@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { StickyNav } from "@/components/sticky-nav";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -37,6 +38,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-foreground">
         {children}
+        <StickyNav />
       </body>
     </html>
   );

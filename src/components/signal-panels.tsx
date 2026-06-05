@@ -1,30 +1,120 @@
 // ─── SIGNAL panels ────────────────────────────────────────────
 // "Show don't claim" throughline tease.
-// Two 4:3 panels side by side, square corners, hairline borders,
-// crosshair L-ticks at top-left + bottom-right of each panel.
+// Two 4:3 panels, code-drawn illustrations, shared visual vocabulary.
 //
-// Images: drop files in public/images/
-//   signal-now.jpg   → [01] /now/  Novensia (AI brand operating system)
-//   signal-root.jpg  → [02] /root/ hype.js (~2015 generative installation)
-// Any extension (jpg/png/webp) works — update the src props below.
+// [01] /now/  — NowIllustration:  warm radial bloom (CSS gradients)
+// [02] /root/ — RootIllustration: generative ring forms (SVG)
+//
+// PanelCRT overlays scanlines + phosphor vignette on both.
+// Glitch animation (.crt-glitch) fires on the illustration layer;
+// ticks, labels, and CRT overlay stay fixed.
 
-import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
-interface SignalPanelProps {
-  index: "01" | "02";
-  slug: string;
-  caption: string;
-  href: string;
-  borderColor: string;
-  tickColor: string;
-  imageSrc?: string;
-  imageAlt?: string;
+// ── Shared palette ─────────────────────────────────────────────
+const G = "#FFC24B"; // gold
+const C = "#FF7A45"; // coral
+const E = "#C23A4E"; // ember
+const T = "#1FD8C4"; // teal accent
+const BG = "#15161c"; // near-black panel field
+
+// ── Tick constants ─────────────────────────────────────────────
+const TICK_PX = 10;
+const TICK_WEIGHT = "1px";
+
+// ──────────────────────────────────────────────────────────────
+// Illustration: [01] /now/ — warm radial bloom
+// Gold core glowing off-centre toward lower-right, dissolving
+// through coral → ember into the near-black field.
+// ──────────────────────────────────────────────────────────────
+const NOW_GRADIENT = [
+  `radial-gradient(ellipse 20% 16% at 67% 67%, ${G} 0%, transparent 100%)`,
+  `radial-gradient(ellipse 44% 35% at 64% 68%, rgba(255,122,69,0.78) 0%, transparent 100%)`,
+  `radial-gradient(ellipse 78% 62% at 60% 70%, rgba(194,58,78,0.44) 0%, transparent 100%)`,
+  `radial-gradient(ellipse 108% 86% at 55% 72%, rgba(194,58,78,0.15) 0%, transparent 100%)`,
+  BG,
+].join(", ");
+
+function NowIllustration() {
+  return (
+    <>
+      {/* Base — static, never moves */}
+      <div style={{ position: "absolute", inset: 0, background: NOW_GRADIENT }} />
+      {/* Glitch layer — same gradient, clips to horizontal bands and offsets */}
+      <div
+        aria-hidden="true"
+        className="now-glitch-layer"
+        style={{ position: "absolute", inset: 0, background: NOW_GRADIENT }}
+      />
+    </>
+  );
 }
 
-const TICK_PX = 9;
-const TICK_WEIGHT = "0.5px";
+// ──────────────────────────────────────────────────────────────
+// Illustration: [02] /root/ — generative ring forms
+// Three ring clusters in warm palette + teal accent, stroke-only,
+// varying radii and dash patterns. Primary centred; two secondary
+// clusters partially off-frame (upper-left, lower-right), echoing
+// the radial generative installation work.
+// ──────────────────────────────────────────────────────────────
+function RootIllustration() {
+  return (
+    <div style={{ position: "absolute", inset: 0, backgroundColor: "#161720" }}>
+      <svg
+        viewBox="0 0 400 300"
+        width="100%"
+        height="100%"
+        style={{ position: "absolute", inset: 0, display: "block" }}
+        aria-hidden="true"
+      >
+        {/* ── Primary cluster ─ centre ~(200, 150) ── */}
+        <circle cx="200" cy="150" r="22" fill="none" stroke={G}  strokeWidth="1.2" strokeDasharray="3 5"  opacity="0.75" />
+        <circle cx="200" cy="150" r="38" fill="none" stroke={C}  strokeWidth="1.0" strokeDasharray="4 7"  opacity="0.62" />
+        <circle cx="200" cy="150" r="57" fill="none" stroke={E}  strokeWidth="0.8" strokeDasharray="2 6"  opacity="0.50" />
+        <circle cx="200" cy="150" r="78" fill="none" stroke={C}  strokeWidth="0.6" strokeDasharray="5 10" opacity="0.38" />
+        <circle cx="200" cy="150" r="101" fill="none" stroke={T} strokeWidth="0.5" strokeDasharray="3 9"  opacity="0.28" />
+        <circle cx="200" cy="150" r="126" fill="none" stroke={T} strokeWidth="0.4" strokeDasharray="2 13" opacity="0.17" />
 
+        {/* ── Secondary cluster ─ upper-left, partially off-frame ── */}
+        <circle cx="55"  cy="112" r="26" fill="none" stroke={C}  strokeWidth="1.0" strokeDasharray="3 6"  opacity="0.55" />
+        <circle cx="55"  cy="112" r="48" fill="none" stroke={G}  strokeWidth="0.8" strokeDasharray="4 8"  opacity="0.40" />
+        <circle cx="55"  cy="112" r="72" fill="none" stroke={E}  strokeWidth="0.6" strokeDasharray="2 7"  opacity="0.27" />
+        <circle cx="55"  cy="112" r="98" fill="none" stroke={T}  strokeWidth="0.4" strokeDasharray="5 13" opacity="0.16" />
+
+        {/* ── Tertiary cluster ─ lower-right, partially off-frame ── */}
+        <circle cx="356" cy="196" r="20" fill="none" stroke={C}  strokeWidth="0.9" strokeDasharray="3 5"  opacity="0.48" />
+        <circle cx="356" cy="196" r="40" fill="none" stroke={G}  strokeWidth="0.7" strokeDasharray="4 8"  opacity="0.34" />
+        <circle cx="356" cy="196" r="63" fill="none" stroke={E}  strokeWidth="0.5" strokeDasharray="2 8"  opacity="0.22" />
+        <circle cx="356" cy="196" r="89" fill="none" stroke={T}  strokeWidth="0.4" strokeDasharray="6 14" opacity="0.13" />
+      </svg>
+    </div>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────
+// CRT overlay — scanlines + phosphor vignette.
+// Layered above the illustration, below ticks and labels.
+// Glitch is on the illustration layer, not here.
+// ──────────────────────────────────────────────────────────────
+function PanelCRT() {
+  return (
+    <div
+      aria-hidden="true"
+      className="panel-crt"
+      style={{
+        position: "absolute",
+        inset: 0,
+        zIndex: 3,
+        pointerEvents: "none",
+      }}
+    />
+  );
+}
+
+// ──────────────────────────────────────────────────────────────
+// Corner tick — L-shaped, top-left + bottom-right
+// ──────────────────────────────────────────────────────────────
 function CornerTick({
   corner,
   color,
@@ -38,21 +128,31 @@ function CornerTick({
       aria-hidden="true"
       style={{
         position: "absolute",
+        zIndex: 4,
         ...(isTopLeft ? { top: 0, left: 0 } : { bottom: 0, right: 0 }),
         width: TICK_PX,
         height: TICK_PX,
         ...(isTopLeft
-          ? {
-              borderTop: `${TICK_WEIGHT} solid ${color}`,
-              borderLeft: `${TICK_WEIGHT} solid ${color}`,
-            }
-          : {
-              borderBottom: `${TICK_WEIGHT} solid ${color}`,
-              borderRight: `${TICK_WEIGHT} solid ${color}`,
-            }),
+          ? { borderTop: `${TICK_WEIGHT} solid ${color}`, borderLeft: `${TICK_WEIGHT} solid ${color}` }
+          : { borderBottom: `${TICK_WEIGHT} solid ${color}`, borderRight: `${TICK_WEIGHT} solid ${color}` }),
       }}
     />
   );
+}
+
+// ──────────────────────────────────────────────────────────────
+// SignalPanel — composes illustration + CRT + ticks + meta
+// ──────────────────────────────────────────────────────────────
+interface SignalPanelProps {
+  index: "01" | "02";
+  slug: string;
+  caption: string;
+  href: string;
+  borderColor: string;
+  tickColor: string;
+  illustration: ReactNode;
+  /** Pass false when the illustration manages its own glitch animation internally */
+  glitch?: boolean;
 }
 
 function SignalPanel({
@@ -62,11 +162,9 @@ function SignalPanel({
   href,
   borderColor,
   tickColor,
-  imageSrc,
-  imageAlt = "",
+  illustration,
+  glitch = true,
 }: SignalPanelProps) {
-  const isLeft = index === "01";
-
   return (
     <Link
       href={href}
@@ -74,35 +172,21 @@ function SignalPanel({
       style={{
         aspectRatio: "4 / 3",
         border: `1px solid ${borderColor}`,
-        backgroundColor: "#15161c",
-        overflow: "visible",
+        backgroundColor: BG,
+        overflow: "hidden",
       }}
     >
-      {/* Crosshair corner ticks — top-left + bottom-right */}
+      {/* Illustration — glitch fires here; CRT overlay stays fixed */}
+      <div className={glitch ? "crt-glitch" : undefined} style={{ position: "absolute", inset: 0 }}>
+        {illustration}
+      </div>
+
+      {/* CRT scanlines + vignette — fixed, above illustration */}
+      <PanelCRT />
+
+      {/* Corner ticks — above everything */}
       <CornerTick corner="top-left" color={tickColor} />
       <CornerTick corner="bottom-right" color={tickColor} />
-
-      {/* Image — fill the panel; clamp to panel bounds */}
-      <div className="absolute inset-0" style={{ overflow: "hidden" }}>
-        {imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            fill
-            style={{ objectFit: "cover" }}
-            sizes="(max-width: 960px) 50vw, 460px"
-          />
-        ) : (
-          /* Placeholder until assets arrive */
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              backgroundColor: "#15161c",
-            }}
-          />
-        )}
-      </div>
 
       {/* ── Top meta row ── */}
       <div
@@ -116,20 +200,11 @@ function SignalPanel({
           fontFamily: "var(--font-jetbrains-mono), monospace",
           fontSize: 12,
           lineHeight: 1,
-          zIndex: 1,
+          zIndex: 5,
         }}
       >
-        <span
-          style={{
-            color: isLeft ? "#26c5ff" : "rgba(255,255,255,0.4)",
-            letterSpacing: "0.04em",
-          }}
-        >
-          [{index}]
-        </span>
-        <span style={{ color: "#6a6a70", letterSpacing: "0.04em" }}>
-          {slug}
-        </span>
+        <span style={{ color: "#FF419F", letterSpacing: "0.04em" }}>[{index}]</span>
+        <span style={{ color: "#26c5ff", letterSpacing: "0.04em" }}>{slug}</span>
       </div>
 
       {/* ── Bottom caption ── */}
@@ -143,7 +218,7 @@ function SignalPanel({
           color: "#6a6a70",
           letterSpacing: "0.04em",
           lineHeight: 1,
-          zIndex: 1,
+          zIndex: 5,
         }}
       >
         {caption}
@@ -152,11 +227,13 @@ function SignalPanel({
   );
 }
 
+// ──────────────────────────────────────────────────────────────
+// SignalPanels — exported section
+// ──────────────────────────────────────────────────────────────
 export function SignalPanels() {
   return (
     <div>
-      {/* ── Hairline divider: SIGNAL ———— ONE INSTINCT, MANY FORMS ── */}
-      {/* Right phrase defines SIGNAL — single header spanning both panels */}
+      {/* ── Hairline divider ── */}
       <div
         style={{
           display: "flex",
@@ -202,19 +279,16 @@ export function SignalPanels() {
 
       {/* ── Panel grid ── */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-        {/* LEFT — [01] /now/ — Novensia — GENERATIVE / AI — cyan border */}
         <SignalPanel
           index="01"
           slug="/now/"
           caption="GENERATIVE / AI"
           href="/volumes/ai-systems/novensia"
-          borderColor="rgba(38,197,255,0.4)"
-          tickColor="rgba(38,197,255,0.6)"
-          imageSrc="/images/signal-now.jpg"
-          imageAlt="Novensia — GENERATIVE / AI"
+          borderColor="rgba(255,255,255,0.16)"
+          tickColor="rgba(255,255,255,0.3)"
+          glitch={false}
+          illustration={<NowIllustration />}
         />
-
-        {/* RIGHT — [02] /root/ — hype.js — GENERATIVE / SPATIAL — neutral border */}
         <SignalPanel
           index="02"
           slug="/root/"
@@ -222,8 +296,7 @@ export function SignalPanels() {
           href="/volumes/creative-immersive/hype-js"
           borderColor="rgba(255,255,255,0.16)"
           tickColor="rgba(255,255,255,0.3)"
-          imageSrc="/images/signal-root.jpg"
-          imageAlt="hype.js — GENERATIVE / SPATIAL"
+          illustration={<RootIllustration />}
         />
       </div>
     </div>

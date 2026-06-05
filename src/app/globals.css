@@ -97,6 +97,8 @@ body {
   color: var(--text-body);
   font-family: var(--font-inter), system-ui, sans-serif;
   overflow-x: hidden;
+  /* Clear the sticky nav at the bottom */
+  padding-bottom: 96px;
   /* 32px grid — rgba(255,255,255,0.028) */
   background-image:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
@@ -104,12 +106,104 @@ body {
   background-size: 32px 32px;
 }
 
-/* ─── Door hover — CSS-only, keeps doors as server components ── */
+/* ─── Door hover (legacy hero-doors) ────────────────────────── */
 .door-link:hover {
   background-color: rgba(255, 255, 255, 0.025);
 }
 
-/* ─── Cursor blink (the ONE intentional animation) ───────────── */
+/* ─── Volume index cards ─────────────────────────────────────── */
+.volume-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.volume-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 2px 0 0 0 #26c5ff;
+}
+
+/* ─── Case study back link hover ────────────────────────────── */
+.case-back-link:hover {
+  color: #26c5ff;
+}
+
+/* ─── Sticky nav ─────────────────────────────────────────────── */
+
+/* Base link — Syne Title 24, nav muted */
+.sticky-door-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-family: var(--font-syne), sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #9a9a9f;
+}
+
+/* > prefix — mono, muted */
+.door-prefix {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6a6a70;
+  margin-right: 5px;
+  transition: color 0.15s ease;
+}
+
+/* Title text */
+.door-title-text {
+  transition: color 0.15s ease;
+}
+
+/* Blinking cursor block — hidden at rest */
+.door-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background-color: #26c5ff;
+  margin-left: 6px;
+  flex-shrink: 0;
+  align-self: center;
+  opacity: 0;
+}
+
+/* Hover: brighten title, cyan prefix, reveal + blink cursor */
+.sticky-door-link:hover .door-title-text {
+  color: #e8e8ea;
+}
+.sticky-door-link:hover .door-prefix {
+  color: #26c5ff;
+}
+.sticky-door-link:hover .door-cursor {
+  opacity: 1;
+  animation: cursor-blink 1.2s step-end infinite;
+}
+
+/* ─── CRT scanline drift ─────────────────────────────────────── */
+/* Moves the scanline pattern one full pitch (4px) per cycle.    */
+/* background + vignette live here so the animation owns them.   */
+@keyframes scanline-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 0 4px; }
+}
+
+.panel-crt {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 4px
+  );
+  box-shadow: inset 0 0 60px 10px rgba(0, 0, 0, 0.5);
+  animation: scanline-drift 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel-crt { animation: none; }
+}
+
+/* ─── Cursor blink ───────────────────────────────────────────── */
 @keyframes cursor-blink {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
@@ -117,4 +211,92 @@ body {
 
 .cursor-blink {
   animation: cursor-blink 1.2s step-end infinite;
+}
+
+/* ─── /root/ CRT glitch ─────────────────────────────────────── */
+/* 19s cycle; four events at irregular positions so the cadence  */
+/* never feels mechanical. Directions and intensities vary.      */
+@keyframes crt-glitch {
+  0%, 100% { transform: none; filter: none; }
+
+  /* Event A — ~10% — right-then-left, strong */
+   9.8% { transform: none;              filter: none; }
+  10.0% { transform: translateX(6px);   filter: saturate(1.8) hue-rotate(12deg); }
+  10.3% { transform: translateX(-4px);  filter: saturate(1.4) hue-rotate(-8deg); }
+  10.6% { transform: translateX(2px);   filter: none; }
+  10.8% { transform: none;              filter: none; }
+
+  /* Event B — ~34% — hard left-dominant */
+  33.5% { transform: none;              filter: none; }
+  33.7% { transform: translateX(-8px);  filter: saturate(1.9) hue-rotate(-18deg); }
+  34.0% { transform: translateX(4px);   filter: saturate(1.5); }
+  34.3% { transform: translateX(-2px);  filter: none; }
+  34.5% { transform: none;              filter: none; }
+
+  /* Event C — ~61% — subtle, asymmetric, with skew */
+  60.7% { transform: none;                        filter: none; }
+  60.9% { transform: translateX(4px) skewX(-0.6deg); filter: saturate(1.5) hue-rotate(9deg); }
+  61.2% { transform: translateX(-3px);            filter: none; }
+  61.5% { transform: none;                        filter: none; }
+
+  /* Event D — ~83% — hardest hit, left then recovery */
+  82.9% { transform: none;              filter: none; }
+  83.1% { transform: translateX(-9px);  filter: saturate(2.0) hue-rotate(-22deg); }
+  83.4% { transform: translateX(5px);   filter: saturate(1.6) hue-rotate(6deg); }
+  83.7% { transform: translateX(-2px);  filter: none; }
+  83.9% { transform: none;              filter: none; }
+}
+
+.crt-glitch {
+  animation: crt-glitch 19s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-glitch { animation: none; }
+}
+
+/* ── /now/ tile scanline glitch ─────────────────────────────── */
+/* Duplicate gradient layer sits above base (which stays fixed). */
+/* clip-path snaps to a horizontal band and offsets it with      */
+/* translateX — three band positions in rapid succession.        */
+/* Same 7s cycle as .crt-glitch; step-end = no interpolation.   */
+@keyframes now-scanline {
+  0%, 91%, 100% {
+    clip-path: inset(0 0 101% 0);
+    transform: none;
+    opacity: 0;
+    filter: none;
+  }
+  91.3% {
+    clip-path: inset(26% 0 64% 0);
+    transform: translateX(9px);
+    opacity: 1;
+    filter: brightness(1.3);
+  }
+  91.55% {
+    clip-path: inset(54% 0 35% 0);
+    transform: translateX(-7px);
+    opacity: 1;
+    filter: brightness(1.1);
+  }
+  91.8% {
+    clip-path: inset(16% 0 76% 0);
+    transform: translateX(5px);
+    opacity: 1;
+    filter: none;
+  }
+  92.1% {
+    clip-path: inset(0 0 101% 0);
+    transform: none;
+    opacity: 0;
+    filter: none;
+  }
+}
+
+.now-glitch-layer {
+  animation: now-scanline 7s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .now-glitch-layer { animation: none; opacity: 0 !important; }
 }

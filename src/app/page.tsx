@@ -1,6 +1,5 @@
 import { PromptLine } from "@/components/prompt-line";
 import { SignalPanels } from "@/components/signal-panels";
-import { HeroDoors } from "@/components/hero-doors";
 
 export default function Home() {
   return (
@@ -93,8 +92,6 @@ export default function Home() {
         <SignalPanels />
       </main>
 
-      {/* ── Doors — full width, pinned to bottom ── */}
-      <HeroDoors />
     </div>
   );
 }

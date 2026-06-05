@@ -225,7 +225,7 @@ export function CaseStudy({
     >
       <div
         style={{
-          maxWidth: 800,
+          maxWidth: 960,
           margin: "0 auto",
           padding: "64px 48px 0",
         }}

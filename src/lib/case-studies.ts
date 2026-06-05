@@ -13,6 +13,7 @@ export interface CaseStudyData {
   role: string;
   year: string | number;
   summary: string;
+  image?: string;
   content: string;
 }
 
@@ -43,6 +44,7 @@ export function getAllCaseStudies(): CaseStudyData[] {
         role: data.role,
         year: data.year,
         summary: data.summary,
+        image: data.image,
         content: content.trim(),
       };
     });
@@ -62,6 +64,7 @@ export function getCaseStudy(slug: string): CaseStudyData | null {
         role: data.role,
         year: data.year,
         summary: data.summary,
+        image: data.image,
         content: content.trim(),
       };
     }

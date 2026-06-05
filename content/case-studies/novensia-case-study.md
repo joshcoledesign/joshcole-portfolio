@@ -4,6 +4,7 @@ volume: "ai-systems"
 slug: "novensia"
 role: "Solo — strategy, architecture, design, build"
 year: "2025–Present"
+image: "/case-studies/novensia.jpg"
 summary: "An AI brand operating system — foundation-first, multi-model, built end to end by one set of hands."
 ---
 

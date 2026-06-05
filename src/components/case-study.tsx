@@ -3,6 +3,7 @@
 // Server component — no 'use client' needed.
 // Fonts + grid background come from globals.css / layout.tsx.
 
+import Image from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -212,6 +213,7 @@ export function CaseStudy({
   volume,
   role,
   year,
+  image,
   content,
 }: CaseStudyData) {
   const vol = VOLUMES[volume];
@@ -300,6 +302,30 @@ export function CaseStudy({
             marginBottom: 56,
           }}
         />
+
+        {/* ── Hero image (optional) ── */}
+        {image && (
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              aspectRatio: "16 / 9",
+              maxHeight: 540,
+              marginBottom: 56,
+              border: "0.5px solid rgba(255,255,255,0.1)",
+              overflow: "hidden",
+            }}
+          >
+            <Image
+              src={image}
+              alt={title}
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 960px) 100vw, 864px"
+              priority
+            />
+          </div>
+        )}
 
         {/* ── Prose body ── */}
         <div style={{ maxWidth: 800 }}>

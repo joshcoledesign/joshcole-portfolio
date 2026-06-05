@@ -305,22 +305,21 @@ export function CaseStudy({
 
         {/* ── Hero image (optional) ── */}
         {image && (
-          <div
+          <Image
+            src={image}
+            alt={title}
+            width={0}
+            height={0}
+            sizes="(max-width: 960px) 100vw, 864px"
             style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
               marginBottom: 56,
               border: "0.5px solid rgba(255,255,255,0.1)",
             }}
-          >
-            <Image
-              src={image}
-              alt={title}
-              width={0}
-              height={0}
-              sizes="(max-width: 960px) 100vw, 864px"
-              style={{ width: "100%", height: "auto", display: "block" }}
-              priority
-            />
-          </div>
+            priority
+          />
         )}
 
         {/* ── Prose body ── */}

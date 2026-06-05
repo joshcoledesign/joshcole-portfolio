@@ -10,9 +10,8 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 const DOORS = [
-  { label: "The Thread",  sub: "THE PLOT",     href: "/thread"  },
-  { label: "The Volumes", sub: "THE CHAPTERS", href: "/volumes" },
-  { label: "About",       sub: "THE AUTHOR",   href: "/about"   },
+  { label: "The Volumes", sub: "THE WORK",   href: "/volumes" },
+  { label: "About",       sub: "THE AUTHOR", href: "/about"   },
 ] as const;
 
 // Scroll further than this from the top before collapsing
@@ -91,7 +90,7 @@ export function StickyNav() {
           transition: reduced ? "none" : `max-height 0.8s ${EASE}${expanded ? "" : " 0.3s"}`,
         }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
           {DOORS.map((door, i) => (
             <div
               key={door.label}

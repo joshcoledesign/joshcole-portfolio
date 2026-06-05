@@ -307,21 +307,17 @@ export function CaseStudy({
         {image && (
           <div
             style={{
-              position: "relative",
-              width: "100%",
-              aspectRatio: "16 / 9",
-              maxHeight: 540,
               marginBottom: 56,
               border: "0.5px solid rgba(255,255,255,0.1)",
-              overflow: "hidden",
             }}
           >
             <Image
               src={image}
               alt={title}
-              fill
-              style={{ objectFit: "cover" }}
+              width={0}
+              height={0}
               sizes="(max-width: 960px) 100vw, 864px"
+              style={{ width: "100%", height: "auto", display: "block" }}
               priority
             />
           </div>

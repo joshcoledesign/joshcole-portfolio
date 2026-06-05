@@ -39,16 +39,7 @@ const VOLUMES: Array<{
   },
 ];
 
-// ── hype.js — hardcoded stub, appended to Creative & Immersive ─
-const HYPE_JS = {
-  title: "hype.js",
-  slug: "hype-js",
-  role: "",
-  year: "",
-  summary:
-    "Generative installation work — circular forms running live in space.",
-  href: "/volumes/creative-immersive/hype-js",
-};
+// hype.js is now a real MD file — no hardcoded stub needed.
 
 // ── Card type ──────────────────────────────────────────────────
 interface CardData {
@@ -189,7 +180,6 @@ export default function VolumesPage() {
               summary: cs.summary,
               href: `/volumes/${cs.volume}/${cs.slug}`,
             })),
-            ...(vol.key === "creative-immersive" ? [HYPE_JS] : []),
           ];
 
           return (

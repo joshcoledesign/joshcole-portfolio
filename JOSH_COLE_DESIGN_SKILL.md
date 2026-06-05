@@ -68,7 +68,8 @@ Notes: Syne covers Display→Title only; body text is Inter 16. Hero statement =
 ## SHAPE & MOTION
 
 - **Corners:** **square (0 radius) throughout — no rounded corners anywhere on the site.** This is deliberate and matches the dossier/terminal aesthetic. Hero panel, SIGNAL panels (square, with crosshair corner ticks), dividers, door rules, and any future cards (including case-study cards) are all square-cornered. The only non-rectangular edge is the prompt-line chevron clip (`clip-path`, pointed right edge).
-- **Motion:** restraint. One or two intentional moments only (e.g. blinking prompt cursor). No ambient motion.
+- **Motion:** restraint. The deliberate moments: the blinking prompt cursor (and its reuse on door hover), the sticky bottom nav's slow collapse/reveal on scroll, and the SIGNAL panels' rare, subtle CRT glitch (a brief channel-split firing ~once every 5–8s, then still). No ambient or decorative motion beyond these. All motion must be slow/quiet and reduced-motion-aware so it reads as intentional, not twitchy.
+- **CRT / screen treatment:** SIGNAL panels (and potentially other image surfaces) carry a faint scanline + phosphor-vignette + rare-glitch overlay applied in the UI layer, never baked into source images. The retro/screen feeling comes from interface chrome, kept subtle — never a vaporwave filter.
 
 ---
 
@@ -83,8 +84,10 @@ Notes: Syne covers Display→Title only; body text is Inter 16. Hero statement =
 
 ## NAVIGATION
 
-- **Homepage hero:** no persistent top nav. The prompt line owns the top bar; the three doors (The Thread / The Volumes / About) handle navigation.
-- **Inner pages** (a Volume, a case study): standard persistent top nav, built as a shared component.
+- **Site-wide nav: a sticky bottom doors bar** — The Thread / The Volumes / About, with mono sublabels (THE PLOT / THE CHAPTERS / THE AUTHOR). One nav system on every page (homepage and inner pages alike). No persistent top nav anywhere.
+- **Homepage hero:** no top nav — the prompt line owns the top bar; the sticky bottom bar handles navigation.
+- **Link affordance:** door titles carry a mono `>` prefix at rest (terminal-command style); on hover, the title brightens and the prompt line's blinking cyan cursor animates in after it. Sublabels stay quiet/non-interactive — only the title is the link.
+- **Scroll behavior:** the bar collapses to a thin strip (gradient hairline + sublabels stay visible, so nav is always discoverable) on scroll-down and expands on scroll-up. Slow easing, scroll-threshold debounce, respects `prefers-reduced-motion` (stays visible if set).
 
 ---
 

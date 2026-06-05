@@ -302,7 +302,7 @@ export function CaseStudy({
         />
 
         {/* ── Prose body ── */}
-        <div>
+        <div style={{ maxWidth: 800 }}>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={markdownComponents}

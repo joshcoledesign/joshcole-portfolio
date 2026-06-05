@@ -4,16 +4,18 @@
 // crosshair L-ticks at top-left + bottom-right of each panel.
 //
 // Images: drop files in public/images/
-//   signal-now.jpg   → [01] /now/  (recent AI/generative piece)
-//   signal-root.jpg  → [02] /root/ (2015 generative piece)
+//   signal-now.jpg   → [01] /now/  Novensia (AI brand operating system)
+//   signal-root.jpg  → [02] /root/ hype.js (~2015 generative installation)
 // Any extension (jpg/png/webp) works — update the src props below.
 
 import Image from "next/image";
+import Link from "next/link";
 
 interface SignalPanelProps {
   index: "01" | "02";
   slug: string;
   caption: string;
+  href: string;
   borderColor: string;
   tickColor: string;
   imageSrc?: string;
@@ -57,6 +59,7 @@ function SignalPanel({
   index,
   slug,
   caption,
+  href,
   borderColor,
   tickColor,
   imageSrc,
@@ -65,8 +68,9 @@ function SignalPanel({
   const isLeft = index === "01";
 
   return (
-    <div
-      className="relative"
+    <Link
+      href={href}
+      className="relative block"
       style={{
         aspectRatio: "4 / 3",
         border: `1px solid ${borderColor}`,
@@ -144,7 +148,7 @@ function SignalPanel({
       >
         {caption}
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -198,26 +202,28 @@ export function SignalPanels() {
 
       {/* ── Panel grid ── */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-        {/* LEFT — [01] /now/ — GENERATIVE / AI — cyan border */}
+        {/* LEFT — [01] /now/ — Novensia — GENERATIVE / AI — cyan border */}
         <SignalPanel
           index="01"
           slug="/now/"
           caption="GENERATIVE / AI"
+          href="/volumes/ai-systems/novensia"
           borderColor="rgba(38,197,255,0.4)"
           tickColor="rgba(38,197,255,0.6)"
-          // imageSrc="/images/signal-now.jpg"
-          // imageAlt="[title of piece] — GENERATIVE / AI"
+          imageSrc="/images/signal-now.jpg"
+          imageAlt="Novensia — GENERATIVE / AI"
         />
 
-        {/* RIGHT — [02] /root/ — GENERATIVE / SPATIAL — neutral border */}
+        {/* RIGHT — [02] /root/ — hype.js — GENERATIVE / SPATIAL — neutral border */}
         <SignalPanel
           index="02"
           slug="/root/"
           caption="GENERATIVE / SPATIAL"
+          href="/volumes/creative-immersive/hype-js"
           borderColor="rgba(255,255,255,0.16)"
           tickColor="rgba(255,255,255,0.3)"
-          // imageSrc="/images/signal-root.jpg"
-          // imageAlt="[title of piece] — GENERATIVE / SPATIAL"
+          imageSrc="/images/signal-root.jpg"
+          imageAlt="hype.js — GENERATIVE / SPATIAL"
         />
       </div>
     </div>

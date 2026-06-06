@@ -5,6 +5,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { CaseStudyData, Volume } from "@/lib/case-studies";
@@ -289,11 +290,32 @@ export function CaseStudy({
             fontSize: 14,
             color: "#6a6a70",
             letterSpacing: "0.04em",
-            marginBottom: 48,
+            marginBottom: image ? 32 : 48,
           }}
         >
           {role} · {year}
         </div>
+
+        {/* ── Hero image (when present) ── */}
+        {image && (
+          <div
+            style={{
+              position: "relative",
+              height: 400,
+              overflow: "hidden",
+              marginBottom: 48,
+            }}
+          >
+            <Image
+              src={image}
+              alt={title}
+              fill
+              sizes="(max-width: 960px) 100vw, 864px"
+              style={{ objectFit: "cover" }}
+              priority
+            />
+          </div>
+        )}
 
         {/* ── Divider ── */}
         <div

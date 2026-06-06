@@ -58,14 +58,14 @@ export default function Home() {
           </span>
         </div>
 
-        {/* ── Statement — Syne Headline 48, weight 600 ── */}
+        {/* ── Statement — Syne Headline 64, weight 600 ── */}
         {/* Exact copy — do not reword */}
         <h1
           style={{
             fontFamily: "var(--font-syne), sans-serif",
             fontSize: 64,
             fontWeight: 600,
-            lineHeight: 1.05,
+            lineHeight: 0.88,
             color: "#e8e8ea",
             maxWidth: "17ch",
             margin: "0 0 28px",
@@ -81,7 +81,7 @@ export default function Home() {
             fontSize: 18,
             lineHeight: 1.6,
             color: "#acacb1",
-            maxWidth: "52ch",
+            maxWidth: "60ch",
             margin: "0 0 56px",
           }}
         >

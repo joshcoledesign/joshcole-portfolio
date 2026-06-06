@@ -1,113 +1,234 @@
 // ─── /volumes index ───────────────────────────────────────────
-// Three volume sections, each with a header + case study cards.
-// Cards pulled from /content/case-studies/ frontmatter, grouped
-// and ordered by volume. hype.js is a hardcoded stub card.
+// Three volume sections, each with a featured lead card +
+// smaller grid for the rest. Cards are image-forward when the
+// case study has a hero image; text-only otherwise (graceful
+// fallback — no empty image areas).
+//
+// Featured card (index 0 per volume): full-width span, 320px
+//   image header. On hover: brand gradient top-line appears.
+// Regular card: single column, 180px image header when present.
+//   On hover: border warms to cyan + left inset edge.
+// Both: image scales 1.04× slowly on hover (prefers-reduced-motion aware).
+//
 // Server component — no 'use client' needed.
 
+import Image from "next/image";
 import Link from "next/link";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import type { Volume } from "@/lib/case-studies";
+import { PromptLine } from "@/components/prompt-line";
 
 const MONO = "var(--font-jetbrains-mono), monospace";
 const SYNE = "var(--font-syne), sans-serif";
 const INTER = "var(--font-inter), system-ui, sans-serif";
 
-// ── Volume manifest — defines order within each section ────────
+// ── Volume manifest ────────────────────────────────────────────
+// accent = eyebrow label color only; not a full retheme.
 const VOLUMES: Array<{
   key: Volume;
   eyebrow: string;
   title: string;
   order: string[];
+  accent: string;
 }> = [
   {
     key: "ai-systems",
     eyebrow: "VOLUME I",
     title: "AI Systems",
     order: ["novensia", "emergence", "ust-rfp-agent"],
+    accent: "#26c5ff", // cyan
   },
   {
     key: "ux-enterprise",
     eyebrow: "VOLUME II",
     title: "UX & Enterprise",
     order: ["vrc-suite", "gprs-sitemap"],
+    accent: "#ca43ff", // violet
   },
   {
     key: "creative-immersive",
     eyebrow: "VOLUME III",
     title: "Creative & Immersive",
-    order: ["lp-7d-ride", "union-station-hotel"],
+    order: ["lp-7d-ride", "union-station-hotel", "hype-js"],
+    accent: "#ff419f", // pink
   },
 ];
 
-// hype.js is now a real MD file — no hardcoded stub needed.
-
-// ── Card type ──────────────────────────────────────────────────
+// ── Card data shape ────────────────────────────────────────────
 interface CardData {
   title: string;
   slug: string;
   role: string;
   year: string;
   summary: string;
+  image: string | undefined;
   href: string;
 }
 
-// ── CaseStudyCard ──────────────────────────────────────────────
-function CaseStudyCard({ card }: { card: CardData }) {
-  const hasMeta = card.role || card.year;
+// ── FeaturedCard — full-width, leads each volume ───────────────
+function FeaturedCard({
+  card,
+  accent,
+}: {
+  card: CardData;
+  accent: string;
+}) {
   return (
     <Link
       href={card.href}
-      className="volume-card"
-      style={{
-        display: "block",
-        backgroundColor: "#15161c",
-        padding: "24px 28px",
-        textDecoration: "none",
-      }}
+      className="vol-card-featured"
+      style={{ gridColumn: "1 / -1" }}
     >
-      {/* Title — Syne Title 24 */}
+      {/* Accent hairline — always present on every featured card */}
       <div
+        aria-hidden="true"
         style={{
-          fontFamily: SYNE,
-          fontSize: 24,
-          fontWeight: 600,
-          lineHeight: 1.2,
-          color: "#e8e8ea",
-          marginBottom: hasMeta ? 8 : 12,
+          height: 1,
+          background: `linear-gradient(90deg, ${accent}, transparent 70%)`,
+          flexShrink: 0,
         }}
-      >
-        {card.title}
-      </div>
+      />
 
-      {/* Meta: role · year — JetBrains Mono XS 12, muted */}
-      {hasMeta && (
+      {card.image && (
+        // Image header — scanline overlays handle hover effect; no scale
         <div
-          style={{
-            fontFamily: MONO,
-            fontSize: 12,
-            color: "#6a6a70",
-            letterSpacing: "0.04em",
-            marginBottom: 12,
-          }}
+          className="vol-card-img"
+          style={{ position: "relative", height: 320 }}
         >
-          {card.role}
-          {card.role && card.year ? " · " : ""}
-          {card.year}
+          <Image
+            src={card.image}
+            alt={card.title}
+            fill
+            sizes="(max-width: 960px) 100vw, 864px"
+            className="vol-card-img-fill"
+            style={{ objectFit: "cover" }}
+          />
+          {/* Slow scanline — rest state */}
+          <div aria-hidden="true" className="vol-feat-crt-slow" style={{ position: "absolute", zIndex: 1, pointerEvents: "none" }} />
+          {/* Fast scanline — cross-fades in on hover */}
+          <div aria-hidden="true" className="vol-feat-crt-fast" style={{ position: "absolute", zIndex: 1, pointerEvents: "none" }} />
         </div>
       )}
 
-      {/* Summary — Inter 16, muted */}
-      <p
+      <div style={{ padding: "20px 24px 28px" }}>
+        {/* Title */}
+        <div
+          style={{
+            fontFamily: SYNE,
+            fontSize: 24,
+            fontWeight: 600,
+            lineHeight: 1.2,
+            color: "#e8e8ea",
+            marginBottom: 8,
+          }}
+        >
+          {card.title}
+        </div>
+
+        {/* Meta */}
+        {(card.role || card.year) && (
+          <div
+            style={{
+              fontFamily: MONO,
+              fontSize: 12,
+              color: "#6a6a70",
+              letterSpacing: "0.04em",
+              marginBottom: 12,
+            }}
+          >
+            {card.role}
+            {card.role && card.year ? " · " : ""}
+            {card.year}
+          </div>
+        )}
+
+        {/* Summary */}
+        <p
+          style={{
+            fontFamily: INTER,
+            fontSize: 16,
+            lineHeight: 1.6,
+            color: "#acacb1",
+            margin: 0,
+          }}
+        >
+          {card.summary}
+        </p>
+      </div>
+    </Link>
+  );
+}
+
+// ── CaseStudyCard — single-column grid card ────────────────────
+function CaseStudyCard({ card }: { card: CardData }) {
+  const hasMeta = card.role || card.year;
+  return (
+    <Link href={card.href} className="vol-card">
+      {card.image && (
+        <div
+          className="vol-card-img"
+          style={{ position: "relative", height: 180 }}
+        >
+          <Image
+            src={card.image}
+            alt={card.title}
+            fill
+            sizes="(max-width: 960px) 50vw, 432px"
+            className="vol-card-img-fill"
+            style={{ objectFit: "cover" }}
+          />
+        </div>
+      )}
+
+      <div
         style={{
-          fontFamily: INTER,
-          fontSize: 16,
-          lineHeight: 1.6,
-          color: "#acacb1",
-          margin: 0,
+          padding: card.image ? "16px 20px 20px" : "24px 20px 24px",
         }}
       >
-        {card.summary}
-      </p>
+        {/* Title */}
+        <div
+          style={{
+            fontFamily: SYNE,
+            fontSize: 24,
+            fontWeight: 600,
+            lineHeight: 1.2,
+            color: "#e8e8ea",
+            marginBottom: hasMeta ? 8 : 12,
+          }}
+        >
+          {card.title}
+        </div>
+
+        {/* Meta */}
+        {hasMeta && (
+          <div
+            style={{
+              fontFamily: MONO,
+              fontSize: 12,
+              color: "#6a6a70",
+              letterSpacing: "0.04em",
+              marginBottom: 12,
+            }}
+          >
+            {card.role}
+            {card.role && card.year ? " · " : ""}
+            {card.year}
+          </div>
+        )}
+
+        {/* Summary */}
+        <p
+          style={{
+            fontFamily: INTER,
+            fontSize: 16,
+            lineHeight: 1.6,
+            color: "#acacb1",
+            margin: 0,
+          }}
+        >
+          {card.summary}
+        </p>
+      </div>
     </Link>
   );
 }
@@ -118,6 +239,7 @@ export default function VolumesPage() {
 
   return (
     <div style={{ minHeight: "100vh", paddingBottom: 120 }}>
+      <PromptLine href="/" />
       <div
         style={{
           maxWidth: 960,
@@ -146,7 +268,7 @@ export default function VolumesPage() {
             fontWeight: 600,
             lineHeight: 1.07,
             color: "#e8e8ea",
-            margin: "0 0 40px",
+            margin: "0 0 20px",
           }}
         >
           The Volumes
@@ -171,34 +293,36 @@ export default function VolumesPage() {
               return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
             });
 
-          const cards: CardData[] = [
-            ...studies.map((cs) => ({
-              title: cs.title,
-              slug: cs.slug,
-              role: cs.role ?? "",
-              year: cs.year != null ? String(cs.year) : "",
-              summary: cs.summary,
-              href: `/volumes/${cs.volume}/${cs.slug}`,
-            })),
-          ];
+          const cards: CardData[] = studies.map((cs) => ({
+            title: cs.title,
+            slug: cs.slug,
+            role: cs.role ?? "",
+            year: cs.year != null ? String(cs.year) : "",
+            summary: cs.summary,
+            image: cs.image,
+            href: `/volumes/${cs.volume}/${cs.slug}`,
+          }));
+
+          if (cards.length === 0) return null;
 
           return (
-            <section key={vol.key} style={{ marginBottom: 80 }}>
-              {/* Eyebrow — JetBrains Mono XS */}
+            <section key={vol.key} style={{ marginBottom: 95 }}>
+              {/* Eyebrow — per-volume accent color */}
               <div
                 style={{
                   fontFamily: MONO,
                   fontSize: 12,
-                  color: "#6a6a70",
+                  color: vol.accent,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   marginBottom: 10,
+                  opacity: 0.8,
                 }}
               >
                 {vol.eyebrow}
               </div>
 
-              {/* Volume title — Syne Subheader 32 */}
+              {/* Volume title */}
               <h2
                 style={{
                   fontFamily: SYNE,
@@ -206,23 +330,13 @@ export default function VolumesPage() {
                   fontWeight: 600,
                   lineHeight: 1.15,
                   color: "#e8e8ea",
-                  margin: "0 0 20px",
+                  margin: "0 0 50px",
                 }}
               >
                 {vol.title}
               </h2>
 
-              {/* Hairline */}
-              <div
-                aria-hidden="true"
-                style={{
-                  height: 0,
-                  borderTop: "0.5px solid rgba(255,255,255,0.1)",
-                  marginBottom: 24,
-                }}
-              />
-
-              {/* Card grid — 2 columns */}
+              {/* Card grid — featured spans full width, rest are 2-col */}
               <div
                 style={{
                   display: "grid",
@@ -230,9 +344,17 @@ export default function VolumesPage() {
                   gap: 16,
                 }}
               >
-                {cards.map((card) => (
-                  <CaseStudyCard key={card.slug} card={card} />
-                ))}
+                {cards.map((card, idx) =>
+                  idx === 0 ? (
+                    <FeaturedCard
+                      key={card.slug}
+                      card={card}
+                      accent={vol.accent}
+                    />
+                  ) : (
+                    <CaseStudyCard key={card.slug} card={card} />
+                  )
+                )}
               </div>
             </section>
           );

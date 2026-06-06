@@ -20,8 +20,8 @@ const T = "#1FD8C4"; // teal accent
 const BG = "#15161c"; // near-black panel field
 
 // ── Tick constants ─────────────────────────────────────────────
-const TICK_PX = 10;
-const TICK_WEIGHT = "1px";
+const TICK_PX = 12;
+const TICK_WEIGHT = "2px";
 
 // ──────────────────────────────────────────────────────────────
 // Illustration: [01] /now/ — warm radial bloom
@@ -239,7 +239,7 @@ export function SignalPanels() {
           display: "flex",
           alignItems: "center",
           gap: 16,
-          marginBottom: 16,
+          marginBottom: 20,
         }}
       >
         <span

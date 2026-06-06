@@ -1,6 +1,8 @@
 // ─── About ────────────────────────────────────────────────────
 // Real bio. Visual system identical to case study pages.
 
+import { PromptLine } from "@/components/prompt-line";
+
 const MONO = "var(--font-jetbrains-mono), monospace";
 const SYNE = "var(--font-syne), sans-serif";
 const INTER = "var(--font-inter), system-ui, sans-serif";
@@ -21,6 +23,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div style={{ minHeight: "100vh", paddingBottom: 120 }}>
+      <PromptLine href="/" />
       <div
         style={{
           maxWidth: 800,

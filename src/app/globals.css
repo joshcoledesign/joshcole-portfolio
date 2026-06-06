@@ -106,6 +106,14 @@ body {
   background-size: 32px 32px;
 }
 
+/* ─── Prompt line home link (all non-home pages) ────────────── */
+.prompt-line-link {
+  transition: filter 0.15s ease;
+}
+.prompt-line-link:hover {
+  filter: brightness(1.08);
+}
+
 /* ─── Door hover (legacy hero-doors) ────────────────────────── */
 .door-link:hover {
   background-color: rgba(255, 255, 255, 0.025);
@@ -124,6 +132,123 @@ body {
 /* ─── Case study back link hover ────────────────────────────── */
 .case-back-link:hover {
   color: #26c5ff;
+}
+
+/* ─── Image-forward volume cards ─────────────────────────────── */
+
+/* Featured card — full-width, brand gradient top-line on hover  */
+.vol-card-featured {
+  position: relative;
+  z-index: 0; /* stacking context so ::after renders above image */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #15161c;
+  display: block;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+.vol-card-featured::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #26c5ff, #ca43ff 52%, #ff419f);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.vol-card-featured:hover {
+  border-color: rgba(38, 197, 255, 0.25);
+}
+.vol-card-featured:hover::after {
+  opacity: 1;
+}
+
+/* Regular card — single column */
+/* Real border + overflow:hidden. CSS spec: overflow clips at the padding  */
+/* edge (inside the border), so the border is always visible and children  */
+/* are always cropped inside it.                                           */
+.vol-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #15161c;
+  display: block;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+.vol-card:hover {
+  border-color: rgba(38, 197, 255, 0.55);
+}
+.vol-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 2px 0 0 0 #26c5ff;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.vol-card:hover::after {
+  opacity: 1;
+}
+
+/* Image container — clips the image to its own bounds */
+.vol-card-img {
+  overflow: hidden;
+}
+
+/* No scale on regular cards */
+.vol-card-img-fill {
+  display: block;
+}
+
+/* ── Featured card scanline scroll ──────────────────────────── */
+/* Transform-based: overlay extends 4px beyond container, translateY */
+/* scrolls it one pitch per cycle. Parent overflow:hidden clips.     */
+@keyframes scanline-scroll {
+  from { transform: translateY(0); }
+  to   { transform: translateY(4px); }
+}
+
+/* Rest layer — subtle lines, static */
+.vol-feat-crt-slow {
+  top: -4px; left: 0; right: 0; bottom: -4px;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(255, 255, 255, 0.06) 2px,
+    rgba(255, 255, 255, 0.06) 4px
+  );
+  box-shadow: inset 0 0 48px 12px rgba(0, 0, 0, 0.45);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Hover layer — slightly brighter, scrolling */
+.vol-feat-crt-fast {
+  top: -4px; left: 0; right: 0; bottom: -4px;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(255, 255, 255, 0.07) 2px,
+    rgba(255, 255, 255, 0.07) 4px
+  );
+  box-shadow: inset 0 0 48px 12px rgba(0, 0, 0, 0.45);
+  animation: scanline-scroll 1s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.vol-card-featured:hover .vol-feat-crt-slow { opacity: 0; }
+.vol-card-featured:hover .vol-feat-crt-fast  { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .vol-feat-crt-slow { animation: none; }
+  .vol-feat-crt-fast { display: none; }
 }
 
 /* ─── Sticky nav ─────────────────────────────────────────────── */

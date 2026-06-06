@@ -44,7 +44,7 @@ export function getAllCaseStudies(): CaseStudyData[] {
         role: data.role,
         year: data.year,
         summary: data.summary,
-        image: data.image,
+        image: data.image as string | undefined,
         content: content.trim(),
       };
     });
@@ -64,7 +64,7 @@ export function getCaseStudy(slug: string): CaseStudyData | null {
         role: data.role,
         year: data.year,
         summary: data.summary,
-        image: data.image,
+        image: data.image as string | undefined,
         content: content.trim(),
       };
     }

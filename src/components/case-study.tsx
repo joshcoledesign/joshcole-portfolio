@@ -9,6 +9,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { CaseStudyData, Volume } from "@/lib/case-studies";
 import type { Components } from "react-markdown";
+import { PromptLine } from "@/components/prompt-line";
 
 // ── Volume metadata ────────────────────────────────────────────
 const VOLUMES: Record<Volume, { eyebrow: string; label: string; href: string }> = {
@@ -225,6 +226,7 @@ export function CaseStudy({
         paddingBottom: 120,
       }}
     >
+      <PromptLine href="/" />
       <div
         style={{
           maxWidth: 960,

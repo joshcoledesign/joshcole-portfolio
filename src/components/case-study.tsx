@@ -250,7 +250,7 @@ export function CaseStudy({
             marginBottom: 40,
           }}
         >
-          <span aria-hidden="true">&gt;</span>
+          <span aria-hidden="true">&lt;</span>
           <span>Back to {vol.label}</span>
         </Link>
 
@@ -289,21 +289,23 @@ export function CaseStudy({
             fontSize: 14,
             color: "#6a6a70",
             letterSpacing: "0.04em",
-            marginBottom: image ? 32 : 48,
+            marginBottom: image ? 50 : 48,
           }}
         >
           {role} · {year}
         </div>
 
-        {/* ── Divider ── */}
-        <div
-          aria-hidden="true"
-          style={{
-            height: 0,
-            borderTop: "0.5px solid rgba(255,255,255,0.1)",
-            marginBottom: 56,
-          }}
-        />
+        {/* ── Divider (only when no hero image) ── */}
+        {!image && (
+          <div
+            aria-hidden="true"
+            style={{
+              height: 0,
+              borderTop: "0.5px solid rgba(255,255,255,0.1)",
+              marginBottom: 56,
+            }}
+          />
+        )}
 
         {/* ── Hero image (optional) ── */}
         {image && (

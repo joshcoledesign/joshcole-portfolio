@@ -295,27 +295,6 @@ export function CaseStudy({
           {role} · {year}
         </div>
 
-        {/* ── Hero image (when present) ── */}
-        {image && (
-          <div
-            style={{
-              position: "relative",
-              height: 400,
-              overflow: "hidden",
-              marginBottom: 48,
-            }}
-          >
-            <Image
-              src={image}
-              alt={title}
-              fill
-              sizes="(max-width: 960px) 100vw, 864px"
-              style={{ objectFit: "cover" }}
-              priority
-            />
-          </div>
-        )}
-
         {/* ── Divider ── */}
         <div
           aria-hidden="true"

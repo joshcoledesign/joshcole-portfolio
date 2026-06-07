@@ -5,6 +5,7 @@ slug: "union-station-hotel"
 role: "Creative Director & Brand Strategist"
 year: "mid-2010s"
 summary: "A brand woven into a 125-year-old Gothic train station — from the tile mosaic to the staff cuffs."
+# heroImage: ""
 ---
 
 # Union Station Hotel

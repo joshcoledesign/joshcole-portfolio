@@ -17,6 +17,12 @@ import Link from "next/link";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import type { Volume } from "@/lib/case-studies";
 import { PromptLine } from "@/components/prompt-line";
+import { RfpAgentFlow } from "@/components/heroes/rfp-agent-flow";
+
+// ── Component-based card thumbnails (slug → component) ────────
+const THUMB_COMPONENTS: Record<string, React.ComponentType<{ cover?: boolean }>> = {
+  "ust-rfp-agent": RfpAgentFlow,
+};
 
 const MONO = "var(--font-jetbrains-mono), monospace";
 const SYNE = "var(--font-syne), sans-serif";
@@ -89,26 +95,38 @@ function FeaturedCard({
         }}
       />
 
-      {card.image && (
-        // Image header — scanline overlays handle hover effect; no scale
-        <div
-          className="vol-card-img"
-          style={{ position: "relative", height: 320 }}
-        >
-          <Image
-            src={card.image}
-            alt={card.title}
-            fill
-            sizes="(max-width: 960px) 100vw, 864px"
-            className="vol-card-img-fill"
-            style={{ objectFit: "cover" }}
-          />
-          {/* Slow scanline — rest state */}
-          <div aria-hidden="true" className="vol-feat-crt-slow" style={{ position: "absolute", zIndex: 1, pointerEvents: "none" }} />
-          {/* Fast scanline — cross-fades in on hover */}
-          <div aria-hidden="true" className="vol-feat-crt-fast" style={{ position: "absolute", zIndex: 1, pointerEvents: "none" }} />
-        </div>
-      )}
+      {(() => {
+        const Thumb = THUMB_COMPONENTS[card.slug];
+        if (Thumb) return (
+          <div
+            className="vol-card-img"
+            style={{ position: "relative", height: 320, overflow: "hidden" }}
+          >
+            <Thumb cover />
+          </div>
+        );
+        if (card.image) return (
+          // Image header — scanline overlays handle hover effect; no scale
+          <div
+            className="vol-card-img"
+            style={{ position: "relative", height: 320 }}
+          >
+            <Image
+              src={card.image}
+              alt={card.title}
+              fill
+              sizes="(max-width: 960px) 100vw, 864px"
+              className="vol-card-img-fill"
+              style={{ objectFit: "cover" }}
+            />
+            {/* Slow scanline — rest state */}
+            <div aria-hidden="true" className="vol-feat-crt-slow" style={{ position: "absolute", zIndex: 1, pointerEvents: "none" }} />
+            {/* Fast scanline — cross-fades in on hover */}
+            <div aria-hidden="true" className="vol-feat-crt-fast" style={{ position: "absolute", zIndex: 1, pointerEvents: "none" }} />
+          </div>
+        );
+        return null;
+      })()}
 
       <div style={{ padding: "20px 24px 28px" }}>
         {/* Title */}
@@ -164,25 +182,37 @@ function CaseStudyCard({ card }: { card: CardData }) {
   const hasMeta = card.role || card.year;
   return (
     <Link href={card.href} className="vol-card">
-      {card.image && (
-        <div
-          className="vol-card-img"
-          style={{ position: "relative", height: 180 }}
-        >
-          <Image
-            src={card.image}
-            alt={card.title}
-            fill
-            sizes="(max-width: 960px) 50vw, 432px"
-            className="vol-card-img-fill"
-            style={{ objectFit: "cover" }}
-          />
-        </div>
-      )}
+      {(() => {
+        const Thumb = THUMB_COMPONENTS[card.slug];
+        if (Thumb) return (
+          <div
+            className="vol-card-img"
+            style={{ position: "relative", height: 180, overflow: "hidden" }}
+          >
+            <Thumb cover />
+          </div>
+        );
+        if (card.image) return (
+          <div
+            className="vol-card-img"
+            style={{ position: "relative", height: 180 }}
+          >
+            <Image
+              src={card.image}
+              alt={card.title}
+              fill
+              sizes="(max-width: 960px) 50vw, 432px"
+              className="vol-card-img-fill"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+        );
+        return null;
+      })()}
 
       <div
         style={{
-          padding: card.image ? "16px 20px 20px" : "24px 20px 24px",
+          padding: card.image || THUMB_COMPONENTS[card.slug] ? "16px 20px 20px" : "24px 20px 24px",
         }}
       >
         {/* Title */}

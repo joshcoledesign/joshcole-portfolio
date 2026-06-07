@@ -5,6 +5,7 @@ slug: "vrc-suite"
 role: "UX Lead — four products"
 year: "Four-year engagement"
 summary: "Four products, one connected suite, 80,000–100,000+ requests a month in regulated industries."
+# heroImage: ""
 ---
 
 # VRC Suite

@@ -5,6 +5,7 @@ slug: "lp-7d-ride"
 role: "Design Director — end to end"
 year: "2019"
 summary: "A full 7D experiential ride that made building materials unforgettable. 485+ leads, 2.2M+ media impressions."
+# heroImage: ""
 ---
 
 # LP 7D Ride

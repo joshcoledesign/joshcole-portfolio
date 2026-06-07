@@ -5,6 +5,7 @@ slug: "ust-rfp-agent"
 role: "Built end to end — flow, scraping, scoring, agent"
 year: "2024"
 summary: "An AI system that does the first pass on six-figure pursuit decisions, so the team can decide."
+# heroImage: ""
 ---
 
 # UST RFP Triage Agent

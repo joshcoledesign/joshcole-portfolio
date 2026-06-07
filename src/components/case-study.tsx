@@ -10,6 +10,13 @@ import remarkGfm from "remark-gfm";
 import type { CaseStudyData, Volume } from "@/lib/case-studies";
 import type { Components } from "react-markdown";
 import { PromptLine } from "@/components/prompt-line";
+import { RfpAgentFlow } from "@/components/heroes/rfp-agent-flow";
+
+// ── Component-based heroes (slug → component) ────────────────
+// For case studies with SVG/generated heroes instead of images.
+const HERO_COMPONENTS: Record<string, React.ComponentType> = {
+  "ust-rfp-agent": RfpAgentFlow,
+};
 
 // ── Volume metadata ────────────────────────────────────────────
 const VOLUMES: Record<Volume, { eyebrow: string; label: string; href: string }> = {
@@ -211,12 +218,17 @@ const markdownComponents: Components = {
 // ── CaseStudy component ────────────────────────────────────────
 export function CaseStudy({
   title,
+  slug,
   volume,
   role,
   year,
   image,
+  heroImage,
   content,
 }: CaseStudyData) {
+  const HeroComponent = HERO_COMPONENTS[slug];
+  const hero = HeroComponent ? null : (heroImage ?? image);
+  const hasHero = !!(HeroComponent || hero);
   const vol = VOLUMES[volume];
 
   return (
@@ -289,14 +301,14 @@ export function CaseStudy({
             fontSize: 14,
             color: "#6a6a70",
             letterSpacing: "0.04em",
-            marginBottom: image ? 50 : 48,
+            marginBottom: hasHero ? 50 : 48,
           }}
         >
           {role} · {year}
         </div>
 
-        {/* ── Divider (only when no hero image) ── */}
-        {!image && (
+        {/* ── Divider (only when no hero) ── */}
+        {!hasHero && (
           <div
             aria-hidden="true"
             style={{
@@ -307,14 +319,26 @@ export function CaseStudy({
           />
         )}
 
-        {/* ── Hero image (optional) ── */}
-        {image && (
+        {/* ── Hero (component or image) ── */}
+        {HeroComponent && (
+          <div
+            style={{
+              marginBottom: 56,
+              border: "0.5px solid rgba(255,255,255,0.1)",
+            }}
+          >
+            <HeroComponent />
+          </div>
+        )}
+        {hero && (
           <Image
-            src={image}
+            src={hero}
             alt={title}
-            width={0}
+            width={1728}
             height={0}
             sizes="(max-width: 960px) 100vw, 864px"
+            quality={100}
+            unoptimized
             style={{
               width: "100%",
               height: "auto",

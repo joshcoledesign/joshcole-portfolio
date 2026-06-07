@@ -14,6 +14,7 @@ export interface CaseStudyData {
   year: string | number;
   summary: string;
   image?: string;
+  heroImage?: string;
   content: string;
 }
 
@@ -45,6 +46,7 @@ export function getAllCaseStudies(): CaseStudyData[] {
         year: data.year,
         summary: data.summary,
         image: data.image as string | undefined,
+        heroImage: data.heroImage as string | undefined,
         content: content.trim(),
       };
     });
@@ -65,6 +67,7 @@ export function getCaseStudy(slug: string): CaseStudyData | null {
         year: data.year,
         summary: data.summary,
         image: data.image as string | undefined,
+        heroImage: data.heroImage as string | undefined,
         content: content.trim(),
       };
     }

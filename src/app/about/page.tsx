@@ -1,6 +1,7 @@
 // ─── About ────────────────────────────────────────────────────
 // Real bio. Visual system identical to case study pages.
 
+import Link from "next/link";
 import { PromptLine } from "@/components/prompt-line";
 
 const MONO = "var(--font-jetbrains-mono), monospace";
@@ -31,6 +32,26 @@ export default function AboutPage() {
           padding: "64px 48px 0",
         }}
       >
+        {/* ── Back link ── */}
+        <Link
+          href="/"
+          className="case-back-link"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 6,
+            fontFamily: MONO,
+            fontSize: 12,
+            color: "#6a6a70",
+            textDecoration: "none",
+            letterSpacing: "0.04em",
+            marginBottom: 40,
+          }}
+        >
+          <span aria-hidden="true">&lt;</span>
+          <span>Back to Home</span>
+        </Link>
+
         {/* Eyebrow */}
         <div
           style={{

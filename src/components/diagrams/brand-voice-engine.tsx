@@ -73,7 +73,7 @@ export function BrandVoiceEngine() {
 
   return (
     <svg
-      viewBox={`0 0 ${W} ${H}`}
+      viewBox={`100 0 760 ${H}`}
       role="img"
       aria-label="Brand Voice Engine four-stage pipeline: voice analysis, content strategy, content generation, and a separate-model quality check that judges the draft against the voice profile and brief"
       style={{ width: "100%", height: "auto", display: "block" }}
@@ -140,9 +140,10 @@ export function BrandVoiceEngine() {
         y={(cy(0) + cy(3)) / 2}
         fontFamily={MONO}
         fontSize={11}
+        fontWeight="normal"
         fill={PINK}
         textAnchor="middle"
-        letterSpacing="0.04em"
+        letterSpacing="0.08em"
       >
         judges against voice + brief
       </text>

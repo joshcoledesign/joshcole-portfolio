@@ -5,7 +5,7 @@ slug: "emergence"
 role: "Design system architect"
 year: "2025"
 summary: "The design system that runs Novensia — something new forming out of something larger."
-image: "/case-studies/emergence/emergence-bloom.jpg"
+thumbnail: "/case-studies/emergence/emergence-bloom.jpg"
 heroImage: "/case-studies/emergence/emergence-01.png"
 ---
 

@@ -67,7 +67,7 @@ interface CardData {
   role: string;
   year: string;
   summary: string;
-  image: string | undefined;
+  thumbnail: string | undefined;
   href: string;
 }
 
@@ -105,14 +105,14 @@ function FeaturedCard({
             <Thumb cover />
           </div>
         );
-        if (card.image) return (
+        if (card.thumbnail) return (
           // Image header — scanline overlays handle hover effect; no scale
           <div
             className="vol-card-img"
             style={{ position: "relative", height: 320 }}
           >
             <Image
-              src={card.image}
+              src={card.thumbnail}
               alt={card.title}
               fill
               sizes="(max-width: 960px) 100vw, 864px"
@@ -192,13 +192,13 @@ function CaseStudyCard({ card }: { card: CardData }) {
             <Thumb cover />
           </div>
         );
-        if (card.image) return (
+        if (card.thumbnail) return (
           <div
             className="vol-card-img"
             style={{ position: "relative", height: 180 }}
           >
             <Image
-              src={card.image}
+              src={card.thumbnail}
               alt={card.title}
               fill
               sizes="(max-width: 960px) 50vw, 432px"
@@ -212,7 +212,7 @@ function CaseStudyCard({ card }: { card: CardData }) {
 
       <div
         style={{
-          padding: card.image || THUMB_COMPONENTS[card.slug] ? "16px 20px 20px" : "24px 20px 24px",
+          padding: card.thumbnail || THUMB_COMPONENTS[card.slug] ? "16px 20px 20px" : "24px 20px 24px",
         }}
       >
         {/* Title */}
@@ -329,7 +329,7 @@ export default function VolumesPage() {
             role: cs.role ?? "",
             year: cs.year != null ? String(cs.year) : "",
             summary: cs.summary,
-            image: cs.image,
+            thumbnail: cs.thumbnail,
             href: `/volumes/${cs.volume}/${cs.slug}`,
           }));
 

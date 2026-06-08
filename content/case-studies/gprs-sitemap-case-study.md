@@ -5,6 +5,7 @@ slug: "gprs-sitemap"
 role: "Lead UX/UI Designer"
 year: "2023–2024"
 summary: "A map-first product where everything under a job site lives — across desktop, tablet, and mobile."
+# thumbnail: ""
 # heroImage: ""
 ---
 

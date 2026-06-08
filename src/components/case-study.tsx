@@ -285,12 +285,11 @@ export function CaseStudy({
   volume,
   role,
   year,
-  image,
   heroImage,
   content,
 }: CaseStudyData) {
   const HeroComponent = HERO_COMPONENTS[slug];
-  const hero = HeroComponent ? null : (heroImage ?? image);
+  const hero = HeroComponent ? null : (heroImage ?? null);
   const hasHero = !!(HeroComponent || hero);
   const vol = VOLUMES[volume];
 

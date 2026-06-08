@@ -5,7 +5,7 @@ slug: "novensia"
 role: "Solo — strategy, architecture, design, build"
 year: "2025–Present"
 summary: "An AI brand operating system — foundation-first, multi-model, built end to end by one set of hands."
-image: "/case-studies/novensia/signal-now.jpg"
+thumbnail: "/case-studies/novensia/signal-now.jpg"
 # heroImage: ""
 ---
 

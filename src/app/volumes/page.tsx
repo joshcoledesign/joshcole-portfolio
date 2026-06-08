@@ -288,7 +288,7 @@ export default function VolumesPage() {
             marginBottom: 16,
           }}
         >
-          THE CHAPTERS
+          THE WORK
         </div>
 
         <h1

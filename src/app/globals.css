@@ -249,6 +249,11 @@ body {
   .vol-feat-crt-fast { display: none; }
 }
 
+/* ─── Build queue links ─────────────────────────────────────── */
+a:hover .build-queue-link {
+  text-decoration: underline;
+}
+
 /* ─── Sticky nav ─────────────────────────────────────────────── */
 
 /* Base link — Syne Title 24, nav muted */

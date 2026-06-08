@@ -1,3 +1,4 @@
+import { BuildQueue } from "@/components/build-queue";
 import { PromptLine } from "@/components/prompt-line";
 import { SignalPanels } from "@/components/signal-panels";
 
@@ -90,6 +91,9 @@ export default function Home() {
 
         {/* ── SIGNAL panels ── */}
         <SignalPanels />
+
+        {/* ── Build queue — "coming soon" as terminal process ── */}
+        <BuildQueue />
       </main>
 
     </div>

@@ -37,6 +37,8 @@ Novensia is built in three layers, on purpose, in order.
 
 **Then the production tools.** The brand voice engine is the first one — a four-stage pipeline that learns how you write from your samples, builds a strategy for what you want to say, generates a draft, then runs a tough quality check on its own output before handing it to you. That last part matters. Most AI tools give you the first thing the model thinks of. The voice engine writes a draft, then puts a second model in the room whose only job is to find what's wrong with it — measured against your voice and against the strategy. The version you see has already been argued with.
 
+![Brand Voice Engine four-stage pipeline](component:voice-engine)
+
 Underneath, the choices are deliberate. Sonnet 4.6 handles the fast creative work — voice analysis, strategy, drafting — at temperatures 0.2, 0.4, and 0.7 respectively. Cool and analytical when the system is learning your voice. Warmer when it's writing for you. Opus 4.6 handles the quality check at 0.2 — cool again, because judgment needs to be sharper than invention. The right model and the right temperature for what each stage is actually doing.
 
 One detail worth pulling out: the voice profile captures _techniques, not phrases_. Most "trained on your voice" tools just remix sentences from your samples — which is why they sound like a karaoke version of you. Novensia learns _how_ you make a point, not the exact words you used to make it last time. The difference shows up in the writing.
@@ -48,6 +50,8 @@ Everything attaches to a shared brand record. Intake and voice engine aren't ste
 ---
 
 ## What it feels like to use
+
+![What it feels like to use](/case-studies/novensia/chapter-01.png)
 
 Branding is storytelling. Every brand worth anything is a story someone is telling about themselves — to their people, to the world, to the customer trying to decide if this is for them. So Novensia is built in chapters. Not because chapters are a clever metaphor, but because that's actually what's happening: you're writing the story of your brand, in order, one piece at a time.
 

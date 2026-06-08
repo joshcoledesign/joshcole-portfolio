@@ -39,10 +39,10 @@ export function RfpAgentWorkflow() {
   ];
 
   // ── Side blocks ──
-  const hf = { x: 40, y: 356, w: 200, h: 74 }; // human fetch (left)
-  const hfCY = hf.y + hf.h / 2; // 393
-  const step3CY = 280 + 35; // 315 — center-y of step 3
-  const mergeY = 442; // return path meets main connector
+  const hf = { x: 40, y: 361, w: 200, h: 74 }; // human fetch (left) — centered between connectors at 350 and 445
+  const hfCY = hf.y + hf.h / 2;
+  const step3CY = 280 + 70; // 350 — bottom of step 3
+  const mergeY = 445; // Y-merge junction: complete path + return path converge here before CoPilot
 
   const step5CY = 578 + 43; // 621 — center-y of step 5
   const rt = { x: 720, y: step5CY - 28, w: 200, h: 56 }; // rules table (right)
@@ -77,6 +77,7 @@ export function RfpAgentWorkflow() {
       {/* ── Main vertical connectors ── */}
       {nodes.map((node, i) => {
         if (i >= nodes.length - 1) return null;
+        if (i === 2) return null; // drawn as split segments around the merge circle below
         const next = nodes[i + 1];
         return (
           <line
@@ -91,15 +92,19 @@ export function RfpAgentWorkflow() {
         );
       })}
 
-      {/* ── Branch: "blocked" from step 3 left → human fetch ── */}
+      {/* ── Split 2→3 connector: "complete" input + merged output, separated by merge circle ── */}
+      <line x1={CX} y1={nodes[2].y + nodes[2].h} x2={CX} y2={mergeY - 2.5} stroke={CYAN} strokeWidth={1} />
+      <line x1={CX} y1={mergeY + 2.5} x2={CX} y2={nodes[3].y} stroke={CYAN} strokeWidth={1} />
+
+      {/* ── Branch: "blocked" from step 3 left → human fetch top ── */}
       <path
-        d={`M ${NX},${step3CY} H 270 V ${hfCY} H ${hf.x + hf.w}`}
+        d={`M ${NX},${step3CY} H ${hf.x + hf.w / 2} V ${hf.y}`}
         fill="none"
         stroke={CYAN}
         strokeWidth={1}
       />
       <text
-        x={290}
+        x={Math.round((NX + hf.x + hf.w / 2) / 2)}
         y={step3CY - 8}
         fontFamily={MONO}
         fontSize={10}
@@ -120,8 +125,8 @@ export function RfpAgentWorkflow() {
 
       {/* "complete" label on main path */}
       <text
-        x={CX + 10}
-        y={Math.round((280 + 70 + 458) / 2) + 4}
+        x={CX + 4}
+        y={Math.round((step3CY + mergeY) / 2) + 4}
         fontFamily={MONO}
         fontSize={10}
         fill={DIM}

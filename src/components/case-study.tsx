@@ -5,17 +5,27 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { defaultUrlTransform } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeUnwrapImages from "rehype-unwrap-images";
 import type { CaseStudyData, Volume } from "@/lib/case-studies";
 import type { Components } from "react-markdown";
 import { PromptLine } from "@/components/prompt-line";
 import { RfpAgentFlow } from "@/components/heroes/rfp-agent-flow";
+import { RfpAgentWorkflow } from "@/components/diagrams/rfp-agent-workflow";
+import { BrandVoiceEngine } from "@/components/diagrams/brand-voice-engine";
 
 // ── Component-based heroes (slug → component) ────────────────
 // For case studies with SVG/generated heroes instead of images.
 const HERO_COMPONENTS: Record<string, React.ComponentType> = {
   "ust-rfp-agent": RfpAgentFlow,
+};
+
+// ── Inline diagram components, embedded from markdown via ──────
+// a `![alt](component:<key>)` image marker. Lets case studies drop
+// a live diagram at an exact point in the prose.
+const INLINE_COMPONENTS: Record<string, React.ComponentType> = {
+  "voice-engine": BrandVoiceEngine,
 };
 
 // ── Volume metadata ────────────────────────────────────────────
@@ -187,16 +197,40 @@ const markdownComponents: Components = {
       </pre>
     );
   },
-  hr() {
+  img({ src, alt }) {
+    // Live-component marker: ![alt](component:voice-engine)
+    if (typeof src === "string" && src.startsWith("component:")) {
+      const Comp = INLINE_COMPONENTS[src.slice("component:".length)];
+      if (Comp) {
+        // Break out of the 800px prose column to the full content width
+        // (matches the page's hero images), capped so it never overflows.
+        return (
+          <div
+            style={{
+              margin: "48px 0",
+              width: "calc(100% + 64px)",
+              maxWidth: "calc(100vw - 96px)",
+            }}
+          >
+            <Comp />
+          </div>
+        );
+      }
+    }
     return (
-      <div
-        aria-hidden="true"
-        style={{
-          height: 0,
-          borderTop: "0.5px solid rgba(255,255,255,0.1)",
-          margin: "48px 0",
-        }}
-      />
+      <div style={{ margin: "32px 0" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={alt ?? ""}
+          style={{
+            width: "100%",
+            height: "auto",
+            display: "block",
+            border: "0.5px solid rgba(255,255,255,0.1)",
+          }}
+        />
+      </div>
     );
   },
   blockquote({ children }) {
@@ -214,6 +248,35 @@ const markdownComponents: Components = {
     );
   },
 };
+
+// ── Slug-aware markdown component factory ─────────────────────
+// Allows per-slug overrides (e.g. replacing the first <hr> with a diagram).
+function makeMarkdownComponents(slug: string): Components {
+  let hrCount = 0;
+  return {
+    ...markdownComponents,
+    hr() {
+      hrCount++;
+      if (slug === "ust-rfp-agent" && hrCount === 1) {
+        return (
+          <div style={{ margin: "48px 0" }}>
+            <RfpAgentWorkflow />
+          </div>
+        );
+      }
+      return (
+        <div
+          aria-hidden="true"
+          style={{
+            height: 0,
+            borderTop: "0.5px solid rgba(255,255,255,0.1)",
+            margin: "48px 0",
+          }}
+        />
+      );
+    },
+  };
+}
 
 // ── CaseStudy component ────────────────────────────────────────
 export function CaseStudy({
@@ -354,7 +417,11 @@ export function CaseStudy({
         <div style={{ maxWidth: 800 }}>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
-            components={markdownComponents}
+            rehypePlugins={[rehypeUnwrapImages]}
+            components={makeMarkdownComponents(slug)}
+            urlTransform={(url) =>
+              url.startsWith("component:") ? url : defaultUrlTransform(url)
+            }
           >
             {content}
           </ReactMarkdown>

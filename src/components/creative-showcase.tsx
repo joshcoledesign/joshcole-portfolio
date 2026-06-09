@@ -69,7 +69,8 @@ export function CreativeShowcase({
   const existingImages = filterExistingImages(images);
   const nextCreative = getNextCreative(slug);
 
-  // Adapt to CaseStudyNext's expected shape — null when no next piece
+  // Adapt to CaseStudyNext's expected shape — null when no next piece.
+  // Use the next piece's lead image as the green-feed thumbnail.
   const nextForEndcap = nextCreative
     ? {
         title: nextCreative.title,
@@ -78,7 +79,7 @@ export function CreativeShowcase({
         role: "",
         year: "",
         summary: "",
-        thumbnail: undefined,
+        thumbnail: nextCreative.images[0],
         content: "",
       }
     : null;
@@ -263,7 +264,10 @@ export function CreativeShowcase({
         </div>
 
         {/* ── Next-bar — reuses the case-study end-cap card ── */}
-        <CaseStudyNext next={nextForEndcap} />
+        <CaseStudyNext
+          next={nextForEndcap}
+          href={nextCreative ? `/creative/${nextCreative.slug}` : undefined}
+        />
       </div>
     </div>
   );

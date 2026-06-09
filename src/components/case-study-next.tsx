@@ -46,9 +46,15 @@ function CornerTick({
 
 interface CaseStudyNextProps {
   next: CaseStudyData | null;
+  /**
+   * Route override for the "next" link. Defaults to the volume
+   * route (`/volumes/<volume>/<slug>`). Creative pieces live at
+   * `/creative/<slug>`, so the showcase passes that path here.
+   */
+  href?: string;
 }
 
-export function CaseStudyNext({ next }: CaseStudyNextProps) {
+export function CaseStudyNext({ next, href }: CaseStudyNextProps) {
   return (
     <div style={{ marginTop: 48 }}>
       {/* ── Card container ── */}
@@ -78,7 +84,7 @@ export function CaseStudyNext({ next }: CaseStudyNextProps) {
 
             {/* Next study row — text + thumbnail grouped tight */}
             <Link
-              href={`/volumes/${next.volume}/${next.slug}`}
+              href={href ?? `/volumes/${next.volume}/${next.slug}`}
               className="next-endcap-link"
               style={{
                 display: "flex",

@@ -12,6 +12,9 @@ export interface CreativeData {
   slug: string;
   images: string[];
   content: string;
+  // Optional crop anchor for the volumes-page card thumbnail
+  // (e.g. "top"). Undefined → center crop.
+  thumbPosition?: string;
 }
 
 export function getAllCreativeSlugs(): { slug: string }[] {
@@ -42,6 +45,7 @@ export function getAllCreative(): CreativeData[] {
         slug: data.slug,
         images: (data.images as string[]) ?? [],
         content: content.trim(),
+        thumbPosition: data.thumbPosition as string | undefined,
       };
     });
 }
@@ -49,13 +53,19 @@ export function getAllCreative(): CreativeData[] {
 // ── Ordered sequence — controls the "next" end-cap ──────────
 export const CREATIVE_ORDER: string[] = [
   "fractured",
+  "saints",
 ];
 
-/** Return the next creative piece in order, or null if last. */
+/**
+ * Return the next creative piece in order. The sequence wraps —
+ * with two+ pieces each end-cap points to the next and the last
+ * loops back to the first, so the collection reads as a loop
+ * rather than dead-ending. Returns null only for a lone piece.
+ */
 export function getNextCreative(currentSlug: string): CreativeData | null {
   const idx = CREATIVE_ORDER.indexOf(currentSlug);
-  if (idx === -1 || idx === CREATIVE_ORDER.length - 1) return null;
-  return getCreative(CREATIVE_ORDER[idx + 1]);
+  if (idx === -1 || CREATIVE_ORDER.length < 2) return null;
+  return getCreative(CREATIVE_ORDER[(idx + 1) % CREATIVE_ORDER.length]);
 }
 
 export function getCreative(slug: string): CreativeData | null {
@@ -73,6 +83,7 @@ export function getCreative(slug: string): CreativeData | null {
         slug: data.slug,
         images: (data.images as string[]) ?? [],
         content: content.trim(),
+        thumbPosition: data.thumbPosition as string | undefined,
       };
     }
   }

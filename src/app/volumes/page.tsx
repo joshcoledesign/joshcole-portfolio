@@ -60,7 +60,7 @@ const VOLUMES: Array<{
     id: "volume-iii",
     eyebrow: "VOLUME III",
     title: "Creative & Immersive",
-    order: ["lp-7d-ride", "union-station-hotel", "hype-js", "fractured"],
+    order: ["lp-7d-ride", "union-station-hotel", "hype-js", "fractured", "saints"],
     accent: "#ff419f", // pink
   },
 ];
@@ -74,6 +74,10 @@ interface CardData {
   summary: string;
   thumbnail: string | undefined;
   href: string;
+  // Crop anchor for the cover-fit thumbnail. Undefined → browser
+  // default (center). Creative figure pieces use "top" so the
+  // subject's head/halo isn't cropped out of the card.
+  imgPosition?: string;
 }
 
 // ── FeaturedCard — full-width, leads each volume ───────────────
@@ -122,7 +126,7 @@ function FeaturedCard({
               fill
               sizes="(max-width: 960px) 100vw, 864px"
               className="vol-card-img-fill"
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover", objectPosition: card.imgPosition }}
             />
             {/* Slow scanline — rest state */}
             <div aria-hidden="true" className="vol-feat-crt-slow" style={{ position: "absolute", zIndex: 1, pointerEvents: "none" }} />
@@ -208,7 +212,7 @@ function CaseStudyCard({ card }: { card: CardData }) {
               fill
               sizes="(max-width: 960px) 50vw, 432px"
               className="vol-card-img-fill"
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover", objectPosition: card.imgPosition }}
             />
           </div>
         );
@@ -347,6 +351,7 @@ export default function VolumesPage() {
                     summary: c.subline,
                     thumbnail: c.images[0],
                     href: `/creative/${c.slug}`,
+                    imgPosition: c.thumbPosition,
                   }))
               : [];
 

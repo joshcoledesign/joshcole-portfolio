@@ -52,6 +52,38 @@ export function getAllCaseStudies(): CaseStudyData[] {
     });
 }
 
+// ── Ordered sequence: Volume I → II → III, continuous ─────────
+// Used by the "next" end-cap to cross volume boundaries.
+export const CASE_STUDY_ORDER: string[] = [
+  // Volume I — AI Systems
+  "novensia",
+  "emergence",
+  "ust-rfp-agent",
+  // Volume II — UX & Enterprise
+  "vrc-suite",
+  "gprs-sitemap",
+  // Volume III — Creative & Immersive
+  "lp-7d-ride",
+  "union-station-hotel",
+  "hype-js",
+];
+
+// ── Volume display names keyed by Volume type ─────────────────
+export const VOLUME_LABELS: Record<Volume, string> = {
+  "ai-systems": "AI SYSTEMS",
+  "ux-enterprise": "UX & ENTERPRISE",
+  "creative-immersive": "CREATIVE & IMMERSIVE",
+};
+
+/** Return the next case study in the ordered sequence, or null if last. */
+export function getNextCaseStudy(
+  currentSlug: string,
+): CaseStudyData | null {
+  const idx = CASE_STUDY_ORDER.indexOf(currentSlug);
+  if (idx === -1 || idx === CASE_STUDY_ORDER.length - 1) return null;
+  return getCaseStudy(CASE_STUDY_ORDER[idx + 1]);
+}
+
 export function getCaseStudy(slug: string): CaseStudyData | null {
   if (!fs.existsSync(CONTENT_DIR)) return null;
   const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".md"));

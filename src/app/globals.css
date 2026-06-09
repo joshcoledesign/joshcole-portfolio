@@ -88,9 +88,6 @@
 }
 
 /* ─── Base styles ────────────────────────────────────────────── */
-*, *::before, *::after {
-  border-radius: 0 !important;
-}
 
 body {
   background-color: var(--bg-base);
@@ -129,6 +126,85 @@ body {
   box-shadow: inset 2px 0 0 0 #26c5ff;
 }
 
+/* ─── Case study "next" end-cap ─────────────────────────────── */
+/* Green CRT feed tint — P1 phosphor green */
+:root {
+  --feed-tint: 75deg;
+}
+
+/* Thumbnail: 80s monochrome CRT treatment.
+   blur softens pixel edges → grayscale strips color →
+   full sepia gives maximum tint material → hue-rotate to phosphor green →
+   high saturate for vivid neon → brightness clamps dark →
+   high contrast crushes mid-tones to bright-green-on-black. */
+.next-endcap-thumb {
+  filter: blur(0.5px) grayscale(1) sepia(1) hue-rotate(var(--feed-tint)) saturate(2.5) brightness(0.35) contrast(1.9);
+  transition: filter 0.25s ease;
+}
+.next-endcap-link:hover .next-endcap-thumb {
+  filter: blur(0px) grayscale(0) sepia(0) hue-rotate(0deg) saturate(1) contrast(1) brightness(1);
+}
+
+/* Phosphor glow — green light bleeding from the thumbnail */
+.next-endcap-thumb-wrap {
+  box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.15);
+  transition: box-shadow 0.25s ease;
+}
+.next-endcap-link:hover .next-endcap-thumb-wrap {
+  box-shadow: none;
+}
+
+/* CRT noise grain — signal static that breaks up flat-color areas */
+.next-endcap-noise {
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+  transition: opacity 0.25s ease;
+}
+.next-endcap-link:hover .next-endcap-noise {
+  opacity: 0;
+}
+
+/* CRT barrel vignette — edge darkening from tube curvature */
+.next-endcap-vignette {
+  transition: opacity 0.25s ease;
+}
+.next-endcap-link:hover .next-endcap-vignette {
+  opacity: 0;
+}
+
+/* Scanline overlay — heavier at rest for visible line pitch */
+.next-endcap-thumb-wrap .panel-crt {
+  transition: opacity 0.25s ease;
+}
+.next-endcap-link:hover .next-endcap-thumb-wrap .panel-crt {
+  opacity: 0.1;
+}
+
+/* Text hover states */
+.next-endcap-slug {
+  transition: color 0.15s ease;
+}
+.next-endcap-link:hover .next-endcap-slug {
+  text-decoration: underline;
+}
+.next-endcap-read {
+  color: #26c5ff;
+  transition: color 0.15s ease;
+}
+.next-endcap-link:hover .next-endcap-read {
+  color: #7ddfff;
+}
+
+/* Back link — cd ../volumes rests cyan, lifts brighter on hover */
+.next-endcap-back-text {
+  color: #26c5ff;
+  transition: color 0.15s ease;
+}
+.next-endcap-back:hover .next-endcap-back-text {
+  color: #7ddfff;
+  text-decoration: underline;
+}
+
 /* ─── Case study back link hover ────────────────────────────── */
 .case-back-link:hover {
   color: #26c5ff;
@@ -141,6 +217,8 @@ body {
   position: relative;
   z-index: 0; /* stacking context so ::after renders above image */
   border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 5px;
+  overflow: hidden;
   background-color: #15161c;
   display: block;
   text-decoration: none;
@@ -172,6 +250,7 @@ body {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 5px;
   background-color: #15161c;
   display: block;
   text-decoration: none;
@@ -252,6 +331,98 @@ body {
 /* ─── Build queue links ─────────────────────────────────────── */
 a:hover .build-queue-link {
   text-decoration: underline;
+}
+
+/* ─── Volume manifest links ─────────────────────────────────── */
+.manifest-title {
+  color: #6a6a70;
+  transition: color 0.15s ease;
+}
+.manifest-count {
+  color: #8a8a90;
+  transition: color 0.15s ease;
+}
+.manifest-link:hover .manifest-slug {
+  text-decoration: underline;
+}
+.manifest-link:hover .manifest-title {
+  color: #e8e8ea;
+}
+.manifest-link:hover .manifest-count {
+  color: #FF419F;
+}
+
+/* Scanline overlay inside manifest — no vignette box-shadow */
+.manifest-crt {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 4px
+  );
+  animation: scanline-drift 6s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .manifest-crt { animation: none; }
+}
+
+/* ─── Site footer ───────────────────────────────────────────── */
+.footer-action-link .footer-action-text {
+  transition: color 0.15s ease;
+}
+.footer-action-link:hover .footer-action-text {
+  color: #7ddfff;
+  text-decoration: underline;
+}
+.footer-uplink .footer-uplink-name,
+.footer-uplink .footer-uplink-label {
+  transition: color 0.15s ease;
+}
+.footer-uplink:hover .footer-uplink-name {
+  color: #26c5ff;
+  text-decoration: underline;
+}
+.footer-uplink:hover .footer-uplink-label {
+  color: #e8e8ea;
+}
+
+/* ─── Locked case study redaction overlay ───────────────────── */
+/* Heavier scanline + glitch for redaction, not just atmosphere  */
+@keyframes locked-glitch {
+  0%, 100% { transform: none; filter: none; }
+  14.8% { transform: none;              filter: none; }
+  15.0% { transform: translateX(5px);   filter: saturate(1.6) hue-rotate(10deg); }
+  15.3% { transform: translateX(-3px);  filter: saturate(1.3) hue-rotate(-6deg); }
+  15.5% { transform: none;              filter: none; }
+  52.5% { transform: none;              filter: none; }
+  52.7% { transform: translateX(-6px);  filter: saturate(1.7) hue-rotate(-14deg); }
+  53.0% { transform: translateX(3px);   filter: saturate(1.4); }
+  53.2% { transform: none;              filter: none; }
+  78.9% { transform: none;              filter: none; }
+  79.1% { transform: translateX(4px) skewX(-0.5deg); filter: saturate(1.5) hue-rotate(8deg); }
+  79.4% { transform: translateX(-2px);  filter: none; }
+  79.6% { transform: none;              filter: none; }
+}
+
+.locked-scanline {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(255, 255, 255, 0.06) 2px,
+    rgba(255, 255, 255, 0.06) 4px
+  );
+  animation: scanline-drift 4s linear infinite;
+}
+
+.locked-glitch {
+  animation: locked-glitch 11s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .locked-scanline { animation: none; }
+  .locked-glitch { animation: none; }
 }
 
 /* ─── Sticky nav ─────────────────────────────────────────────── */

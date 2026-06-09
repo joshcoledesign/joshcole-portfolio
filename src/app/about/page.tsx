@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { PromptLine } from "@/components/prompt-line";
+import { CommitLog } from "@/components/commit-log";
 
 const MONO = "var(--font-jetbrains-mono), monospace";
 const SYNE = "var(--font-syne), sans-serif";
@@ -23,7 +24,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div style={{ minHeight: "100vh", paddingBottom: 120 }}>
+    <div style={{ minHeight: "100vh", paddingBottom: 56 }}>
       <PromptLine href="/" />
       <div
         style={{
@@ -194,6 +195,29 @@ export default function AboutPage() {
             person on the other side feels what I felt making it.
           </p>
         </div>
+
+        {/* ── Recent commits ── */}
+        <div
+          aria-hidden="true"
+          style={{
+            height: 0,
+            borderTop: "0.5px solid rgba(255,255,255,0.1)",
+            margin: "56px 0",
+          }}
+        />
+        <div
+          style={{
+            fontFamily: MONO,
+            fontSize: 12,
+            color: "#6a6a70",
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            marginBottom: 16,
+          }}
+        >
+          RECENT COMMITS
+        </div>
+        <CommitLog />
       </div>
     </div>
   );

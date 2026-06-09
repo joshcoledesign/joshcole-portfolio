@@ -14,6 +14,8 @@ import { PromptLine } from "@/components/prompt-line";
 import { RfpAgentFlow } from "@/components/heroes/rfp-agent-flow";
 import { RfpAgentWorkflow } from "@/components/diagrams/rfp-agent-workflow";
 import { BrandVoiceEngine } from "@/components/diagrams/brand-voice-engine";
+import { CaseStudyNext } from "@/components/case-study-next";
+import { getNextCaseStudy } from "@/lib/case-studies";
 
 // ── Component-based heroes (slug → component) ────────────────
 // For case studies with SVG/generated heroes instead of images.
@@ -297,7 +299,7 @@ export function CaseStudy({
     <div
       style={{
         minHeight: "100vh",
-        paddingBottom: 120,
+        paddingBottom: 56,
       }}
     >
       <PromptLine href="/" />
@@ -425,6 +427,9 @@ export function CaseStudy({
             {content}
           </ReactMarkdown>
         </div>
+
+        {/* ── Next end-cap ── */}
+        <CaseStudyNext next={getNextCaseStudy(slug)} />
       </div>
     </div>
   );

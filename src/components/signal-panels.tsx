@@ -3,12 +3,13 @@
 // Two 4:3 panels, code-drawn illustrations, shared visual vocabulary.
 //
 // [01] /now/  — NowIllustration:  warm radial bloom (CSS gradients)
-// [02] /root/ — RootIllustration: generative ring forms (SVG)
+// [02] /root/ — TEMP AUDITION: fractured photograph, togglable
 //
 // PanelCRT overlays scanlines + phosphor vignette on both.
 // Glitch animation (.crt-glitch) fires on the illustration layer;
 // ticks, labels, and CRT overlay stay fixed.
 
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -52,43 +53,45 @@ function NowIllustration() {
 }
 
 // ──────────────────────────────────────────────────────────────
-// Illustration: [02] /root/ — generative ring forms
-// Three ring clusters in warm palette + teal accent, stroke-only,
-// varying radii and dash patterns. Primary centred; two secondary
-// clusters partially off-frame (upper-left, lower-right), echoing
-// the radial generative installation work.
+// TEMP AUDITION — remove after [02] frame selected
+// Fractured photograph illustration for [02] panel.
+// Renders the selected frame (A or B) with optional CRT overlay.
 // ──────────────────────────────────────────────────────────────
-function RootIllustration() {
+const FRAME_A = "/case-studies/fractured/fractured-tn.png";
+const FRAME_B = "/case-studies/fractured/fractured-3-tn.jpg";
+
+function FracturedIllustration({
+  frame,
+  crt,
+}: {
+  frame: "A" | "B";
+  crt: boolean;
+}) {
+  const src = frame === "A" ? FRAME_A : FRAME_B;
   return (
-    <div style={{ position: "absolute", inset: 0, backgroundColor: "#161720" }}>
-      <svg
-        viewBox="0 0 400 300"
-        width="100%"
-        height="100%"
-        style={{ position: "absolute", inset: 0, display: "block" }}
-        aria-hidden="true"
-      >
-        {/* ── Primary cluster ─ centre ~(200, 150) ── */}
-        <circle cx="200" cy="150" r="22" fill="none" stroke={G}  strokeWidth="1.2" strokeDasharray="3 5"  opacity="0.75" />
-        <circle cx="200" cy="150" r="38" fill="none" stroke={C}  strokeWidth="1.0" strokeDasharray="4 7"  opacity="0.62" />
-        <circle cx="200" cy="150" r="57" fill="none" stroke={E}  strokeWidth="0.8" strokeDasharray="2 6"  opacity="0.50" />
-        <circle cx="200" cy="150" r="78" fill="none" stroke={C}  strokeWidth="0.6" strokeDasharray="5 10" opacity="0.38" />
-        <circle cx="200" cy="150" r="101" fill="none" stroke={T} strokeWidth="0.5" strokeDasharray="3 9"  opacity="0.28" />
-        <circle cx="200" cy="150" r="126" fill="none" stroke={T} strokeWidth="0.4" strokeDasharray="2 13" opacity="0.17" />
-
-        {/* ── Secondary cluster ─ upper-left, partially off-frame ── */}
-        <circle cx="55"  cy="112" r="26" fill="none" stroke={C}  strokeWidth="1.0" strokeDasharray="3 6"  opacity="0.55" />
-        <circle cx="55"  cy="112" r="48" fill="none" stroke={G}  strokeWidth="0.8" strokeDasharray="4 8"  opacity="0.40" />
-        <circle cx="55"  cy="112" r="72" fill="none" stroke={E}  strokeWidth="0.6" strokeDasharray="2 7"  opacity="0.27" />
-        <circle cx="55"  cy="112" r="98" fill="none" stroke={T}  strokeWidth="0.4" strokeDasharray="5 13" opacity="0.16" />
-
-        {/* ── Tertiary cluster ─ lower-right, partially off-frame ── */}
-        <circle cx="356" cy="196" r="20" fill="none" stroke={C}  strokeWidth="0.9" strokeDasharray="3 5"  opacity="0.48" />
-        <circle cx="356" cy="196" r="40" fill="none" stroke={G}  strokeWidth="0.7" strokeDasharray="4 8"  opacity="0.34" />
-        <circle cx="356" cy="196" r="63" fill="none" stroke={E}  strokeWidth="0.5" strokeDasharray="2 8"  opacity="0.22" />
-        <circle cx="356" cy="196" r="89" fill="none" stroke={T}  strokeWidth="0.4" strokeDasharray="6 14" opacity="0.13" />
-      </svg>
-    </div>
+    <>
+      <Image
+        src={src}
+        alt=""
+        fill
+        sizes="(max-width: 960px) 50vw, 432px"
+        style={{ objectFit: "cover" }}
+        priority
+      />
+      {/* CRT scanlines + vignette — only in CRT treatment */}
+      {crt && (
+        <div
+          aria-hidden="true"
+          className="panel-crt"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 2,
+            pointerEvents: "none",
+          }}
+        />
+      )}
+    </>
   );
 }
 
@@ -153,6 +156,8 @@ interface SignalPanelProps {
   illustration: ReactNode;
   /** Pass false when the illustration manages its own glitch animation internally */
   glitch?: boolean;
+  /** TEMP AUDITION — skip the standard PanelCRT when illustration handles its own */
+  skipCrt?: boolean;
 }
 
 function SignalPanel({
@@ -164,6 +169,7 @@ function SignalPanel({
   tickColor,
   illustration,
   glitch = true,
+  skipCrt = false,
 }: SignalPanelProps) {
   return (
     <Link
@@ -172,6 +178,7 @@ function SignalPanel({
       style={{
         aspectRatio: "4 / 3",
         border: `1px solid ${borderColor}`,
+        borderRadius: 5,
         backgroundColor: BG,
         overflow: "hidden",
       }}
@@ -182,11 +189,26 @@ function SignalPanel({
       </div>
 
       {/* CRT scanlines + vignette — fixed, above illustration */}
-      <PanelCRT />
+      {!skipCrt && <PanelCRT />}
 
       {/* Corner ticks — above everything */}
       <CornerTick corner="top-left" color={tickColor} />
       <CornerTick corner="bottom-right" color={tickColor} />
+
+      {/* ── Top-left scrim — radial fade behind the label ── */}
+      <div
+        aria-hidden="true"
+        className="absolute"
+        style={{
+          top: 0,
+          left: 0,
+          width: "60%",
+          height: "50%",
+          background: "radial-gradient(ellipse at 0% 0%, rgba(0,0,0,0.65) 0%, transparent 70%)",
+          zIndex: 4,
+          pointerEvents: "none",
+        }}
+      />
 
       {/* ── Top meta row ── */}
       <div
@@ -207,7 +229,7 @@ function SignalPanel({
         <span style={{ color: "#26c5ff", letterSpacing: "0.04em" }}>{slug}</span>
       </div>
 
-      {/* ── Bottom caption ── */}
+      {/* ── Bottom caption — burnt-in timecode treatment ── */}
       <div
         className="absolute"
         style={{
@@ -215,7 +237,8 @@ function SignalPanel({
           left: 12,
           fontFamily: "var(--font-jetbrains-mono), monospace",
           fontSize: 12,
-          color: "#6a6a70",
+          color: "rgba(255,255,255,0.6)",
+          textShadow: "0 0 4px rgba(255,255,255,0.3)",
           letterSpacing: "0.04em",
           lineHeight: 1,
           zIndex: 5,
@@ -279,6 +302,7 @@ export function SignalPanels() {
 
       {/* ── Panel grid ── */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+        {/* [01] — untouched, exactly as before */}
         <SignalPanel
           index="01"
           slug="/now/"
@@ -289,14 +313,17 @@ export function SignalPanels() {
           glitch={false}
           illustration={<NowIllustration />}
         />
+        {/* [02] — Fractured photograph, Frame A clean */}
         <SignalPanel
           index="02"
           slug="/root/"
-          caption="GENERATIVE / SPATIAL"
-          href="/volumes/creative-immersive/hype-js"
+          caption="SCRIPTING / FRACTURED"
+          href="/creative/fractured"
           borderColor="rgba(255,255,255,0.16)"
           tickColor="rgba(255,255,255,0.3)"
-          illustration={<RootIllustration />}
+          glitch={false}
+          skipCrt={true}
+          illustration={<FracturedIllustration frame="A" crt={false} />}
         />
       </div>
     </div>

@@ -16,6 +16,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import type { Volume } from "@/lib/case-studies";
+import { getAllCreative } from "@/lib/creative";
 import { PromptLine } from "@/components/prompt-line";
 import { RfpAgentFlow } from "@/components/heroes/rfp-agent-flow";
 
@@ -32,6 +33,7 @@ const INTER = "var(--font-inter), system-ui, sans-serif";
 // accent = eyebrow label color only; not a full retheme.
 const VOLUMES: Array<{
   key: Volume;
+  id: string;
   eyebrow: string;
   title: string;
   order: string[];
@@ -39,6 +41,7 @@ const VOLUMES: Array<{
 }> = [
   {
     key: "ai-systems",
+    id: "volume-i",
     eyebrow: "VOLUME I",
     title: "AI Systems",
     order: ["novensia", "emergence", "ust-rfp-agent"],
@@ -46,6 +49,7 @@ const VOLUMES: Array<{
   },
   {
     key: "ux-enterprise",
+    id: "volume-ii",
     eyebrow: "VOLUME II",
     title: "UX & Enterprise",
     order: ["vrc-suite", "gprs-sitemap"],
@@ -53,9 +57,10 @@ const VOLUMES: Array<{
   },
   {
     key: "creative-immersive",
+    id: "volume-iii",
     eyebrow: "VOLUME III",
     title: "Creative & Immersive",
-    order: ["lp-7d-ride", "union-station-hotel", "hype-js"],
+    order: ["lp-7d-ride", "union-station-hotel", "hype-js", "fractured"],
     accent: "#ff419f", // pink
   },
 ];
@@ -266,6 +271,7 @@ function CaseStudyCard({ card }: { card: CardData }) {
 // ── Page ───────────────────────────────────────────────────────
 export default function VolumesPage() {
   const all = getAllCaseStudies();
+  const creative = getAllCreative();
 
   return (
     <div style={{ minHeight: "100vh", paddingBottom: 120 }}>
@@ -315,15 +321,10 @@ export default function VolumesPage() {
 
         {/* ── Volume sections ── */}
         {VOLUMES.map((vol) => {
-          const studies = all
-            .filter((cs) => cs.volume === vol.key)
-            .sort((a, b) => {
-              const ai = vol.order.indexOf(a.slug);
-              const bi = vol.order.indexOf(b.slug);
-              return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-            });
+          const studies = all.filter((cs) => cs.volume === vol.key);
 
-          const cards: CardData[] = studies.map((cs) => ({
+          // Build cards from case studies
+          const caseCards: CardData[] = studies.map((cs) => ({
             title: cs.title,
             slug: cs.slug,
             role: cs.role ?? "",
@@ -333,10 +334,34 @@ export default function VolumesPage() {
             href: `/volumes/${cs.volume}/${cs.slug}`,
           }));
 
+          // Merge creative pieces into Volume III
+          const creativeCards: CardData[] =
+            vol.key === "creative-immersive"
+              ? creative
+                  .filter((c) => vol.order.includes(c.slug))
+                  .map((c) => ({
+                    title: c.title,
+                    slug: c.slug,
+                    role: "",
+                    year: "",
+                    summary: c.subline,
+                    thumbnail: c.images[0],
+                    href: `/creative/${c.slug}`,
+                  }))
+              : [];
+
+          const cards: CardData[] = [...caseCards, ...creativeCards].sort(
+            (a, b) => {
+              const ai = vol.order.indexOf(a.slug);
+              const bi = vol.order.indexOf(b.slug);
+              return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+            },
+          );
+
           if (cards.length === 0) return null;
 
           return (
-            <section key={vol.key} style={{ marginBottom: 95 }}>
+            <section key={vol.key} id={vol.id} style={{ marginBottom: 95, scrollMarginTop: 32 }}>
               {/* Eyebrow — per-volume accent color */}
               <div
                 style={{

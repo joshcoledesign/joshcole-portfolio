@@ -1,29 +1,20 @@
-import { BuildQueue } from "@/components/build-queue";
 import { PromptLine } from "@/components/prompt-line";
 import { SignalPanels } from "@/components/signal-panels";
+import { VolumeManifest } from "@/components/volume-manifest";
 
 export default function Home() {
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <div>
       {/* ── Prompt line — owns the top bar, no persistent nav ── */}
       <PromptLine />
 
       {/* ── Main hero content ── */}
       <main
         style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
           maxWidth: 960,
           width: "100%",
           margin: "0 auto",
-          padding: "64px 48px 48px",
+          padding: "64px 48px 56px",
         }}
       >
         {/* ── Eyebrow ── */}
@@ -92,8 +83,8 @@ export default function Home() {
         {/* ── SIGNAL panels ── */}
         <SignalPanels />
 
-        {/* ── Build queue — "coming soon" as terminal process ── */}
-        <BuildQueue />
+        {/* ── Volume manifest — tree listing with resolve animation ── */}
+        <VolumeManifest />
       </main>
 
     </div>

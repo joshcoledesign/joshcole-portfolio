@@ -22,7 +22,7 @@ const QUEUE: QueueItem[] = [
   { name: "hype-js", status: "queued" },
 ];
 
-// ── Braille spinner frames ────────────────────────────────────
+// Earmarked for Brand Voice Engine pipeline stage states (analyzing / generating / QC). Removed from homepage manifest — no async state in a tree listing.
 const SPINNER = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
 
 export function BuildQueue() {
@@ -49,6 +49,7 @@ export function BuildQueue() {
         marginTop: 20,
         padding: "14px 16px",
         border: "1px solid rgba(255,255,255,0.06)",
+        borderRadius: 5,
         backgroundColor: "rgba(16,17,23,0.5)",
       }}
     >

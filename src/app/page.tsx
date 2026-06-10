@@ -10,6 +10,7 @@ export default function Home() {
 
       {/* ── Main hero content ── */}
       <main
+        className="page-container"
         style={{
           maxWidth: 960,
           width: "100%",
@@ -21,7 +22,7 @@ export default function Home() {
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-start",
             gap: 12,
             marginBottom: 40,
           }}
@@ -35,6 +36,7 @@ export default function Home() {
               boxShadow: "0 0 8px rgba(38,197,255,0.55)",
               flexShrink: 0,
               display: "inline-block",
+              marginTop: 5,
             }}
           />
           <span
@@ -53,9 +55,9 @@ export default function Home() {
         {/* ── Statement — Syne Headline 64, weight 600 ── */}
         {/* Exact copy — do not reword */}
         <h1
+          className="hero-title"
           style={{
             fontFamily: "var(--font-syne), sans-serif",
-            fontSize: 64,
             fontWeight: 600,
             lineHeight: 0.88,
             color: "#e8e8ea",

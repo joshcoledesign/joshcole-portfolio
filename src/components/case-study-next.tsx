@@ -59,6 +59,7 @@ export function CaseStudyNext({ next, href }: CaseStudyNextProps) {
     <div style={{ marginTop: 48 }}>
       {/* ── Card container ── */}
       <div
+        className="next-endcap-card"
         style={{
           background: "rgba(21, 22, 28, 0.65)",
           border: "0.5px solid rgba(255,255,255,0.08)",
@@ -85,7 +86,7 @@ export function CaseStudyNext({ next, href }: CaseStudyNextProps) {
             {/* Next study row — text + thumbnail grouped tight */}
             <Link
               href={href ?? `/volumes/${next.volume}/${next.slug}`}
-              className="next-endcap-link"
+              className="next-endcap-link next-endcap-row"
               style={{
                 display: "flex",
                 gap: 16,
@@ -194,6 +195,7 @@ export function CaseStudyNext({ next, href }: CaseStudyNextProps) {
                   </span>
                 </div>
                 <div
+                  className="next-endcap-meta"
                   style={{
                     fontFamily: MONO,
                     fontSize: 12,
@@ -230,10 +232,11 @@ export function CaseStudyNext({ next, href }: CaseStudyNextProps) {
             lineHeight: 1.5,
           }}
         >
-          <span style={{ color: "#5a5a60" }}>{">"} </span>
-          {/* Color set via CSS class — no inline color */}
-          <span className="next-endcap-back-text">cd ../volumes</span>
-          <span style={{ color: "#5a5a60", marginLeft: "2ch" }}>
+          <span style={{ whiteSpace: "nowrap" }}>
+            <span style={{ color: "#5a5a60" }}>{">"} </span>
+            <span className="next-endcap-back-text">cd ../volumes</span>
+          </span>
+          <span className="next-endcap-back-sub" style={{ color: "#5a5a60", marginLeft: "2ch" }}>
             back to all work
           </span>
         </Link>

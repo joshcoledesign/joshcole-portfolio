@@ -301,7 +301,7 @@ export function SignalPanels() {
       </div>
 
       {/* ── Panel grid ── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+      <div className="signal-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         {/* [01] — untouched, exactly as before */}
         <SignalPanel
           index="01"

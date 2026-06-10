@@ -51,7 +51,7 @@ export async function CommitLog() {
         fontSize: 13,
         lineHeight: 1.7,
         padding: "14px 16px",
-        border: "1px solid rgba(255,255,255,0.06)",
+        border: "1px solid rgba(255,255,255,0.1)",
         borderRadius: 5,
         backgroundColor: "rgba(16,17,23,0.5)",
         position: "relative",
@@ -71,7 +71,7 @@ export async function CommitLog() {
         }}
       />
 
-      <div style={{ position: "relative", zIndex: 3 }}>
+      <div className="commit-log-body" style={{ position: "relative", zIndex: 3 }}>
         {/* Command */}
         <div style={{ marginBottom: 6 }}>
           <span style={{ color: "#6a6a70" }}>{">"} </span>
@@ -87,7 +87,14 @@ export async function CommitLog() {
 
         {/* Commits */}
         {commits.map((c) => (
-          <div key={c.hash}>
+          <div
+            key={c.hash}
+            style={{
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
             <span style={{ color: "#5a5a60" }}>{c.hash}</span>
             <span style={{ color: "#e8e8ea", marginLeft: "2ch" }}>
               {c.message}
@@ -96,7 +103,15 @@ export async function CommitLog() {
         ))}
 
         {/* Access offer */}
-        <div style={{ marginTop: 8, color: "#5a5a60", fontStyle: "italic" }}>
+        <div style={{
+          marginTop: 8,
+          paddingBottom: 10,
+          color: "#5a5a60",
+          fontStyle: "italic",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}>
           # private repos (brand-voice-engine + others) available on request
         </div>
       </div>

@@ -146,7 +146,7 @@ function FeaturedCard({
             fontWeight: 600,
             lineHeight: 1.2,
             color: "#e8e8ea",
-            marginBottom: 8,
+            marginBottom: 0,
           }}
         >
           {card.title}
@@ -232,7 +232,7 @@ function CaseStudyCard({ card }: { card: CardData }) {
             fontWeight: 600,
             lineHeight: 1.2,
             color: "#e8e8ea",
-            marginBottom: hasMeta ? 8 : 12,
+            marginBottom: hasMeta ? 0 : 12,
           }}
         >
           {card.title}
@@ -281,6 +281,7 @@ export default function VolumesPage() {
     <div style={{ minHeight: "100vh", paddingBottom: 120 }}>
       <PromptLine href="/" />
       <div
+        className="page-container"
         style={{
           maxWidth: 960,
           margin: "0 auto",
@@ -295,16 +296,16 @@ export default function VolumesPage() {
             color: "#6a6a70",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            marginBottom: 16,
+            marginBottom: 7,
           }}
         >
           THE WORK
         </div>
 
         <h1
+          className="page-title"
           style={{
             fontFamily: SYNE,
-            fontSize: 48,
             fontWeight: 600,
             lineHeight: 1.07,
             color: "#e8e8ea",
@@ -375,7 +376,7 @@ export default function VolumesPage() {
                   color: vol.accent,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
-                  marginBottom: 10,
+                  marginBottom: 5,
                   opacity: 0.8,
                 }}
               >
@@ -384,9 +385,9 @@ export default function VolumesPage() {
 
               {/* Volume title */}
               <h2
+                className="section-title"
                 style={{
                   fontFamily: SYNE,
-                  fontSize: 32,
                   fontWeight: 600,
                   lineHeight: 1.15,
                   color: "#e8e8ea",
@@ -398,6 +399,7 @@ export default function VolumesPage() {
 
               {/* Card grid — featured spans full width, rest are 2-col */}
               <div
+                className="vol-card-grid"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(2, 1fr)",

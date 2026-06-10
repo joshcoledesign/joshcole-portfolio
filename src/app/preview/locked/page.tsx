@@ -28,6 +28,7 @@ export default function LockedPreviewPage() {
     <div style={{ minHeight: "100vh", paddingBottom: 120 }}>
       <PromptLine href="/" />
       <div
+        className="page-container"
         style={{
           maxWidth: 960,
           margin: "0 auto",
@@ -42,7 +43,7 @@ export default function LockedPreviewPage() {
             color: "#6a6a70",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            marginBottom: 16,
+            marginBottom: 7,
           }}
         >
           COMPONENT PREVIEW

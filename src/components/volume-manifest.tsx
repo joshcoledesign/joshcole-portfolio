@@ -47,7 +47,7 @@ export function VolumeManifest() {
         fontSize: 13,
         marginTop: 20,
         padding: "14px 16px",
-        border: "1px solid rgba(255,255,255,0.06)",
+        border: "1px solid rgba(255,255,255,0.1)",
         borderRadius: 5,
         backgroundColor: "rgba(21,22,28,0.35)",
         overflow: "hidden",
@@ -94,7 +94,7 @@ export function VolumeManifest() {
       </div>
 
       {/* ── Tree listing — tight block for connected spine ── */}
-      <div style={{ position: "relative", zIndex: 3, marginTop: 8, overflowX: "auto" }}>
+      <div className="manifest-row-wrap" style={{ position: "relative", zIndex: 3, marginTop: 8, overflowX: "auto" }}>
         {/* ./volumes header */}
         <div
           style={{
@@ -121,6 +121,8 @@ export function VolumeManifest() {
               textDecoration: "none",
               lineHeight: 1.15,
               whiteSpace: "nowrap",
+              minWidth: 0,
+              overflow: "hidden",
               padding: 0,
               margin: 0,
               opacity: resolved ? 1 : 0,

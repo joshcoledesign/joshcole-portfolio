@@ -27,6 +27,7 @@ export default function AboutPage() {
     <div style={{ minHeight: "100vh", paddingBottom: 56 }}>
       <PromptLine href="/" />
       <div
+        className="page-container"
         style={{
           maxWidth: 960,
           margin: "0 auto",
@@ -61,7 +62,7 @@ export default function AboutPage() {
             color: "#6a6a70",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            marginBottom: 16,
+            marginBottom: 7,
           }}
         >
           THE AUTHOR
@@ -69,9 +70,9 @@ export default function AboutPage() {
 
         {/* Title */}
         <h1
+          className="page-title"
           style={{
             fontFamily: SYNE,
-            fontSize: 48,
             fontWeight: 600,
             lineHeight: 1.07,
             color: "#e8e8ea",
@@ -212,7 +213,7 @@ export default function AboutPage() {
             color: "#6a6a70",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            marginBottom: 16,
+            marginBottom: 7,
           }}
         >
           RECENT COMMITS

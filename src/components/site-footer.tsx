@@ -62,6 +62,7 @@ export function SiteFooter() {
 
   return (
     <footer
+      className="site-footer"
       style={{
         fontFamily: MONO,
         fontSize: 13,
@@ -75,9 +76,10 @@ export function SiteFooter() {
       <div
         aria-hidden="true"
         style={{
-          height: 0,
-          borderTop: "0.5px solid rgba(255,255,255,0.08)",
-          marginBottom: 32,
+          height: 1,
+          backgroundImage:
+            "repeating-linear-gradient(to right, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 8px, transparent 8px, transparent 12px)",
+          marginBottom: 48,
           width: "100vw",
           marginLeft: "calc(-50vw + 50%)",
         }}

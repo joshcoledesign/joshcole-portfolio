@@ -428,6 +428,7 @@ a:hover .build-queue-link {
 /* ─── Sticky nav ─────────────────────────────────────────────── */
 
 /* Base link — Syne Title 24, nav muted */
+.sticky-door-sub { font-size: 12px; }
 .sticky-door-link {
   display: inline-flex;
   align-items: center;
@@ -552,6 +553,134 @@ a:hover .build-queue-link {
 
 @media (prefers-reduced-motion: reduce) {
   .crt-glitch { animation: none; }
+}
+
+/* ─── Responsiveness ────────────────────────────────────────── */
+
+/* ── Prompt line — shed segments at narrow widths ──────────── */
+/* Shedding order (least → most essential):
+   1. --creative-technologist flag
+   2. ⬡ v20.26 (segment 3)
+   3. ⎇ main   (segment 2)
+   4. ~/portfolio (segment 1)
+   Keeps: cole13 + ./josh-cole + cursor at all widths */
+@media (max-width: 767px) {
+  .prompt-flag { display: none !important; }
+}
+@media (max-width: 579px) {
+  .prompt-seg-3 { display: none !important; }
+}
+@media (max-width: 479px) {
+  .prompt-seg-2 { display: none !important; }
+}
+@media (max-width: 379px) {
+  .prompt-seg-1 { display: none !important; }
+}
+
+/* ── Title base sizes + responsive scaling ────────────────── */
+.hero-title { font-size: 64px; }
+.page-title { font-size: 48px; }
+.section-title { font-size: 32px; }
+.case-study-prose h2 { font-size: 32px; }
+.case-study-prose p,
+.case-study-prose li { font-size: 18px; }
+
+@media (max-width: 768px) {
+  .hero-title { font-size: 56px; }
+  .case-study-prose h2 { font-size: 26px; }
+  .case-study-prose p,
+  .case-study-prose li { font-size: 16px; }
+}
+
+/* ── Tablet and below (< 1024px) ──────────────────────────── */
+@media (max-width: 1023px) {
+  /* SIGNAL panels: stack to single column */
+  .signal-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── Phone (< 640px) ──────────────────────────────────────── */
+@media (max-width: 639px) {
+  /* Page containers — reduce side padding */
+  .page-container { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Homepage hero h1 — scale down from 64px */
+  .hero-title { font-size: 40px; }
+
+  /* Page h1s — scale down from 48px */
+  .page-title { font-size: 36px; }
+
+  /* Volume section h2s — scale down from 32px */
+  .section-title { font-size: 26px; }
+
+  /* Sticky nav — reduce padding */
+  .sticky-door { padding: 16px 20px !important; }
+  .sticky-door-link { font-size: 20px; }
+
+  /* Footer — reduce side padding */
+  .site-footer { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Footer uplinks — shrink name column for narrow screens */
+  .footer-uplink { grid-template-columns: 10ch auto 1fr !important; }
+
+  /* Volume card grid — single column */
+  .vol-card-grid { grid-template-columns: 1fr !important; }
+
+  /* Tree manifest — tighten grid columns */
+  .manifest-link { grid-template-columns: 5ch 11ch 1fr auto !important; }
+
+  /* Git log — handled by per-row truncation now */
+
+  /* Next-bar card — reduce padding */
+  .next-endcap-card { padding: 20px !important; }
+
+  /* Case study body — reduce prose max-width for padding */
+  .case-study-prose { max-width: 100% !important; }
+
+  /* Inline diagrams — horizontal scroll */
+  .diagram-wrap { overflow-x: auto; max-width: calc(100vw - 40px); }
+
+  /* Case study image break-out — contain within padding */
+  .diagram-breakout { width: 100% !important; max-width: 100% !important; }
+}
+
+/* ── Volume manifest narrow (≤ 480px) ── hide arc count, truncate title */
+@media (max-width: 480px) {
+  .manifest-link { grid-template-columns: 5ch 11ch 1fr !important; }
+  .manifest-count { display: none; }
+  .manifest-title { overflow: hidden; text-overflow: ellipsis; padding-left: 1ch; }
+}
+
+/* ── Next-bar stacking (< 500px) ──────────────────────────── */
+@media (max-width: 500px) {
+  .next-endcap-row { flex-direction: column !important; align-items: flex-start !important; }
+  .next-endcap-meta { flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; }
+}
+
+/* ── Sticky nav small (≤ 425px) ───────────────────────────── */
+@media (max-width: 425px) {
+  .sticky-door-link { font-size: 16px; }
+  .sticky-door-sub { font-size: 10px; }
+}
+
+/* ── Small phone (< 400px) ────────────────────────────────── */
+@media (max-width: 399px) {
+  .hero-title { font-size: 32px; }
+  .page-title { font-size: 28px; }
+
+  /* Tree manifest — narrower slug column for tiny screens */
+  .manifest-link { grid-template-columns: 5ch 10ch 1fr !important; }
+
+  /* Footer uplinks — stack label below name */
+  .footer-uplink {
+    grid-template-columns: auto auto 1fr !important;
+  }
+  .footer-uplink-label { display: none; }
+}
+
+/* ── Smallest phone (≤ 320px) ─────────────────────────────── */
+@media (max-width: 320px) {
+  .sticky-door-link { font-size: 13px; }
+  .next-endcap-back-sub { display: block; margin-left: 0 !important; margin-top: 2px; }
 }
 
 /* ── /now/ tile scanline glitch ─────────────────────────────── */

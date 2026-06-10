@@ -94,6 +94,7 @@ export function StickyNav() {
           {DOORS.map((door, i) => (
             <div
               key={door.label}
+              className="sticky-door"
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -118,9 +119,9 @@ export function StickyNav() {
 
               {/* Sublabel */}
               <span
+                className="sticky-door-sub"
                 style={{
                   fontFamily: "var(--font-jetbrains-mono), monospace",
-                  fontSize: 12,
                   color: "#6a6a70",
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",

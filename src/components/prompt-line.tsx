@@ -28,12 +28,13 @@ interface PromptLineProps {
 
 export function PromptLine({ href }: PromptLineProps = {}) {
   const innerContent = (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <div style={{ display: "flex", alignItems: "center", overflow: "hidden" }}>
 
       {/* ── Powerline chevron segments ── */}
       {SEGMENTS.map((seg, i) => (
         <div
           key={seg.label}
+          className={`prompt-seg prompt-seg-${i}`}
           style={{
             position: "relative",            // required for z-index
             zIndex: SEGMENTS.length - i,     // 4 → 3 → 2 → 1, descending
@@ -57,6 +58,7 @@ export function PromptLine({ href }: PromptLineProps = {}) {
             whiteSpace: "nowrap",
             letterSpacing: "0.01em",
             userSelect: "none",
+            flexShrink: 0,
           }}
         >
           {seg.label}
@@ -72,10 +74,11 @@ export function PromptLine({ href }: PromptLineProps = {}) {
           fontFamily: "var(--font-jetbrains-mono), monospace",
           fontSize: 14,
           lineHeight: `${SEG_H}px`,
+          flexShrink: 0,
         }}
       >
         <span style={{ color: "#e8e8ea" }}>{"./josh-cole "}</span>
-        <span style={{ color: "#26c5ff" }}>{"--creative-technologist"}</span>
+        <span className="prompt-flag" style={{ color: "#26c5ff" }}>{"--creative-technologist"}</span>
 
         {/* Blinking cursor block — ~8×15px per spec, cyan */}
         <span

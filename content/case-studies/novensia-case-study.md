@@ -9,8 +9,6 @@ thumbnail: "/case-studies/novensia/signal-now.jpg"
 # heroImage: ""
 ---
 
-# Novensia
-
 Novensia is a brand operating system. The brand foundation — mission, pillars, visual guidelines — becomes the source of truth that powers everything downstream, from content production on out. It's built for the people who are their own brand and the agencies, coaches, and consultants who build brands for others.
 
 _Novensia is a working name. The product is what matters right now._

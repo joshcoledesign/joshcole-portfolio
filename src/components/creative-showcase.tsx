@@ -93,6 +93,7 @@ export function CreativeShowcase({
     >
       <PromptLine href="/" />
       <div
+        className="page-container"
         style={{
           maxWidth: 960,
           margin: "0 auto",
@@ -121,9 +122,9 @@ export function CreativeShowcase({
 
         {/* ── Header ── */}
         <h1
+          className="page-title"
           style={{
             fontFamily: SYNE,
-            fontSize: 48,
             fontWeight: 600,
             lineHeight: 1.07,
             color: "#e8e8ea",

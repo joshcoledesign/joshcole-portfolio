@@ -48,7 +48,7 @@ export function BuildQueue() {
         lineHeight: 1.8,
         marginTop: 20,
         padding: "14px 16px",
-        border: "1px solid rgba(255,255,255,0.06)",
+        border: "1px solid rgba(255,255,255,0.1)",
         borderRadius: 5,
         backgroundColor: "rgba(16,17,23,0.5)",
       }}

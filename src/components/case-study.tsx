@@ -61,7 +61,6 @@ const markdownComponents: Components = {
       <h2
         style={{
           fontFamily: SYNE,
-          fontSize: 32,
           fontWeight: 600,
           lineHeight: 1.15,
           color: "#e8e8ea",
@@ -93,7 +92,6 @@ const markdownComponents: Components = {
       <p
         style={{
           fontFamily: INTER,
-          fontSize: 18,
           lineHeight: 1.7,
           color: "#acacb1",
           margin: "0 0 24px",
@@ -140,7 +138,6 @@ const markdownComponents: Components = {
       <li
         style={{
           fontFamily: INTER,
-          fontSize: 18,
           lineHeight: 1.7,
           color: "#acacb1",
           marginBottom: 8,
@@ -208,6 +205,7 @@ const markdownComponents: Components = {
         // (matches the page's hero images), capped so it never overflows.
         return (
           <div
+            className="diagram-breakout diagram-wrap"
             style={{
               margin: "48px 0",
               width: "calc(100% + 64px)",
@@ -261,7 +259,7 @@ function makeMarkdownComponents(slug: string): Components {
       hrCount++;
       if (slug === "ust-rfp-agent" && hrCount === 1) {
         return (
-          <div style={{ margin: "48px 0" }}>
+          <div className="diagram-wrap" style={{ margin: "48px 0" }}>
             <RfpAgentWorkflow />
           </div>
         );
@@ -304,6 +302,7 @@ export function CaseStudy({
     >
       <PromptLine href="/" />
       <div
+        className="page-container"
         style={{
           maxWidth: 960,
           margin: "0 auto",
@@ -338,7 +337,7 @@ export function CaseStudy({
             color: "#6a6a70",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            marginBottom: 16,
+            marginBottom: 7,
           }}
         >
           {vol.eyebrow}
@@ -346,9 +345,9 @@ export function CaseStudy({
 
         {/* ── Title ── */}
         <h1
+          className="page-title"
           style={{
             fontFamily: SYNE,
-            fontSize: 48,
             fontWeight: 600,
             lineHeight: 1.07,
             color: "#e8e8ea",
@@ -415,7 +414,7 @@ export function CaseStudy({
         )}
 
         {/* ── Prose body ── */}
-        <div style={{ maxWidth: 800 }}>
+        <div className="case-study-prose" style={{ maxWidth: 800 }}>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeUnwrapImages]}

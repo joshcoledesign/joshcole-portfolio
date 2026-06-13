@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useSyncExternalStore } from "react";
 
 // ── Anti-scrape email — same fragments as site-footer ─────────
 const _u = [99, 111, 108, 101, 116, 104, 105, 114, 116, 101, 101, 110];
@@ -59,13 +59,15 @@ function CornerTick({
 
 export function LockedCaseStudy({ study }: { study: LockedStudyData }) {
   const volPath = study.volumePath ?? "volume-ii/[redacted]-platform.md";
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    setReducedMotion(
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    );
-  }, []);
+  const reducedMotion = useSyncExternalStore(
+    (cb) => {
+      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+      mq.addEventListener("change", cb);
+      return () => mq.removeEventListener("change", cb);
+    },
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false
+  );
 
   const handleRequestAccess = useCallback(() => {
     const addr =

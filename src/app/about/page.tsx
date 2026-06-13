@@ -95,24 +95,24 @@ export default function AboutPage() {
         {/* Bio */}
         <div>
           <p style={P}>
-            I build things that don't exist yet. That's the shortest true thing
-            I can say about myself, and it's been the same since before I had
+            I build things that don&apos;t exist yet. That&apos;s the shortest true thing
+            I can say about myself, and it&apos;s been the same since before I had
             any of the tools I use now.
           </p>
 
           <p style={P}>
             My dad was a sculptor. Clay, cast in bronze, finished by hand. But
-            he wasn't satisfied just making the thing. He took a job at a
-            foundry so he'd understand every step of how a sculpture came to be,
+            he wasn&apos;t satisfied just making the thing. He took a job at a
+            foundry so he&apos;d understand every step of how a sculpture came to be,
             from armature to patina. Knowing how it worked, all the way down,
             made him better at the part everyone else could see. I grew up
-            watching that: a man who'd stay up the whole night on his own work,
+            watching that: a man who&apos;d stay up the whole night on his own work,
             sleep a couple hours, then go learn the materials so the work could
             be truer.
           </p>
 
           <p style={P}>
-            There's a piece of his I think about all the time, a Native American
+            There&apos;s a piece of his I think about all the time, a Native American
             war chief about three feet tall. He could have just sculpted it.
             Instead he built the armature, then sculpted the skeleton to learn
             the bones, then the internal organs from anatomy books, hidden inside
@@ -124,55 +124,55 @@ export default function AboutPage() {
           </p>
 
           <p style={P}>
-            I didn't know it then, but I've been doing the same thing my whole
+            I didn&apos;t know it then, but I&apos;ve been doing the same thing my whole
             life. I build the part nobody sees so the part everybody sees comes
             out true.
           </p>
 
           <p style={P}>
             My mom taught me the other half. She made pottery and painted
-            ceramics after full days as a legal secretary, and I'd sit with her
-            while she worked. What I picked up at that table wasn't technique.
-            It was that what you do when no one's looking is the part that
+            ceramics after full days as a legal secretary, and I&apos;d sit with her
+            while she worked. What I picked up at that table wasn&apos;t technique.
+            It was that what you do when no one&apos;s looking is the part that
             counts. Both of them made honesty the whole point of our house, and
             it stuck harder than anything else they gave me.
           </p>
 
           <p style={P}>
             I went to school to sculpt monsters: special effects makeup, because
-            horror and sci-fi and fantasy let you make things that don't exist
+            horror and sci-fi and fantasy let you make things that don&apos;t exist
             anywhere else. Then I saw my first 3D animation and the floor moved.
             I could sculpt without running out of clay or running out of money
             for tools, and make the impossible thing at any scale I could
             imagine. I left the makeup program, went home to Arizona, and threw
             myself into 3D and animation, and into code: C++, Director, Flash,
-            on machines I'd never touched. Bigger medium, fewer limits, same
+            on machines I&apos;d never touched. Bigger medium, fewer limits, same
             thing I was after the whole time.
           </p>
 
           <p style={P}>
-            What I haven't said is where I was when all that started. A few
+            What I haven&apos;t said is where I was when all that started. A few
             years before any of it, my life had come apart completely. The way
-            out wasn't something I engineered. God pulled me out of the dark and
-            into the light, and everything I've built since stands on that.
+            out wasn&apos;t something I engineered. God pulled me out of the dark and
+            into the light, and everything I&apos;ve built since stands on that.
           </p>
 
           <p style={P}>
             I was partway through the degree when Compaq saw my portfolio and
             offered me a job. They moved me to Houston, into interface design
-            before "UX" was a phrase anyone said out loud. I finished my
-            associate's on the way out the door. Someone had seen me, and I was
+            before &quot;UX&quot; was a phrase anyone said out loud. I finished my
+            associate&apos;s on the way out the door. Someone had seen me, and I was
             too new to all of it to grasp how much that meant.
           </p>
 
           <p style={P}>
             From there, the work just kept changing shape. Brand and creative
             direction. UX and design leadership. Immersive and generative work.
-            And now AI, one more tool in the same hands, used the way I've used
-            all of them: to make what doesn't exist real. The tools kept
+            And now AI, one more tool in the same hands, used the way I&apos;ve used
+            all of them: to make what doesn&apos;t exist real. The tools kept
             changing. What I was doing never did: know how it works all the way
             down, build the unseen structure so the surface is true, make the
-            thing that isn't there yet.
+            thing that isn&apos;t there yet.
           </p>
 
           <p style={P}>
@@ -188,11 +188,11 @@ export default function AboutPage() {
             ever sitting me down to say it. He never cared what degree I got or
             where. He cared whether the work made me feel alive, and he lived
             exactly that way. For me, that feeling is a kind of release: the
-            pressure drops, everything goes sharp and clear, and I'm reminded
-            how much I've been given and what it took to get here. I was brought
+            pressure drops, everything goes sharp and clear, and I&apos;m reminded
+            how much I&apos;ve been given and what it took to get here. I was brought
             out of the dark for a reason, and a lot of that reason has nothing
-            to do with work. It's to do for other people what was done for me.
-            The building is one way I get to do that. When it's right, the
+            to do with work. It&apos;s to do for other people what was done for me.
+            The building is one way I get to do that. When it&apos;s right, the
             person on the other side feels what I felt making it.
           </p>
         </div>

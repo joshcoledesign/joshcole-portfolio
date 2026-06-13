@@ -26,7 +26,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function Swatch({ label, hex, textColor = "#e8e8ea" }: { label: string; hex: string; textColor?: string }) {
+function Swatch({ label, hex }: { label: string; hex: string }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
       <div style={{

@@ -40,7 +40,6 @@ export function RfpAgentWorkflow() {
 
   // ── Side blocks ──
   const hf = { x: 40, y: 361, w: 200, h: 74 }; // human fetch (left) — centered between connectors at 350 and 445
-  const hfCY = hf.y + hf.h / 2;
   const step3CY = 280 + 70; // 350 — bottom of step 3
   const mergeY = 445; // Y-merge junction: complete path + return path converge here before CoPilot
 

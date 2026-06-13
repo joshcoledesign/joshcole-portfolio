@@ -6,7 +6,7 @@
 // Expands to full doors on scroll-up or when near page top.
 // prefers-reduced-motion: stays fully expanded, no animation.
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import Link from "next/link";
 
 const DOORS = [
@@ -23,12 +23,19 @@ const EASE = "cubic-bezier(0.25, 0.46, 0.45, 0.94)";
 
 export function StickyNav() {
   const [expanded, setExpanded] = useState(true);
-  const [reduced, setReduced] = useState(false);
+  const reduced = useSyncExternalStore(
+    (cb) => {
+      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+      mq.addEventListener("change", cb);
+      return () => mq.removeEventListener("change", cb);
+    },
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false
+  );
   const lastY = useRef(0);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
     lastY.current = window.scrollY;
 
     let ticking = false;

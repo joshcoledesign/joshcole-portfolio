@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 
 // ── Volume directory data ─────────────────────────────────────
 const VOLUMES = [
@@ -13,18 +13,21 @@ const VOLUMES = [
 const COMMAND = "tree ./volumes";
 
 export function VolumeManifest() {
+  const prefersReduced = useSyncExternalStore(
+    (cb) => {
+      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+      mq.addEventListener("change", cb);
+      return () => mq.removeEventListener("change", cb);
+    },
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false
+  );
+
   const [typed, setTyped] = useState("");
   const [resolved, setResolved] = useState(false);
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (prefersReduced) {
-      setTyped(COMMAND);
-      setResolved(true);
-      return;
-    }
+    if (prefersReduced) return;
 
     let i = 0;
     const typeInterval = setInterval(() => {
@@ -37,7 +40,10 @@ export function VolumeManifest() {
     }, 30);
 
     return () => clearInterval(typeInterval);
-  }, []);
+  }, [prefersReduced]);
+
+  const displayTyped = prefersReduced ? COMMAND : typed;
+  const displayResolved = prefersReduced || resolved;
 
   return (
     <div
@@ -75,11 +81,11 @@ export function VolumeManifest() {
             textShadow: "0 0 1px rgba(38,197,255,0.4)",
           }}
         >
-          {typed}
+          {displayTyped}
         </span>
         {/* Block cursor — fades out after resolve */}
         <span
-          className={!resolved ? "cursor-blink" : undefined}
+          className={!displayResolved ? "cursor-blink" : undefined}
           style={{
             display: "inline-block",
             width: 8,
@@ -87,7 +93,7 @@ export function VolumeManifest() {
             backgroundColor: "#26c5ff",
             verticalAlign: "middle",
             marginLeft: 1,
-            opacity: resolved ? 0 : 1,
+            opacity: displayResolved ? 0 : 1,
             transition: "opacity 0.2s ease",
           }}
         />
@@ -101,7 +107,7 @@ export function VolumeManifest() {
             lineHeight: 1.15,
             color: "#6a6a70",
             paddingBottom: 2,
-            opacity: resolved ? 1 : 0,
+            opacity: displayResolved ? 1 : 0,
             transition: "opacity 0.12s ease",
           }}
         >
@@ -125,9 +131,9 @@ export function VolumeManifest() {
               overflow: "hidden",
               padding: 0,
               margin: 0,
-              opacity: resolved ? 1 : 0,
+              opacity: displayResolved ? 1 : 0,
               transition: "opacity 0.12s ease",
-              transitionDelay: resolved ? `${(idx + 1) * 50}ms` : "0ms",
+              transitionDelay: displayResolved ? `${(idx + 1) * 50}ms` : "0ms",
             }}
           >
             {/* Col 1: branch + cursor — single inline run */}
@@ -160,9 +166,9 @@ export function VolumeManifest() {
             lineHeight: 1.4,
             color: "#6a6a70",
             fontSize: 12,
-            opacity: resolved ? 1 : 0,
+            opacity: displayResolved ? 1 : 0,
             transition: "opacity 0.12s ease",
-            transitionDelay: resolved ? "220ms" : "0ms",
+            transitionDelay: displayResolved ? "220ms" : "0ms",
           }}
         >
           3 directories · 7 arcs · all systems shipped

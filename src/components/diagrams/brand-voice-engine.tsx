@@ -8,18 +8,19 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 
 export function BrandVoiceEngine() {
   // ── Responsive detection ──
-  const [compact, setCompact] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
-    setCompact(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setCompact(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+  const compact = useSyncExternalStore(
+    (cb) => {
+      const mq = window.matchMedia("(max-width: 768px)");
+      mq.addEventListener("change", cb);
+      return () => mq.removeEventListener("change", cb);
+    },
+    () => window.matchMedia("(max-width: 768px)").matches,
+    () => false
+  );
 
   // ── Tokens ──
   const CYAN = "#26C5FF";
@@ -77,7 +78,7 @@ export function BrandVoiceEngine() {
     {
       title: "Quality Check",
       desc: ["A separate model scores the draft,", "flags drift, returns a revision"],
-      model: "opus-4.6",
+      model: "opus-4.8",
       temp: 0.2,
       out: "revised_content",
       color: PINK,

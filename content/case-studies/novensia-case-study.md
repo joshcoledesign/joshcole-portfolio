@@ -9,7 +9,7 @@ thumbnail: "/case-studies/novensia/signal-now.jpg"
 # heroImage: ""
 ---
 
-Novensia is a brand operating system. The brand foundation — mission, pillars, visual guidelines — becomes the source of truth that powers everything downstream, from content production on out. It's built for the people who are their own brand and the agencies, coaches, and consultants who build brands for others.
+Novensia is a brand operating system in active development. The brand foundation — mission, pillars, visual guidelines — becomes the source of truth that powers everything downstream, from content production on out. It's built for the people who are their own brand and the agencies, coaches, and consultants who build brands for others. Building the brand's visual identity is a separate part of the same system. I run it by hand for now, on purpose: it stays manual until it's earned the trust to run on its own, with my judgment as the check until it does.
 
 _Novensia is a working name. The product is what matters right now._
 
@@ -37,7 +37,7 @@ Novensia is built in three layers, on purpose, in order.
 
 ![Brand Voice Engine four-stage pipeline](component:voice-engine)
 
-Underneath, the choices are deliberate. Sonnet 4.6 handles the fast creative work — voice analysis, strategy, drafting — at temperatures 0.2, 0.4, and 0.7 respectively. Cool and analytical when the system is learning your voice. Warmer when it's writing for you. Opus 4.6 handles the quality check at 0.2 — cool again, because judgment needs to be sharper than invention. The right model and the right temperature for what each stage is actually doing.
+Underneath, the choices are deliberate. Sonnet 4.6 handles the fast creative work — voice analysis, strategy, drafting — at temperatures 0.2, 0.4, and 0.7 respectively. Cool and analytical when the system is learning your voice. Warmer when it's writing for you. Opus 4.8 handles the quality check at 0.2 — cool again, because judgment needs to be sharper than invention. The right model and the right temperature for what each stage is actually doing.
 
 One detail worth pulling out: the voice profile captures _techniques, not phrases_. Most "trained on your voice" tools just remix sentences from your samples — which is why they sound like a karaoke version of you. Novensia learns _how_ you make a point, not the exact words you used to make it last time. The difference shows up in the writing.
 

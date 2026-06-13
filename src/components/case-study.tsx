@@ -14,6 +14,7 @@ import { PromptLine } from "@/components/prompt-line";
 import { RfpAgentFlow } from "@/components/heroes/rfp-agent-flow";
 import { RfpAgentWorkflow } from "@/components/diagrams/rfp-agent-workflow";
 import { BrandVoiceEngine } from "@/components/diagrams/brand-voice-engine";
+import { IdentityPipeline } from "@/components/diagrams/identity-pipeline";
 import { CaseStudyNext } from "@/components/case-study-next";
 import { getNextCaseStudy } from "@/lib/case-studies";
 
@@ -28,6 +29,7 @@ const HERO_COMPONENTS: Record<string, React.ComponentType> = {
 // a live diagram at an exact point in the prose.
 const INLINE_COMPONENTS: Record<string, React.ComponentType> = {
   "voice-engine": BrandVoiceEngine,
+  "identity-pipeline": IdentityPipeline,
 };
 
 // ── Volume metadata ────────────────────────────────────────────

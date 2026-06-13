@@ -15,9 +15,6 @@ import type { ReactNode } from "react";
 
 // ── Shared palette ─────────────────────────────────────────────
 const G = "#FFC24B"; // gold
-const C = "#FF7A45"; // coral
-const E = "#C23A4E"; // ember
-const T = "#1FD8C4"; // teal accent
 const BG = "#15161c"; // near-black panel field
 
 // ── Tick constants ─────────────────────────────────────────────
@@ -131,7 +128,7 @@ function CornerTick({
       aria-hidden="true"
       style={{
         position: "absolute",
-        zIndex: 4,
+        zIndex: 6,
         ...(isTopLeft ? { top: 0, left: 0 } : { bottom: 0, right: 0 }),
         width: TICK_PX,
         height: TICK_PX,

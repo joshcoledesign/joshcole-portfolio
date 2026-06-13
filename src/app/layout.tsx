@@ -3,6 +3,7 @@ import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyNav } from "@/components/sticky-nav";
+import { Analytics } from "@vercel/analytics/next";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -41,6 +42,7 @@ export default function RootLayout({
         {children}
         <SiteFooter />
         <StickyNav />
+        <Analytics />
       </body>
     </html>
   );

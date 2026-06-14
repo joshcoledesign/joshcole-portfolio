@@ -23,26 +23,13 @@ It isn't finished. Parts of it run by hand. That's deliberate, and I'll get to w
 
 **Intake.** A structured questionnaire that pulls the raw material: who the person is, what they believe, who they serve, how they talk, what they've lived through. Not a creative brief written to sound good. The actual person, in their own words, contradictions left in.
 
-<!--
-  IMAGE: A page of NEMO's filled intake.
-  Source: John Nemo brand intake doc. Show a vivid section (the "why" / faith / Zubaz answers)
-  to make the point that the input is a real human, not a tidy brief.
-  No caption. Alt: "A page of a brand intake questionnaire filled in with personal, candid answers."
--->
+![A page of a brand intake questionnaire filled in with personal, candid answers.](/case-studies/identity-pipeline/nemo-intake.png)
 
 **Analysis.** The system reads the intake and returns the strategic core: an archetype stack, a positioning line, a messaging territory, a voice. This is the step that turns a person into a brand foundation. For Nemo, a former AP reporter and self-described goofball who is open about his faith and careful never to preach, it returned a Sage-led stack, the line "make your message matter, and convert," and an editorial-xerox territory.
 
 **Direction and build.** The foundation becomes a visual system and a deck: type, color, texture, imagery, logo. This is where I art-direct, and where the manual judgment is heaviest.
 
 Each stage hands a real artifact to the next. An intake doc, a foundation doc, a creative-direction doc, a deck. You can open any stage and see what it produced and the reasoning behind it. The brand isn't one opaque output. It's a chain you can audit.
-
-<!--
-  OPTIONAL SECTION — your call (see "What this still needs").
-  The larger system also includes a voice and content engine: a separate, more built-out
-  pipeline that produces ongoing on-brand writing. It's its own potential case study.
-  Decide whether to mention it here (one line, for scope) or keep this piece purely the
-  brand-identity pipeline.
--->
 
 ## Why it doesn't come out generic
 

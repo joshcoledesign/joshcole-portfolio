@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# joshcole-portfolio
+
+Personal portfolio site built with Next.js, Tailwind CSS, and shadcn/ui.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Case Study Authoring
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Case studies live in `content/case-studies/*.md` and use standard markdown rendered via `react-markdown`.
 
-## Learn More
+### Links
 
-To learn more about Next.js, take a look at the following resources:
+Standard markdown links render in brand cyan (`#26c5ff`) with an underline on hover:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```markdown
+[Link text](https://example.com)
+[Internal link](/volumes/creative-immersive/nemo-brand)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Images
 
-## Deploy on Vercel
+```markdown
+![Alt text](/case-studies/path/to/image.png)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Image modifiers
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Append hash fragments to the image URL to control rendering. All modifiers are stackable:
+
+| Fragment | Effect | Default |
+|---|---|---|
+| `#no-border` | Removes the subtle border | Border on |
+| `#mt-{px}` | Sets margin-top in pixels | `32px` |
+| `#mb-{px}` | Sets margin-bottom in pixels | `32px` |
+
+Examples:
+
+```markdown
+<!-- Remove border -->
+![Alt](/case-studies/img.png#no-border)
+
+<!-- Custom spacing -->
+![Alt](/case-studies/img.png#mt-48#mb-8)
+
+<!-- Combine all -->
+![Alt](/case-studies/img.png#no-border#mt-48#mb-0)
+```
+
+### Live components
+
+Embed interactive React diagrams using the `component:` prefix:
+
+```markdown
+![Brand Voice Engine](component:voice-engine)
+![Identity Pipeline](component:identity-pipeline)
+```
+
+Available components are registered in `INLINE_COMPONENTS` in `src/components/case-study.tsx`.
+
+### Case study ordering and "Next" end-cap
+
+Each case study shows a "NEXT" card at the bottom linking to the next study in a continuous sequence across all volumes. The order is defined in `CASE_STUDY_ORDER` in `src/lib/case-studies.ts`:
+
+```
+Vol I  (AI Systems):        novensia → emergence → ust-rfp-agent
+Vol II (UX & Enterprise):   vrc-suite → gprs-sitemap
+Vol III (Creative):         lp-7d-ride → union-station-hotel → hype-js
+```
+
+The last study in the sequence shows only a `> cd ../volumes` link back to the volumes index.
+
+To add a new case study to the chain, insert its slug into `CASE_STUDY_ORDER` at the desired position.

@@ -303,7 +303,7 @@ export function SignalPanels() {
         <SignalPanel
           index="01"
           slug="/now/"
-          caption="GENERATIVE / AI"
+          caption="AI / GENERATIVE"
           href="/volumes/ai-systems/novensia"
           borderColor="rgba(255,255,255,0.16)"
           tickColor="rgba(255,255,255,0.3)"

@@ -210,6 +210,15 @@ body {
   color: #26c5ff;
 }
 
+/* ─── Case study prose links ─────────────────────────────────── */
+.case-prose-link {
+  color: #26c5ff;
+  text-decoration: none;
+}
+.case-prose-link:hover {
+  text-decoration: underline;
+}
+
 /* ─── Image-forward volume cards ─────────────────────────────── */
 
 /* Featured card — full-width, brand gradient top-line on hover  */

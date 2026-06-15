@@ -44,7 +44,7 @@ const VOLUMES: Array<{
     id: "volume-i",
     eyebrow: "VOLUME I",
     title: "AI Systems",
-    order: ["novensia", "emergence", "ust-rfp-agent"],
+    order: ["novensia", "emergence", "ust-rfp-agent", "identity-pipeline"],
     accent: "#26c5ff", // cyan
   },
   {
@@ -60,7 +60,7 @@ const VOLUMES: Array<{
     id: "volume-iii",
     eyebrow: "VOLUME III",
     title: "Creative & Immersive",
-    order: ["lp-7d-ride", "union-station-hotel", "hype-js", "fractured", "saints"],
+    order: ["lp-7d-ride", "union-station-hotel", "hype-js", "nemo-brand", "fractured", "saints"],
     accent: "#ff419f", // pink
   },
 ];

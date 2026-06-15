@@ -219,20 +219,47 @@ const markdownComponents: Components = {
         );
       }
     }
+    // Parse hash fragments: #no-border, #mt-{px}, #mb-{px}
+    const hash =
+      typeof src === "string" ? src.slice(src.indexOf("#")) : "";
+    const cleanSrc =
+      typeof src === "string" ? src.replace(/#.*$/, "") : src;
+    const noBorder = hash.includes("no-border");
+    const mt = hash.match(/mt-(\d+)/);
+    const mb = hash.match(/mb-(\d+)/);
+
     return (
-      <div style={{ margin: "32px 0" }}>
+      <div
+        style={{
+          marginTop: mt ? `${mt[1]}px` : 32,
+          marginBottom: mb ? `${mb[1]}px` : 32,
+        }}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={src}
+          src={cleanSrc}
           alt={alt ?? ""}
           style={{
             width: "100%",
             height: "auto",
             display: "block",
-            border: "0.5px solid rgba(255,255,255,0.1)",
+            ...(noBorder
+              ? {}
+              : { border: "0.5px solid rgba(255,255,255,0.1)" }),
           }}
         />
       </div>
+    );
+  },
+  a({ href, children }) {
+    return (
+      <a
+        href={href}
+        className="case-prose-link"
+        style={{ color: "#26c5ff", textDecoration: "none" }}
+      >
+        {children}
+      </a>
     );
   },
   blockquote({ children }) {

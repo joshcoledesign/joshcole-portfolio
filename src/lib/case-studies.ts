@@ -59,6 +59,7 @@ export const CASE_STUDY_ORDER: string[] = [
   "novensia",
   "emergence",
   "ust-rfp-agent",
+  "identity-pipeline",
   // Volume II — UX & Enterprise
   "vrc-suite",
   "gprs-sitemap",
@@ -66,6 +67,9 @@ export const CASE_STUDY_ORDER: string[] = [
   "lp-7d-ride",
   "union-station-hotel",
   "hype-js",
+  "nemo-brand",
+  "fractured",
+  "saints",
 ];
 
 // ── Volume display names keyed by Volume type ─────────────────

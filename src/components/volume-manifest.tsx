@@ -5,9 +5,9 @@ import { useState, useEffect, useSyncExternalStore } from "react";
 
 // ── Volume directory data ─────────────────────────────────────
 const VOLUMES = [
-  { branch: "├─", slug: "volume-i", title: "AI SYSTEMS", arcs: 3, href: "/volumes#volume-i" },
+  { branch: "├─", slug: "volume-i", title: "AI SYSTEMS", arcs: 4, href: "/volumes#volume-i" },
   { branch: "├─", slug: "volume-ii", title: "UX & ENTERPRISE", arcs: 2, href: "/volumes#volume-ii" },
-  { branch: "└─", slug: "volume-iii", title: "CREATIVE & IMMERSIVE", arcs: 2, href: "/volumes#volume-iii" },
+  { branch: "└─", slug: "volume-iii", title: "CREATIVE & IMMERSIVE", arcs: 6, href: "/volumes#volume-iii" },
 ];
 
 const COMMAND = "tree ./volumes";
@@ -100,13 +100,13 @@ export function VolumeManifest() {
       </div>
 
       {/* ── Tree listing — tight block for connected spine ── */}
-      <div className="manifest-row-wrap" style={{ position: "relative", zIndex: 3, marginTop: 8, overflowX: "auto" }}>
+      <div className="manifest-row-wrap" style={{ position: "relative", zIndex: 3, marginTop: 14, overflowX: "auto" }}>
         {/* ./volumes header */}
         <div
           style={{
             lineHeight: 1.15,
             color: "#6a6a70",
-            paddingBottom: 2,
+            paddingBottom: 6,
             opacity: displayResolved ? 1 : 0,
             transition: "opacity 0.12s ease",
           }}
@@ -114,55 +114,69 @@ export function VolumeManifest() {
           ./volumes
         </div>
 
-        {/* Volume rows — line-height 1.15 for breathing room, spine stays connected */}
+        {/* Volume rows — line-height 1.15, pipe spacers between volumes */}
         {VOLUMES.map((vol, idx) => (
-          <Link
-            key={vol.slug}
-            href={vol.href}
-            className="manifest-link"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "6ch 12ch 22ch auto",
-              alignItems: "baseline",
-              textDecoration: "none",
-              lineHeight: 1.15,
-              whiteSpace: "nowrap",
-              minWidth: 0,
-              overflow: "hidden",
-              padding: 0,
-              margin: 0,
-              opacity: displayResolved ? 1 : 0,
-              transition: "opacity 0.12s ease",
-              transitionDelay: displayResolved ? `${(idx + 1) * 50}ms` : "0ms",
-            }}
-          >
-            {/* Col 1: branch + cursor — single inline run */}
-            <span style={{ whiteSpace: "pre" }}>
-              <span style={{ color: "#5a5a60" }}>{vol.branch}</span>
-              <span style={{ color: "#26c5ff" }}> &gt; </span>
-            </span>
+          <div key={vol.slug}>
+            {/* Spine spacer — CSS border instead of │ glyph for pixel-perfect alignment */}
+            {idx > 0 && (
+              <div
+                style={{
+                  height: "0.7em",
+                  borderLeft: "1px solid #5a5a60",
+                  marginLeft: "calc(0.45ch + 2px)",
+                  opacity: displayResolved ? 1 : 0,
+                  transition: "opacity 0.12s ease",
+                  transitionDelay: displayResolved ? `${idx * 50}ms` : "0ms",
+                }}
+              />
+            )}
+            <Link
+              href={vol.href}
+              className="manifest-link"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "6ch 12ch 22ch auto",
+                alignItems: "baseline",
+                textDecoration: "none",
+                lineHeight: 1.15,
+                whiteSpace: "nowrap",
+                minWidth: 0,
+                overflow: "hidden",
+                padding: 0,
+                margin: 0,
+                opacity: displayResolved ? 1 : 0,
+                transition: "opacity 0.12s ease",
+                transitionDelay: displayResolved ? `${(idx + 1) * 50}ms` : "0ms",
+              }}
+            >
+              {/* Col 1: branch + cursor — single inline run */}
+              <span style={{ whiteSpace: "pre" }}>
+                <span style={{ color: "#5a5a60" }}>{vol.branch}</span>
+                <span style={{ color: "#26c5ff" }}> &gt; </span>
+              </span>
 
-            {/* Col 2: slug — underline target */}
-            <span className="manifest-slug" style={{ color: "#e8e8ea" }}>
-              {vol.slug}
-            </span>
+              {/* Col 2: slug — underline target */}
+              <span className="manifest-slug" style={{ color: "#e8e8ea" }}>
+                {vol.slug}
+              </span>
 
-            {/* Col 3: human title — fixed width, left-aligned */}
-            <span className="manifest-title">
-              {vol.title}
-            </span>
+              {/* Col 3: human title — fixed width, left-aligned */}
+              <span className="manifest-title">
+                {vol.title}
+              </span>
 
-            {/* Col 4: count — left-packed after title column */}
-            <span className="manifest-count">
-              [ {vol.arcs} arcs ]
-            </span>
-          </Link>
+              {/* Col 4: count — left-packed after title column */}
+              <span className="manifest-count">
+                [ {vol.arcs} arcs ]
+              </span>
+            </Link>
+          </div>
         ))}
 
         {/* Footer */}
         <div
           style={{
-            marginTop: 10,
+            marginTop: 20,
             lineHeight: 1.4,
             color: "#6a6a70",
             fontSize: 12,
@@ -171,7 +185,7 @@ export function VolumeManifest() {
             transitionDelay: displayResolved ? "220ms" : "0ms",
           }}
         >
-          3 directories · 7 arcs · all systems shipped
+          3 directories · 12 arcs · all systems shipped
         </div>
       </div>
     </div>

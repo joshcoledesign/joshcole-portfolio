@@ -65,7 +65,7 @@ export function PromptLine({ href }: PromptLineProps = {}) {
         </div>
       ))}
 
-      {/* ── Command: ./josh-cole --creative-technologist [cursor] ── */}
+      {/* ── Command: ./josh-cole --creative-technologist ── */}
       <div
         style={{
           display: "flex",
@@ -79,20 +79,6 @@ export function PromptLine({ href }: PromptLineProps = {}) {
       >
         <span style={{ color: "#e8e8ea" }}>{"./josh-cole "}</span>
         <span className="prompt-flag" style={{ color: "#26c5ff" }}>{"--creative-technologist"}</span>
-
-        {/* Blinking cursor block — ~8×15px per spec, cyan */}
-        <span
-          className="cursor-blink"
-          style={{
-            display: "inline-block",
-            width: 8,
-            height: 15,
-            backgroundColor: "#26c5ff",
-            marginLeft: 4,
-            flexShrink: 0,
-            alignSelf: "center",
-          }}
-        />
       </div>
 
     </div>

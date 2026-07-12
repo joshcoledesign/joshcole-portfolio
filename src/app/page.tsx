@@ -59,27 +59,65 @@ export default function Home() {
           style={{
             fontFamily: "var(--font-syne), sans-serif",
             fontWeight: 600,
-            lineHeight: 0.88,
+            lineHeight: 1.02,
             color: "#e8e8ea",
-            maxWidth: "17ch",
+            maxWidth: "none",
             margin: "0 0 28px",
           }}
         >
-          I work in the space where new technology meets craft.
+          <span style={{ display: "block" }}>Technology changes constantly.</span>
+          <span style={{ display: "block" }}>Human curiosity doesn&apos;t.</span>
         </h1>
 
-        {/* ── Jacket sub-copy — Inter 16, muted, max-width ~52ch ── */}
-        <p
+        {/* ── Jacket sub-copy — Inter, muted, three paragraphs ── */}
+        {/* font-size handled in CSS (.hero-copy) so it can shrink responsively */}
+        <div
+          className="hero-copy"
           style={{
             fontFamily: "var(--font-inter), sans-serif",
-            fontSize: 18,
             lineHeight: 1.6,
             color: "#acacb1",
+            maxWidth: "60ch",
+            margin: "0 0 48px",
+          }}
+        >
+          <p style={{ margin: "0 0 24px" }}>
+            Hundreds of ideas in the air, waiting for their moment. That&apos;s not noise — that&apos;s the signal, waiting to be found. Explore first. The right one only reveals itself to whoever keeps looking.
+          </p>
+          <p style={{ margin: "0 0 24px" }}>
+            Nobody knows exactly what they need at the start of a project — only what they want. Finding the difference takes exploring, testing, iterating. That&apos;s where the good ones start to surface.
+          </p>
+          <p style={{ margin: 0 }}>
+            One becomes a tool someone actually uses. Another becomes the voice a brand&apos;s been missing. Another, an efficiency pipeline. And in the best moments, something none of us saw coming.
+          </p>
+        </div>
+
+        {/* ── Terminal-style closer — standalone, blue, blinking cursor ── */}
+        {/* font-size handled in CSS (.hero-closer) so it can shrink responsively */}
+        <p
+          className="hero-closer"
+          style={{
+            fontFamily: "var(--font-jetbrains-mono), monospace",
+            lineHeight: 1.5,
+            color: "#26c5ff",
             maxWidth: "60ch",
             margin: "0 0 56px",
           }}
         >
-          Solve the problem, connect the dots, and surface what the story needs the person to feel. The tools keep changing. The instinct underneath never has.
+          <span style={{ marginRight: "0.6ch" }}>{">"}</span>
+          The best ideas rarely show up at the starting line.
+          <span
+            className="cursor-blink"
+            aria-hidden="true"
+            style={{
+              display: "inline-block",
+              width: "0.6ch",
+              height: "1.05em",
+              backgroundColor: "#26c5ff",
+              marginLeft: "0.35ch",
+              verticalAlign: "text-bottom",
+            }}
+          />
         </p>
 
         {/* ── SIGNAL panels ── */}

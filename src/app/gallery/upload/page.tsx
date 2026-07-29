@@ -109,7 +109,7 @@ export default function UploadPage() {
           }}
         >
           <span aria-hidden="true">&lt;</span>
-          <span>Back to Gallery</span>
+          <span>Back to Archive</span>
         </Link>
 
         {/* ── Header ── */}
@@ -264,7 +264,7 @@ export default function UploadPage() {
                   color: "#26c5ff",
                 }}
               >
-                View gallery →
+                View archive →
               </Link>
             )}
           </div>

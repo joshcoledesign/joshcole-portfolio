@@ -11,7 +11,7 @@ import Link from "next/link";
 
 const DOORS = [
   { label: "The Volumes", sub: "THE WORK",   href: "/volumes" },
-  { label: "Gallery",     sub: "THE FIELD",  href: "/gallery" },
+  { label: "Archive",     sub: "THE FIELD",  href: "/gallery" },
   { label: "About",       sub: "THE AUTHOR", href: "/about"   },
 ] as const;
 

@@ -12,7 +12,7 @@ import { getGalleryImages, isBlobConfigured } from "@/lib/gallery";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Gallery — Josh Cole",
+  title: "Archive — Josh Cole",
   description: "A visual field of work and experiments.",
 };
 
@@ -72,7 +72,7 @@ export default async function GalleryPage() {
               margin: 0,
             }}
           >
-            Gallery
+            Archive
           </h1>
           <div style={{ fontFamily: MONO, fontSize: 12, color: "#6a6a70", letterSpacing: "0.06em" }}>
             {String(images.length).padStart(2, "0")} frames

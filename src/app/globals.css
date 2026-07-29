@@ -111,6 +111,24 @@ body {
   filter: brightness(1.08);
 }
 
+/* ─── Gallery frames (masonry) ──────────────────────────────── */
+.gallery-frame img {
+  transition: filter 0.2s ease;
+}
+.gallery-frame:hover img {
+  filter: brightness(1.06);
+}
+.gallery-frame:hover .gallery-index {
+  opacity: 1 !important;
+}
+.gallery-frame:focus-visible {
+  outline: 1px solid var(--brand-cyan, #26c5ff);
+  outline-offset: 2px;
+}
+.gallery-frame:focus-visible .gallery-index {
+  opacity: 1 !important;
+}
+
 /* ─── Door hover (legacy hero-doors) ────────────────────────── */
 .door-link:hover {
   background-color: rgba(255, 255, 255, 0.025);

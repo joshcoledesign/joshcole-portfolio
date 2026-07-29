@@ -11,6 +11,7 @@ import Link from "next/link";
 
 const DOORS = [
   { label: "The Volumes", sub: "THE WORK",   href: "/volumes" },
+  { label: "Gallery",     sub: "THE FIELD",  href: "/gallery" },
   { label: "About",       sub: "THE AUTHOR", href: "/about"   },
 ] as const;
 
@@ -97,7 +98,7 @@ export function StickyNav() {
           transition: reduced ? "none" : `max-height 0.8s ${EASE}${expanded ? "" : " 0.3s"}`,
         }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: `repeat(${DOORS.length}, 1fr)` }}>
           {DOORS.map((door, i) => (
             <div
               key={door.label}

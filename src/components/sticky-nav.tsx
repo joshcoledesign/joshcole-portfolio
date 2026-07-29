@@ -10,9 +10,9 @@ import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import Link from "next/link";
 
 const DOORS = [
-  { label: "The Volumes", sub: "THE WORK",   href: "/volumes" },
-  { label: "Archive",     sub: "THE FIELD",  href: "/gallery" },
-  { label: "About",       sub: "THE AUTHOR", href: "/about"   },
+  { label: "Volumes",     sub: "THE CASES",  href: "/volumes" },
+  { label: "Archive",     sub: "PAST WORK",  href: "/gallery" },
+  { label: "Bio",         sub: "ABOUT ME",   href: "/about"   },
 ] as const;
 
 // Scroll further than this from the top before collapsing

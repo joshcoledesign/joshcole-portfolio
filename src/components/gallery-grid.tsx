@@ -12,15 +12,15 @@ import type { GalleryImage } from "@/lib/gallery";
 const MONO = "var(--font-jetbrains-mono), monospace";
 
 // ── Responsive column count, matched to Tailwind breakpoints ──
-// (sm 640 / lg 1024 / xl 1280). Used to distribute images across
-// columns in reading order rather than letting CSS columns fill
-// each column top-to-bottom first.
+// (sm 640 / lg 1024). Used to distribute images across columns in
+// reading order rather than letting CSS columns fill each column
+// top-to-bottom first. Caps at 3 columns.
 function useColumnCount() {
   const [count, setCount] = useState(1);
   useEffect(() => {
     const compute = () => {
       const w = window.innerWidth;
-      setCount(w >= 1280 ? 4 : w >= 1024 ? 3 : w >= 640 ? 2 : 1);
+      setCount(w >= 1024 ? 3 : w >= 640 ? 2 : 1);
     };
     compute();
     window.addEventListener("resize", compute);

@@ -11,6 +11,24 @@ import type { GalleryImage } from "@/lib/gallery";
 
 const MONO = "var(--font-jetbrains-mono), monospace";
 
+// ── Responsive column count, matched to Tailwind breakpoints ──
+// (sm 640 / lg 1024 / xl 1280). Used to distribute images across
+// columns in reading order rather than letting CSS columns fill
+// each column top-to-bottom first.
+function useColumnCount() {
+  const [count, setCount] = useState(1);
+  useEffect(() => {
+    const compute = () => {
+      const w = window.innerWidth;
+      setCount(w >= 1280 ? 4 : w >= 1024 ? 3 : w >= 640 ? 2 : 1);
+    };
+    compute();
+    window.addEventListener("resize", compute);
+    return () => window.removeEventListener("resize", compute);
+  }, []);
+  return count;
+}
+
 // ── Corner tick — matches CreativeShowcase framing ────────────
 function CornerTick({ corner }: { corner: "top-left" | "bottom-right" }) {
   const isTopLeft = corner === "top-left";
@@ -39,6 +57,7 @@ function CornerTick({ corner }: { corner: "top-left" | "bottom-right" }) {
 
 export function GalleryGrid({ images }: { images: GalleryImage[] }) {
   const [active, setActive] = useState<number | null>(null);
+  const columnCount = useColumnCount();
 
   const close = useCallback(() => setActive(null), []);
   const prev = useCallback(
@@ -69,60 +88,72 @@ export function GalleryGrid({ images }: { images: GalleryImage[] }) {
 
   if (images.length === 0) return null;
 
+  // Round-robin images into columns so reading order runs
+  // left-to-right, top-to-bottom (image 0 → col 0, 1 → col 1, …)
+  // while each column keeps its variable-height masonry look.
+  const columns: { img: GalleryImage; index: number }[][] = Array.from(
+    { length: columnCount },
+    () => [],
+  );
+  images.forEach((img, i) => columns[i % columnCount].push({ img, index: i }));
+
   return (
     <>
-      {/* ── Masonry: CSS columns, responsive count via Tailwind ── */}
-      <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
-        {images.map((img, i) => (
-          <button
-            key={img.pathname}
-            type="button"
-            onClick={() => setActive(i)}
-            className="gallery-frame"
-            style={{
-              position: "relative",
-              display: "block",
-              width: "100%",
-              marginBottom: 16,
-              padding: 0,
-              border: "none",
-              background: "none",
-              cursor: "zoom-in",
-              breakInside: "avoid",
-            }}
-          >
-            {/* Mono index — appears on hover */}
-            <span
-              aria-hidden="true"
-              className="gallery-index"
-              style={{
-                position: "absolute",
-                top: 8,
-                left: 8,
-                zIndex: 2,
-                fontFamily: MONO,
-                fontSize: 11,
-                letterSpacing: "0.08em",
-                color: "#e8e8ea",
-                background: "rgba(16,17,23,0.72)",
-                padding: "2px 6px",
-                opacity: 0,
-                transition: "opacity 0.18s ease",
-              }}
-            >
-              [ {String(i + 1).padStart(2, "0")} ]
-            </span>
+      {/* ── Masonry: JS-distributed columns in reading order ── */}
+      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+        {columns.map((col, c) => (
+          <div key={c} style={{ flex: 1, minWidth: 0 }}>
+            {col.map(({ img, index: i }) => (
+              <button
+                key={img.pathname}
+                type="button"
+                onClick={() => setActive(i)}
+                className="gallery-frame"
+                style={{
+                  position: "relative",
+                  display: "block",
+                  width: "100%",
+                  marginBottom: 16,
+                  padding: 0,
+                  border: "none",
+                  background: "none",
+                  cursor: "zoom-in",
+                }}
+              >
+                {/* Mono index — appears on hover */}
+                <span
+                  aria-hidden="true"
+                  className="gallery-index"
+                  style={{
+                    position: "absolute",
+                    top: 8,
+                    left: 8,
+                    zIndex: 2,
+                    fontFamily: MONO,
+                    fontSize: 11,
+                    letterSpacing: "0.08em",
+                    color: "#e8e8ea",
+                    background: "rgba(16,17,23,0.72)",
+                    padding: "2px 6px",
+                    opacity: 0,
+                    transition: "opacity 0.18s ease",
+                  }}
+                >
+                  [ {String(i + 1).padStart(2, "0")} ]
+                </span>
 
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={img.url}
-              alt=""
-              loading="lazy"
-              style={{ width: "100%", height: "auto", display: "block" }}
-            />
-            <CornerTick corner="top-left" />
-            <CornerTick corner="bottom-right" />
-          </button>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={img.url}
+                  alt=""
+                  loading="lazy"
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                />
+                <CornerTick corner="top-left" />
+                <CornerTick corner="bottom-right" />
+              </button>
+            ))}
+          </div>
         ))}
       </div>
 

@@ -138,6 +138,22 @@ export function SiteFooter() {
         )}
       </div>
 
+      {/* ── Resume ── */}
+      <div style={{ marginBottom: 28 }}>
+        <div style={{ color: "#6a6a70" }}>
+          {">"} ./resume --
+          <a
+            href="/resume"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-action-link"
+            style={{ color: "#26c5ff", textDecoration: "none" }}
+          >
+            <span className="footer-action-text">view &amp; print</span>
+          </a>
+        </div>
+      </div>
+
       {/* ── Uplinks ── */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ color: "#6a6a70", marginBottom: 6 }}>

@@ -1,0 +1,603 @@
+<meta charset="utf-8">
+<title>Josh Cole — Creative Technologist · AI</title>
+<meta name="author" content="Josh Cole">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--
+  Josh Cole — resume
+  Source of truth. The .docx and .pdf are derivatives; regenerate, never edit.
+
+  EXPORT: Chrome/Brave → Print → Destination "Save as PDF"
+          Margins: DEFAULT  — not "None". "None" forces margins to zero and
+                              overrides the @page rule below, printing the
+                              content edge to edge.
+          "Background graphics": ON   (the gradient rule under the name)
+
+  FONTS: loaded from Google Fonts below for portability. To self-host from
+  joshcolecreative.com instead, delete the two <link> tags and point the
+  @font-face at your own /fonts directory. Same families either way.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------------------------------------------------------------
+     TOKENS — paper variant of the joshcolecreative.com system.
+     Ink is the dark base lifted off pure black; the gradient is the
+     brand gradient, unchanged.
+  --------------------------------------------------------------- */
+  :root {
+    --ink:        #17181d;   /* body text */
+    --ink-strong: #0d0e12;   /* name, role titles */
+    --ink-muted:  #5a5b63;   /* role summaries, earlier-career detail */
+    --ink-label:  #6a6a70;   /* section labels, dates */
+    --rule:       #d8d9de;   /* hairlines */
+    --grad:       linear-gradient(90deg, #26C5FF 0%, #CA43FF 52%, #FF419F 100%);
+
+    --display: "Syne", Georgia, serif;
+    --body:    "Inter", "Helvetica Neue", Arial, sans-serif;
+    --mono:    "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  }
+
+  /* ---------------------------------------------------------------
+     PAGE
+  --------------------------------------------------------------- */
+  /* Vertical margins come from @page; horizontal comes from .sheet padding
+     in print. Splitting them this way means a "Margins: None" export still
+     keeps its side margins instead of going fully edge to edge. */
+  @page { size: letter; margin: 0.5in 0; }
+
+  * { box-sizing: border-box; }
+
+  html { background: #e9eaee; }
+
+  body {
+    margin: 0;
+    font-family: var(--body);
+    font-size: 9.1pt;
+    line-height: 1.35;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Screen preview only — simulates the sheet. Removed in print. */
+  .sheet {
+    width: 7.4in;               /* 8.5in less the 0.55in page margins */
+    margin: 28px auto;
+    padding: 36px 40px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.14), 0 12px 34px rgba(0,0,0,.10);
+  }
+
+
+  /* ---------------------------------------------------------------
+     TOOLBAR — screen only, never printed.
+  --------------------------------------------------------------- */
+  .toolbar {
+    width: 7.4in;
+    margin: 28px auto -14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .toolbar button {
+    font-family: var(--mono);
+    font-size: 8.5pt;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid #c9cad0;
+    border-radius: 0;
+    padding: 7px 12px;
+    cursor: pointer;
+    transition: border-color .12s ease, color .12s ease;
+  }
+  .toolbar button:hover { border-color: #8a8b93; }
+  .toolbar button:focus-visible { outline: 2px solid #26C5FF; outline-offset: 2px; }
+  .toolbar .status {
+    font-family: var(--mono);
+    font-size: 8pt;
+    color: var(--ink-muted);
+    opacity: 0;
+    transition: opacity .15s ease;
+  }
+  .toolbar .status.on { opacity: 1; }
+  @media print { .toolbar { display: none !important; } }
+  @media screen and (max-width: 820px) {
+    .toolbar { width: auto; margin: 16px 20px -8px; flex-wrap: wrap; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .toolbar button, .toolbar .status { transition: none; }
+  }
+
+  /* ---------------------------------------------------------------
+     MASTHEAD
+     Name is live text, never an image — a resume whose header is an
+     SVG parses as a nameless document.
+  --------------------------------------------------------------- */
+  .name {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 25pt;
+    line-height: 1;
+    letter-spacing: -0.005em;
+    color: var(--ink-strong);
+    margin: 0;
+  }
+
+  .discipline {
+    font-family: var(--mono);
+    font-size: 8pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-label);
+    margin: 7px 0 0;
+  }
+
+  /* The one signature moment. Everything else stays ink and gray. */
+  .grad-rule {
+    height: 2.5px;
+    background: var(--grad);
+    margin: 11px 0 9px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .contact {
+    font-family: var(--mono);
+    font-size: 7.6pt;
+    letter-spacing: 0.01em;
+    color: var(--ink-muted);
+    margin: 0;
+  }
+  .contact a { color: inherit; text-decoration: none; }
+  .contact .sep { color: #b6b7bd; padding: 0 5px; }
+
+  /* ---------------------------------------------------------------
+     SECTIONS
+  --------------------------------------------------------------- */
+  .section { margin-top: 12px; }
+
+  .section > h2 {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 7.4pt;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--ink-label);
+    margin: 0 0 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ---------------------------------------------------------------
+     SUMMARY
+  --------------------------------------------------------------- */
+  .summary p { margin: 0 0 6px; }
+  .summary p:last-child { margin-bottom: 0; }
+
+  /* ---------------------------------------------------------------
+     SKILLS
+  --------------------------------------------------------------- */
+  .skill { margin: 0 0 5px; }
+  .skill:last-child { margin-bottom: 0; }
+  .skill b {
+    font-weight: 600;
+    color: var(--ink-strong);
+  }
+
+  /* ---------------------------------------------------------------
+     ROLES
+     Single column, no tables, no text boxes. Title and company sit
+     ahead of the date in DOM order so parsers read them in sequence.
+  --------------------------------------------------------------- */
+  /* Roles may break across pages — forcing whole-role atomicity leaves
+     large gaps at page bottoms. What must not split: a title from its
+     summary, and a bullet from itself. */
+  .role { margin-bottom: 9px; }
+  .role:last-child { margin-bottom: 0; }
+
+  .role-head {
+    break-after: avoid;
+    page-break-after: avoid;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .role-title {
+    font-weight: 600;
+    font-size: 10pt;
+    color: var(--ink-strong);
+    margin: 0;
+    line-height: 1.3;
+  }
+  .role-title .org { font-weight: 400; color: var(--ink); }
+  .role-title .qual { font-weight: 400; color: var(--ink-muted); }
+
+  /* The date column reads as a timeline down the right edge. */
+  .role-date {
+    font-family: var(--mono);
+    font-size: 7.8pt;
+    color: var(--ink-label);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .role-summary {
+    break-after: avoid;
+    page-break-after: avoid;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin: 2px 0 4px;
+  }
+
+  .role ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .role li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    position: relative;
+    padding-left: 12px;
+    margin-bottom: 2.5px;
+  }
+  .role li:last-child { margin-bottom: 0; }
+  .role li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.52em;
+    width: 3px;
+    height: 3px;
+    background: #a9aab1;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ---------------------------------------------------------------
+     EARLIER CAREER — same structure, tightened
+  --------------------------------------------------------------- */
+  .earlier .role { margin-bottom: 5px; break-inside: avoid; page-break-inside: avoid; }
+  .earlier .role-title { font-size: 9.3pt; }
+  .earlier li { color: var(--ink-muted); }
+
+  /* ---------------------------------------------------------------
+     PRINT
+  --------------------------------------------------------------- */
+  @media print {
+    html { background: #fff; }
+    .sheet {
+      width: auto;
+      margin: 0;
+      padding: 0 0.55in;   /* side margins — applies on every page */
+      box-shadow: none;
+    }
+    .section { break-inside: auto; }
+    .section > h2 { break-after: avoid; page-break-after: avoid; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+  /* ---------------------------------------------------------------
+     SMALL SCREENS — preview only
+  --------------------------------------------------------------- */
+  @media screen and (max-width: 820px) {
+    .sheet { width: auto; margin: 0; padding: 24px 20px; }
+    .role-head { flex-direction: column; gap: 1px; }
+  }
+</style>
+
+<script type="text/plain" id="plaintext">
+JOSH COLE
+Creative Technologist / AI
+Hendersonville, TN | joshcolecreative.com | linkedin.com/in/joshcolecreative | colethirteen@pm.me | (615) 945-3302
+
+SUMMARY
+
+Creative technologist and problem solver. I think in design and code, finding creative uses for technology by connecting ideas across disciplines, exploring what's possible, and shaping them into something useful for a person, business, or brand.
+
+Over 25 years I've worked across brand, UX, creative direction, generative and immersive work, and now AI. I grew from hands-on designer into creative and UX leadership, working closer to the technology as the problems grew in scale and complexity. I led and mentored teams the whole way, without ever putting the work down.
+
+Thinking, exploring, and testing an idea until it becomes something real is where I do my best work.
+
+SKILLS & TOOLS
+
+AI & Building: Agentic Workflow Design, LLM Orchestration, Multi-Model Pipelines, Prompt Engineering, RAG (in development), Claude, GPT, Copilot Studio, Power Automate, Claude Code (agentic CLI development), AI-Assisted Prototyping
+
+Applied AI Engineering: Full-stack LLM pipelines (Node / Next.js / TypeScript / Supabase / Vercel), schema-enforced JSON outputs, prompt templating as configuration, multi-model review loops
+
+Design Leadership: UX Strategy & Vision, Human-Centered AI Design, Design Systems, Information Architecture, Design Practice Building, Cross-functional & Multidisciplinary Team Leadership
+
+Generative & Visual AI: ComfyUI, Stable Diffusion, node-based generative workflows, AI-assisted image and video pipelines; explores the wider ecosystem (Hugging Face, NotebookLM)
+
+Creative Technology: Adobe Creative Suite (Photoshop, Illustrator, InDesign, Premiere, After Effects), Figma, Unreal Engine, Processing, TouchDesigner, Generative Design, VR / Immersive Production, Maya, Blender
+
+SELECTED AI WORK
+
+Voice & Content Engine — within a brand operating system — Independent  |  2025 – Present
+Closed beta. A production-grade agentic AI system that learns a brand's writing voice from samples, develops content strategy, generates drafts, and quality-checks output through a multi-model review loop — designed, architected, and shipped end to end.
+- Designed and built a four-stage AI pipeline (voice analysis, content strategy, generation, quality control) on Claude Opus, with schema-enforced JSON outputs and temperature calibration per stage
+- Built a multi-model quality-control loop where a separate model scores each draft against the voice profile and brief and flags where it drifts — one model checking another's work, the core differentiator
+- Full-stack build: Next.js 14, TypeScript, Supabase, Vercel, and a Node CLI sharing one engine library across web and command line
+
+EXPERIENCE
+
+Founder & Creative Technologist — Josh Cole Creative  |  2013 – Present
+Independent studio practice spanning branding, immersive experiences, digital product design, and emerging technology — now pointed at AI systems and the interfaces built around them.
+- Led end-to-end design and production of a healthcare mobile application managing nurse-staffing workflows, delivering a regulated-industry product from strategy through launch
+- Applied ComfyUI and Stable Diffusion extensively across personal and freelance work — producing finished visual assets and generative art through node-based workflows; extensive image-compositing and scripted-compositing experience in Photoshop
+- Directed VR production using Unreal Engine and Maya, and developed generative art installations using Processing and TouchDesigner — applying computational design thinking to experiential contexts
+- Built and led remote teams of creative technologists across diverse project types, managing design vision, client relationships, and production quality simultaneously
+
+Enterprise Solutions Architect, UX (design leadership role) — UST  |  2024 – May 2026
+Defined AI-integrated solution strategies for global clients across UX, technology, and business — bridging design leadership and hands-on AI practice.
+- Designed and built a Microsoft Copilot AI agent to automate RFP Go/No-Go decision-making for an internal public-sector team — defining the use case, designing the flow, and building the agent hands-on
+- Designed enterprise AI solutions spanning LLM integration, agentic workflow design, and process automation — turning complex business requirements into clear, human-centered design strategies
+- Led client-facing discovery and solution design sessions, aligning engineering, UX, and business stakeholders around AI approaches built on foundation models including Claude and GPT
+- Led a multi-year, multi-product UX and AI engagement for a healthcare technology client — directing a design team, managing client relationships, and delivering across four simultaneous software products in a regulated environment
+- Built hands-on AI workflows using Power Automate, Copilot Studio, and prompt-engineered integrations alongside foundation models, across healthcare and enterprise software clients
+
+UX/UI Practice Lead — Xpanxion / UST  |  2021 – 2024
+Founded and scaled a UX practice from scratch within a global technology consultancy — building the team, methodology, and operating model that embedded design quality into enterprise delivery.
+- Built and mentored a multidisciplinary design team — managing senior designers and design leads, not only individual contributors — and defined the process frameworks and quality standards that integrated UX into technical delivery at scale
+- Established design as a strategic differentiator in client engagements, leading discovery that shaped how UX was positioned in proposals and solution approaches
+- Designed repeatable workflows for distributed and offshore teams, holding consistency and design cohesion across complex multi-team delivery
+- Coached and upskilled team members and client stakeholders on design tools, workflows, and UX methodology — making complex concepts accessible and actionable
+
+UX Director — GS&F  |  2017 – 2019
+Led a team of eight designers and researchers across UX strategy, UI design, and immersive experience development.
+- Directed the full design lifecycle across multiple simultaneous client engagements — research and strategy through wireframes, prototypes, and production
+- Led cross-functional VR projects including a multi-sensory 3D motion ride, overseeing scriptwriting, environment design, and hardware integration
+- Managed stakeholder relationships and led strategic design presentations to executive-level clients
+
+Creative Director — ST8MNT Brand Agency  |  2015 – 2017
+Co-led agency creative direction across branding and digital, owning team development and design quality.
+- Co-led a full agency rebrand that repositioned the creative offering
+- Mentored and developed design team members, building a culture of strategic creative thinking alongside strong craft
+
+EARLIER CAREER
+
+Design Director — Andculture  |  2013 – 2015
+- Led user-centered digital experiences across healthcare and gaming verticals; drove an agency rebrand and integrated UX research into the design process.
+
+Adjunct Instructor, Visual Arts — Messiah College  |  2014 – 2015
+- Taught design principles, branding, and portfolio development to final-year visual arts students, including hands-on Adobe Creative Suite instruction.
+
+Creative Director — Redpepper  |  2010 – 2013
+- Led design strategy and creative direction for digital projects across agency clients, from concept through implementation.
+
+Interface & UX Designer — Compaq Computer Corporation  |  Early Career
+- Began in interface design at one of the world's leading PC manufacturers, working on user-facing software experiences.
+</script>
+
+<div class="toolbar" role="group" aria-label="Resume download options">
+  <button type="button" id="btn-copy">Copy plain text</button>
+  <button type="button" id="btn-pdf">Save as PDF</button>
+  <button type="button" id="btn-txt">Download .txt</button>
+  <span class="status" id="status" role="status" aria-live="polite"></span>
+</div>
+
+<div class="sheet">
+
+  <header>
+    <h1 class="name">Josh Cole</h1>
+    <p class="discipline">Creative Technologist · AI</p>
+    <div class="grad-rule"></div>
+    <p class="contact">
+      Hendersonville, TN<span class="sep">·</span><a href="https://joshcolecreative.com">joshcolecreative.com</a><span class="sep">·</span><a href="https://linkedin.com/in/joshcolecreative">linkedin.com/in/joshcolecreative</a><span class="sep">·</span><a href="mailto:colethirteen@pm.me">colethirteen@pm.me</a><span class="sep">·</span>(615) 945-3302
+    </p>
+  </header>
+
+  <section class="section summary">
+    <h2>Summary</h2>
+    <p>Creative technologist and problem solver. I think in design and code, finding creative uses for technology by connecting ideas across disciplines, exploring what's possible, and shaping them into something useful for a person, business, or brand.</p>
+    <p>Over 25 years I've worked across brand, UX, creative direction, generative and immersive work, and now AI. I grew from hands-on designer into creative and UX leadership, working closer to the technology as the problems grew in scale and complexity. I led and mentored teams the whole way, without ever putting the work down.</p>
+    <p>Thinking, exploring, and testing an idea until it becomes something real is where I do my best work.</p>
+  </section>
+
+  <section class="section">
+    <h2>Skills &amp; Tools</h2>
+    <p class="skill"><b>AI &amp; Building:</b> Agentic Workflow Design, LLM Orchestration, Multi-Model Pipelines, Prompt Engineering, RAG (in development), Claude, GPT, Copilot Studio, Power Automate, Claude Code (agentic CLI development), AI-Assisted Prototyping</p>
+    <p class="skill"><b>Applied AI Engineering:</b> Full-stack LLM pipelines (Node / Next.js / TypeScript / Supabase / Vercel), schema-enforced JSON outputs, prompt templating as configuration, multi-model review loops</p>
+    <p class="skill"><b>Design Leadership:</b> UX Strategy &amp; Vision, Human-Centered AI Design, Design Systems, Information Architecture, Design Practice Building, Cross-functional &amp; Multidisciplinary Team Leadership</p>
+    <p class="skill"><b>Generative &amp; Visual AI:</b> ComfyUI, Stable Diffusion, node-based generative workflows, AI-assisted image and video pipelines; explores the wider ecosystem (Hugging Face, NotebookLM)</p>
+    <p class="skill"><b>Creative Technology:</b> Adobe Creative Suite (Photoshop, Illustrator, InDesign, Premiere, After Effects), Figma, Unreal Engine, Processing, TouchDesigner, Generative Design, VR / Immersive Production, Maya, Blender</p>
+  </section>
+
+  <section class="section">
+    <h2>Selected AI Work</h2>
+
+    <div class="role">
+      <div class="role-head">
+        <h3 class="role-title">Voice &amp; Content Engine — within a brand operating system <span class="org">— Independent</span></h3>
+        <span class="role-date">2025 – Present</span>
+      </div>
+      <p class="role-summary">Closed beta. A production-grade agentic AI system that learns a brand's writing voice from samples, develops content strategy, generates drafts, and quality-checks output through a multi-model review loop — designed, architected, and shipped end to end.</p>
+      <ul>
+        <li>Designed and built a four-stage AI pipeline (voice analysis, content strategy, generation, quality control) on Claude Opus, with schema-enforced JSON outputs and temperature calibration per stage</li>
+        <li>Built a multi-model quality-control loop where a separate model scores each draft against the voice profile and brief and flags where it drifts — one model checking another's work, the core differentiator</li>
+        <li>Full-stack build: Next.js 14, TypeScript, Supabase, Vercel, and a Node CLI sharing one engine library across web and command line</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Experience</h2>
+
+    <div class="role">
+      <div class="role-head">
+        <h3 class="role-title">Founder &amp; Creative Technologist <span class="org">— Josh Cole Creative</span></h3>
+        <span class="role-date">2013 – Present</span>
+      </div>
+      <p class="role-summary">Independent studio practice spanning branding, immersive experiences, digital product design, and emerging technology — now pointed at AI systems and the interfaces built around them.</p>
+      <ul>
+        <li>Led end-to-end design and production of a healthcare mobile application managing nurse-staffing workflows, delivering a regulated-industry product from strategy through launch</li>
+        <li>Applied ComfyUI and Stable Diffusion extensively across personal and freelance work — producing finished visual assets and generative art through node-based workflows; extensive image-compositing and scripted-compositing experience in Photoshop</li>
+        <li>Directed VR production using Unreal Engine and Maya, and developed generative art installations using Processing and TouchDesigner — applying computational design thinking to experiential contexts</li>
+        <li>Built and led remote teams of creative technologists across diverse project types, managing design vision, client relationships, and production quality simultaneously</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <h3 class="role-title">Enterprise Solutions Architect, UX <span class="qual">(design leadership role)</span> <span class="org">— UST</span></h3>
+        <span class="role-date">2024 – May 2026</span>
+      </div>
+      <p class="role-summary">Defined AI-integrated solution strategies for global clients across UX, technology, and business — bridging design leadership and hands-on AI practice.</p>
+      <ul>
+        <li>Designed and built a Microsoft Copilot AI agent to automate RFP Go/No-Go decision-making for an internal public-sector team — defining the use case, designing the flow, and building the agent hands-on</li>
+        <li>Designed enterprise AI solutions spanning LLM integration, agentic workflow design, and process automation — turning complex business requirements into clear, human-centered design strategies</li>
+        <li>Led client-facing discovery and solution design sessions, aligning engineering, UX, and business stakeholders around AI approaches built on foundation models including Claude and GPT</li>
+        <li>Led a multi-year, multi-product UX and AI engagement for a healthcare technology client — directing a design team, managing client relationships, and delivering across four simultaneous software products in a regulated environment</li>
+        <li>Built hands-on AI workflows using Power Automate, Copilot Studio, and prompt-engineered integrations alongside foundation models, across healthcare and enterprise software clients</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <h3 class="role-title">UX/UI Practice Lead <span class="org">— Xpanxion / UST</span></h3>
+        <span class="role-date">2021 – 2024</span>
+      </div>
+      <p class="role-summary">Founded and scaled a UX practice from scratch within a global technology consultancy — building the team, methodology, and operating model that embedded design quality into enterprise delivery.</p>
+      <ul>
+        <li>Built and mentored a multidisciplinary design team — managing senior designers and design leads, not only individual contributors — and defined the process frameworks and quality standards that integrated UX into technical delivery at scale</li>
+        <li>Established design as a strategic differentiator in client engagements, leading discovery that shaped how UX was positioned in proposals and solution approaches</li>
+        <li>Designed repeatable workflows for distributed and offshore teams, holding consistency and design cohesion across complex multi-team delivery</li>
+        <li>Coached and upskilled team members and client stakeholders on design tools, workflows, and UX methodology — making complex concepts accessible and actionable</li>
+      </ul>
+    </div>
+
+
+    <div class="role">
+      <div class="role-head">
+        <h3 class="role-title">UX Director <span class="org">— GS&amp;F</span></h3>
+        <span class="role-date">2017 – 2019</span>
+      </div>
+      <p class="role-summary">Led a team of eight designers and researchers across UX strategy, UI design, and immersive experience development.</p>
+      <ul>
+        <li>Directed the full design lifecycle across multiple simultaneous client engagements — research and strategy through wireframes, prototypes, and production</li>
+        <li>Led cross-functional VR projects including a multi-sensory 3D motion ride, overseeing scriptwriting, environment design, and hardware integration</li>
+        <li>Managed stakeholder relationships and led strategic design presentations to executive-level clients</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <h3 class="role-title">Creative Director <span class="org">— ST8MNT Brand Agency</span></h3>
+        <span class="role-date">2015 – 2017</span>
+      </div>
+      <p class="role-summary">Co-led agency creative direction across branding and digital, owning team development and design quality.</p>
+      <ul>
+        <li>Co-led a full agency rebrand that repositioned the creative offering</li>
+        <li>Mentored and developed design team members, building a culture of strategic creative thinking alongside strong craft</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section earlier">
+    <h2>Earlier Career</h2>
+
+    <div class="role">
+      <div class="role-head">
+        <h3 class="role-title">Design Director <span class="org">— Andculture</span></h3>
+        <span class="role-date">2013 – 2015</span>
+      </div>
+      <ul>
+        <li>Led user-centered digital experiences across healthcare and gaming verticals; drove an agency rebrand and integrated UX research into the design process.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <h3 class="role-title">Adjunct Instructor, Visual Arts <span class="org">— Messiah College</span></h3>
+        <span class="role-date">2014 – 2015</span>
+      </div>
+      <ul>
+        <li>Taught design principles, branding, and portfolio development to final-year visual arts students, including hands-on Adobe Creative Suite instruction.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <h3 class="role-title">Creative Director <span class="org">— Redpepper</span></h3>
+        <span class="role-date">2010 – 2013</span>
+      </div>
+      <ul>
+        <li>Led design strategy and creative direction for digital projects across agency clients, from concept through implementation.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <h3 class="role-title">Interface &amp; UX Designer <span class="org">— Compaq Computer Corporation</span></h3>
+        <span class="role-date">Early Career</span>
+      </div>
+      <ul>
+        <li>Began in interface design at one of the world's leading PC manufacturers, working on user-facing software experiences.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var src    = document.getElementById('plaintext');
+  var status = document.getElementById('status');
+  var text   = src ? src.textContent.replace(/^\n/, '') : '';
+
+  function flash(msg) {
+    status.textContent = msg;
+    status.classList.add('on');
+    clearTimeout(flash._t);
+    flash._t = setTimeout(function () { status.classList.remove('on'); }, 2200);
+  }
+
+  document.getElementById('btn-copy').addEventListener('click', function () {
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:absolute;left:-9999px;top:0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      flash(ok ? 'Copied' : 'Copy failed — use Download .txt');
+    }
+    // clipboard API needs a secure context; file:// is not one, so fall back
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function () { flash('Copied'); }, fallback);
+    } else {
+      fallback();
+    }
+  });
+
+  document.getElementById('btn-txt').addEventListener('click', function () {
+    var url = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'josh-cole-resume.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    flash('Downloaded');
+  });
+
+  // Opens the print dialog so the PDF comes from the browser's own renderer —
+  // full type quality, real text layer. Client-side PDF libraries rasterize
+  // the page and produce a file no applicant tracking system can read.
+  // ON THE LIVE SITE: replace this with a link to a PDF built at deploy time.
+  document.getElementById('btn-pdf').addEventListener('click', function () {
+    window.print();
+  });
+})();
+</script>

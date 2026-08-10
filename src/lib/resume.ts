@@ -106,7 +106,7 @@ export const resume: ResumeData = {
   selectedWork: [
     {
       title: "Voice & Content Engine — within a brand operating system",
-      org: "Independent",
+      org: "Josh Cole Creative",
       date: "2025 – Present",
       summary:
         "Closed beta. A production-grade agentic AI system that learns a brand's writing voice from samples, develops content strategy, generates drafts, and quality-checks output through a multi-model review loop — designed, architected, and shipped end to end.",

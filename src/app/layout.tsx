@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { SiteFooter } from "@/components/site-footer";
-import { StickyNav } from "@/components/sticky-nav";
+import { SiteChrome } from "@/components/site-chrome";
 import { Analytics } from "@vercel/analytics/next";
 
 const syne = Syne({
@@ -40,8 +39,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-foreground">
         {children}
-        <SiteFooter />
-        <StickyNav />
+        <SiteChrome />
         <Analytics />
       </body>
     </html>

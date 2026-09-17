@@ -8,15 +8,13 @@ import Link from "next/link";
 import ReactMarkdown, { defaultUrlTransform } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeUnwrapImages from "rehype-unwrap-images";
-import type { CaseStudyData, Volume } from "@/lib/case-studies";
+import type { CaseStudyData } from "@/lib/case-studies";
 import type { Components } from "react-markdown";
 import { PromptLine } from "@/components/prompt-line";
 import { RfpAgentFlow } from "@/components/heroes/rfp-agent-flow";
 import { RfpAgentWorkflow } from "@/components/diagrams/rfp-agent-workflow";
 import { BrandVoiceEngine } from "@/components/diagrams/brand-voice-engine";
 import { IdentityPipeline } from "@/components/diagrams/identity-pipeline";
-import { CaseStudyNext } from "@/components/case-study-next";
-import { getNextCaseStudy } from "@/lib/case-studies";
 
 // ── Component-based heroes (slug → component) ────────────────
 // For case studies with SVG/generated heroes instead of images.
@@ -30,25 +28,6 @@ const HERO_COMPONENTS: Record<string, React.ComponentType> = {
 const INLINE_COMPONENTS: Record<string, React.ComponentType> = {
   "voice-engine": BrandVoiceEngine,
   "identity-pipeline": IdentityPipeline,
-};
-
-// ── Volume metadata ────────────────────────────────────────────
-const VOLUMES: Record<Volume, { eyebrow: string; label: string; href: string }> = {
-  "ai-systems": {
-    eyebrow: "VOLUME I — AI SYSTEMS",
-    label: "The Volumes",
-    href: "/volumes",
-  },
-  "ux-enterprise": {
-    eyebrow: "VOLUME II — UX & ENTERPRISE",
-    label: "The Volumes",
-    href: "/volumes",
-  },
-  "creative-immersive": {
-    eyebrow: "VOLUME III — CREATIVE & IMMERSIVE",
-    label: "The Volumes",
-    href: "/volumes",
-  },
 };
 
 // ── Markdown component map ─────────────────────────────────────
@@ -311,16 +290,15 @@ function makeMarkdownComponents(slug: string): Components {
 export function CaseStudy({
   title,
   slug,
-  volume,
   role,
   year,
   heroImage,
   content,
-}: CaseStudyData) {
+  backHref = "/",
+}: CaseStudyData & { backHref?: string }) {
   const HeroComponent = HERO_COMPONENTS[slug];
   const hero = HeroComponent ? null : (heroImage ?? null);
   const hasHero = !!(HeroComponent || hero);
-  const vol = VOLUMES[volume];
 
   return (
     <div
@@ -329,7 +307,7 @@ export function CaseStudy({
         paddingBottom: 56,
       }}
     >
-      <PromptLine href="/" />
+      <PromptLine href={backHref} command={`./work/${slug}`} flag="" />
       <div
         className="page-container"
         style={{
@@ -340,7 +318,7 @@ export function CaseStudy({
       >
         {/* ── Back link ── */}
         <Link
-          href={vol.href}
+          href={backHref}
           className="case-back-link"
           style={{
             display: "inline-flex",
@@ -355,7 +333,7 @@ export function CaseStudy({
           }}
         >
           <span aria-hidden="true">&lt;</span>
-          <span>Back to {vol.label}</span>
+          <span>cd ..</span>
         </Link>
 
         {/* ── Eyebrow ── */}
@@ -369,7 +347,7 @@ export function CaseStudy({
             marginBottom: 7,
           }}
         >
-          {vol.eyebrow}
+          CASE STUDY · {year}
         </div>
 
         {/* ── Title ── */}
@@ -456,8 +434,6 @@ export function CaseStudy({
           </ReactMarkdown>
         </div>
 
-        {/* ── Next end-cap ── */}
-        <CaseStudyNext next={getNextCaseStudy(slug)} />
       </div>
     </div>
   );

@@ -23,6 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://joshcolecreative.com"),
   title: "Josh Cole",
   description: "Enterprise solutions architect, UX designer, and AI systems builder.",
 };

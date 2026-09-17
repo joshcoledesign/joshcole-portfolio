@@ -1,6 +1,7 @@
 ---
 title: SAINTS
 subline: Where the sacred goes, a woman.
+descriptor: portraiture in the icon position
 processLine: "> photoshop composite · 5–8 studio frames · single model, multiplied"
 credit: ""
 slug: saints

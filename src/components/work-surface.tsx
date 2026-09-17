@@ -1,25 +1,35 @@
 "use client";
 
-// ─── WorkSurface ──────────────────────────────────────────────
-// The homepage map. Tags are the navigation: filter state lives in
-// the URL query string (?tag=…&view=…&sort=…) so a filtered view is a
-// shareable link. Two views (map / ls) share that state. Squarify and
-// weight-shaping come from src/lib/treemap.ts (ported from the
-// prototype). See docs/work-surface-spec.md.
-
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PromptLine } from "@/components/prompt-line";
-import type { PieceCard } from "@/lib/work";
+import type { PieceCard, PieceImage } from "@/lib/work";
 import { PILLARS, tagSlug } from "@/lib/tags";
-import { layout } from "@/lib/treemap";
+import { layout, type Placed } from "@/lib/treemap";
 import styles from "./work-surface.module.css";
 
 const CANVAS_W = 1000;
-const CANVAS_H = 625;
-const GUTTER = 5; // px between tiles
-const SM = 250; // px width below which a tile drops to small treatment
+const DESKTOP_H = 625;
+const MOBILE_H = 1333;
+const GUTTER = 5;
+const MIN_TILE_WIDTH = 180;
+
+const DOMAIN_FLAGS = [
+  "Enterprise",
+  "Immersive",
+  "Brand",
+  "Generative AI",
+  "Design Systems",
+  "Generative",
+  "Photography",
+] as const;
+
+const PILLAR_COLORS: Record<(typeof PILLARS)[number], string> = {
+  "AI Systems": "#26c5ff",
+  "UX Leadership": "#ca43ff",
+  "Creative Direction": "#ff419f",
+};
 
 interface Props {
   pieces: PieceCard[];
@@ -32,304 +42,365 @@ function cx(...parts: (string | false | undefined)[]) {
   return parts.filter(Boolean).join(" ");
 }
 
+function pillarFor(piece: PieceCard): (typeof PILLARS)[number] {
+  return PILLARS.find((pillar) => piece.tags.includes(pillar)) ?? "Creative Direction";
+}
+
+function photographyFrames(group: PieceCard): PieceCard[] {
+  return group.images.map((image, index) => ({
+    ...group,
+    slug: `photography-frame-${String(index + 1).padStart(2, "0")}`,
+    title: image.label || `Photography ${String(index + 1).padStart(2, "0")}`,
+    descriptor: "an archive frame",
+    display: "single",
+    images: [image],
+    frames: 1,
+    blocks: 1,
+  }));
+}
+
+function mapLayout(
+  pieces: PieceCard[],
+  feats: PieceCard[],
+  canvasW: number,
+  canvasH: number,
+): Placed<PieceCard>[] {
+  let candidates = pieces.slice();
+  for (let pass = 0; pass < pieces.length && candidates.length > 1; pass++) {
+    const candidateSet = new Set(candidates);
+    const pinned = feats.filter((piece) => candidateSet.has(piece));
+    const placed = layout(candidates, CANVAS_W, canvasH, pinned);
+    const narrow = new Set(
+      placed
+        .filter((rect) => (rect.w / CANVAS_W) * canvasW - GUTTER < MIN_TILE_WIDTH)
+        .map((rect) => rect.piece),
+    );
+    if (!narrow.size) return placed;
+    const next = candidates.filter((piece) => !narrow.has(piece));
+    candidates = next.length ? next : [candidates[0]];
+  }
+  return layout(candidates, CANVAS_W, canvasH, feats.filter((piece) => candidates.includes(piece)));
+}
+
 export function WorkSurface({ pieces, featuredOrder }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // ── URL-derived state ──
   const activeTags = searchParams.getAll("tag");
-  const tagKey = activeTags.join(",");
-  const activeSet = useMemo(() => new Set(activeTags), [tagKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  const activeSet = new Set(activeTags);
   const view = searchParams.get("view") === "ls" ? "ls" : "map";
   const sortParam = searchParams.get("sort");
   const sort: SortMode = sortParam === "size" || sortParam === "name" ? sortParam : "date";
 
-  // ── canvas width, for the 250px small-tile threshold ──
   const mapRef = useRef<HTMLDivElement>(null);
   const [canvasW, setCanvasW] = useState(CANVAS_W);
   useEffect(() => {
-    const el = mapRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver((entries) => {
-      for (const e of entries) {
-        if (e.contentRect.width > 0) setCanvasW(e.contentRect.width);
-      }
+    const element = mapRef.current;
+    if (!element) return;
+    const observer = new ResizeObserver(([entry]) => {
+      if (entry?.contentRect.width) setCanvasW(entry.contentRect.width);
     });
-    ro.observe(el);
-    return () => ro.disconnect();
+    observer.observe(element);
+    return () => observer.disconnect();
   }, []);
 
   const [readout, setReadout] = useState("");
 
-  // ── URL writers ──
   const pushParams = useCallback(
     (next: URLSearchParams) => {
-      const qs = next.toString();
-      router.push(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      const query = next.toString();
+      router.push(query ? `${pathname}?${query}` : pathname, { scroll: false });
     },
-    [router, pathname],
+    [pathname, router],
   );
+
   const toggleTag = useCallback(
     (slug: string) => {
       const next = new URLSearchParams(searchParams.toString());
-      const cur = next.getAll("tag");
+      const current = next.getAll("tag");
       next.delete("tag");
-      (cur.includes(slug) ? cur.filter((t) => t !== slug) : [...cur, slug]).forEach((t) =>
-        next.append("tag", t),
+      (current.includes(slug) ? current.filter((tag) => tag !== slug) : [...current, slug]).forEach(
+        (tag) => next.append("tag", tag),
       );
       pushParams(next);
     },
-    [searchParams, pushParams],
+    [pushParams, searchParams],
   );
+
   const setParam = useCallback(
-    (key: string, val: string | null) => {
+    (key: string, value: string | null) => {
       const next = new URLSearchParams(searchParams.toString());
-      if (val === null) next.delete(key);
-      else next.set(key, val);
+      if (value === null) next.delete(key);
+      else next.set(key, value);
       pushParams(next);
     },
-    [searchParams, pushParams],
+    [pushParams, searchParams],
   );
 
-  // ── tag flags: pillars first, then the rest alphabetically ──
-  const allTags = useMemo(() => {
-    const present = Array.from(new Set(pieces.flatMap((p) => p.tags)));
-    const pillars = (PILLARS as readonly string[]).filter((t) => present.includes(t));
-    const rest = present
-      .filter((t) => !(PILLARS as readonly string[]).includes(t))
-      .sort((a, b) => a.localeCompare(b));
-    return [...pillars, ...rest];
-  }, [pieces]);
+  const photography = pieces.find((piece) => piece.slug === "photography");
+  const releasePhotography =
+    activeSet.has("photography") || activeSet.has("creative-direction");
+  const surfacePieces =
+    !photography || !releasePhotography || !photography.images.length
+      ? pieces
+      : [
+      ...pieces.filter((piece) => piece !== photography),
+      ...photographyFrames(photography),
+        ];
 
-  // ── filter: a piece shows if it carries ANY active tag (union) ──
-  const filtered = useMemo(() => {
-    if (!activeSet.size) return pieces;
-    return pieces.filter((p) => p.tags.some((t) => activeSet.has(tagSlug(t))));
-  }, [pieces, activeSet]);
+  const filtered = !activeSet.size
+    ? surfacePieces
+    : surfacePieces.filter((piece) =>
+        piece.tags.some((tag) => activeSet.has(tagSlug(tag))),
+      );
 
-  // Global featured set (for the ls star + featured-first sort).
   const featCards = useMemo(
     () =>
       featuredOrder
-        .map((slug) => pieces.find((p) => p.slug === slug))
-        .filter((p): p is PieceCard => !!p),
-    [pieces, featuredOrder],
+        .map((slug) => pieces.find((piece) => piece.slug === slug))
+        .filter((piece): piece is PieceCard => Boolean(piece)),
+    [featuredOrder, pieces],
   );
-  const featSlugs = useMemo(() => new Set(featCards.map((p) => p.slug)), [featCards]);
+  const featSlugs = useMemo(() => new Set(featCards.map((piece) => piece.slug)), [featCards]);
+  const feats = activeSet.size || canvasW < 1024 ? [] : featCards;
+  const canvasH = canvasW <= 900 ? MOBILE_H : DESKTOP_H;
+  const placed = mapLayout(filtered, feats, canvasW, canvasH);
 
-  // Pinned trio releases the moment any filter is set.
-  const feats = activeSet.size ? [] : featCards;
-
-  const totalBlocks = filtered.reduce((a, b) => a + b.blocks, 0);
-
-  const placed = useMemo(() => layout(filtered, CANVAS_W, CANVAS_H, feats), [filtered, feats]);
-
-  // featured-first, then the chosen sort
   const listed = useMemo(() => {
-    const rank = (p: PieceCard) => {
-      const i = featCards.indexOf(p);
-      return i < 0 ? 99 : i;
+    const rank = (piece: PieceCard) => {
+      const index = featCards.indexOf(piece);
+      return index < 0 ? 99 : index;
     };
     return filtered.slice().sort((a, b) => {
-      const ra = rank(a);
-      const rb = rank(b);
-      if (ra !== rb && (ra < 99 || rb < 99)) return ra - rb;
+      const rankA = rank(a);
+      const rankB = rank(b);
+      if (rankA !== rankB && (rankA < 99 || rankB < 99)) return rankA - rankB;
       if (sort === "date") return b.sortYear - a.sortYear || a.title.localeCompare(b.title);
       if (sort === "size") return b.blocks - a.blocks || a.title.localeCompare(b.title);
       return a.title.localeCompare(b.title);
     });
-  }, [filtered, featCards, sort]);
+  }, [featCards, filtered, sort]);
 
-  const readoutFor = (p: PieceCard) =>
-    `${p.title}  ·  ${p.tags[0] ?? ""}  ·  ${p.displayDate || p.sortYear}  ·  ${p.blocks} blocks`;
+  const studyCount = pieces.filter((piece) => piece.kind === "study").length;
+  const seriesCount = pieces.filter((piece) => piece.kind !== "study").length;
+  const activeLabel = activeTags.length ? activeTags.join(" + ") : "no filter";
+
+  const readoutFor = (piece: PieceCard) =>
+    `${piece.title} · ${piece.kind === "study" ? "Case study" : "Series"} · ${piece.displayDate || piece.sortYear} · ${piece.frames} frames`;
+
+  const pieceHref = (piece: PieceCard) => {
+    const state = new URLSearchParams(searchParams.toString());
+    state.delete("frame");
+    if (piece.slug.startsWith("photography-frame-")) {
+      state.set("frame", piece.slug.slice(-2));
+      return `/work/photography?${state.toString()}`;
+    }
+    const query = state.toString();
+    return `/work/${piece.slug}${query ? `?${query}` : ""}`;
+  };
 
   return (
     <>
-      {/* signature powerline prompt — full-bleed persistent top bar */}
       <PromptLine />
+      <main className={styles.wrap}>
+        <section className={styles.intro} aria-labelledby="work-title">
+          <p className={styles.eyebrow}>Technology changes constantly. Human curiosity doesn&apos;t.</p>
+          <h1 id="work-title">Creative technologist. AI systems designer.</h1>
+          <p className={styles.deck}>
+            I design and build AI systems, products, and brands, and make them usable for the person
+            on the other side. Nine case studies and three series are below. The flags filter the
+            work; the map is the site.
+          </p>
+        </section>
 
-      <div className={styles.wrap}>
-
-      {/* prompt / filter bar — tags are the navigation */}
-      <div className={styles.promptbar}>
-        <span className={styles.path}>./work</span>
-        {activeTags.map((t) => (
-          <span key={t} className={styles.flag}>
-            --tag={t}
-          </span>
-        ))}
-        <span className={styles.sep} aria-hidden="true" />
-        {allTags.map((t) => {
-          const slug = tagSlug(t);
-          const on = activeSet.has(slug);
-          return (
-            <button
-              key={t}
-              type="button"
-              className={styles.chip}
-              aria-pressed={on}
-              onClick={() => toggleTag(slug)}
-            >
-              --{slug}
-            </button>
-          );
-        })}
-        <span className={styles.sep} aria-hidden="true" />
-        <button
-          type="button"
-          className={cx(styles.chip, styles.warm)}
-          aria-pressed={view === "ls"}
-          onClick={() => setParam("view", view === "map" ? "ls" : null)}
-        >
-          {view === "map" ? "--view=ls" : "--view=map"}
-        </button>
-        <select
-          className={styles.select}
-          aria-label="Sort"
-          value={sort}
-          onChange={(e) => setParam("sort", e.target.value === "date" ? null : e.target.value)}
-        >
-          <option value="date">--sort=date</option>
-          <option value="size">--sort=size</option>
-          <option value="name">--sort=name</option>
-        </select>
-        <Link href="/about" className={styles.about}>
-          ./about
-        </Link>
-      </div>
-
-      {/* status bar */}
-      <div className={styles.status}>
-        <span>
-          {filtered.length} pieces · {totalBlocks} blocks ·{" "}
-          {activeTags.length ? activeTags.join(" + ") : "no filter"} · sort={sort} · view={view}
-        </span>
-        <span className={styles.rt}>{readout || "hover a piece"}</span>
-      </div>
-
-      {/* identity line — exact copy, do not reword */}
-      <h1 className={styles.identity}>Technology changes constantly. Human curiosity doesn&apos;t.</h1>
-
-      {/* map (kept mounted so the ResizeObserver stays attached) */}
-      <div ref={mapRef} className={cx(styles.map, view !== "map" && styles.hide)}>
-        {view === "map" &&
-          filtered.length > 0 &&
-          placed.map((r) => {
-            const p = r.piece;
-            const pxW = (r.w / CANVAS_W) * canvasW;
-            const sm = pxW < SM;
-            const mosaic = p.display === "mosaic" && !sm && p.images.length > 0;
-            return (
-              <Link
-                key={p.slug}
-                href={`/work/${p.slug}`}
-                className={cx(styles.tile, r.pin && styles.pin, sm && styles.sm)}
-                style={{
-                  left: `${(r.x / CANVAS_W) * 100}%`,
-                  top: `${(r.y / CANVAS_H) * 100}%`,
-                  width: `calc(${(r.w / CANVAS_W) * 100}% - ${GUTTER}px)`,
-                  height: `calc(${(r.h / CANVAS_H) * 100}% - ${GUTTER}px)`,
-                }}
-                aria-label={`${p.title} — ${p.tags.join(", ")}${
-                  p.kind === "series" ? ` — ${p.frames} frames` : ""
-                }`}
-                onMouseEnter={() => setReadout(readoutFor(p))}
+        <div className={styles.flagbar} aria-label="Work controls">
+          <div className={styles.flagrowPrimary}>
+            <div className={styles.flaggroup}>
+              <span className={styles.path}>./work</span>
+              {PILLARS.map((pillar) => (
+                <FlagButton
+                  key={pillar}
+                  label={tagSlug(pillar)}
+                  color={PILLAR_COLORS[pillar]}
+                  pressed={activeSet.has(tagSlug(pillar))}
+                  onClick={() => toggleTag(tagSlug(pillar))}
+                />
+              ))}
+            </div>
+            <div className={styles.viewgroup}>
+              <FlagButton label="map" pressed={view === "map"} onClick={() => setParam("view", null)} />
+              <FlagButton label="ls" pressed={view === "ls"} onClick={() => setParam("view", "ls")} />
+              <select
+                className={styles.select}
+                aria-label="Sort work"
+                value={sort}
+                onChange={(event) =>
+                  setParam("sort", event.target.value === "date" ? null : event.target.value)
+                }
               >
-                <TileArt piece={p} mosaic={mosaic} />
-                <div className={styles.crt} aria-hidden="true" />
-                <div className={styles.scrim} aria-hidden="true" />
-                <div className={styles.cap}>
-                  <span>{p.title}</span>
-                  {!sm && (
-                    <i>
-                      {p.tags[0]}
-                      {p.kind === "series" ? ` · ${p.frames}f` : ""}
-                    </i>
+                <option value="date">sort=date</option>
+                <option value="size">sort=size</option>
+                <option value="name">sort=name</option>
+              </select>
+            </div>
+          </div>
+          <div className={styles.flagrowSecondary}>
+            <span className={styles.filterBy}>filter by</span>
+            {DOMAIN_FLAGS.map((tag) => (
+              <FlagButton
+                key={tag}
+                label={tagSlug(tag)}
+                pressed={activeSet.has(tagSlug(tag))}
+                onClick={() => toggleTag(tagSlug(tag))}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.status}>
+          <span>
+            {studyCount} studies · {seriesCount} series · {activeLabel} · {filtered.length} pieces ·
+            sort={sort} · click a flag to filter, click it again to clear
+          </span>
+          <span className={styles.rt}>{readout || "hover a piece"}</span>
+        </div>
+
+        <div ref={mapRef} className={cx(styles.map, view !== "map" && styles.hide)}>
+          {view === "map" &&
+            placed.map((rect) => {
+              const piece = rect.piece;
+              const isMosaic = piece.display === "mosaic" && piece.images.length > 0;
+              const pinIndex = rect.pin ? featuredOrder.indexOf(piece.slug) : -1;
+              const pillar = pillarFor(piece);
+              return (
+                <Link
+                  key={piece.slug}
+                  href={pieceHref(piece)}
+                  className={cx(styles.tile, rect.pin && styles.pin)}
+                  style={{
+                    left: `${(rect.x / CANVAS_W) * 100}%`,
+                    top: `${(rect.y / canvasH) * 100}%`,
+                    width: `calc(${(rect.w / CANVAS_W) * 100}% - ${GUTTER}px)`,
+                    height: `calc(${(rect.h / canvasH) * 100}% - ${GUTTER}px)`,
+                  }}
+                  aria-label={`${piece.title} — ${piece.kind === "study" ? "Case study" : "Series"} — ${pillar} — ${piece.descriptor}`}
+                  onMouseEnter={() => setReadout(readoutFor(piece))}
+                  onMouseLeave={() => setReadout("")}
+                >
+                  <TileArt piece={piece} mosaic={isMosaic} />
+                  <div className={styles.crt} aria-hidden="true" />
+                  <div className={styles.scrim} aria-hidden="true" />
+                  {rect.pin && (
+                    <span className={styles.pinLabel} style={{ color: PILLAR_COLORS[pillar] }}>
+                      PINNED · {String(pinIndex + 1).padStart(2, "0")}
+                    </span>
                   )}
-                </div>
-              </Link>
-            );
-          })}
-      </div>
-
-      {/* ls view */}
-      <div className={cx(styles.ls, view !== "ls" && styles.hide)}>
-        <div className={styles.hd}>
-          <span />
-          <span>name</span>
-          <span>tags</span>
-          <span>type</span>
-          <span>date</span>
-          <span className={styles.num}>blocks</span>
+                  <div className={styles.cap}>
+                    <span className={styles.capName}>{piece.title}</span>
+                    <span className={styles.capMeta}>
+                      {piece.kind === "study" ? "Case study" : "Series"} · {pillar} · {piece.descriptor}
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
         </div>
-        {listed.map((p) => (
-          <Link
-            key={p.slug}
-            href={`/work/${p.slug}`}
-            className={styles.rw}
-            onMouseEnter={() => setReadout(readoutFor(p))}
-          >
-            <span className={styles.st}>{featSlugs.has(p.slug) ? "*" : ""}</span>
-            <span className={styles.nm}>{p.title}</span>
-            <span className={styles.tg}>{p.tags.map(tagSlug).join(", ")}</span>
-            <span>{p.kind === "series" ? `${p.frames} frames` : "study"}</span>
-            <span className={styles.dt}>{p.displayDate || p.sortYear}</span>
-            <span className={styles.num}>{p.blocks}</span>
-          </Link>
-        ))}
-        <div className={styles.tot}>
-          total {listed.length} pieces · {totalBlocks} blocks · * = featured
-        </div>
-      </div>
 
-      {filtered.length === 0 && (
-        <div className={styles.empty}>0 pieces — nothing carries that combination.</div>
-      )}
-      </div>
+        <div className={cx(styles.ls, view !== "ls" && styles.hide)}>
+          <div className={styles.hd}>
+            <span />
+            <span>name</span>
+            <span>tags</span>
+            <span>type</span>
+            <span>date</span>
+            <span className={styles.num}>blocks</span>
+          </div>
+          {listed.map((piece) => (
+            <Link
+              key={piece.slug}
+              href={pieceHref(piece)}
+              className={styles.rw}
+              onMouseEnter={() => setReadout(readoutFor(piece))}
+              onMouseLeave={() => setReadout("")}
+            >
+              <span className={styles.st}>{featSlugs.has(piece.slug) ? "*" : ""}</span>
+              <span className={styles.nm}>{piece.title}</span>
+              <span className={styles.tg}>{piece.tags.map(tagSlug).join(", ")}</span>
+              <span>{piece.kind === "study" ? "Case study" : "Series"}</span>
+              <span className={styles.dt}>{piece.displayDate || piece.sortYear}</span>
+              <span className={styles.num}>{piece.blocks}</span>
+            </Link>
+          ))}
+          <div className={styles.tot}>total {listed.length} pieces · * = featured</div>
+        </div>
+
+        {filtered.length === 0 && (
+          <div className={styles.empty}>0 pieces — nothing carries that flag.</div>
+        )}
+      </main>
     </>
   );
 }
 
-// ── Tile art: hero-mode mosaic, single image, or placeholder ──
-function TileArt({ piece, mosaic }: { piece: PieceCard; mosaic: boolean }) {
-  const imgs = piece.images;
-  if (!imgs.length) return <div className={styles.placeholder} aria-hidden="true" />;
-
-  if (mosaic) {
-    const cells = imgs.slice(0, 6);
-    return (
-      <div
-        className={styles.mos}
-        style={{ gridTemplateColumns: "repeat(3, 1fr)", gridTemplateRows: "repeat(3, 1fr)" }}
-      >
-        {cells.map((im, i) => (
-          <span key={im.src} style={i === 0 ? { gridColumn: "span 2", gridRow: "span 2" } : undefined}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={im.src}
-              alt=""
-              loading="lazy"
-              style={{ objectPosition: `${im.focal[0] * 100}% ${im.focal[1] * 100}%` }}
-            />
-          </span>
-        ))}
-      </div>
-    );
-  }
-
-  const im = imgs[0];
+function FlagButton({
+  label,
+  color,
+  pressed,
+  onClick,
+}: {
+  label: string;
+  color?: string;
+  pressed: boolean;
+  onClick: () => void;
+}) {
   return (
-    <div className={styles.mos} style={{ gridTemplateColumns: "1fr", gridTemplateRows: "1fr", gap: 0 }}>
-      <span>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={im.src}
-          alt=""
-          loading="lazy"
-          style={{ objectPosition: `${im.focal[0] * 100}% ${im.focal[1] * 100}%` }}
-        />
-      </span>
+    <button
+      type="button"
+      className={styles.toggle}
+      aria-pressed={pressed}
+      onClick={onClick}
+      style={color ? { "--flag-color": color } as React.CSSProperties : undefined}
+    >
+      <span className={styles.bracket}>[</span>
+      {pressed ? "x" : " "}
+      <span className={styles.bracket}>]</span> {label}
+    </button>
+  );
+}
+
+function TileArt({ piece, mosaic }: { piece: PieceCard; mosaic: boolean }) {
+  const images = piece.images;
+  if (!images.length) return <div className={styles.placeholder} aria-hidden="true" />;
+
+  const cells = mosaic ? images.slice(0, 6) : images.slice(0, 1);
+  return (
+    <div
+      className={styles.mos}
+      style={
+        mosaic
+          ? { gridTemplateColumns: "repeat(3, 1fr)", gridTemplateRows: "repeat(3, 1fr)" }
+          : { gridTemplateColumns: "1fr", gridTemplateRows: "1fr", gap: 0 }
+      }
+    >
+      {cells.map((image, index) => (
+        <TileCell key={`${image.src}-${index}`} image={image} lead={mosaic && index === 0} />
+      ))}
     </div>
+  );
+}
+
+function TileCell({ image, lead }: { image: PieceImage; lead: boolean }) {
+  return (
+    <span style={lead ? { gridColumn: "span 2", gridRow: "span 2" } : undefined}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={image.src}
+        alt=""
+        loading="lazy"
+        style={{ objectPosition: `${image.focal[0] * 100}% ${image.focal[1] * 100}%` }}
+      />
+      {image.label && <i className={styles.cellLabel}>{image.label}</i>}
+    </span>
   );
 }

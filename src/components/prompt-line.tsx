@@ -24,9 +24,17 @@ const SEG_H   = 19; // px — segment height per spec (~19px vs ~14px cmd)
 interface PromptLineProps {
   /** When provided, wraps the bar in a Link to this route (used on all non-home pages). */
   href?: string;
+  /** Visible command path. Piece routes replace the homepage identity command. */
+  command?: string;
+  /** Optional command flag. Pass an empty string to suppress it. */
+  flag?: string;
 }
 
-export function PromptLine({ href }: PromptLineProps = {}) {
+export function PromptLine({
+  href,
+  command = "./josh-cole",
+  flag = "--creative-technologist",
+}: PromptLineProps = {}) {
   const innerContent = (
     <div style={{ display: "flex", alignItems: "center", overflow: "hidden" }}>
 
@@ -77,8 +85,8 @@ export function PromptLine({ href }: PromptLineProps = {}) {
           flexShrink: 0,
         }}
       >
-        <span style={{ color: "#e8e8ea" }}>{"./josh-cole "}</span>
-        <span className="prompt-flag" style={{ color: "#26c5ff" }}>{"--creative-technologist"}</span>
+        <span style={{ color: "#e8e8ea" }}>{command}{flag ? " " : ""}</span>
+        {flag && <span className="prompt-flag" style={{ color: "#26c5ff" }}>{flag}</span>}
       </div>
 
     </div>

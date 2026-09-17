@@ -75,7 +75,7 @@ export function SiteFooter() {
         padding: "0 48px 64px",
       }}
     >
-      {/* Hairline — full-bleed, breaks out of the 960 container */}
+      {/* Hairline — contained so viewport scrollbars never create horizontal overflow. */}
       <div
         aria-hidden="true"
         style={{
@@ -83,8 +83,7 @@ export function SiteFooter() {
           backgroundImage:
             "repeating-linear-gradient(to right, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 8px, transparent 8px, transparent 12px)",
           marginBottom: 48,
-          width: "100vw",
-          marginLeft: "calc(-50vw + 50%)",
+          width: "100%",
         }}
       />
 

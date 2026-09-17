@@ -1,6 +1,7 @@
 ---
 title: FRACTURED
 subline: Not the highlight reel. The whole person.
+descriptor: a portrait built from every frame
 processLine: "> photoshop script \xB7 40\u201380 frames \xB7 opacity + order randomized"
 credit: ""
 slug: fractured

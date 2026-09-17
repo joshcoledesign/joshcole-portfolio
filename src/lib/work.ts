@@ -15,7 +15,7 @@ import matter from "gray-matter";
 const CASE_STUDIES_DIR = path.join(process.cwd(), "content/case-studies");
 const CREATIVE_DIR = path.join(process.cwd(), "content/creative");
 
-const STUDY_ALLOWANCE = 8;
+const STUDY_ALLOWANCE = 20;
 
 export type PieceKind = "study" | "series" | "single";
 export type PieceDisplay = "single" | "mosaic";
@@ -25,6 +25,7 @@ export interface PieceImage {
   alt: string;
   focal: [number, number]; // 0–1 each axis, drives object-position
   story?: string;          // optional, shown in the lightbox
+  label?: string;          // optional cell label for grouped photography
 }
 
 export interface Piece {
@@ -39,6 +40,7 @@ export interface Piece {
   displayDate: string; // printed verbatim on the piece
   study: boolean;      // drives the +8 allowance
   description: string; // prose shown on the piece route
+  descriptor: string;  // short second-line tile caption
   images: PieceImage[];
   frames: number;      // derived: images.length
   blocks: number;      // derived: frames + (study ? 8 : 0)
@@ -47,25 +49,40 @@ export interface Piece {
 
 type Frontmatter = Record<string, unknown>;
 
-function isStringArray(v: unknown): v is string[] {
-  return Array.isArray(v) && v.every((s) => typeof s === "string");
+function isImageObject(v: unknown): v is {
+  src: string;
+  alt?: string;
+  focal?: [number, number];
+  story?: string;
+} {
+  if (!v || typeof v !== "object") return false;
+  const image = v as Record<string, unknown>;
+  return typeof image.src === "string";
 }
 
 // Series author an explicit `images` list. Studies don't yet carry a
 // frame set, so we derive a lead frame from hero/thumbnail until
 // designed key images exist (see spec Open items).
 function toImages(data: Frontmatter, title: string): PieceImage[] {
-  const srcs = isStringArray(data.images)
-    ? data.images
-    : [...new Set([data.heroImage, data.thumbnail].filter(
-        (s): s is string => typeof s === "string",
-      ))];
+  if (Array.isArray(data.images)) {
+    return data.images.flatMap((image): PieceImage[] => {
+      if (typeof image === "string") {
+        return [{ src: image, alt: title, focal: [0.5, 0.5] }];
+      }
+      if (!isImageObject(image)) return [];
+      return [{
+        src: image.src,
+        alt: image.alt ?? title,
+        focal: image.focal ?? [0.5, 0.5],
+        story: image.story,
+      }];
+    });
+  }
 
-  return srcs.map((src) => ({
-    src,
-    alt: title,
-    focal: [0.5, 0.5] as [number, number],
-  }));
+  const srcs = [...new Set([data.heroImage, data.thumbnail].filter(
+    (s): s is string => typeof s === "string",
+  ))];
+  return srcs.map((src) => ({ src, alt: title, focal: [0.5, 0.5] }));
 }
 
 function toPiece(raw: string): Piece {
@@ -90,6 +107,7 @@ function toPiece(raw: string): Piece {
     displayDate: (fm.displayDate as string) || String(fm.year ?? ""),
     study,
     description: (fm.summary as string) ?? (fm.subline as string) ?? "",
+    descriptor: (fm.descriptor as string) ?? "",
     images,
     frames,
     blocks: frames + (study ? STUDY_ALLOWANCE : 0),
@@ -139,6 +157,7 @@ export function getPublishedCards(): PieceCard[] {
     displayDate: p.displayDate,
     study: p.study,
     description: p.description,
+    descriptor: p.descriptor,
     images: p.images,
     frames: p.frames,
     blocks: p.blocks,

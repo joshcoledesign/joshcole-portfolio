@@ -7,6 +7,16 @@ year: "Four-year engagement"
 summary: "Four products, one connected suite, 80,000–100,000+ requests a month in regulated industries."
 thumbnail: "/case-studies/vrc/vr-flow-1.png"
 heroImage: "/case-studies/vrc/pre-story-flow.png"
+kind: "study"
+display: "single"
+featured: false
+sortYear: 2021  # TODO(josh): provisional — confirm most-recent year
+displayDate: "Four-year engagement"
+tags:
+  - "UX Leadership"
+  - "Enterprise"
+  - "Design Systems"
+  - "Healthcare"
 ---
 
 Vital Records Control is one of the largest records and information management companies in the U.S. — three-plus decades, nationwide, handling the full information lifecycle for regulated industries from healthcare to banking to government. I led UX for four of their products over four years: VitalChart, Payer Audit, Pricing Tables, and Vital Retain. Four products, one connected suite, 80,000 to 100,000+ requests moving through the systems each month.

@@ -7,6 +7,15 @@ year: "2025–Present"
 summary: "A system that turns a person into a brand identity. The judgment in between is the part I run by hand."
 thumbnail: "/case-studies/identity-pipeline/morgan-brand.png"
 # heroImage: ""
+kind: "study"
+display: "single"
+featured: false
+sortYear: 2026
+displayDate: "2025–Present"
+tags:
+  - "AI Systems"
+  - "Generative AI"
+  - "Brand"
 ---
 
 This is one half of a brand operating system in active development. The other half, Novensia, captures a brand's foundation and writes content in its voice. This half does the visual work: it turns a person into a brand identity. Same system, different job. Where Novensia generates words, this builds the look.

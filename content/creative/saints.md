@@ -11,6 +11,15 @@ images:
   - /case-studies/saints/saints-03.png
   - /case-studies/saints/saints-04.png
   - /case-studies/saints/saints-05.png
+kind: "series"
+display: "mosaic"
+featured: false
+sortYear: 2015  # TODO(josh): provisional — date owed
+displayDate: ""  # TODO(josh): displayDate owed
+tags:
+  - "Creative Direction"
+  - "Portrait"
+  - "Gallery"
 ---
 
 Old religious painting put its saints dead center — venerated, lit, untouchable, the whole composition bent around them. Saints borrows those poses and puts a woman in that position and means it. Not the muse off to the side. The icon at the center, and the power that position carries.

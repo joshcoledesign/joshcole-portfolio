@@ -7,6 +7,15 @@ year: "mid-2010s"
 summary: "A brand woven into a 125-year-old Gothic train station — from the tile mosaic to the staff cuffs."
 thumbnail: "/case-studies/ush/tile-mosaic.png"
 heroImage: "/case-studies/ush/tile-mosaic.png"
+kind: "study"
+display: "single"
+featured: false
+sortYear: 2016  # TODO(josh): provisional — confirm most-recent year
+displayDate: "mid-2010s"
+tags:
+  - "Creative Direction"
+  - "Brand"
+  - "Hospitality"
 ---
 
 # Union Station Hotel

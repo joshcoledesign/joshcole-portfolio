@@ -7,6 +7,16 @@ year: "2023–2024"
 summary: "A map-first product where everything under a job site lives — across desktop, tablet, and mobile."
 thumbnail: "/case-studies/gprs/sitemap-tn.jpg"
 heroImage: "/case-studies/gprs/map-lines.jpg"
+kind: "study"
+display: "single"
+featured: true
+sortYear: 2024
+displayDate: "2023–2024"
+tags:
+  - "UX Leadership"
+  - "Enterprise"
+  - "Web"
+  - "Mobile"
 ---
 
 # GPRS SiteMap

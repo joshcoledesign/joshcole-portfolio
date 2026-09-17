@@ -7,6 +7,15 @@ year: "2025–Present"
 summary: "An AI brand operating system — foundation-first, multi-model, built end to end by one set of hands."
 thumbnail: "/case-studies/novensia/signal-now.jpg"
 # heroImage: ""
+kind: "study"
+display: "single"
+featured: true
+sortYear: 2026
+displayDate: "2025–Present"
+tags:
+  - "AI Systems"
+  - "Brand"
+  - "Design Systems"
 ---
 
 Novensia is a brand operating system in active development. The brand foundation — mission, pillars, visual guidelines — becomes the source of truth that powers everything downstream, from content production on out. It's built for the people who are their own brand and the agencies, coaches, and consultants who build brands for others. Building the brand's visual identity is a separate part of the same system. I run it by hand for now, on purpose: it stays manual until it's earned the trust to run on its own, with my judgment as the check until it does.

@@ -7,6 +7,15 @@ year: "2019"
 summary: "A full 7D experiential ride that made building materials unforgettable. 485+ leads, 2.2M+ media impressions."
 thumbnail: "/case-studies/lp-7d-ride/riders.png"
 # heroImage: ""
+kind: "study"
+display: "single"
+featured: true
+sortYear: 2019
+displayDate: "2019"
+tags:
+  - "Creative Direction"
+  - "Immersive"
+  - "Live Event"
 ---
 
 # LP 7D Ride

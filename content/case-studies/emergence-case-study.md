@@ -7,6 +7,15 @@ year: "2025"
 summary: "The design system that runs Novensia — something new forming out of something larger."
 thumbnail: "/case-studies/emergence/emergence-bloom.jpg"
 heroImage: "/case-studies/emergence/emergence-01.png"
+kind: "study"
+display: "single"
+featured: false
+sortYear: 2025
+displayDate: "2025"
+tags:
+  - "Creative Direction"
+  - "Design Systems"
+  - "AI Systems"
 ---
 
 # Emergence

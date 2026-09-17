@@ -7,6 +7,15 @@ year: "2025–Present"
 summary: "The inconsistency is the system"
 thumbnail: "/case-studies/nemo/nemo-tn.jpg"
 # heroImage: ""
+kind: "study"
+display: "single"
+featured: false
+published: false  # gated — outstanding client permission on the faith framing
+sortYear: 2026
+displayDate: "2025–Present"
+tags:
+  - "Creative Direction"
+  - "Brand"
 ---
 
 A personal brand for John Nemo, built with a system I'm developing and steered by hand.

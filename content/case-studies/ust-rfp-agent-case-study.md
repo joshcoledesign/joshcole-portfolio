@@ -7,6 +7,14 @@ year: "2024"
 summary: "An AI system that does the first pass on six-figure pursuit decisions, so the team can decide."
 # thumbnail: ""
 # heroImage: ""
+kind: "study"
+display: "single"
+featured: false
+sortYear: 2024
+displayDate: "2024"
+tags:
+  - "AI Systems"
+  - "Enterprise"
 ---
 
 # UST RFP Triage Agent

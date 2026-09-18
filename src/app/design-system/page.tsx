@@ -414,7 +414,7 @@ export default function DesignSystemPage() {
             </div>
           </div>
           <div className={styles["naming-cell"]}>
-            <div className={styles.term}>The Volumes</div>
+            <div className={styles.term}>Work Surface</div>
             <div className={styles.def}>
               Three work pillars as chapters: Volume I — AI Systems, Volume II — UX &amp;
               Enterprise, Volume III — Creative &amp; Immersive. One full-size template so any
@@ -452,7 +452,7 @@ export default function DesignSystemPage() {
             <div className={styles["door-sub"]}>Door 01</div>
           </div>
           <div className={styles.door}>
-            <div className={styles["door-title"]}>The Volumes</div>
+            <div className={styles["door-title"]}>Work Surface</div>
             <div className={styles["door-sub"]}>Door 02</div>
           </div>
           <div className={styles.door}>

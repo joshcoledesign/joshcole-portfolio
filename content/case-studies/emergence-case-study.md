@@ -6,11 +6,13 @@ role: "Design system architect"
 year: "2025"
 summary: "The design system that runs Novensia — something new forming out of something larger."
 descriptor: "a system forming in public"
-thumbnail: "/case-studies/emergence/emergence-bloom.jpg"
+thumbnail: "/case-studies/emergence/grid.jpg"
 heroImage: "/case-studies/emergence/emergence-01.png"
 kind: "study"
 display: "single"
 featured: false
+weight: 2
+order: 9
 sortYear: 2025
 displayDate: "2025"
 tags:

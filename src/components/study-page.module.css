@@ -1,0 +1,269 @@
+.page {
+  min-height: 100vh;
+  padding-bottom: 72px;
+}
+
+.container {
+  width: min(100%, 960px);
+  margin: 0 auto;
+  padding: 56px 48px 0;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 40px;
+  color: #26c5ff;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.back:hover,
+.back:focus-visible {
+  color: #e8e8ea;
+}
+
+.header {
+  padding-bottom: 40px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.header h1 {
+  margin: 0;
+  color: #e8e8ea;
+  font-family: var(--font-syne), sans-serif;
+  font-size: clamp(38px, 6vw, 60px);
+  font-weight: 600;
+  line-height: 1.04;
+}
+
+.descriptor {
+  max-width: 720px;
+  margin: 14px 0 0;
+  color: #acacb1;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.meta {
+  margin: 22px 0 0;
+  color: #6a6a70;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.body {
+  padding-top: 8px;
+  color: #acacb1;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.72;
+}
+
+.body h2,
+.body h3 {
+  color: #e8e8ea;
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 600;
+}
+
+.body h2 {
+  margin: 56px 0 20px;
+  font-size: 32px;
+  line-height: 1.15;
+}
+
+.body h3 {
+  margin: 40px 0 14px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.body p {
+  margin: 0 0 24px;
+}
+
+.body strong {
+  color: #e8e8ea;
+  font-weight: 600;
+}
+
+.body ul,
+.body ol {
+  margin: 0 0 24px;
+  padding-left: 26px;
+}
+
+.body li {
+  margin-bottom: 8px;
+}
+
+.body a {
+  color: #26c5ff;
+  text-decoration: none;
+}
+
+.body a:hover,
+.body a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.body blockquote {
+  margin: 0 0 24px;
+  padding-left: 20px;
+  border-left: 2px solid #26c5ff;
+}
+
+.body code,
+.body pre {
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+.body code {
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e8e8ea;
+  font-size: 14px;
+}
+
+.body pre {
+  overflow-x: auto;
+  margin: 0 0 32px;
+  padding: 20px 24px;
+  background: #15161c;
+  color: #e8e8ea;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.body pre code {
+  padding: 0;
+  background: transparent;
+}
+
+.rule {
+  height: 0;
+  margin: 48px 0;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.figure {
+  margin: 32px 0;
+}
+
+.imageButton {
+  display: block;
+  width: 100%;
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  padding: 0;
+  background: #101117;
+  cursor: zoom-in;
+}
+
+.imageButton.noBorder {
+  border: 0;
+}
+
+.imageButton img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure figcaption {
+  margin-top: 10px;
+  color: #8c8e9c;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.diagram {
+  width: 100%;
+  margin: 48px 0;
+  overflow-x: auto;
+}
+
+.lightbox {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  place-items: center;
+  gap: 14px;
+  padding: 48px;
+  background: rgba(5, 6, 9, 0.96);
+  cursor: zoom-out;
+}
+
+.lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 130px);
+  object-fit: contain;
+}
+
+.lightbox p {
+  max-width: 960px;
+  margin: 0;
+  color: #b4b6c2;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.close {
+  position: fixed;
+  z-index: 1;
+  top: 18px;
+  right: 20px;
+  border: 0;
+  padding: 8px;
+  background: transparent;
+  color: #e8e8ea;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media (max-width: 639px) {
+  .container {
+    padding: 40px 20px 0;
+  }
+
+  .back {
+    margin-bottom: 30px;
+  }
+
+  .header {
+    padding-bottom: 32px;
+  }
+
+  .descriptor {
+    font-size: 18px;
+  }
+
+  .body {
+    font-size: 16px;
+  }
+
+  .body h2 {
+    font-size: 26px;
+  }
+
+  .body h3 {
+    font-size: 21px;
+  }
+
+  .lightbox {
+    padding: 42px 16px 24px;
+  }
+}

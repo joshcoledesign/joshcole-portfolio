@@ -15,6 +15,9 @@ images:
 kind: "series"
 display: "mosaic"
 featured: false
+weight: 1
+order: 14
+shape: "square"
 sortYear: 2014  # TODO(josh): provisional — date owed
 displayDate: ""  # TODO(josh): displayDate owed
 tags:

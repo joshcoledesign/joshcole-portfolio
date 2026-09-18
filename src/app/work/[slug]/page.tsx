@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CaseStudy } from "@/components/case-study";
 import { SeriesSurface } from "@/components/series-surface";
-import { getCaseStudy } from "@/lib/case-studies";
-import { getGalleryImages } from "@/lib/gallery";
-import { getPiece, getPublishedPieces, type Piece } from "@/lib/work";
+import { StudyPage } from "@/components/study-page";
+import { getPhotographyImages } from "@/lib/gallery";
+import { getPiece, getPublishedPieces, resolveImageSource, type Piece } from "@/lib/work";
 
 type Query = Record<string, string | string[] | undefined>;
 type Props = {
@@ -33,7 +32,7 @@ function backHref(query: Query) {
 }
 
 async function photographyPiece(): Promise<Piece> {
-  const gallery = await getGalleryImages();
+  const gallery = await getPhotographyImages();
   const images = gallery.map((image) => ({
     src: image.url,
     alt: "Photography archive frame",
@@ -51,11 +50,14 @@ async function photographyPiece(): Promise<Piece> {
     display: "mosaic",
     featured: false,
     published: true,
+    weight: 3,
+    order: 5,
+    shape: "landscape",
     sortYear: new Date().getFullYear(),
     displayDate: "Archive",
     study: false,
     description: "An evolving visual archive of photographs, experiments, and commissioned frames.",
-    descriptor: "the visual archive",
+    descriptor: `${images.length} series · portrait, editorial, film`,
     images,
     frames: images.length,
     blocks: images.length,
@@ -65,6 +67,20 @@ async function photographyPiece(): Promise<Piece> {
 
 async function resolvePiece(slug: string) {
   return slug === "photography" ? photographyPiece() : getPiece(slug);
+}
+
+function studyImageSources(content: string): Record<string, string> {
+  const sources: Record<string, string> = {};
+  const imagePattern = /!\[[^\]]*\]\(([^)\s]+)(?:\s+["'][^)]*["'])?\)/g;
+
+  for (const match of content.matchAll(imagePattern)) {
+    const source = match[1];
+    if (source.startsWith("component:")) continue;
+    const cleanSource = source.replace(/#.*$/, "");
+    sources[cleanSource] = resolveImageSource(cleanSource).src;
+  }
+
+  return sources;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -91,9 +107,13 @@ export default async function WorkPiecePage({ params, searchParams }: Props) {
   const returnTo = backHref(query);
 
   if (piece.kind === "study") {
-    const study = getCaseStudy(piece.slug);
-    if (!study) notFound();
-    return <CaseStudy {...study} year={piece.displayDate} backHref={returnTo} />;
+    return (
+      <StudyPage
+        piece={piece}
+        backHref={returnTo}
+        imageSources={studyImageSources(piece.content)}
+      />
+    );
   }
 
   return <SeriesSurface piece={piece} backHref={returnTo} />;

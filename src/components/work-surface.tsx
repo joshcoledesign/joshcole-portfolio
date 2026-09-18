@@ -6,14 +6,12 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PromptLine } from "@/components/prompt-line";
 import type { PieceCard, PieceImage } from "@/lib/work";
 import { PILLARS, tagSlug } from "@/lib/tags";
-import { layout, type Placed } from "@/lib/treemap";
+import { layoutBands, type Placed } from "@/lib/treemap";
 import styles from "./work-surface.module.css";
 
 const CANVAS_W = 1000;
-const DESKTOP_H = 625;
-const MOBILE_H = 1333;
-const GUTTER = 5;
-const MIN_TILE_WIDTH = 180;
+const DESKTOP_H = 900;
+const GUTTER = 15;
 
 const DOMAIN_FLAGS = [
   "Enterprise",
@@ -36,7 +34,7 @@ interface Props {
   featuredOrder: string[];
 }
 
-type SortMode = "date" | "size" | "name";
+type SortMode = "arranged" | "date";
 
 function cx(...parts: (string | false | undefined)[]) {
   return parts.filter(Boolean).join(" ");
@@ -65,21 +63,20 @@ function mapLayout(
   canvasW: number,
   canvasH: number,
 ): Placed<PieceCard>[] {
-  let candidates = pieces.slice();
-  for (let pass = 0; pass < pieces.length && candidates.length > 1; pass++) {
-    const candidateSet = new Set(candidates);
-    const pinned = feats.filter((piece) => candidateSet.has(piece));
-    const placed = layout(candidates, CANVAS_W, canvasH, pinned);
-    const narrow = new Set(
-      placed
-        .filter((rect) => (rect.w / CANVAS_W) * canvasW - GUTTER < MIN_TILE_WIDTH)
-        .map((rect) => rect.piece),
-    );
-    if (!narrow.size) return placed;
-    const next = candidates.filter((piece) => !narrow.has(piece));
-    candidates = next.length ? next : [candidates[0]];
+  if (canvasW < 1024) {
+    const columns = canvasW < 640 ? 1 : 2;
+    const rows = Math.max(Math.ceil(pieces.length / columns), 1);
+    const cellW = CANVAS_W / columns;
+    const cellH = canvasH / rows;
+    return pieces.map((piece, index) => ({
+      piece,
+      x: (index % columns) * cellW,
+      y: Math.floor(index / columns) * cellH,
+      w: cellW,
+      h: cellH,
+    }));
   }
-  return layout(candidates, CANVAS_W, canvasH, feats.filter((piece) => candidates.includes(piece)));
+  return layoutBands(pieces, CANVAS_W, canvasH, feats, 1.4, 4);
 }
 
 export function WorkSurface({ pieces, featuredOrder }: Props) {
@@ -90,8 +87,7 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
   const activeTags = searchParams.getAll("tag");
   const activeSet = new Set(activeTags);
   const view = searchParams.get("view") === "ls" ? "ls" : "map";
-  const sortParam = searchParams.get("sort");
-  const sort: SortMode = sortParam === "size" || sortParam === "name" ? sortParam : "date";
+  const sort: SortMode = searchParams.get("sort") === "date" ? "date" : "arranged";
 
   const mapRef = useRef<HTMLDivElement>(null);
   const [canvasW, setCanvasW] = useState(CANVAS_W);
@@ -104,8 +100,6 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
-
-  const [readout, setReadout] = useState("");
 
   const pushParams = useCallback(
     (next: URLSearchParams) => {
@@ -164,30 +158,37 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
   );
   const featSlugs = useMemo(() => new Set(featCards.map((piece) => piece.slug)), [featCards]);
   const feats = activeSet.size || canvasW < 1024 ? [] : featCards;
-  const canvasH = canvasW <= 900 ? MOBILE_H : DESKTOP_H;
-  const placed = mapLayout(filtered, feats, canvasW, canvasH);
+  const ordered = filtered.slice().sort((a, b) => {
+    const rankA = featuredOrder.indexOf(a.slug);
+    const rankB = featuredOrder.indexOf(b.slug);
+    const featuredA = rankA >= 0;
+    const featuredB = rankB >= 0;
+    if (featuredA || featuredB) {
+      if (featuredA && featuredB) return rankA - rankB;
+      return featuredA ? -1 : 1;
+    }
+    if (sort === "date") {
+      return b.sortYear - a.sortYear || a.title.localeCompare(b.title);
+    }
+    if (a.order !== null || b.order !== null) {
+      if (a.order === null) return 1;
+      if (b.order === null) return -1;
+      if (a.order !== b.order) return a.order - b.order;
+    }
+    return b.sortYear - a.sortYear || a.title.localeCompare(b.title);
+  });
+  const flowColumns = canvasW < 640 ? 1 : canvasW < 1024 ? 2 : 0;
+  const flowRows = flowColumns ? Math.max(Math.ceil(ordered.length / flowColumns), 1) : 0;
+  const canvasH = flowColumns
+    ? flowRows * (flowColumns === 1 ? 560 : 320)
+    : DESKTOP_H;
+  const placed = mapLayout(ordered, feats, canvasW, canvasH);
 
-  const listed = useMemo(() => {
-    const rank = (piece: PieceCard) => {
-      const index = featCards.indexOf(piece);
-      return index < 0 ? 99 : index;
-    };
-    return filtered.slice().sort((a, b) => {
-      const rankA = rank(a);
-      const rankB = rank(b);
-      if (rankA !== rankB && (rankA < 99 || rankB < 99)) return rankA - rankB;
-      if (sort === "date") return b.sortYear - a.sortYear || a.title.localeCompare(b.title);
-      if (sort === "size") return b.blocks - a.blocks || a.title.localeCompare(b.title);
-      return a.title.localeCompare(b.title);
-    });
-  }, [featCards, filtered, sort]);
+  const listed = ordered;
 
   const studyCount = pieces.filter((piece) => piece.kind === "study").length;
   const seriesCount = pieces.filter((piece) => piece.kind !== "study").length;
-  const activeLabel = activeTags.length ? activeTags.join(" + ") : "no filter";
-
-  const readoutFor = (piece: PieceCard) =>
-    `${piece.title} · ${piece.kind === "study" ? "Case study" : "Series"} · ${piece.displayDate || piece.sortYear} · ${piece.frames} frames`;
+  const activeLabel = activeTags.join(" + ");
 
   const pieceHref = (piece: PieceCard) => {
     const state = new URLSearchParams(searchParams.toString());
@@ -206,11 +207,15 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
       <main className={styles.wrap}>
         <section className={styles.intro} aria-labelledby="work-title">
           <p className={styles.eyebrow}>Technology changes constantly. Human curiosity doesn&apos;t.</p>
-          <h1 id="work-title">Creative technologist. AI systems designer.</h1>
+          <h1 id="work-title">
+            Creative technologist.
+            <br />
+            AI systems designer.
+          </h1>
           <p className={styles.deck}>
             I design and build AI systems, products, and brands, and make them usable for the person
-            on the other side. Nine case studies and three series are below. The flags filter the
-            work; the map is the site.
+            on the other side. {studyCount} case studies and {seriesCount} series are below. The flags
+            filter the work; the map is the site.
           </p>
         </section>
 
@@ -231,18 +236,15 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
             <div className={styles.viewgroup}>
               <FlagButton label="map" pressed={view === "map"} onClick={() => setParam("view", null)} />
               <FlagButton label="ls" pressed={view === "ls"} onClick={() => setParam("view", "ls")} />
-              <select
-                className={styles.select}
-                aria-label="Sort work"
-                value={sort}
-                onChange={(event) =>
-                  setParam("sort", event.target.value === "date" ? null : event.target.value)
-                }
+              <button
+                type="button"
+                className={styles.sortControl}
+                aria-label={`Sort work by ${sort === "arranged" ? "date" : "arranged order"}`}
+                onClick={() => setParam("sort", sort === "arranged" ? "date" : null)}
               >
-                <option value="date">sort=date</option>
-                <option value="size">sort=size</option>
-                <option value="name">sort=name</option>
-              </select>
+                <span>sort={sort}</span>
+                <span className={styles.selectArrow} aria-hidden="true">↓</span>
+              </button>
             </div>
           </div>
           <div className={styles.flagrowSecondary}>
@@ -260,24 +262,34 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
 
         <div className={styles.status}>
           <span>
-            {studyCount} studies · {seriesCount} series · {activeLabel} · {filtered.length} pieces ·
-            sort={sort} · click a flag to filter, click it again to clear
+            {activeSet.size
+              ? `${activeLabel} · ${filtered.length} pieces · click it again to clear`
+              : `${studyCount} studies · ${seriesCount} series · click a flag to filter`}
           </span>
-          <span className={styles.rt}>{readout || "hover a piece"}</span>
         </div>
 
-        <div ref={mapRef} className={cx(styles.map, view !== "map" && styles.hide)}>
+        <div
+          ref={mapRef}
+          className={cx(styles.map, view !== "map" && styles.hide)}
+          style={{ aspectRatio: `${CANVAS_W} / ${canvasH}` }}
+        >
           {view === "map" &&
             placed.map((rect) => {
               const piece = rect.piece;
               const isMosaic = piece.display === "mosaic" && piece.images.length > 0;
-              const pinIndex = rect.pin ? featuredOrder.indexOf(piece.slug) : -1;
+              const hasPlaceholder = piece.images.some((image) => image.placeholderFileName);
+              const isFeatured = featSlugs.has(piece.slug);
+              const pinIndex = isFeatured ? featuredOrder.indexOf(piece.slug) : -1;
               const pillar = pillarFor(piece);
               return (
                 <Link
                   key={piece.slug}
                   href={pieceHref(piece)}
-                  className={cx(styles.tile, rect.pin && styles.pin)}
+                  className={cx(
+                    styles.tile,
+                    isFeatured && styles.pin,
+                    hasPlaceholder && styles.placeholderTile,
+                  )}
                   style={{
                     left: `${(rect.x / CANVAS_W) * 100}%`,
                     top: `${(rect.y / canvasH) * 100}%`,
@@ -285,21 +297,19 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
                     height: `calc(${(rect.h / canvasH) * 100}% - ${GUTTER}px)`,
                   }}
                   aria-label={`${piece.title} — ${piece.kind === "study" ? "Case study" : "Series"} — ${pillar} — ${piece.descriptor}`}
-                  onMouseEnter={() => setReadout(readoutFor(piece))}
-                  onMouseLeave={() => setReadout("")}
                 >
                   <TileArt piece={piece} mosaic={isMosaic} />
                   <div className={styles.crt} aria-hidden="true" />
                   <div className={styles.scrim} aria-hidden="true" />
-                  {rect.pin && (
+                  {isFeatured && (
                     <span className={styles.pinLabel} style={{ color: PILLAR_COLORS[pillar] }}>
-                      PINNED · {String(pinIndex + 1).padStart(2, "0")}
+                      FEATURED · {String(pinIndex + 1).padStart(2, "0")}
                     </span>
                   )}
                   <div className={styles.cap}>
                     <span className={styles.capName}>{piece.title}</span>
                     <span className={styles.capMeta}>
-                      {piece.kind === "study" ? "Case study" : "Series"} · {pillar} · {piece.descriptor}
+                      {piece.kind === "study" ? "Case study" : "Series"} · {isFeatured ? `${pillar} · ` : ""}{piece.descriptor}
                     </span>
                   </div>
                 </Link>
@@ -314,22 +324,18 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
             <span>tags</span>
             <span>type</span>
             <span>date</span>
-            <span className={styles.num}>blocks</span>
           </div>
           {listed.map((piece) => (
             <Link
               key={piece.slug}
               href={pieceHref(piece)}
               className={styles.rw}
-              onMouseEnter={() => setReadout(readoutFor(piece))}
-              onMouseLeave={() => setReadout("")}
             >
               <span className={styles.st}>{featSlugs.has(piece.slug) ? "*" : ""}</span>
               <span className={styles.nm}>{piece.title}</span>
               <span className={styles.tg}>{piece.tags.map(tagSlug).join(", ")}</span>
               <span>{piece.kind === "study" ? "Case study" : "Series"}</span>
               <span className={styles.dt}>{piece.displayDate || piece.sortYear}</span>
-              <span className={styles.num}>{piece.blocks}</span>
             </Link>
           ))}
           <div className={styles.tot}>total {listed.length} pieces · * = featured</div>
@@ -357,7 +363,7 @@ function FlagButton({
   return (
     <button
       type="button"
-      className={styles.toggle}
+      className={cx(styles.toggle, Boolean(color) && styles.pillarToggle)}
       aria-pressed={pressed}
       onClick={onClick}
       style={color ? { "--flag-color": color } as React.CSSProperties : undefined}
@@ -373,10 +379,11 @@ function TileArt({ piece, mosaic }: { piece: PieceCard; mosaic: boolean }) {
   const images = piece.images;
   if (!images.length) return <div className={styles.placeholder} aria-hidden="true" />;
 
-  const cells = mosaic ? images.slice(0, 6) : images.slice(0, 1);
+  const hasOverflow = mosaic && images.length > 6;
+  const cells = mosaic ? images.slice(0, hasOverflow ? 5 : 6) : images.slice(0, 1);
   return (
     <div
-      className={styles.mos}
+      className={cx(styles.mos, piece.slug === "photography" && styles.photoMosaic)}
       style={
         mosaic
           ? { gridTemplateColumns: "repeat(3, 1fr)", gridTemplateRows: "repeat(3, 1fr)" }
@@ -386,6 +393,11 @@ function TileArt({ piece, mosaic }: { piece: PieceCard; mosaic: boolean }) {
       {cells.map((image, index) => (
         <TileCell key={`${image.src}-${index}`} image={image} lead={mosaic && index === 0} />
       ))}
+      {hasOverflow && (
+        <span className={styles.moreCell} aria-hidden="true">
+          +{images.length - 5}
+        </span>
+      )}
     </div>
   );
 }
@@ -400,6 +412,12 @@ function TileCell({ image, lead }: { image: PieceImage; lead: boolean }) {
         loading="lazy"
         style={{ objectPosition: `${image.focal[0] * 100}% ${image.focal[1] * 100}%` }}
       />
+      {image.placeholderFileName && (
+        <span className={styles.placeholderDetails} aria-hidden="true">
+          <b>{image.placeholderFileName}</b>
+          <i>{image.alt}</i>
+        </span>
+      )}
       {image.label && <i className={styles.cellLabel}>{image.label}</i>}
     </span>
   );

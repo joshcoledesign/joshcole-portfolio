@@ -21,33 +21,128 @@ interface Rect {
   h: number;
 }
 
-const GAMMA = 0.55; // compression exponent
-const FLOOR = 0.02; // min canvas share per piece
+// Editorial weights drive the map directly. Clamp the smallest value to a
+// quarter of the largest so every tile remains visually useful even if future
+// authored values expand beyond the current 1–3 scale.
+function shaped<T extends { weight: number }>(list: T[]): { piece: T; w: number }[] {
+  const largest = Math.max(...list.map((item) => item.weight), 1);
+  const minimum = largest / 4;
+  return list.map((piece) => ({ piece, w: Math.max(piece.weight, minimum) }));
+}
 
-// Weight shaping: compress, then lift small pieces to the floor,
-// redistributing the deficit proportionally (8 passes max).
-function shaped<T extends { blocks: number }>(list: T[]): { piece: T; w: number }[] {
-  const w = list.map((it) => Math.pow(it.blocks, GAMMA));
-  for (let p = 0; p < 8; p++) {
-    const tot = w.reduce((a, b) => a + b, 0);
-    let def = 0;
-    const free: number[] = [];
-    w.forEach((v, k) => {
-      if (v / tot < FLOOR) {
-        def += FLOOR * tot - v;
-        w[k] = FLOOR * tot;
-      } else {
-        free.push(k);
+// Ordered horizontal-band packing for the home map. Dynamic programming
+// chooses 1–4 consecutive pieces per band, minimizing distance from the
+// requested landscape aspect while preserving editorial order.
+export function layoutBands<T extends { weight: number; shape?: "landscape" | "portrait" | "square" }>(
+  list: T[],
+  W: number,
+  H: number,
+  featured: T[],
+  targetAspect = 1.4,
+  maxPerBand = 4,
+): Placed<T>[] {
+  if (!list.length) return [];
+
+  const weighted = shaped(list);
+  const hasFeaturedCluster =
+    featured.length >= 3 &&
+    weighted[0]?.piece === featured[0] &&
+    weighted[1]?.piece === featured[1] &&
+    weighted[2]?.piece === featured[2];
+  const effectiveWeights = weighted.map((item, index) =>
+    hasFeaturedCluster && index === 0 ? item.w * 1.5 : item.w,
+  );
+  const totalWeight = effectiveWeights.reduce((sum, weight) => sum + weight, 0);
+  const scale = (W * H) / totalWeight;
+  const areas = effectiveWeights.map((weight) => weight * scale);
+  const costs = Array<number>(list.length + 1).fill(Infinity);
+  const counts = Array<number>(list.length).fill(1);
+  const firstBandIndex = hasFeaturedCluster ? 3 : 0;
+  costs[list.length] = 0;
+
+  const aspectTarget = (piece: T) => {
+    if (piece.shape === "portrait") return 1 / targetAspect;
+    if (piece.shape === "square") return 1;
+    return targetAspect;
+  };
+
+  for (let start = list.length - 1; start >= firstBandIndex; start--) {
+    let bandArea = 0;
+    for (let count = 1; count <= maxPerBand && start + count <= list.length; count++) {
+      bandArea += areas[start + count - 1];
+      const bandHeight = bandArea / W;
+      const widthFactors = weighted
+        .slice(start, start + count)
+        .map((item) => aspectTarget(item.piece) * Math.sqrt(item.w));
+      const factorTotal = widthFactors.reduce((sum, factor) => sum + factor, 0);
+      let aspectCost = 0;
+      for (let offset = 0; offset < count; offset++) {
+        const index = start + offset;
+        const tileWidth = (widthFactors[offset] / factorTotal) * W;
+        const aspect = tileWidth / bandHeight;
+        const distance = Math.log(aspect / aspectTarget(weighted[index].piece));
+        aspectCost += distance * distance;
       }
-    });
-    if (def <= 0.0001) break;
-    const fs = free.reduce((a, k) => a + w[k], 0);
-    if (fs <= def) break;
-    free.forEach((k) => {
-      w[k] -= def * (w[k] / fs);
-    });
+      const cost = aspectCost / count + costs[start + count];
+      if (cost < costs[start]) {
+        costs[start] = cost;
+        counts[start] = count;
+      }
+    }
   }
-  return list.map((it, k) => ({ piece: it, w: w[k] }));
+
+  const featuredSet = new Set(featured);
+  const out: Placed<T>[] = [];
+  let y = 0;
+  if (hasFeaturedCluster) {
+    const clusterArea = areas[0] + areas[1] + areas[2];
+    const clusterHeight = clusterArea / W;
+    const leadWidth = areas[0] / clusterHeight;
+    const stackWidth = W - leadWidth;
+    const secondHeight = areas[1] / stackWidth;
+    out.push(
+      { piece: weighted[0].piece, x: 0, y: 0, w: leadWidth, h: clusterHeight, pin: true },
+      { piece: weighted[1].piece, x: leadWidth, y: 0, w: stackWidth, h: secondHeight, pin: true },
+      {
+        piece: weighted[2].piece,
+        x: leadWidth,
+        y: secondHeight,
+        w: stackWidth,
+        h: clusterHeight - secondHeight,
+        pin: true,
+      },
+    );
+    y = clusterHeight;
+  }
+
+  let start = firstBandIndex;
+  while (start < list.length) {
+    const count = counts[start];
+    const bandArea = areas.slice(start, start + count).reduce((sum, area) => sum + area, 0);
+    const bandHeight = bandArea / W;
+    const widthFactors = weighted
+      .slice(start, start + count)
+      .map((item) => aspectTarget(item.piece) * Math.sqrt(item.w));
+    const factorTotal = widthFactors.reduce((sum, factor) => sum + factor, 0);
+    let x = 0;
+    for (let offset = 0; offset < count; offset++) {
+      const index = start + offset;
+      const tileWidth = (widthFactors[offset] / factorTotal) * W;
+      out.push({
+        piece: weighted[index].piece,
+        x,
+        y,
+        w: tileWidth,
+        h: bandHeight,
+        pin: featuredSet.has(weighted[index].piece) || undefined,
+      });
+      x += tileWidth;
+    }
+    y += bandHeight;
+    start += count;
+  }
+
+  return out;
 }
 
 interface Area<T> {
@@ -119,7 +214,7 @@ function squarifyInto<T>(weighted: { piece: T; w: number }[], rect: Rect, out: P
 // Lays `list` into a W×H rectangle. When `feats` is non-empty, three
 // pieces pin into the top-left featured region and the rest squarify
 // into the leftover right block + bottom band.
-export function layout<T extends { blocks: number }>(
+export function layout<T extends { weight: number }>(
   list: T[],
   W: number,
   H: number,

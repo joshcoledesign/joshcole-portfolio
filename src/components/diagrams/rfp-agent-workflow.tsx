@@ -2,6 +2,27 @@
 // Three phases mapped to the brand gradient:
 //   Ingestion (cyan) → Scoring & output (violet) → Verdict & delivery (pink)
 
+import type { ComponentType, SVGProps } from "react";
+
+import {
+  CopilotIcon,
+  DocumentIcon,
+  PowerAutomateIcon,
+  TeamsIcon,
+  UserIcon,
+} from "@/components/icons/workflow-icons";
+
+type WorkflowIcon = ComponentType<SVGProps<SVGSVGElement>>;
+
+type WorkflowNode = {
+  y: number;
+  h: number;
+  title: string;
+  sub: string[];
+  color: string;
+  icon?: WorkflowIcon;
+};
+
 export function RfpAgentWorkflow() {
   // ── Layout ──
   const W = 960;
@@ -25,17 +46,17 @@ export function RfpAgentWorkflow() {
 
   // ── Main flow nodes ──
   // y/h pre-computed; gap between step 3→4 is wider for the branch.
-  const nodes = [
+  const nodes: WorkflowNode[] = [
     { y: 40, h: 70, title: "Incoming requests", sub: ["Request systems, scraping, direct email"], color: CYAN },
-    { y: 160, h: 70, title: "Power Automate ingestion", sub: ["Email simplified to a text file"], color: CYAN },
+    { y: 160, h: 70, title: "Power Automate ingestion", sub: ["Email simplified to a text file"], color: CYAN, icon: PowerAutomateIcon },
     { y: 280, h: 70, title: "Is the full request present?", sub: ["Scrape the rest if the email is partial"], color: CYAN },
-    { y: 458, h: 70, title: "CoPilot reads the full request", sub: ["Complete RFP, ready to score"], color: VIOLET },
+    { y: 458, h: 70, title: "Copilot reads the full request", sub: ["Complete RFP, ready to score"], color: VIOLET, icon: CopilotIcon },
     { y: 578, h: 86, title: "Score against the rules table", sub: ["Team-owned, editable rubric. A hard-no", "rule kills the request immediately"], color: VIOLET },
     { y: 714, h: 70, title: "Per-request spreadsheet", sub: ["Every rule scored, then stored"], color: VIOLET },
-    { y: 834, h: 86, title: "Summary document", sub: ["Synopsis, results, final score, flags,", "and a link to the stored spreadsheet"], color: VIOLET },
+    { y: 834, h: 86, title: "Summary document", sub: ["Synopsis, results, final score, flags,", "and a link to the stored spreadsheet"], color: VIOLET, icon: DocumentIcon },
     { y: 970, h: 70, title: "Go / Maybe / No-go verdict", sub: ["Triage score with flags on why"], color: PINK },
-    { y: 1090, h: 70, title: "Delivered to Teams", sub: ["The team's morning review surface"], color: PINK },
-    { y: 1210, h: 86, title: "Human decision", sub: ["3\u20135 of ~20 daily requests get scrubbed", "by people and pursued"], color: PINK },
+    { y: 1090, h: 70, title: "Delivered to Teams", sub: ["The team's morning review surface"], color: PINK, icon: TeamsIcon },
+    { y: 1210, h: 86, title: "Human decision", sub: ["3\u20135 of ~20 daily requests get scrubbed", "by people and pursued"], color: PINK, icon: UserIcon },
   ];
 
   // ── Side blocks ──
@@ -183,8 +204,12 @@ export function RfpAgentWorkflow() {
       </text>
 
       {/* ── Main flow nodes ── */}
-      {nodes.map((node, i) => (
-        <g key={`n${i}`}>
+      {nodes.map((node, i) => {
+        const Icon = node.icon;
+        const contentX = Icon ? TX + 28 : TX;
+
+        return (
+          <g key={`n${i}`}>
           <rect
             x={NX}
             y={node.y}
@@ -194,13 +219,22 @@ export function RfpAgentWorkflow() {
             stroke={node.color}
             strokeWidth={1}
           />
-          <text x={TX} y={node.y + 28} fontFamily={MONO} fontSize={13} fill={BRIGHT}>
+          {Icon ? (
+            <Icon
+              x={TX}
+              y={node.y + 16}
+              width={18}
+              height={18}
+              color={node.color}
+            />
+          ) : null}
+          <text x={contentX} y={node.y + 28} fontFamily={MONO} fontSize={13} fill={BRIGHT}>
             {node.title}
           </text>
           {node.sub.map((line, j) => (
             <text
               key={j}
-              x={TX}
+              x={contentX}
               y={node.y + 48 + j * 16}
               fontFamily={BODY}
               fontSize={12}
@@ -209,8 +243,9 @@ export function RfpAgentWorkflow() {
               {line}
             </text>
           ))}
-        </g>
-      ))}
+          </g>
+        );
+      })}
 
       {/* ── Legend ── */}
       <g>

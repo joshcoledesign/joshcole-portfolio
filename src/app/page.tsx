@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { getPublishedCards, type PieceCard } from "@/lib/work";
-import { getGalleryImages } from "@/lib/gallery";
+import { getPhotographyImages } from "@/lib/gallery";
 import { WorkSurface } from "@/components/work-surface";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -8,11 +8,11 @@ import { SiteFooter } from "@/components/site-footer";
 // filtered URL (e.g. /?tag=ai-systems) is a shareable link.
 // See docs/work-surface-spec.md.
 
-const FEATURED_ORDER = ["novensia", "lp-7d-ride", "gprs-sitemap"];
+const FEATURED_ORDER = ["novensia", "gprs-sitemap", "lp-7d-ride"];
 
 export const dynamic = "force-dynamic";
 
-function photographyCard(images: Awaited<ReturnType<typeof getGalleryImages>>): PieceCard {
+function photographyCard(images: Awaited<ReturnType<typeof getPhotographyImages>>): PieceCard {
   const frames = images.length;
   return {
     slug: "photography",
@@ -22,11 +22,14 @@ function photographyCard(images: Awaited<ReturnType<typeof getGalleryImages>>): 
     display: "mosaic",
     featured: false,
     published: true,
+    weight: 3,
+    order: 5,
+    shape: "landscape",
     sortYear: new Date().getFullYear(),
     displayDate: "Archive",
     study: false,
     description: "An evolving visual archive of photographs, experiments, and commissioned frames.",
-    descriptor: "the visual archive",
+    descriptor: `${frames} series · portrait, editorial, film`,
     images: images.map((image) => ({
       src: image.url,
       alt: "Photography archive frame",
@@ -42,7 +45,7 @@ function photographyCard(images: Awaited<ReturnType<typeof getGalleryImages>>): 
 }
 
 export default async function Home() {
-  const galleryImages = await getGalleryImages();
+  const galleryImages = await getPhotographyImages();
   const pieces = [...getPublishedCards(), photographyCard(galleryImages)];
   return (
     <>

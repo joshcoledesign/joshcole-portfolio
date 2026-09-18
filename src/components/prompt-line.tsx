@@ -5,9 +5,8 @@
 // z-index, as specified. Each segment's arrow sits on top of the next.
 // CSS border-triangle approach was rejected in favour of this.
 //
-// When `href` is provided (all pages except homepage) the entire bar
-// becomes a Next.js Link back to that route. No visual change at rest;
-// a slight brightness bump on hover signals it's clickable.
+// When `href` is provided (all pages except homepage), the prompt content
+// links back to that route. The utility links on the right remain independent.
 
 import Link from "next/link";
 
@@ -36,7 +35,7 @@ export function PromptLine({
   flag = "--creative-technologist",
 }: PromptLineProps = {}) {
   const innerContent = (
-    <div style={{ display: "flex", alignItems: "center", overflow: "hidden" }}>
+    <div className="prompt-line-content">
 
       {/* ── Powerline chevron segments ── */}
       {SEGMENTS.map((seg, i) => (
@@ -85,8 +84,12 @@ export function PromptLine({
           flexShrink: 0,
         }}
       >
-        <span style={{ color: "#e8e8ea" }}>{command}{flag ? " " : ""}</span>
-        {flag && <span className="prompt-flag" style={{ color: "#26c5ff" }}>{flag}</span>}
+        <span style={{ color: "#e8e8ea" }}>{command}</span>
+        {flag && (
+          <span className="prompt-flag" style={{ color: "#26c5ff" }}>
+            {"\u00a0"}{flag}
+          </span>
+        )}
       </div>
 
     </div>
@@ -97,16 +100,23 @@ export function PromptLine({
       style={{
         borderBottom: "0.5px solid rgba(255,255,255,0.1)",
         paddingTop: 8,
+        paddingRight: 12,
         paddingBottom: 12,
       }}
     >
-      {href ? (
-        <Link href={href} className="prompt-line-link" style={{ display: "block", textDecoration: "none" }}>
-          {innerContent}
-        </Link>
-      ) : (
-        innerContent
-      )}
+      <div className="prompt-line-row">
+        {href ? (
+          <Link href={href} className="prompt-line-link prompt-line-main">
+            {innerContent}
+          </Link>
+        ) : (
+          <div className="prompt-line-main">{innerContent}</div>
+        )}
+        <nav className="prompt-line-nav" aria-label="Utility links">
+          <Link href="/about">./about</Link>
+          <Link href="/resume">./resume</Link>
+        </nav>
+      </div>
     </div>
   );
 }

@@ -11,6 +11,8 @@ heroImage: "/case-studies/gprs/map-lines.jpg"
 kind: "study"
 display: "single"
 featured: true
+weight: 3
+order: 2
 sortYear: 2024
 displayDate: "2023–2024"
 tags:

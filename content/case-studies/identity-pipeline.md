@@ -6,11 +6,13 @@ role: "System design · Brand direction · Model tuning"
 year: "2025–Present"
 summary: "A system that turns a person into a brand identity. The judgment in between is the part I run by hand."
 descriptor: "a human-steered identity system"
-thumbnail: "/case-studies/identity-pipeline/morgan-brand.png"
+thumbnail: "/case-studies/identity-pipeline/grid.jpg"
 # heroImage: ""
 kind: "study"
 display: "single"
 featured: false
+weight: 2
+order: 11
 sortYear: 2026
 displayDate: "2025–Present"
 tags:
@@ -59,7 +61,7 @@ A personal brand for John Nemo: editorial-xerox, all teeth, built around a logo 
 
 ![The NEMO brand identity — mismatched display type on heavy grain.](/case-studies/identity-pipeline/nemo-sl1-7.png#no-border#mb-48)
 
-[→ Full case study: NEMO (Volume III)](/volumes/creative-immersive/nemo-brand) 
+[→ Full case study: NEMO (pending publication)](/)
 
 ### The range — what the system produced across four very different people
 
@@ -93,4 +95,4 @@ AI is the material here. The strategy the analysis returns is real work, not my 
 
 ---
 
-The other half of the same system, Novensia, captures the foundation and writes the content. This half builds the identity. → [Novensia](/volumes/ai-systems/novensia)
+The other half of the same system, Novensia, captures the foundation and writes the content. This half builds the identity. → [Novensia](/work/novensia)

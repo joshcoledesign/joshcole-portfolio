@@ -65,7 +65,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
 
   const canvasH = mapWidth <= 900 ? MOBILE_H : DESKTOP_H;
   const frames = useMemo(
-    () => piece.images.map((image, index) => ({ image, index, blocks: 1 })),
+    () => piece.images.map((image, index) => ({ image, index, weight: 1 })),
     [piece.images],
   );
   const placed = useMemo(() => layout(frames, CANVAS_W, canvasH, []), [canvasH, frames]);

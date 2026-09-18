@@ -89,13 +89,15 @@
 
 /* ─── Base styles ────────────────────────────────────────────── */
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--bg-base);
   color: var(--text-body);
   font-family: var(--font-inter), system-ui, sans-serif;
-  overflow-x: hidden;
-  /* Clear the sticky nav at the bottom */
-  padding-bottom: 96px;
   /* 32px grid — rgba(255,255,255,0.028) */
   background-image:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
@@ -129,100 +131,6 @@ body {
   opacity: 1 !important;
 }
 
-/* ─── Door hover (legacy hero-doors) ────────────────────────── */
-.door-link:hover {
-  background-color: rgba(255, 255, 255, 0.025);
-}
-
-/* ─── Volume index cards ─────────────────────────────────────── */
-.volume-card {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-.volume-card:hover {
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: inset 2px 0 0 0 #26c5ff;
-}
-
-/* ─── Case study "next" end-cap ─────────────────────────────── */
-/* Green CRT feed tint — P1 phosphor green */
-:root {
-  --feed-tint: 75deg;
-}
-
-/* Thumbnail: 80s monochrome CRT treatment.
-   blur softens pixel edges → grayscale strips color →
-   full sepia gives maximum tint material → hue-rotate to phosphor green →
-   high saturate for vivid neon → brightness clamps dark →
-   high contrast crushes mid-tones to bright-green-on-black. */
-.next-endcap-thumb {
-  filter: blur(0.5px) grayscale(1) sepia(1) hue-rotate(var(--feed-tint)) saturate(2.5) brightness(0.35) contrast(1.9);
-  transition: filter 0.25s ease;
-}
-.next-endcap-link:hover .next-endcap-thumb {
-  filter: blur(0px) grayscale(0) sepia(0) hue-rotate(0deg) saturate(1) contrast(1) brightness(1);
-}
-
-/* Phosphor glow — green light bleeding from the thumbnail */
-.next-endcap-thumb-wrap {
-  box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.15);
-  transition: box-shadow 0.25s ease;
-}
-.next-endcap-link:hover .next-endcap-thumb-wrap {
-  box-shadow: none;
-}
-
-/* CRT noise grain — signal static that breaks up flat-color areas */
-.next-endcap-noise {
-  opacity: 0.15;
-  mix-blend-mode: overlay;
-  transition: opacity 0.25s ease;
-}
-.next-endcap-link:hover .next-endcap-noise {
-  opacity: 0;
-}
-
-/* CRT barrel vignette — edge darkening from tube curvature */
-.next-endcap-vignette {
-  transition: opacity 0.25s ease;
-}
-.next-endcap-link:hover .next-endcap-vignette {
-  opacity: 0;
-}
-
-/* Scanline overlay — heavier at rest for visible line pitch */
-.next-endcap-thumb-wrap .panel-crt {
-  transition: opacity 0.25s ease;
-}
-.next-endcap-link:hover .next-endcap-thumb-wrap .panel-crt {
-  opacity: 0.1;
-}
-
-/* Text hover states */
-.next-endcap-slug {
-  transition: color 0.15s ease;
-}
-.next-endcap-link:hover .next-endcap-slug {
-  text-decoration: underline;
-}
-.next-endcap-read {
-  color: #26c5ff;
-  transition: color 0.15s ease;
-}
-.next-endcap-link:hover .next-endcap-read {
-  color: #7ddfff;
-}
-
-/* Back link — cd ../volumes rests cyan, lifts brighter on hover */
-.next-endcap-back-text {
-  color: #26c5ff;
-  transition: color 0.15s ease;
-}
-.next-endcap-back:hover .next-endcap-back-text {
-  color: #7ddfff;
-  text-decoration: underline;
-}
-
 /* ─── Case study back link hover ────────────────────────────── */
 .case-back-link:hover {
   color: #26c5ff;
@@ -235,183 +143,6 @@ body {
 }
 .case-prose-link:hover {
   text-decoration: underline;
-}
-
-/* ─── Image-forward volume cards ─────────────────────────────── */
-
-/* Featured card — full-width, brand gradient top-line on hover  */
-.vol-card-featured {
-  position: relative;
-  z-index: 0; /* stacking context so ::after renders above image */
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 5px;
-  overflow: hidden;
-  background-color: #15161c;
-  display: block;
-  text-decoration: none;
-  transition: border-color 0.2s ease;
-}
-.vol-card-featured::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #26c5ff, #ca43ff 52%, #ff419f);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  pointer-events: none;
-  z-index: 2;
-}
-.vol-card-featured:hover {
-  border-color: rgba(38, 197, 255, 0.25);
-}
-.vol-card-featured:hover::after {
-  opacity: 1;
-}
-
-/* Regular card — single column */
-/* Real border + overflow:hidden. CSS spec: overflow clips at the padding  */
-/* edge (inside the border), so the border is always visible and children  */
-/* are always cropped inside it.                                           */
-.vol-card {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 5px;
-  background-color: #15161c;
-  display: block;
-  text-decoration: none;
-  transition: border-color 0.2s ease;
-}
-.vol-card:hover {
-  border-color: rgba(38, 197, 255, 0.55);
-}
-.vol-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  box-shadow: inset 2px 0 0 0 #26c5ff;
-  pointer-events: none;
-  z-index: 10;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-.vol-card:hover::after {
-  opacity: 1;
-}
-
-/* Image container — clips the image to its own bounds */
-.vol-card-img {
-  overflow: hidden;
-}
-
-/* No scale on regular cards */
-.vol-card-img-fill {
-  display: block;
-}
-
-/* ── Featured card scanline scroll ──────────────────────────── */
-/* Transform-based: overlay extends 4px beyond container, translateY */
-/* scrolls it one pitch per cycle. Parent overflow:hidden clips.     */
-@keyframes scanline-scroll {
-  from { transform: translateY(0); }
-  to   { transform: translateY(4px); }
-}
-
-/* Rest layer — subtle lines, static */
-.vol-feat-crt-slow {
-  top: -4px; left: 0; right: 0; bottom: -4px;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0px,
-    transparent 2px,
-    rgba(255, 255, 255, 0.06) 2px,
-    rgba(255, 255, 255, 0.06) 4px
-  );
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-/* Hover layer — slightly brighter, scrolling */
-.vol-feat-crt-fast {
-  top: -4px; left: 0; right: 0; bottom: -4px;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0px,
-    transparent 2px,
-    rgba(255, 255, 255, 0.07) 2px,
-    rgba(255, 255, 255, 0.07) 4px
-  );
-  animation: scanline-scroll 1s linear infinite;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.vol-card-featured:hover .vol-feat-crt-slow { opacity: 0; }
-.vol-card-featured:hover .vol-feat-crt-fast  { opacity: 1; }
-
-@media (prefers-reduced-motion: reduce) {
-  .vol-feat-crt-slow { animation: none; }
-  .vol-feat-crt-fast { display: none; }
-}
-
-/* ─── Build queue links ─────────────────────────────────────── */
-a:hover .build-queue-link {
-  text-decoration: underline;
-}
-
-/* ─── Volume manifest links ─────────────────────────────────── */
-.manifest-title {
-  color: #6a6a70;
-  transition: color 0.15s ease;
-}
-.manifest-count {
-  color: #8a8a90;
-  transition: color 0.15s ease;
-}
-.manifest-link:hover .manifest-slug {
-  text-decoration: underline;
-}
-.manifest-link:hover .manifest-title {
-  color: #e8e8ea;
-}
-.manifest-link:hover .manifest-count {
-  color: #FF419F;
-}
-
-/* Scanline overlay inside manifest — no vignette box-shadow */
-.manifest-crt {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0px,
-    transparent 2px,
-    rgba(255, 255, 255, 0.03) 2px,
-    rgba(255, 255, 255, 0.03) 4px
-  );
-  animation: scanline-drift 6s linear infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .manifest-crt { animation: none; }
-}
-
-/* ─── Site footer ───────────────────────────────────────────── */
-.footer-action-link .footer-action-text {
-  transition: color 0.15s ease;
-}
-.footer-action-link:hover .footer-action-text {
-  color: #7ddfff;
-  text-decoration: underline;
-}
-.footer-uplink .footer-uplink-name,
-.footer-uplink .footer-uplink-label {
-  transition: color 0.15s ease;
-}
-.footer-uplink:hover .footer-uplink-name {
-  color: #26c5ff;
-  text-decoration: underline;
-}
-.footer-uplink:hover .footer-uplink-label {
-  color: #e8e8ea;
 }
 
 /* ─── Locked case study redaction overlay ───────────────────── */
@@ -450,60 +181,6 @@ a:hover .build-queue-link {
 @media (prefers-reduced-motion: reduce) {
   .locked-scanline { animation: none; }
   .locked-glitch { animation: none; }
-}
-
-/* ─── Sticky nav ─────────────────────────────────────────────── */
-
-/* Base link — Syne Title 24, nav muted */
-.sticky-door-sub { font-size: 12px; }
-.sticky-door-link {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  font-family: var(--font-syne), sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.1;
-  color: #9a9a9f;
-}
-
-/* > prefix — mono, muted */
-.door-prefix {
-  font-family: var(--font-jetbrains-mono), monospace;
-  font-size: 14px;
-  font-weight: 400;
-  color: #6a6a70;
-  margin-right: 5px;
-  transition: color 0.15s ease;
-}
-
-/* Title text */
-.door-title-text {
-  transition: color 0.15s ease;
-}
-
-/* Blinking cursor block — hidden at rest */
-.door-cursor {
-  display: inline-block;
-  width: 8px;
-  height: 18px;
-  background-color: #26c5ff;
-  margin-left: 6px;
-  flex-shrink: 0;
-  align-self: center;
-  opacity: 0;
-}
-
-/* Hover: brighten title, cyan prefix, reveal + blink cursor */
-.sticky-door-link:hover .door-title-text {
-  color: #e8e8ea;
-}
-.sticky-door-link:hover .door-prefix {
-  color: #26c5ff;
-}
-.sticky-door-link:hover .door-cursor {
-  opacity: 1;
-  animation: cursor-blink 1.2s step-end infinite;
 }
 
 /* ─── CRT scanline drift ─────────────────────────────────────── */
@@ -584,24 +261,79 @@ a:hover .build-queue-link {
 
 /* ─── Responsiveness ────────────────────────────────────────── */
 
-/* ── Prompt line — shed segments at narrow widths ──────────── */
-/* Shedding order (least → most essential):
-   1. --creative-technologist flag
-   2. ⬡ v20.26 (segment 3)
-   3. ⎇ main   (segment 2)
-   4. ~/portfolio (segment 1)
-   Keeps: cole13 + ./josh-cole + cursor at all widths */
-@media (max-width: 767px) {
+/* ── Prompt line ───────────────────────────────────────────── */
+.prompt-line-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.prompt-line-main {
+  min-width: 0;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+}
+
+.prompt-line-content {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.prompt-line-nav {
+  display: flex;
+  flex-shrink: 0;
+  gap: 24px;
+  margin-left: 24px;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 14px;
+  line-height: 19px;
+  white-space: nowrap;
+}
+
+.prompt-line-nav a {
+  color: #26c5ff;
+  text-decoration: none;
+}
+
+.prompt-line-nav a:hover,
+.prompt-line-nav a:focus-visible {
+  color: #26c5ff;
+}
+
+@media (max-width: 900px) {
   .prompt-flag { display: none !important; }
 }
-@media (max-width: 579px) {
+
+@media (max-width: 767px) {
+  .prompt-seg-1,
+  .prompt-seg-2,
   .prompt-seg-3 { display: none !important; }
+
+  .prompt-line-row {
+    box-sizing: border-box;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .prompt-line-main {
+    flex: 0 1 auto;
+    width: auto;
+  }
+
+  .prompt-line-nav {
+    position: static;
+    gap: 8px;
+    margin-left: auto;
+    font-size: 12px;
+  }
 }
-@media (max-width: 479px) {
-  .prompt-seg-2 { display: none !important; }
-}
-@media (max-width: 379px) {
-  .prompt-seg-1 { display: none !important; }
+
+.site-footer {
+  box-sizing: border-box;
 }
 
 /* ── Title base sizes + responsive scaling ────────────────── */
@@ -625,12 +357,6 @@ a:hover .build-queue-link {
   .case-study-prose li { font-size: 16px; }
 }
 
-/* ── Tablet and below (< 1024px) ──────────────────────────── */
-@media (max-width: 1023px) {
-  /* SIGNAL panels: stack to single column */
-  .signal-grid { grid-template-columns: 1fr !important; }
-}
-
 /* ── Phone (< 640px) ──────────────────────────────────────── */
 @media (max-width: 639px) {
   /* Page containers — reduce side padding */
@@ -647,29 +373,9 @@ a:hover .build-queue-link {
   /* Page h1s — scale down from 48px */
   .page-title { font-size: 36px; }
 
-  /* Volume section h2s — scale down from 32px */
   .section-title { font-size: 26px; }
 
-  /* Sticky nav — reduce padding */
-  .sticky-door { padding: 16px 20px !important; }
-  .sticky-door-link { font-size: 20px; }
-
-  /* Footer — reduce side padding */
-  .site-footer { padding-left: 20px !important; padding-right: 20px !important; }
-
-  /* Footer uplinks — shrink name column for narrow screens */
-  .footer-uplink { grid-template-columns: 10ch auto 1fr !important; }
-
-  /* Volume card grid — single column */
-  .vol-card-grid { grid-template-columns: 1fr !important; }
-
-  /* Tree manifest — tighten grid columns */
-  .manifest-link { grid-template-columns: 5ch 11ch 1fr auto !important; }
-
   /* Git log — handled by per-row truncation now */
-
-  /* Next-bar card — reduce padding */
-  .next-endcap-card { padding: 20px !important; }
 
   /* Case study body — reduce prose max-width for padding */
   .case-study-prose { max-width: 100% !important; }
@@ -681,43 +387,10 @@ a:hover .build-queue-link {
   .diagram-breakout { width: 100% !important; max-width: 100% !important; }
 }
 
-/* ── Volume manifest narrow (≤ 480px) ── hide arc count, truncate title */
-@media (max-width: 480px) {
-  .manifest-link { grid-template-columns: 5ch 11ch 1fr !important; }
-  .manifest-count { display: none; }
-  .manifest-title { overflow: hidden; text-overflow: ellipsis; padding-left: 1ch; }
-}
-
-/* ── Next-bar stacking (< 500px) ──────────────────────────── */
-@media (max-width: 500px) {
-  .next-endcap-row { flex-direction: column !important; align-items: flex-start !important; }
-  .next-endcap-meta { flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; }
-}
-
-/* ── Sticky nav small (≤ 425px) ───────────────────────────── */
-@media (max-width: 425px) {
-  .sticky-door-link { font-size: 16px; }
-  .sticky-door-sub { font-size: 10px; }
-}
-
 /* ── Small phone (< 400px) ────────────────────────────────── */
 @media (max-width: 399px) {
   .page-title { font-size: 28px; }
 
-  /* Tree manifest — narrower slug column for tiny screens */
-  .manifest-link { grid-template-columns: 5ch 10ch 1fr !important; }
-
-  /* Footer uplinks — stack label below name */
-  .footer-uplink {
-    grid-template-columns: auto auto 1fr !important;
-  }
-  .footer-uplink-label { display: none; }
-}
-
-/* ── Smallest phone (≤ 320px) ─────────────────────────────── */
-@media (max-width: 320px) {
-  .sticky-door-link { font-size: 13px; }
-  .next-endcap-back-sub { display: block; margin-left: 0 !important; margin-top: 2px; }
 }
 
 /* ── /now/ tile scanline glitch ─────────────────────────────── */

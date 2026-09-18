@@ -5,94 +5,109 @@ slug: "vrc-suite"
 role: "UX Lead — four products"
 year: "Four-year engagement"
 summary: "Four products, one connected suite, 80,000–100,000+ requests a month in regulated industries."
-thumbnail: "/case-studies/vrc/vr-flow-1.png"
+descriptor: "a four-product records suite"
+thumbnail: "/case-studies/vrc/grid.jpg"
 heroImage: "/case-studies/vrc/pre-story-flow.png"
+kind: "study"
+display: "single"
+featured: false
+weight: 2
+order: 6
+sortYear: 2021  # TODO(josh): provisional — confirm most-recent year
+displayDate: "Four-year engagement"
+tags:
+  - "UX Leadership"
+  - "Enterprise"
+  - "Design Systems"
+  - "Healthcare"
 ---
 
-Vital Records Control is one of the largest records and information management companies in the U.S. — three-plus decades, nationwide, handling the full information lifecycle for regulated industries from healthcare to banking to government. I led UX for four of their products over four years: VitalChart, Payer Audit, Pricing Tables, and Vital Retain. Four products, one connected suite, 80,000 to 100,000+ requests moving through the systems each month.
+# VRC Suite
+
+Vital Records Control is one of the largest records and information management companies in the U.S., handling the full information lifecycle for regulated industries from healthcare to banking to government. I led UX for four of their products over four years: VitalChart, Payer Audit, Pricing Tables, and Vital Retain. Four products, one connected suite, 80,000 to 100,000-plus requests moving through the systems each month.
+
+The question underneath all four: when a regulator asks "prove it," can the system answer?
 
 ---
 
 ## The four products
 
-**VitalChart** is VRC's healthcare information management product — medical records request, retrieval, and release. It's the spine of the healthcare arm of the business and the surface most of VRC's healthcare clients interact with daily.
+**VitalChart** is VRC's healthcare information management product: medical records request, retrieval, and release. It's the spine of the healthcare arm of the business and the surface most healthcare clients touch daily.
 
-**Payer Audit** is a high-volume workflow inside VitalChart, built for the bulk medical record requests that come in from insurance payers — Optum, Blue Cross, and others — for HEDIS audits and similar compliance reviews. A payer sends a CSV listing the records they need and a PDF of the request letter. The system ingests the batch, validates each request against a layered set of rejection rules, creates a container per request, and breaks it down into individual ROI records with their own lifecycle from logged through QA through processing to completed.
+**Payer Audit** is a high-volume workflow inside VitalChart for the bulk record requests that come from insurance payers for HEDIS audits and similar compliance reviews. A payer sends a CSV of the records they need and a PDF of the request letter. The system ingests the batch, validates each request against a layered set of rejection rules, creates a container per request, and breaks it into individual release-of-information records, each with its own lifecycle from logged through QA through processing to completed.
 
-![Alt text](/case-studies/vrc/pre-story-flow.png)
+![Payer Audit ingestion flow, from CSV to individual ROI records](/case-studies/vrc/pre-story-flow.png)
 
-**Pricing Tables** is the rate engine underneath VitalChart's billing. Every U.S. state has its own legal framework for what a records custodian can charge for releasing medical records, broken down by requestor type and record format, tied to specific statutes. The rules change when laws change. Pricing Tables is the editable, auditable rule store that makes sure every ROI gets billed at the right rate for the right state for the right requestor at the right time — and that VRC can prove which rates were in effect when, when a regulator asks.
+**Pricing Tables** is the rate engine under VitalChart's billing. Every U.S. state has its own rules for what a records custodian can charge, by requestor type and record format, tied to specific statutes, and the rules change when laws change. Pricing Tables is the editable, auditable rule store that bills every release at the right rate for the right state for the right requestor at the right time, and can prove which rates were in effect when.
 
-![Alt text](/case-studies/vrc/pricing-admin.png)
+![Pricing Tables admin: state-by-state rate rules with effective dates and legal references](/case-studies/vrc/pricing-admin.png)
 
-**Vital Retain** is the records retention product — the keep/destroy side of the business. Multi-tenant. Subscriber organizations track their physical and digital records assets against retention policies tied to real legal references and CFR citations, with full audit logs on every action. Updates to policies queue and require explicit confirmation before they apply to affected assets, because silently changing the retention period on 89 boxes when the underlying law shifts is the kind of thing that ends a business.
+**Vital Retain** is the retention product, the keep-or-destroy side of the business. Multi-tenant. Subscriber organizations track physical and digital records against retention policies tied to real legal references and CFR citations, with full audit logs on every action. Policy updates queue and require explicit confirmation before they apply, because silently changing the retention period on 89 boxes when the law shifts is the kind of thing that ends a business.
 
-![Alt text](/case-studies/vrc/retention-policies-1.png)
+![Vital Retain retention policies list](/case-studies/vrc/retention-policies-1.png)
 
-Three of the four share branding under the VitalChart umbrella. Vital Retain is its own product with its own identity, designed to plug into the broader VRC ecosystem.
+Three of the four share branding under VitalChart. Vital Retain is its own product with its own identity, designed to plug into the wider VRC ecosystem.
 
 ---
 
 ## The engagement
 
-A four-year UX leadership engagement. I led a team of four UX/UI designers and stayed hands-on every day — directing the work, doing the work, and holding the suite together as one coherent product experience across four different stacks and three years of organizational change on the client side.
+Four years. I led a team of four UX/UI designers and stayed hands-on every day: directing the work, doing the work, and holding the suite together as one product experience across four stacks and three years of organizational change on the client side.
 
-I authored the information architecture, user flows, and system maps across all four products, and on the broader IA I co-authored with another architect on the project — they brought specialized expertise on specific pieces, like the AWS-based address normalization service that Payer Audit relies on, where their depth covered ground outside my own. Everything else was mine to design and direct.
-
-The team and I delivered the IA, user flows, design systems, screen designs, and product strategy support across the four products. We documented as we built, because design needed a stable reference point across products that didn't share much else underneath.
+I authored the information architecture, user flows, and system maps across all four products. On the broader IA I co-authored with another architect who brought depth on specific pieces, like the AWS-based address normalization service Payer Audit depends on. Everything else was mine to design and direct. The team delivered IA, flows, design systems, screen designs, and product strategy support across the four products, and we documented as we built.
 
 ---
 
 ## What it took
 
-To be straight about it: this engagement was more of an uphill build than the deliverables make it look, with more nuance and more complexity than anyone on either side anticipated at the start.
+This was more of an uphill build than the deliverables suggest.
 
-The client didn't have a clear picture of their infrastructure when we started. The four products were built on four different tech stacks. The databases had grown organically over years and weren't easy to reason about. There was no appetite for solving all of it at once. The right call because consolidating four products onto a single stack and rebuilding the underlying data layer would have effectively meant re-platforming the company's software at once: multi-year, multi-million-dollar, the kind of project that puts a business on hold. So from day one, the work was about architecting design solutions that could _scale into_ the infrastructure as it stabilized, rather than waiting for stability that wasn't coming.
+The four products ran on four tech stacks. The databases had grown organically for years. There was no appetite to fix all of it at once, and that was the right call: consolidating onto one stack and rebuilding the data layer would have meant re-platforming the company, multi-year and multi-million, the kind of project that puts a business on hold. So the work was designing solutions that could scale into the infrastructure as it stabilized, rather than waiting for stability that wasn't coming.
 
-The first year was particularly turbulent. Multiple product managers cycled through. The original development team was replaced mid-engagement. There was no business analyst on the program until year three — a budget choice — which meant the design team carried more of the discovery, requirements gathering, and cross-team translation work than is typical. Each transition meant onboarding new people into systems that had been built without the documentation those people needed to be effective quickly.
+The first year was turbulent. Product managers cycled through. The development team was replaced mid-engagement. There was no business analyst until year three, so the design team carried more of the discovery, requirements, and cross-team translation than is typical.
 
-Documentation became a discipline we brought to the engagement. Whoever came in next deserved a clear handoff, and design needed a stable reference point across products that didn't share much else underneath. We documented the IA, the flows, the design system, the rationale behind product decisions, the rejection rule logic, the rate engine architecture, the multi-tenant access model — everything. By the end of the engagement, the design documentation was a stable reference point the program could rely on.
-
-That's the part of the job that doesn't show up in screens. Holding a multi-year, multi-product engagement together through stack inconsistencies, team transitions, shifting product leadership, and the absence of a BA for the first two years — and keeping the design coherent across all of it — was the actual work. The screens are the visible output. The discipline that produced them is what made the program survive.
+Documentation became the discipline that held it together. Whoever came in next deserved a clear handoff, and design needed a stable reference across products that shared little underneath. We documented the IA, the flows, the design system, the rationale behind product decisions, the rejection rule logic, the rate engine, the multi-tenant access model. By the end, the design documentation was the reference point the whole program relied on. The screens are the visible output. That discipline is what made the program survive.
 
 ---
 
 ## How the products think
 
-A few principles ran through all four.
+Four principles ran through all four products.
 
-**Audit logs everywhere.** VRC's customers operate in regulated industries where "prove it" is a real question a regulator may eventually ask. Every meaningful action in Vital Retain, every status change in Payer Audit, every rate adjustment in Pricing Tables generates an audit event. The system assumes someone will need to reconstruct what happened.
+**Audit logs everywhere.** Every meaningful action in Vital Retain, every status change in Payer Audit, every rate adjustment in Pricing Tables writes an audit event. The system assumes someone will need to reconstruct what happened.
 
-![Alt text](/case-studies/vrc/asset-details.png)
+![Asset detail view with its audit history](/case-studies/vrc/asset-details.png)
 
-**Bulk operations, calm interfaces.** Payer Audit processes tens of thousands of requests a month. Vital Retain handles bulk policy assignment across thousands of assets. The challenge was making high-volume operations feel calm rather than overwhelming — a filterable list, a side panel, an explicit confirmation when the action affects a lot of things. The "89 Assets Will be Affected — Confirm Policy Update" modal in Vital Retain exists because silent bulk changes are how regulated-industry products lose trust.
+**Bulk operations, calm interfaces.** Payer Audit processes tens of thousands of requests a month. Vital Retain assigns policies across thousands of assets. High-volume operations had to feel calm: a filterable list, a side panel, and an explicit confirmation when an action touches a lot of things. The "89 Assets Will Be Affected" modal exists because silent bulk changes are how regulated-industry products lose trust.
 
-![Alt text](/case-studies/vrc/confirmation-dialog.png)
+![Confirmation dialog: 89 assets will be affected by this policy update](/case-studies/vrc/confirmation-dialog.png)
 
-**Status as visual rhythm.** A user processing 200 patient records a day shouldn't have to read every word to know where they are. Logged is purple. QA is pink. Processing is blue. Finished Processing is green. Completed is checked. The colors carry the work.
+**Status as visual rhythm.** Someone processing 200 records a day shouldn't have to read every word to know where they are. Logged is purple. QA is pink. Processing is blue. Finished is green. Completed is checked. The colors carry the work.
 
-![Alt text](/case-studies/vrc/container-details.png)
+![Container detail with color-coded record status pipeline](/case-studies/vrc/container-details.png)
 
-**Explicit human-in-the-loop on judgment calls.** Pricing Tables doesn't auto-update rates when statutes change. Vital Retain doesn't auto-apply policy updates to assets. Payer Audit doesn't auto-process records that fail rejection rules. In each case, the system surfaces the decision for a human to confirm, because the cost of being wrong is too high to delegate.
+**A person on every judgment call.** Pricing Tables doesn't auto-update rates when statutes change. Vital Retain doesn't auto-apply policy updates. Payer Audit doesn't auto-process records that fail rejection rules. In each case the system surfaces the decision for a human to confirm, because the cost of being wrong is too high to delegate.
 
-![Alt text](/case-studies/vrc/updates-pending.png)
+![Pending updates queue awaiting human confirmation](/case-studies/vrc/updates-pending.png)
 
-## What I built (in screens)
+---
 
-Across the four products, the work spanned dashboards, asset and record detail pages, multi-step ingestion flows, rule administration surfaces, bulk action panels, audit logs, multi-tenant customer management, status pipelines, and a state-by-state pricing rule editor with hundreds of cards each tied to legal references and effective dates. The screens here are a representative slice — not the full inventory.
+## What I built, in screens
 
-![Alt text](/case-studies/vrc/edit-view.png)
+Dashboards, record and asset detail pages, multi-step ingestion flows, rule administration, bulk action panels, audit logs, multi-tenant customer management, status pipelines, and a state-by-state pricing editor with hundreds of rule cards tied to legal references and effective dates. These are a representative slice, not the inventory.
 
-![Alt text](/case-studies/vrc/roi-detail-uploaded.png)
+![Rule edit view](/case-studies/vrc/edit-view.png)
 
-![Alt text](/case-studies/vrc/dashboard-1.png)
+![ROI record detail after upload](/case-studies/vrc/roi-detail-uploaded.png)
+
+![Suite dashboard](/case-studies/vrc/dashboard-1.png)
+
+---
 
 ## What I take from it
 
-Four years on one engagement teaches things that shorter ones can't.
+Coherence across a product suite is mostly a documentation discipline, not a design-system discipline. A design system gets you consistent buttons. The feeling that four products on four stacks belong to the same company comes from someone deciding, over and over, what the suite's point of view is on each new question, and writing it down so the next person doesn't re-decide it.
 
-The biggest one: design coherence across a product suite is mostly a documentation discipline, not a design system discipline. A design system gets you consistent buttons. Coherence — the feeling that four products built on four stacks belong to the same company — comes from someone deciding, over and over, what the suite's point of view is on every new question, and writing it down so the next person doesn't have to re-decide.
+![Pricing Tables history and audit trail](/case-studies/vrc/pt-history-audit.png)
 
-![Alt text](/case-studies/vrc/pt-history-audit.png)
-
-The second: in long engagements with rotating leadership on the client side, the design team often becomes the keeper of institutional memory. That's not in the contract. But it's the work that makes the rest of the work possible.
+And in long engagements with rotating leadership on the client side, the design team becomes the keeper of institutional memory. It's not in the contract. It's the work that makes the rest of the work possible.

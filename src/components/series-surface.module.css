@@ -1,0 +1,259 @@
+.page {
+  min-height: 100vh;
+  padding-bottom: 56px;
+}
+
+.container {
+  width: min(100%, 1056px);
+  margin: 0 auto;
+  padding: 52px 48px 0;
+}
+
+.back {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  margin-bottom: 36px;
+  color: #6a6a70;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.back:hover {
+  color: #26c5ff;
+}
+
+.eyebrow,
+.count,
+.marker {
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #6a6a70;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+}
+
+.headingRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.headingRow h1 {
+  margin: 0;
+  color: #e8e8ea;
+  font-family: var(--font-syne), sans-serif;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 600;
+  line-height: 1.07;
+}
+
+.count {
+  flex: 0 0 auto;
+  color: #6a6a70;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  margin-top: 34px;
+}
+
+.frame {
+  position: absolute;
+  overflow: hidden;
+  border: 0;
+  border-radius: 7px;
+  padding: 0;
+  background: #15161c;
+  cursor: zoom-in;
+}
+
+.frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 3px),
+    radial-gradient(125% 95% at 50% 42%, transparent 46%, rgba(5, 5, 9, 0.48) 100%);
+  transition: opacity 0.2s ease;
+}
+
+.frame:hover::after,
+.frame:focus-visible::after {
+  opacity: 0.15;
+}
+
+.frame:focus-visible,
+.close:focus-visible,
+.nav:focus-visible {
+  outline: 2px solid #26c5ff;
+  outline-offset: 2px;
+}
+
+.index,
+.marker {
+  position: absolute;
+  z-index: 2;
+  top: 9px;
+  padding: 3px 6px;
+  background: rgba(10, 11, 15, 0.72);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.index {
+  left: 9px;
+  color: #b4b6c2;
+}
+
+.marker {
+  right: 9px;
+  color: #26c5ff;
+}
+
+.prose {
+  max-width: 760px;
+  margin-top: 54px;
+  color: #acacb1;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.prose p {
+  margin: 0 0 24px;
+}
+
+.empty {
+  display: grid;
+  min-height: 280px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #6a6a70;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 12px;
+}
+
+.dialog {
+  position: fixed;
+  z-index: 200;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  gap: 28px;
+  align-items: center;
+  padding: clamp(20px, 5vw, 72px);
+  background: rgba(10, 11, 15, 0.96);
+}
+
+.dialogImage {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 96px);
+  object-fit: contain;
+}
+
+.story {
+  color: #b4b6c2;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.storyIndex {
+  margin-bottom: 18px;
+  color: #6a6a70;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.close,
+.nav {
+  position: absolute;
+  border: 0;
+  background: rgba(21, 22, 28, 0.75);
+  color: #b4b6c2;
+  font-family: var(--font-jetbrains-mono), monospace;
+  cursor: pointer;
+}
+
+.close {
+  top: 18px;
+  right: 20px;
+  padding: 8px;
+  font-size: 18px;
+}
+
+.nav {
+  top: 50%;
+  padding: 10px 13px;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+.prev {
+  left: 12px;
+}
+
+.next {
+  right: 12px;
+}
+
+@media (max-width: 900px) {
+  .map {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    padding: 40px 20px 0;
+  }
+
+  .headingRow {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dialog {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 18px;
+    padding: 54px 20px 24px;
+  }
+
+  .dialogImage {
+    max-height: 68vh;
+  }
+
+  .story {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame::after {
+    transition: none;
+  }
+}

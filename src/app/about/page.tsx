@@ -92,6 +92,43 @@ export default function AboutPage() {
           }}
         />
 
+        {/* ── Relocated from the former homepage hero — exact copy ── */}
+        <div
+          style={{
+            fontFamily: MONO,
+            fontSize: 12,
+            color: "#6a6a70",
+            textTransform: "uppercase",
+            letterSpacing: "0.24em",
+            marginBottom: 24,
+          }}
+        >
+          OUT OF DARKNESS, INTO THE LIGHT
+        </div>
+        <div style={{ marginBottom: 56 }}>
+          <p style={P}>
+            Hundreds of ideas in the air, waiting for their moment. That&apos;s not noise — that&apos;s the signal, waiting to be found. Explore first. The right one only reveals itself to whoever keeps looking.
+          </p>
+          <p style={P}>
+            Nobody knows exactly what they need at the start of a project — only what they want. Finding the difference takes exploring, testing, iterating. That&apos;s where the good ones start to surface.
+          </p>
+          <p style={P}>
+            One becomes a tool someone actually uses. Another becomes the voice a brand&apos;s been missing. Another, an efficiency pipeline. And in the best moments, something none of us saw coming.
+          </p>
+          <p
+            style={{
+              fontFamily: MONO,
+              fontSize: 14,
+              lineHeight: 1.5,
+              color: "#26c5ff",
+              margin: "8px 0 0",
+            }}
+          >
+            <span style={{ marginRight: "0.6ch" }}>{">"}</span>
+            The best ideas rarely show up at the starting line.
+          </p>
+        </div>
+
         {/* Bio */}
         <div>
           <p style={P}>

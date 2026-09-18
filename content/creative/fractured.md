@@ -1,6 +1,7 @@
 ---
 title: FRACTURED
 subline: Not the highlight reel. The whole person.
+descriptor: a portrait built from every frame
 processLine: "> photoshop script \xB7 40\u201380 frames \xB7 opacity + order randomized"
 credit: ""
 slug: fractured
@@ -11,6 +12,18 @@ images:
   - /case-studies/fractured/03.jpg
   - /case-studies/fractured/fractured-1.jpg
   - /case-studies/fractured/fractured-2.jpg
+kind: "series"
+display: "mosaic"
+featured: false
+weight: 1
+order: 14
+shape: "square"
+sortYear: 2014  # TODO(josh): provisional — date owed
+displayDate: ""  # TODO(josh): displayDate owed
+tags:
+  - "Creative Direction"
+  - "Portrait"
+  - "Generative"
 ---
 
 We've gotten good at showing one frame. The good one — the version where everything's working, where the answer to "how are you" is "I'm good." The reel everyone keeps. Fractured is built out of everything that frame leaves out.

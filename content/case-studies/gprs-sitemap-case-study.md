@@ -5,8 +5,21 @@ slug: "gprs-sitemap"
 role: "Lead UX/UI Designer"
 year: "2023–2024"
 summary: "A map-first product where everything under a job site lives — across desktop, tablet, and mobile."
+descriptor: "a map-first field platform"
 thumbnail: "/case-studies/gprs/sitemap-tn.jpg"
 heroImage: "/case-studies/gprs/map-lines.jpg"
+kind: "study"
+display: "single"
+featured: true
+weight: 3
+order: 2
+sortYear: 2024
+displayDate: "2023–2024"
+tags:
+  - "UX Leadership"
+  - "Enterprise"
+  - "Web"
+  - "Mobile"
 ---
 
 # GPRS SiteMap

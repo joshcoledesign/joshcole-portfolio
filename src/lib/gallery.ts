@@ -16,6 +16,15 @@ export interface GalleryImage {
 
 const PREFIX = "gallery/";
 
+const LOCAL_PHOTOGRAPHY_FALLBACKS: GalleryImage[] = [
+  { url: "/case-studies/ush/atrium.jpg", pathname: "gallery/architecture", uploadedAt: "" },
+  { url: "/case-studies/lp-7d-ride/riders.png", pathname: "gallery/experience", uploadedAt: "" },
+  { url: "/case-studies/fractured/02.jpg", pathname: "gallery/portrait", uploadedAt: "" },
+  { url: "/case-studies/saints/saints-01.png", pathname: "gallery/editorial", uploadedAt: "" },
+  { url: "/case-studies/nemo/nemo-tn.jpg", pathname: "gallery/identity", uploadedAt: "" },
+  { url: "/case-studies/facedeals/grid.jpg", pathname: "gallery/technology", uploadedAt: "" },
+];
+
 export function isBlobConfigured(): boolean {
   return Boolean(process.env.BLOB_STORE_ID || process.env.BLOB_READ_WRITE_TOKEN);
 }
@@ -53,4 +62,10 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
     console.error("[gallery] failed to list blobs:", err);
     return [];
   }
+}
+
+/** Always returns enough authored imagery for the collapsed home mosaic. */
+export async function getPhotographyImages(): Promise<GalleryImage[]> {
+  const images = await getGalleryImages();
+  return images.length ? images : LOCAL_PHOTOGRAPHY_FALLBACKS;
 }

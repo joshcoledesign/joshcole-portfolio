@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <title>Microsoft Teams</title>
+  <path d="M22 20h12a6 6 0 0 1 6 6v10a6 6 0 0 1-12 0V26a6 6 0 0 0-6-6Z" fill="#000" opacity=".55"/>
+  <path d="M8 24a6 6 0 0 1 6-6h8a6 6 0 0 1 6 6v12a6 6 0 0 0 6 6H18A10 10 0 0 1 8 32v-8Z" fill="#000" opacity=".8"/>
+  <circle cx="33" cy="13" r="5" fill="#000" opacity=".55"/>
+  <circle cx="18" cy="10" r="6" fill="#000" opacity=".8"/>
+  <path fill="#000" fill-rule="evenodd" clip-rule="evenodd" d="M7.25 23h9.5A3.25 3.25 0 0 1 20 26.25v9.5A3.25 3.25 0 0 1 16.75 39h-9.5A3.25 3.25 0 0 1 4 35.75v-9.5A3.25 3.25 0 0 1 7.25 23Zm1.27 3.429v1.676h2.447v7.466h2.065v-7.466h2.447v-1.676H8.52Z"/>
+</svg>

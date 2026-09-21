@@ -14,6 +14,11 @@ export interface Placed<T> {
   pin?: boolean;
 }
 
+export interface IntrinsicLayout<T> {
+  placed: Placed<T>[];
+  height: number;
+}
+
 interface Rect {
   x: number;
   y: number;
@@ -30,6 +35,95 @@ function shaped<T extends { weight: number }>(list: T[]): { piece: T; w: number 
   return list.map((piece) => ({ piece, w: Math.max(piece.weight, minimum) }));
 }
 
+// Packs ordered pieces into horizontal bands whose heights come from the
+// pieces themselves. Width is distributed from each piece's authored weight
+// and shape; the shared band height is the closest collective fit to those
+// target aspects. The returned height is therefore content-driven rather than
+// a percentage of a predetermined canvas.
+export function layoutIntrinsicBands<
+  T extends { weight: number; shape?: "landscape" | "portrait" | "square" },
+>(
+  list: T[],
+  W: number,
+  targetAspect = 1.4,
+  maxPerBand = 4,
+): IntrinsicLayout<T> {
+  if (!list.length) return { placed: [], height: 0 };
+
+  const weighted = shaped(list);
+  const idealBandHeight = W / (targetAspect * 3);
+  const costs = Array<number>(list.length + 1).fill(Infinity);
+  const counts = Array<number>(list.length).fill(1);
+  costs[list.length] = 0;
+
+  const aspectTarget = (piece: T) => {
+    if (piece.shape === "portrait") return 1 / targetAspect;
+    if (piece.shape === "square") return 1;
+    return targetAspect;
+  };
+
+  const measureBand = (start: number, count: number) => {
+    const items = weighted.slice(start, start + count);
+    const factors = items.map(
+      (item) => aspectTarget(item.piece) * Math.sqrt(item.w),
+    );
+    const factorTotal = factors.reduce((sum, factor) => sum + factor, 0);
+    const widths = factors.map((factor) => (factor / factorTotal) * W);
+    const targetHeights = widths.map(
+      (width, index) => width / aspectTarget(items[index].piece),
+    );
+    const bandHeight = Math.exp(
+      targetHeights.reduce((sum, height) => sum + Math.log(height), 0) / count,
+    );
+    const aspectCost = widths.reduce((sum, width, index) => {
+      const actualAspect = width / bandHeight;
+      const distance = Math.log(actualAspect / aspectTarget(items[index].piece));
+      return sum + distance * distance;
+    }, 0) / count;
+    const heightDistance = Math.log(bandHeight / idealBandHeight);
+
+    return {
+      widths,
+      height: bandHeight,
+      cost: aspectCost + heightDistance * heightDistance,
+    };
+  };
+
+  for (let start = list.length - 1; start >= 0; start--) {
+    for (let count = 1; count <= maxPerBand && start + count <= list.length; count++) {
+      const band = measureBand(start, count);
+      const cost = band.cost + costs[start + count];
+      if (cost < costs[start]) {
+        costs[start] = cost;
+        counts[start] = count;
+      }
+    }
+  }
+
+  const placed: Placed<T>[] = [];
+  let start = 0;
+  let y = 0;
+  while (start < list.length) {
+    const count = counts[start];
+    const band = measureBand(start, count);
+    let x = 0;
+    for (let offset = 0; offset < count; offset++) {
+      placed.push({
+        piece: weighted[start + offset].piece,
+        x,
+        y,
+        w: band.widths[offset],
+        h: band.height,
+      });
+      x += band.widths[offset];
+    }
+    y += band.height;
+    start += count;
+  }
+
+  return { placed, height: y };
+}
+
 // Ordered horizontal-band packing for the home map. Dynamic programming
 // chooses 1–4 consecutive pieces per band, minimizing distance from the
 // requested landscape aspect while preserving editorial order.
@@ -40,15 +134,17 @@ export function layoutBands<T extends { weight: number; shape?: "landscape" | "p
   featured: T[],
   targetAspect = 1.4,
   maxPerBand = 4,
+  featuredLayout: "cluster" | "row" = "cluster",
 ): Placed<T>[] {
   if (!list.length) return [];
 
   const weighted = shaped(list);
-  const hasFeaturedCluster =
+  const hasFeaturedSequence =
     featured.length >= 3 &&
     weighted[0]?.piece === featured[0] &&
     weighted[1]?.piece === featured[1] &&
     weighted[2]?.piece === featured[2];
+  const hasFeaturedCluster = hasFeaturedSequence && featuredLayout === "cluster";
   const effectiveWeights = weighted.map((item, index) =>
     hasFeaturedCluster && index === 0 ? item.w * 1.5 : item.w,
   );
@@ -57,7 +153,7 @@ export function layoutBands<T extends { weight: number; shape?: "landscape" | "p
   const areas = effectiveWeights.map((weight) => weight * scale);
   const costs = Array<number>(list.length + 1).fill(Infinity);
   const counts = Array<number>(list.length).fill(1);
-  const firstBandIndex = hasFeaturedCluster ? 3 : 0;
+  const firstBandIndex = hasFeaturedSequence ? 3 : 0;
   costs[list.length] = 0;
 
   const aspectTarget = (piece: T) => {
@@ -113,6 +209,15 @@ export function layoutBands<T extends { weight: number; shape?: "landscape" | "p
       },
     );
     y = clusterHeight;
+  } else if (hasFeaturedSequence) {
+    const rowHeight = (areas[0] + areas[1] + areas[2]) / W;
+    const tileWidth = W / 3;
+    out.push(
+      { piece: weighted[0].piece, x: 0, y: 0, w: tileWidth, h: rowHeight, pin: true },
+      { piece: weighted[1].piece, x: tileWidth, y: 0, w: tileWidth, h: rowHeight, pin: true },
+      { piece: weighted[2].piece, x: tileWidth * 2, y: 0, w: tileWidth, h: rowHeight, pin: true },
+    );
+    y = rowHeight;
   }
 
   let start = firstBandIndex;

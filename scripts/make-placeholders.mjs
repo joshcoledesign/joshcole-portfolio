@@ -5,7 +5,10 @@ import path from "node:path";
 import matter from "gray-matter";
 
 const ROOT = process.cwd();
-const CONTENT_DIR = path.join(ROOT, "content", "case-studies");
+const CONTENT_DIRS = [
+  path.join(ROOT, "content", "case-studies"),
+  path.join(ROOT, "content", "creative"),
+];
 const PUBLIC_DIR = path.join(ROOT, "public");
 const CASE_STUDIES_DIR = path.join(PUBLIC_DIR, "case-studies");
 const MANIFEST_PATH = path.join(CASE_STUDIES_DIR, "PLACEHOLDERS.md");
@@ -54,9 +57,14 @@ function wrapText(value, maxCharacters, maxLines = 3) {
   return visible;
 }
 
-function makeSvg({ alt, fileName, isThumbnail }) {
-  const width = isThumbnail ? 1600 : 1500;
-  const height = 1000;
+function makeSvg({ alt, fileName, isThumbnail, shape }) {
+  const [width, height] = isThumbnail
+    ? [1600, 1000]
+    : shape === "portrait"
+      ? [1000, 1500]
+      : shape === "square"
+        ? [1200, 1200]
+        : [1500, 1000];
   const maxCharacters = Math.floor((width - 64) / 6.8);
   const altLines = wrapText(alt || fileName, maxCharacters);
   const lineHeight = 16;
@@ -91,32 +99,49 @@ ${altMarkup}
 }
 
 async function collectReferences() {
-  const entries = await readdir(CONTENT_DIR, { withFileTypes: true });
   const references = new Map();
 
-  for (const entry of entries) {
-    if (!entry.isFile() || path.extname(entry.name) !== ".md") continue;
+  for (const contentDir of CONTENT_DIRS) {
+    const entries = await readdir(contentDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isFile() || path.extname(entry.name) !== ".md") continue;
 
-    const source = await readFile(path.join(CONTENT_DIR, entry.name), "utf8");
-    const { data, content } = matter(source);
-    const thumbnail = typeof data.thumbnail === "string" ? cleanReference(data.thumbnail) : null;
+      const source = await readFile(path.join(contentDir, entry.name), "utf8");
+      const { data, content } = matter(source);
+      const title = typeof data.title === "string" ? data.title : entry.name;
+      const shape = data.shape === "portrait" || data.shape === "square" ? data.shape : "landscape";
+      const thumbnail = typeof data.thumbnail === "string" ? cleanReference(data.thumbnail) : null;
 
-    if (thumbnail?.startsWith("/case-studies/")) {
-      references.set(thumbnail, {
-        alt: typeof data.title === "string" ? data.title : path.posix.basename(thumbnail),
-        isThumbnail: true,
-      });
-    }
+      if (thumbnail?.startsWith("/case-studies/") || thumbnail?.startsWith("/creative/")) {
+        references.set(thumbnail, { alt: title, isThumbnail: true, shape });
+      }
 
-    for (const match of content.matchAll(IMAGE_PATTERN)) {
-      const reference = cleanReference(match[2]);
-      if (!reference.startsWith("/case-studies/")) continue;
+      if (Array.isArray(data.images)) {
+        for (const image of data.images) {
+          const sourceValue = typeof image === "string" ? image : image?.src;
+          if (typeof sourceValue !== "string") continue;
+          const reference = cleanReference(sourceValue);
+          if (!reference.startsWith("/case-studies/") && !reference.startsWith("/creative/")) continue;
+          const existing = references.get(reference);
+          references.set(reference, {
+            alt: typeof image === "object" && typeof image?.alt === "string" ? image.alt : existing?.alt ?? title,
+            isThumbnail: existing?.isThumbnail ?? false,
+            shape,
+          });
+        }
+      }
 
-      const existing = references.get(reference);
-      references.set(reference, {
-        alt: match[1] || existing?.alt || path.posix.basename(reference),
-        isThumbnail: existing?.isThumbnail || false,
-      });
+      for (const match of content.matchAll(IMAGE_PATTERN)) {
+        const reference = cleanReference(match[2]);
+        if (!reference.startsWith("/case-studies/") && !reference.startsWith("/creative/")) continue;
+
+        const existing = references.get(reference);
+        references.set(reference, {
+          alt: match[1] || existing?.alt || path.posix.basename(reference),
+          isThumbnail: existing?.isThumbnail || false,
+          shape,
+        });
+      }
     }
   }
 
@@ -145,6 +170,7 @@ async function main() {
         alt: details.alt,
         fileName: path.posix.basename(reference),
         isThumbnail: details.isThumbnail || path.posix.basename(reference).startsWith("hero."),
+        shape: details.shape,
       }),
       "utf8",
     );
@@ -152,13 +178,21 @@ async function main() {
     console.log(`generated ${fallbackReference}`);
   }
 
-  const manifest = `# Generated case-study placeholders
+  const caseStudyPlaceholders = placeholders.filter((reference) => reference.startsWith("/case-studies/"));
+  const creativePlaceholders = placeholders.filter((reference) => reference.startsWith("/creative/"));
+  const manifest = `# Generated image placeholders
 
 These SVGs are generated by \`scripts/make-placeholders.mjs\`. The site should try the referenced raster image first and use its SVG sibling only when the raster is missing.
 
 Replace a placeholder by adding the real image at the original path referenced in the case-study markdown. The generator never overwrites real images or existing SVG fallbacks.
 
-${placeholders.map((reference) => `- \`${reference}\``).join("\n")}
+## case-studies/
+
+${caseStudyPlaceholders.map((reference) => `- \`${reference}\``).join("\n")}
+
+## creative/
+
+${creativePlaceholders.map((reference) => `- \`${reference}\``).join("\n")}
 `;
 
   await mkdir(CASE_STUDIES_DIR, { recursive: true });

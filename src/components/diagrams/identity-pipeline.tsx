@@ -1,7 +1,7 @@
 // Vertical four-stage pipeline diagram for the Identity Pipeline case study.
 // Intake → Analysis → Direction → Deck, each stage handing an artifact to the next.
 // Same node style as BrandVoiceEngine: square corners, hairline borders,
-// JetBrains Mono titles / Inter sub-lines. No feedback loop, no temp gauges.
+// JetBrains Mono titles / Inter sub-lines. No feedback loop or model metadata.
 // Method labels (client input / AI / human-directed / compiled) replace model info.
 
 "use client";

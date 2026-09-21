@@ -1,17 +1,13 @@
 "use client";
 
 // ─── SiteChrome ───────────────────────────────────────────────
-// Renders the site-wide footer on every route EXCEPT
-// bare routes, which carry no global chrome:
-//   /design-system — direct-link-only reference doc
-//   /            — the work surface renders its own footer, and the
-//                  doors are gone (tags are the navigation)
+// Renders the site-wide footer on every route except `/`, where the
+// work surface renders the same footer directly.
 
 import { usePathname } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
 
-// Routes that opt out of global chrome.
-const BARE_ROUTES = ["/design-system", "/work", "/"];
+const BARE_ROUTES = ["/"];
 
 export function SiteChrome() {
   const pathname = usePathname();

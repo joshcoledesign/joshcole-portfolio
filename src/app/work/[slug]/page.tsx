@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { SeriesSurface } from "@/components/series-surface";
 import { StudyPage } from "@/components/study-page";
-import { getPhotographyImages } from "@/lib/gallery";
+import { PhotographySurface } from "@/components/photography-surface";
+import { getPhotographyCard, getPhotographyPieces } from "@/lib/photography";
+import { getStudyDocuments } from "@/lib/study-documents";
 import { getPiece, getPublishedPieces, resolveImageSource, type Piece } from "@/lib/work";
 
 type Query = Record<string, string | string[] | undefined>;
@@ -13,6 +15,10 @@ type Props = {
 
 export const dynamic = "force-dynamic";
 
+const SLUG_ALIASES: Record<string, string> = {
+  multiples: "plurality",
+};
+
 export function generateStaticParams() {
   return [...getPublishedPieces().map((piece) => ({ slug: piece.slug })), { slug: "photography" }];
 }
@@ -22,50 +28,38 @@ function appendQuery(params: URLSearchParams, key: string, value: string | strin
   else if (value) params.set(key, value);
 }
 
-function backHref(query: Query) {
+function navigationParams(query: Query) {
   const params = new URLSearchParams();
   appendQuery(params, "tag", query.tag);
   appendQuery(params, "view", query.view);
   appendQuery(params, "sort", query.sort);
+  return params;
+}
+
+function hasPhotographyParent(query: Query) {
+  return Array.isArray(query.from)
+    ? query.from.includes("photography")
+    : query.from === "photography";
+}
+
+function backHref(query: Query) {
+  const params = navigationParams(query);
   const value = params.toString();
-  return value ? `/?${value}` : "/";
+  const parent = hasPhotographyParent(query) ? "/work/photography" : "/";
+  return value ? `${parent}?${value}` : parent;
 }
 
-async function photographyPiece(): Promise<Piece> {
-  const gallery = await getPhotographyImages();
-  const images = gallery.map((image) => ({
-    src: image.url,
-    alt: "Photography archive frame",
-    focal: [0.5, 0.5] as [number, number],
-    label: image.pathname
-      .replace(/^gallery\//, "")
-      .replace(/\.[^.]+$/, "")
-      .replace(/[-_]+/g, " "),
-  }));
-  return {
-    slug: "photography",
-    title: "Photography",
-    tags: ["Creative Direction", "Photography"],
-    kind: "series",
-    display: "mosaic",
-    featured: false,
-    published: true,
-    weight: 3,
-    order: 5,
-    shape: "landscape",
-    sortYear: new Date().getFullYear(),
-    displayDate: "Archive",
-    study: false,
-    description: "An evolving visual archive of photographs, experiments, and commissioned frames.",
-    descriptor: `${images.length} series · portrait, editorial, film`,
-    images,
-    frames: images.length,
-    blocks: images.length,
-    content: "An evolving visual archive of photographs, experiments, and commissioned frames.",
-  };
+function photographyDetailQuery(query: Query) {
+  const params = navigationParams(query);
+  params.set("from", "photography");
+  return params.toString();
 }
 
-async function resolvePiece(slug: string) {
+function photographyPiece(): Piece {
+  return { ...getPhotographyCard(), content: "" };
+}
+
+function resolvePiece(slug: string) {
   return slug === "photography" ? photographyPiece() : getPiece(slug);
 }
 
@@ -102,9 +96,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function WorkPiecePage({ params, searchParams }: Props) {
   const [{ slug }, query] = await Promise.all([params, searchParams]);
+  const alias = SLUG_ALIASES[slug];
+  if (alias) {
+    const redirectParams = new URLSearchParams();
+    for (const [key, value] of Object.entries(query)) appendQuery(redirectParams, key, value);
+    const suffix = redirectParams.toString();
+    redirect(suffix ? `/work/${alias}?${suffix}` : `/work/${alias}`);
+  }
   const piece = await resolvePiece(slug);
   if (!piece) notFound();
   const returnTo = backHref(query);
+
+  if (slug === "photography") {
+    return (
+      <PhotographySurface
+        pieces={getPhotographyPieces()}
+        backHref={returnTo}
+        detailQuery={photographyDetailQuery(query)}
+      />
+    );
+  }
 
   if (piece.kind === "study") {
     return (
@@ -112,6 +123,7 @@ export default async function WorkPiecePage({ params, searchParams }: Props) {
         piece={piece}
         backHref={returnTo}
         imageSources={studyImageSources(piece.content)}
+        documents={getStudyDocuments(piece.slug)}
       />
     );
   }

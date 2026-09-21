@@ -31,7 +31,12 @@ function passwordMatches(provided: string | null, expected: string): boolean {
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const body = (await request.json()) as HandleUploadBody;
+  let body: HandleUploadBody;
+  try {
+    body = (await request.json()) as HandleUploadBody;
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
+  }
 
   try {
     const jsonResponse = await handleUpload({

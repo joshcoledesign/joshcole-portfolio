@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { PromptLine } from "@/components/prompt-line";
 import type { Piece } from "@/lib/work";
@@ -15,11 +15,25 @@ const DESKTOP_H = 625;
 const MOBILE_H = 1333;
 const GUTTER = 5;
 
+function youtubeId(value: string): string {
+  try {
+    const url = new URL(value);
+    if (url.hostname === "youtu.be") return url.pathname.slice(1);
+    if (url.pathname.startsWith("/embed/")) return url.pathname.split("/")[2] ?? "";
+    return url.searchParams.get("v") ?? "";
+  } catch {
+    return value;
+  }
+}
+
 export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: string }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const mapRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const activeRef = useRef<number | null>(null);
   const [mapWidth, setMapWidth] = useState(CANVAS_W);
 
   useEffect(() => {
@@ -35,6 +49,11 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
   const frameParam = searchParams.get("frame");
   const activeIndex = frameParam ? Number.parseInt(frameParam, 10) - 1 : -1;
   const active = activeIndex >= 0 && activeIndex < piece.images.length ? activeIndex : null;
+  const dialogOpen = active !== null;
+
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
 
   const setFrame = useCallback(
     (index: number | null) => {
@@ -48,20 +67,54 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
   );
 
   useEffect(() => {
-    if (active === null) return;
+    if (!dialogOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const focusFrame = requestAnimationFrame(() => closeRef.current?.focus());
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setFrame(null);
-      if (event.key === "ArrowLeft") setFrame((active - 1 + piece.images.length) % piece.images.length);
-      if (event.key === "ArrowRight") setFrame((active + 1) % piece.images.length);
+      const current = activeRef.current;
+      if (current === null) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setFrame(null);
+        return;
+      }
+      if (event.key === "ArrowLeft") {
+        const next = (current - 1 + piece.images.length) % piece.images.length;
+        activeRef.current = next;
+        setFrame(next);
+      }
+      if (event.key === "ArrowRight") {
+        const next = (current + 1) % piece.images.length;
+        activeRef.current = next;
+        setFrame(next);
+      }
+      if (event.key !== "Tab") return;
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'),
+      ).filter((element) => element.getClientRects().length > 0);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKeyDown);
-    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
+      cancelAnimationFrame(focusFrame);
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = previousOverflow;
+      previousFocus?.focus();
     };
-  }, [active, piece.images.length, setFrame]);
+  }, [dialogOpen, piece.images.length, setFrame]);
 
   const canvasH = mapWidth <= 900 ? MOBILE_H : DESKTOP_H;
   const frames = useMemo(
@@ -69,6 +122,18 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
     [piece.images],
   );
   const placed = useMemo(() => layout(frames, CANVAS_W, canvasH, []), [canvasH, frames]);
+  const markdownComponents = useMemo<Components>(() => ({
+    a({ href, children }) {
+      if (!href) return <>{children}</>;
+      if (!href.startsWith("/work/")) return <a href={href}>{children}</a>;
+
+      const next = new URLSearchParams(searchParams.toString());
+      next.delete("frame");
+      next.set("from", "photography");
+      const separator = href.includes("?") ? "&" : "?";
+      return <Link href={`${href}${separator}${next.toString()}`}>{children}</Link>;
+    },
+  }), [searchParams]);
 
   return (
     <div className={styles.page}>
@@ -84,6 +149,17 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
           <h1>{piece.title}</h1>
           <span className={styles.count}>{String(piece.frames).padStart(2, "0")} frames</span>
         </div>
+
+        {piece.video && youtubeId(piece.video) && (
+          <div className={styles.video}>
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${youtubeId(piece.video)}`}
+              title={`${piece.title} video`}
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        )}
 
         <div ref={mapRef} className={styles.map}>
           {placed.length ? (
@@ -123,19 +199,22 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
         </div>
 
         <div className={styles.prose}>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{piece.content || piece.description}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+            {piece.content || piece.description}
+          </ReactMarkdown>
         </div>
       </main>
 
       {active !== null && (
         <div
+          ref={dialogRef}
           className={styles.dialog}
           role="dialog"
           aria-modal="true"
           aria-label={`Frame ${active + 1} of ${piece.frames}`}
           onClick={() => setFrame(null)}
         >
-          <button className={styles.close} type="button" aria-label="Close frame" onClick={() => setFrame(null)}>
+          <button ref={closeRef} className={styles.close} type="button" aria-label="Close frame" onClick={() => setFrame(null)}>
             ✕
           </button>
           {piece.images.length > 1 && (
@@ -175,7 +254,9 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
             <div className={styles.storyIndex}>
               [{String(active + 1).padStart(2, "0")} / {String(piece.frames).padStart(2, "0")}]
             </div>
-            {piece.images[active].story || piece.images[active].alt}
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+              {piece.images[active].story || piece.images[active].alt}
+            </ReactMarkdown>
           </div>
         </div>
       )}

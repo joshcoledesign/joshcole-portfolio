@@ -74,7 +74,7 @@ export async function CommitLog() {
       <div className="commit-log-body" style={{ position: "relative", zIndex: 3 }}>
         {/* Command */}
         <div style={{ marginBottom: 6 }}>
-          <span style={{ color: "#6a6a70" }}>{">"} </span>
+          <span style={{ color: "#8a8a90" }}>{">"} </span>
           <span
             style={{
               color: "#26c5ff",
@@ -95,7 +95,7 @@ export async function CommitLog() {
               textOverflow: "ellipsis",
             }}
           >
-            <span style={{ color: "#5a5a60" }}>{c.hash}</span>
+            <span style={{ color: "#8a8a90" }}>{c.hash}</span>
             <span style={{ color: "#e8e8ea", marginLeft: "2ch" }}>
               {c.message}
             </span>
@@ -106,7 +106,7 @@ export async function CommitLog() {
         <div style={{
           marginTop: 8,
           paddingBottom: 10,
-          color: "#5a5a60",
+          color: "#8a8a90",
           fontStyle: "italic",
           whiteSpace: "nowrap",
           overflow: "hidden",

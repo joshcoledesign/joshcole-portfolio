@@ -3,6 +3,12 @@
   width: min(100%, 1244px);
   margin: 0 auto;
   padding: 0 32px 40px;
+  /* Row-height transitions must not generate counter-scroll events. */
+  overflow-anchor: none;
+}
+
+.wrap.wrapList {
+  padding-bottom: 0;
 }
 
 .intro {
@@ -36,6 +42,17 @@
   color: #b4b6c2;
 }
 
+.controlsSticky {
+  --primary-row-height: 62px;
+
+  position: sticky;
+  z-index: 40;
+  top: 0;
+  background: #15161c;
+  box-shadow: 0 0 0 100vmax #15161c;
+  clip-path: inset(0 -100vmax);
+}
+
 .flagbar {
   position: relative;
   background: #15161c;
@@ -45,13 +62,43 @@
   font-size: 12px;
 }
 
+.secondaryReveal {
+  overflow: hidden;
+  max-height: 52px;
+  transition: max-height 360ms ease-in-out;
+}
+
+.statusReveal {
+  overflow: hidden;
+  max-height: 42px;
+  transition: max-height 360ms ease-in-out;
+}
+
+.secondaryReveal > *,
+.statusReveal > * {
+  transition: transform 360ms ease-in-out;
+}
+
+.controlsStageOne .statusReveal,
+.controlsStageTwo .secondaryReveal {
+  max-height: 0;
+}
+
+.controlsStageOne .status {
+  transform: translateY(-100%);
+}
+
+.controlsStageTwo .flagrowSecondary {
+  transform: translateY(-100%);
+}
+
+.controlsSticky::before,
+.controlsSticky::after,
 .flagbar::before,
-.flagrowSecondary::before,
-.status::before,
-.status::after {
+.flagbar::after {
   content: "";
   position: absolute;
-  z-index: 2;
+  z-index: 5;
   left: 50%;
   width: 100vw;
   height: 1px;
@@ -60,16 +107,20 @@
   background: #2c2d33;
 }
 
+.controlsSticky::before {
+  top: 0;
+}
+
+.controlsSticky::after {
+  bottom: 0;
+}
+
 .flagbar::before {
-  top: 0;
+  top: var(--primary-row-height);
 }
 
-.status::before {
-  top: 0;
-}
-
-.status::after {
-  bottom: 1px;
+.flagbar::after {
+  bottom: 0;
 }
 
 .flagrowPrimary,
@@ -84,7 +135,10 @@
 }
 
 .flagrowPrimary {
-  height: 42px;
+  position: relative;
+  z-index: 3;
+  height: var(--primary-row-height);
+  background: #15161c;
   justify-content: space-between;
   overflow: hidden;
   white-space: nowrap;
@@ -92,12 +146,12 @@
 
 .flagrowSecondary {
   position: relative;
+  z-index: 2;
+  min-height: 52px;
   flex-wrap: wrap;
+  background: #15161c;
 }
 
-.flagrowSecondary::before {
-  top: 0;
-}
 
 .flaggroup,
 .viewgroup {
@@ -141,7 +195,7 @@
 }
 
 .bracket {
-  color: var(--flag-color, #6a6a70);
+  color: var(--flag-color, #8a8a90);
 }
 
 .toggle:hover,
@@ -151,6 +205,8 @@
 
 .toggle:focus-visible,
 .sortControl:focus-visible,
+.drawerTrigger:focus-visible,
+.drawerClose:focus-visible,
 .tile:focus-visible,
 .rw:focus-visible {
   outline: 2px solid #26c5ff;
@@ -183,6 +239,7 @@
 .status {
   box-sizing: border-box;
   position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   height: 42px;
@@ -209,6 +266,10 @@
   margin-bottom: 25px;
   margin-left: calc(50% - 50vw + 30px);
   margin-top: 30px;
+}
+
+.mapPending {
+  visibility: hidden;
 }
 
 .hide {
@@ -242,11 +303,14 @@
 
 .pinLabel {
   position: absolute;
-  z-index: 7;
+  z-index: 20;
+  isolation: isolate;
   top: 13px;
   left: 14px;
   padding: 3px 6px;
-  background: rgba(10, 11, 15, 0.72);
+  background: #0a0b0f;
+  opacity: 1;
+  filter: none;
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 10px;
   font-weight: 600;
@@ -433,8 +497,7 @@
 }
 
 .ls {
-  margin-top: 22px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 0;
   background: #15161c;
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 13px;
@@ -442,30 +505,84 @@
 
 .hd,
 .rw {
+  position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: 26px minmax(0, 1fr) 170px 100px 150px;
+  grid-template-columns:
+    26px
+    minmax(180px, 0.8fr)
+    minmax(240px, 1.6fr)
+    100px
+    130px;
   gap: 14px;
   align-items: center;
-  padding: 9px 16px;
+  padding: 14px 16px;
+}
+
+.hd::before,
+.rw::before,
+.tot::before,
+.hd::after,
+.rw::after,
+.tot::after {
+  content: "";
+  position: absolute;
+  right: 50%;
+  left: 50%;
+  margin-right: -50vw;
+  margin-left: -50vw;
+  pointer-events: none;
+}
+
+.hd::before,
+.rw::before,
+.tot::before {
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  background: #15161c;
+}
+
+.hd::after,
+.rw::after,
+.tot::after {
+  bottom: 0;
+  height: 1px;
+  background: #2c2d33;
 }
 
 .hd {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  color: #6a6a70;
+  box-sizing: border-box;
+  height: 42px;
+  padding-top: 0;
+  padding-bottom: 0;
+  color: #8a8a90;
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
+.hd::before {
+  background: #1b1c23;
+}
+
 .rw {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   color: #acacb1;
   text-decoration: none;
 }
 
-.rw:hover {
-  background: rgba(38, 197, 255, 0.07);
+.rw::before {
+  transition: background-color 140ms ease;
+}
+
+.rw:hover,
+.rw:focus-visible {
   color: #e8e8ea;
+}
+
+.rw:hover::before,
+.rw:focus-visible::before {
+  background: #1d1e25;
 }
 
 .nm,
@@ -491,9 +608,15 @@
 }
 
 .tot {
+  position: relative;
+  isolation: isolate;
   padding: 10px 16px;
-  color: #6a6a70;
+  color: #8a8a90;
   font-size: 12px;
+}
+
+:global(body):has(.wrapList) :global(footer) {
+  margin-top: 0;
 }
 
 .empty {
@@ -510,21 +633,27 @@
 
   .hd,
   .rw {
-    grid-template-columns: 22px minmax(0, 1fr) 90px;
+    grid-template-columns: 22px minmax(0, 1fr) 100px;
     gap: 10px;
   }
 
-  .hd span:nth-child(n + 4),
-  .rw span:nth-child(n + 4) {
+  .hd span:nth-child(3),
+  .rw span:nth-child(3),
+  .hd span:nth-child(5),
+  .rw span:nth-child(5) {
     display: none;
   }
 }
 
 @media (min-width: 768px) and (max-width: 800px) {
+  .controlsSticky {
+    --primary-row-height: 124px;
+  }
+
   .flagrowPrimary {
     align-items: flex-start;
     flex-direction: column;
-    height: 104px;
+    height: var(--primary-row-height);
     gap: 8px;
     justify-content: center;
   }
@@ -544,6 +673,10 @@
 }
 
 @media (max-width: 767px) {
+  .controlsSticky {
+    --primary-row-height: 124px;
+  }
+
   .wrap {
     padding: 0 18px 40px;
   }
@@ -563,7 +696,7 @@
   .flagrowPrimary {
     align-items: flex-start;
     flex-direction: column;
-    height: 104px;
+    height: var(--primary-row-height);
     gap: 8px;
     justify-content: center;
     white-space: nowrap;
@@ -584,6 +717,206 @@
     overflow: hidden;
   }
 
+  .secondaryReveal {
+    max-height: 120px;
+  }
+
+}
+
+.drawerTrigger,
+.drawerBackdrop,
+.controlsDrawer,
+.tabletControlLabel,
+.compactControlLabel {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .controlsSticky {
+    --primary-row-height: 62px;
+  }
+
+  .flagrowPrimary {
+    align-items: center;
+    flex-direction: row;
+    height: var(--primary-row-height);
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  .flaggroup {
+    max-width: 100%;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+
+  .viewgroup > .toggle,
+  .viewgroup > .sortControl {
+    display: none;
+  }
+
+  .viewgroup {
+    max-width: none;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    overflow: visible;
+  }
+
+  .secondaryReveal,
+  .statusReveal {
+    display: none;
+  }
+
+  .drawerTrigger,
+  .drawerClose {
+    appearance: none;
+    align-items: center;
+    gap: 5px;
+    border: 0;
+    padding: 4px 0;
+    background: transparent;
+    color: #26c5ff;
+    font: inherit;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+
+  .drawerTrigger {
+    display: inline-flex;
+  }
+
+  .tabletControlLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .drawerBackdrop {
+    appearance: none;
+    position: fixed;
+    z-index: 60;
+    inset: 0;
+    display: block;
+    border: 0;
+    padding: 0;
+    background: rgba(8, 8, 12, 0.72);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 360ms ease-in-out,
+      visibility 0s linear 360ms;
+  }
+
+  .drawerBackdropOpen {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  .controlsDrawer {
+    position: fixed;
+    z-index: 70;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: min(420px, calc(100vw - 32px));
+    height: 100dvh;
+    border-left: 1px solid #2c2d33;
+    background: #15161c;
+    color: #b4b6c2;
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 12px;
+    transform: translateX(100%);
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 360ms ease-in-out,
+      visibility 0s linear 360ms;
+  }
+
+  .controlsDrawerOpen {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  .drawerHeader {
+    box-sizing: border-box;
+    display: flex;
+    min-height: 62px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 22px;
+    border-bottom: 1px solid #2c2d33;
+  }
+
+  .drawerClose {
+    display: inline-flex;
+    min-height: 44px;
+  }
+
+  .drawerBody {
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 0 22px 24px;
+  }
+
+  .drawerSection {
+    margin: 0;
+    padding: 22px 0;
+    border-bottom: 1px solid #2c2d33;
+  }
+
+  .drawerLabel {
+    margin: 0 0 14px;
+    color: #8a8a90;
+    font: inherit;
+    font-weight: 400;
+  }
+
+  .drawerOptions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
+  }
+
+  .drawerOptions .toggle,
+  .drawerOptions .sortControl {
+    min-height: 44px;
+  }
+
+  .drawerStatus {
+    margin: auto 0 0;
+    padding: 22px 0 0;
+    color: #8a8a90;
+    line-height: 1.55;
+  }
+}
+
+@media (min-width: 660px) and (max-width: 1023px) {
+  .drawerPillars {
+    display: none;
+  }
+}
+
+@media (max-width: 659px) {
+  .flaggroup .pillarToggle,
+  .tabletControlLabel {
+    display: none;
+  }
+
+  .compactControlLabel {
+    display: inline;
+  }
 }
 
 @media (hover: hover) {
@@ -605,7 +938,20 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .drawerBackdrop,
+  .controlsDrawer,
+  .secondaryReveal,
+  .statusReveal,
+  .secondaryReveal > *,
+  .statusReveal > * {
+    transition: none;
+  }
+
   .tile {
+    transition: none;
+  }
+
+  .rw::before {
     transition: none;
   }
 }

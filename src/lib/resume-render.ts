@@ -5,7 +5,7 @@
 // shell; this file only lays content into fixed markup, so editing content in
 // resume.ts can never disturb the design.
 
-import { RESUME_SHELL } from "./resume-shell";
+import { RESUME_SHELL } from "./resume-shell-print";
 import type { ResumeData, ResumeRole } from "./resume";
 
 /** Escape the three characters that are unsafe in HTML text/attribute content. */
@@ -18,15 +18,15 @@ function esc(s: string): string {
 function contactHtml(c: ResumeData["contact"]): string {
   const sep = '<span class="sep">·</span>';
   return (
-    esc(c.location) +
+    `<span class="contact-item">${esc(c.location)}</span>` +
     sep +
-    `<a href="${c.site.href}">${esc(c.site.label)}</a>` +
+    `<a class="contact-item" href="${c.site.href}">${esc(c.site.label)}</a>` +
     sep +
-    `<a href="${c.linkedin.href}">${esc(c.linkedin.label)}</a>` +
+    `<a class="contact-item" href="${c.linkedin.href}">${esc(c.linkedin.label)}</a>` +
     sep +
-    `<a href="mailto:${c.email}">${esc(c.email)}</a>` +
+    `<a class="contact-item" href="mailto:${c.email}">${esc(c.email)}</a>` +
     sep +
-    esc(c.phone)
+    `<span class="contact-item">${esc(c.phone)}</span>`
   );
 }
 
@@ -97,8 +97,8 @@ export function renderResumeBody(data: ResumeData): string {
   const parts = [
     header,
     summary,
-    skills,
     roleSectionHtml("Selected AI Work", data.selectedWork),
+    skills,
     roleSectionHtml("Experience", data.experience),
     roleSectionHtml("Earlier Career", data.earlier, "earlier"),
   ];
@@ -125,20 +125,17 @@ export function renderResumePlainText(data: ResumeData): string {
   const contactLine = [c.location, c.site.label, c.linkedin.label, c.email, c.phone].join(
     " | "
   );
-  // Plaintext masthead uses an ASCII separator in place of the display "·".
-  const disciplinePlain = data.discipline.replace(" · ", " / ");
-
   const blocks: string[] = [];
-  blocks.push(`${data.name.toUpperCase()}\n${disciplinePlain}\n${contactLine}`);
+  blocks.push(`${data.name.toUpperCase()}\n${data.discipline}\n${contactLine}`);
 
   blocks.push("SUMMARY");
   for (const p of data.summary) blocks.push(p);
 
-  blocks.push("SKILLS & TOOLS");
-  for (const s of data.skills) blocks.push(`${s.label}: ${s.items}`);
-
   blocks.push("SELECTED AI WORK");
   for (const r of data.selectedWork) blocks.push(roleText(r));
+
+  blocks.push("SKILLS & TOOLS");
+  for (const s of data.skills) blocks.push(`${s.label}: ${s.items}`);
 
   blocks.push("EXPERIENCE");
   for (const r of data.experience) blocks.push(roleText(r));
@@ -154,8 +151,14 @@ export function renderResumePlainText(data: ResumeData): string {
 // ── Full document ────────────────────────────────────────────────────────────
 
 export function renderResumeDocument(data: ResumeData): string {
-  return RESUME_SHELL.replace("%%PLAINTEXT%%", () => renderResumePlainText(data)).replace(
-    "%%BODY%%",
-    () => renderResumeBody(data)
-  );
+  return RESUME_SHELL.replace(
+    "<title>Josh Cole — Creative Technologist · AI</title>",
+    `<title>${esc(data.name)} — ${esc(data.discipline)}</title>`
+  )
+    .replace(
+      '<meta name="author" content="Josh Cole">',
+      `<meta name="author" content="Josh Cole">\n<!-- resume-version: ${esc(data.resumeVersion)} -->`
+    )
+    .replace("%%PLAINTEXT%%", () => renderResumePlainText(data))
+    .replace("%%BODY%%", () => renderResumeBody(data));
 }

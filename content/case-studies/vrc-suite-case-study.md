@@ -3,8 +3,8 @@ title: "VRC Suite"
 volume: "ux-enterprise"
 slug: "vrc-suite"
 role: "UX Lead — four products"
-year: "Four-year engagement"
-summary: "Four products, one connected suite, 80,000–100,000+ requests a month in regulated industries."
+year: "2022–2026"
+summary: "Four products, one connected suite, high-volume records requests in regulated industries."
 descriptor: "a four-product records suite"
 thumbnail: "/case-studies/vrc/grid.jpg"
 heroImage: "/case-studies/vrc/pre-story-flow.png"
@@ -12,9 +12,10 @@ kind: "study"
 display: "single"
 featured: false
 weight: 2
-order: 6
-sortYear: 2021  # TODO(josh): provisional — confirm most-recent year
-displayDate: "Four-year engagement"
+order: 5
+shape: "landscape"
+sortYear: 2026
+displayDate: "2022–2026"
 tags:
   - "UX Leadership"
   - "Enterprise"
@@ -24,7 +25,16 @@ tags:
 
 # VRC Suite
 
-Vital Records Control is one of the largest records and information management companies in the U.S., handling the full information lifecycle for regulated industries from healthcare to banking to government. I led UX for four of their products over four years: VitalChart, Payer Audit, Pricing Tables, and Vital Retain. Four products, one connected suite, 80,000 to 100,000-plus requests moving through the systems each month.
+## In brief
+
+- [The four products](#the-four-products): VitalChart, Payer Audit, Pricing Tables, Vital Retain.
+- [The engagement](#the-engagement): four years, a team of four, hands-on every day.
+- [What it took](#what-it-took): four stacks, rotating leadership, and documentation as the discipline that held.
+- [How the products think](#how-the-products-think): audit logs everywhere, calm bulk operations, status as color, a person on every judgment call.
+- [What I built, in screens](#what-i-built-in-screens): a representative slice of the suite.
+- [What I take from it](#what-i-take-from-it): coherence across a suite is a documentation discipline.
+
+Vital Records Control is one of the largest records and information management companies in the U.S., handling the full information lifecycle for regulated industries from healthcare to banking to government. I led UX for four of their products over four years: VitalChart, Payer Audit, Pricing Tables, and Vital Retain. Four products, one connected suite, a high volume of requests moving through the systems every month.
 
 The question underneath all four: when a regulator asks "prove it," can the system answer?
 
@@ -56,6 +66,8 @@ Four years. I led a team of four UX/UI designers and stayed hands-on every day: 
 
 I authored the information architecture, user flows, and system maps across all four products. On the broader IA I co-authored with another architect who brought depth on specific pieces, like the AWS-based address normalization service Payer Audit depends on. Everything else was mine to design and direct. The team delivered IA, flows, design systems, screen designs, and product strategy support across the four products, and we documented as we built.
 
+![Vital Retain information architecture and flow map: login, MFA, dashboard, assets, schedules and policies, user management](/case-studies/vrc/vr-flow-1.png)
+
 ---
 
 ## What it took
@@ -76,9 +88,9 @@ Four principles ran through all four products.
 
 **Audit logs everywhere.** Every meaningful action in Vital Retain, every status change in Payer Audit, every rate adjustment in Pricing Tables writes an audit event. The system assumes someone will need to reconstruct what happened.
 
-![Asset detail view with its audit history](/case-studies/vrc/asset-details.png)
+![Pricing Tables administration with the history panel open: who changed the Texas rate, when, and against which legal reference](/case-studies/vrc/pt-history-audit.png)
 
-**Bulk operations, calm interfaces.** Payer Audit processes tens of thousands of requests a month. Vital Retain assigns policies across thousands of assets. High-volume operations had to feel calm: a filterable list, a side panel, and an explicit confirmation when an action touches a lot of things. The "89 Assets Will Be Affected" modal exists because silent bulk changes are how regulated-industry products lose trust.
+**Bulk operations, calm interfaces.** Payer Audit processes requests by the batch, thousands at a time. Vital Retain assigns retention policies across a client's entire inventory, boxes and files alike. High-volume operations had to feel calm: a filterable list, a side panel, and an explicit confirmation when an action touches a lot of things. The "89 Assets Will Be Affected" modal exists because silent bulk changes are how regulated-industry products lose trust.
 
 ![Confirmation dialog: 89 assets will be affected by this policy update](/case-studies/vrc/confirmation-dialog.png)
 
@@ -96,18 +108,18 @@ Four principles ran through all four products.
 
 Dashboards, record and asset detail pages, multi-step ingestion flows, rule administration, bulk action panels, audit logs, multi-tenant customer management, status pipelines, and a state-by-state pricing editor with hundreds of rule cards tied to legal references and effective dates. These are a representative slice, not the inventory.
 
-![Rule edit view](/case-studies/vrc/edit-view.png)
+![Pricing Tables rate editor: Texas State Disability and Worker's Comp overrides](/case-studies/vrc/edit-view.png)
 
 ![ROI record detail after upload](/case-studies/vrc/roi-detail-uploaded.png)
 
-![Suite dashboard](/case-studies/vrc/dashboard-1.png)
+![Vital Retain asset detail with its audit history](/case-studies/vrc/asset-details.png)
+
+![Vital Retain dashboard: risk alerts, retention updates, asset summary](/case-studies/vrc/dashboard-1.png)
 
 ---
 
 ## What I take from it
 
 Coherence across a product suite is mostly a documentation discipline, not a design-system discipline. A design system gets you consistent buttons. The feeling that four products on four stacks belong to the same company comes from someone deciding, over and over, what the suite's point of view is on each new question, and writing it down so the next person doesn't re-decide it.
-
-![Pricing Tables history and audit trail](/case-studies/vrc/pt-history-audit.png)
 
 And in long engagements with rotating leadership on the client side, the design team becomes the keeper of institutional memory. It's not in the contract. It's the work that makes the rest of the work possible.

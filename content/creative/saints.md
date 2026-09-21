@@ -6,6 +6,7 @@ processLine: "> photoshop composite · 5–8 studio frames · single model, mult
 credit: ""
 slug: saints
 thumbPosition: top
+thumbnail: /creative/saints/saints-birdcage.jpg
 images:
   - /case-studies/saints/saints-01.png
   - /case-studies/saints/saints-02.png
@@ -15,7 +16,7 @@ images:
 kind: "series"
 display: "mosaic"
 featured: false
-weight: 1
+weight: 3
 order: 13
 shape: "square"
 sortYear: 2015  # TODO(josh): provisional — date owed
@@ -26,6 +27,4 @@ tags:
   - "Gallery"
 ---
 
-Old religious painting put its saints dead center — venerated, lit, untouchable, the whole composition bent around them. Saints borrows those poses and puts a woman in that position and means it. Not the muse off to the side. The icon at the center, and the power that position carries.
-
-Look closer and the figures around her are also her — the same woman, venerating herself, kneeling at her own edges. The surreal objects keep it from resolving too cleanly: the cage, the relics, reverence and unease held in the same frame. The series doesn't explain her. It puts her where the sacred goes — without her, none of the rest of it — and lets the contradiction stand.
+One subject in camera, multiple perspectives, a touch of compositing.

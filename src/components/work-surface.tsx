@@ -1,17 +1,20 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PromptLine } from "@/components/prompt-line";
 import type { PieceCard, PieceImage } from "@/lib/work";
 import { PILLARS, tagSlug } from "@/lib/tags";
-import { layoutBands, type Placed } from "@/lib/treemap";
+import { layoutIntrinsicBands, type IntrinsicLayout, type Placed } from "@/lib/treemap";
 import styles from "./work-surface.module.css";
 
 const CANVAS_W = 1000;
-const DESKTOP_H = 900;
 const GUTTER = 15;
+const DESKTOP_BREAKPOINT = 1024;
+const WIDE_DESKTOP_BREAKPOINT = 1500;
+const CONTROL_COLLAPSE_DISTANCE = 48;
+const CONTROL_INPUT_INTENT_WINDOW = 600;
 
 const DOMAIN_FLAGS = [
   "Enterprise",
@@ -44,39 +47,138 @@ function pillarFor(piece: PieceCard): (typeof PILLARS)[number] {
   return PILLARS.find((pillar) => piece.tags.includes(pillar)) ?? "Creative Direction";
 }
 
-function photographyFrames(group: PieceCard): PieceCard[] {
-  return group.images.map((image, index) => ({
-    ...group,
-    slug: `photography-frame-${String(index + 1).padStart(2, "0")}`,
-    title: image.label || `Photography ${String(index + 1).padStart(2, "0")}`,
-    descriptor: "an archive frame",
-    display: "single",
-    images: [image],
-    frames: 1,
-    blocks: 1,
-  }));
-}
-
 function mapLayout(
   pieces: PieceCard[],
   feats: PieceCard[],
   canvasW: number,
-  canvasH: number,
-): Placed<PieceCard>[] {
-  if (canvasW < 1024) {
+  usePhotographyCluster: boolean,
+): IntrinsicLayout<PieceCard> {
+  if (canvasW < DESKTOP_BREAKPOINT) {
     const columns = canvasW < 640 ? 1 : 2;
     const rows = Math.max(Math.ceil(pieces.length / columns), 1);
     const cellW = CANVAS_W / columns;
-    const cellH = canvasH / rows;
-    return pieces.map((piece, index) => ({
-      piece,
-      x: (index % columns) * cellW,
-      y: Math.floor(index / columns) * cellH,
-      w: cellW,
-      h: cellH,
-    }));
+    const cellH = columns === 1 ? 560 : 320;
+    return {
+      placed: pieces.map((piece, index) => ({
+        piece,
+        x: (index % columns) * cellW,
+        y: Math.floor(index / columns) * cellH,
+        w: cellW,
+        h: cellH,
+      })),
+      height: rows * cellH,
+    };
   }
-  return layoutBands(pieces, CANVAS_W, canvasH, feats, 1.4, 4);
+
+  const featuredLayout = canvasW >= WIDE_DESKTOP_BREAKPOINT ? "row" : "cluster";
+  const hasFeaturedSequence =
+    feats.length >= 3 &&
+    pieces[0] === feats[0] &&
+    pieces[1] === feats[1] &&
+    pieces[2] === feats[2];
+  const featuredSet = new Set(hasFeaturedSequence ? feats.slice(0, 3) : []);
+  const featuredRects: Placed<PieceCard>[] = [];
+  let featuredHeight = 0;
+
+  if (hasFeaturedSequence && featuredLayout === "row") {
+    const tileWidth = CANVAS_W / 3;
+    featuredHeight = tileWidth / 1.4;
+    feats.slice(0, 3).forEach((piece, index) => {
+      featuredRects.push({
+        piece,
+        x: index * tileWidth,
+        y: 0,
+        w: tileWidth,
+        h: featuredHeight,
+        pin: true,
+      });
+    });
+  } else if (hasFeaturedSequence) {
+    const leadWidth = CANVAS_W * (1.5 / 3.5);
+    const stackWidth = CANVAS_W - leadWidth;
+    featuredHeight = leadWidth / 1.4;
+    const stackHeight = featuredHeight / 2;
+    featuredRects.push(
+      { piece: feats[0], x: 0, y: 0, w: leadWidth, h: featuredHeight, pin: true },
+      { piece: feats[1], x: leadWidth, y: 0, w: stackWidth, h: stackHeight, pin: true },
+      {
+        piece: feats[2],
+        x: leadWidth,
+        y: stackHeight,
+        w: stackWidth,
+        h: stackHeight,
+        pin: true,
+      },
+    );
+  }
+
+  const rest = pieces.filter((piece) => !featuredSet.has(piece));
+  if (usePhotographyCluster && hasFeaturedSequence) {
+    const bySlug = new Map(rest.map((piece) => [piece.slug, piece]));
+    const facedeals = bySlug.get("facedeals");
+    const vrc = bySlug.get("vrc-suite");
+    const einstein = bySlug.get("einstein-bros-bagels");
+    const hype = bySlug.get("hype-js");
+    const photography = bySlug.get("photography");
+
+    if (facedeals && vrc && einstein && hype && photography) {
+      const clusterPieces = [facedeals, vrc, einstein, hype, photography];
+      const clusterSet = new Set(clusterPieces);
+      const clusterHeight = CANVAS_W / 3;
+      const rowHeight = clusterHeight / 2;
+      const photographyWidth = clusterHeight;
+      const leftWidth = CANVAS_W - photographyWidth;
+      const smallWidth = leftWidth / 3;
+      const largeWidth = leftWidth - smallWidth;
+      const clusterY = featuredHeight;
+      const clusterRects: Placed<PieceCard>[] = [
+        { piece: facedeals, x: 0, y: clusterY, w: smallWidth, h: rowHeight },
+        { piece: vrc, x: smallWidth, y: clusterY, w: largeWidth, h: rowHeight },
+        {
+          piece: einstein,
+          x: 0,
+          y: clusterY + rowHeight,
+          w: largeWidth,
+          h: rowHeight,
+        },
+        {
+          piece: hype,
+          x: largeWidth,
+          y: clusterY + rowHeight,
+          w: smallWidth,
+          h: rowHeight,
+        },
+        {
+          piece: photography,
+          x: leftWidth,
+          y: clusterY,
+          w: photographyWidth,
+          h: clusterHeight,
+        },
+      ];
+      const remaining = rest.filter((piece) => !clusterSet.has(piece));
+      const remainingY = clusterY + clusterHeight;
+      const remainingLayout = layoutIntrinsicBands(remaining, CANVAS_W, 1.4, 4);
+
+      return {
+        placed: [
+          ...featuredRects,
+          ...clusterRects,
+          ...remainingLayout.placed.map((rect) => ({ ...rect, y: rect.y + remainingY })),
+        ],
+        height: remainingY + remainingLayout.height,
+      };
+    }
+  }
+
+  const restLayout = layoutIntrinsicBands(rest, CANVAS_W, 1.4, 4);
+  return {
+    placed: [
+      ...featuredRects,
+      ...restLayout.placed.map((rect) => ({ ...rect, y: rect.y + featuredHeight })),
+    ],
+    height: featuredHeight + restLayout.height,
+  };
 }
 
 export function WorkSurface({ pieces, featuredOrder }: Props) {
@@ -90,16 +192,181 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
   const sort: SortMode = searchParams.get("sort") === "date" ? "date" : "arranged";
 
   const mapRef = useRef<HTMLDivElement>(null);
-  const [canvasW, setCanvasW] = useState(CANVAS_W);
-  useEffect(() => {
+  const controlsRef = useRef<HTMLDivElement>(null);
+  const drawerRef = useRef<HTMLElement>(null);
+  const drawerTriggerRef = useRef<HTMLButtonElement>(null);
+  const drawerCloseRef = useRef<HTMLButtonElement>(null);
+  const controlStageRef = useRef<0 | 1 | 2>(0);
+  const [canvasW, setCanvasW] = useState(DESKTOP_BREAKPOINT);
+  const [layoutReady, setLayoutReady] = useState(false);
+  const [controlStage, setControlStage] = useState<0 | 1 | 2>(0);
+  const [panelOpen, setPanelOpen] = useState(false);
+  useLayoutEffect(() => {
     const element = mapRef.current;
     if (!element) return;
+    const measure = (width: number) => {
+      if (width > 0) setCanvasW(width);
+      setLayoutReady(true);
+    };
+    measure(element.getBoundingClientRect().width);
     const observer = new ResizeObserver(([entry]) => {
-      if (entry?.contentRect.width) setCanvasW(entry.contentRect.width);
+      if (entry?.contentRect.width) measure(entry.contentRect.width);
     });
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let travel = 0;
+    let direction = 0;
+    let inputDirection = 0;
+    let inputDirectionExpiresAt = 0;
+    let touchY: number | null = null;
+
+    const rememberInputDirection = (nextDirection: number) => {
+      if (!nextDirection) return;
+      inputDirection = nextDirection;
+      inputDirectionExpiresAt = performance.now() + CONTROL_INPUT_INTENT_WINDOW;
+    };
+
+    const onWheel = (event: WheelEvent) => {
+      rememberInputDirection(Math.sign(event.deltaY));
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (["ArrowDown", "PageDown", "End"].includes(event.key) || (event.key === " " && !event.shiftKey)) {
+        rememberInputDirection(1);
+      } else if (["ArrowUp", "PageUp", "Home"].includes(event.key) || (event.key === " " && event.shiftKey)) {
+        rememberInputDirection(-1);
+      }
+    };
+
+    const onTouchStart = (event: TouchEvent) => {
+      touchY = event.touches[0]?.clientY ?? null;
+    };
+
+    const onTouchMove = (event: TouchEvent) => {
+      const nextTouchY = event.touches[0]?.clientY;
+      if (nextTouchY === undefined) return;
+      if (touchY !== null) rememberInputDirection(Math.sign(touchY - nextTouchY));
+      touchY = nextTouchY;
+    };
+
+    const onTouchEnd = () => {
+      touchY = null;
+    };
+
+    const commitStage = (next: number) => {
+      const stage = Math.max(0, Math.min(2, next)) as 0 | 1 | 2;
+      if (stage === controlStageRef.current) return;
+      controlStageRef.current = stage;
+      setControlStage(stage);
+    };
+
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+      lastScrollY = currentScrollY;
+
+      const controls = controlsRef.current;
+      if (!controls) return;
+      if (controls.getBoundingClientRect().top > 0.5) {
+        travel = 0;
+        direction = 0;
+        commitStage(0);
+        return;
+      }
+
+      const nextDirection = Math.sign(delta);
+      if (!nextDirection) return;
+      if (
+        performance.now() < inputDirectionExpiresAt &&
+        inputDirection &&
+        nextDirection !== inputDirection
+      ) {
+        return;
+      }
+      if (nextDirection !== direction) {
+        travel = 0;
+        direction = nextDirection;
+      }
+
+      travel += Math.abs(delta);
+      const steps = Math.floor(travel / CONTROL_COLLAPSE_DISTANCE);
+      if (!steps) return;
+      travel %= CONTROL_COLLAPSE_DISTANCE;
+      commitStage(controlStageRef.current + nextDirection * steps);
+    };
+
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const desktop = window.matchMedia(`(min-width: ${DESKTOP_BREAKPOINT}px)`);
+    const closeOnDesktop = () => {
+      if (desktop.matches) setPanelOpen(false);
+    };
+    closeOnDesktop();
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, []);
+
+  useEffect(() => {
+    if (!panelOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const focusFrame = requestAnimationFrame(() => drawerCloseRef.current?.focus());
+
+    const onPanelKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setPanelOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const drawer = drawerRef.current;
+      if (!drawer) return;
+      const focusable = Array.from(
+        drawer.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'),
+      ).filter((element) => element.offsetParent !== null);
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onPanelKeyDown);
+    return () => {
+      cancelAnimationFrame(focusFrame);
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onPanelKeyDown);
+      previousFocus?.focus();
+    };
+  }, [panelOpen]);
 
   const pushParams = useCallback(
     (next: URLSearchParams) => {
@@ -133,20 +400,29 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
   );
 
   const photography = pieces.find((piece) => piece.slug === "photography");
+  const collapsedPieces = [
+    ...pieces.filter(
+      (piece) => piece.slug !== "photography" && !piece.tags.includes("Photography"),
+    ),
+    ...(photography ? [photography] : []),
+  ];
   const releasePhotography =
     activeSet.has("photography") || activeSet.has("creative-direction");
-  const surfacePieces =
-    !photography || !releasePhotography || !photography.images.length
-      ? pieces
-      : [
-      ...pieces.filter((piece) => piece !== photography),
-      ...photographyFrames(photography),
-        ];
+  const surfacePieces = releasePhotography
+    ? pieces.filter((piece) => piece.slug !== "photography")
+    : collapsedPieces;
 
-  const filtered = !activeSet.size
+  // Photography is an expansion control as well as a visible flag: it releases
+  // the complete file-backed set without hiding the studies and the two
+  // standalone creative series. Any additional active flag still filters the
+  // expanded surface normally.
+  const filteringTags = activeTags.filter((tag) => tag !== "photography");
+  const filteringSet = new Set(filteringTags);
+
+  const filtered = !filteringSet.size
     ? surfacePieces
     : surfacePieces.filter((piece) =>
-        piece.tags.some((tag) => activeSet.has(tagSlug(tag))),
+        piece.tags.some((tag) => filteringSet.has(tagSlug(tag))),
       );
 
   const featCards = useMemo(
@@ -157,7 +433,7 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
     [featuredOrder, pieces],
   );
   const featSlugs = useMemo(() => new Set(featCards.map((piece) => piece.slug)), [featCards]);
-  const feats = activeSet.size || canvasW < 1024 ? [] : featCards;
+  const feats = activeSet.size || canvasW < DESKTOP_BREAKPOINT ? [] : featCards;
   const ordered = filtered.slice().sort((a, b) => {
     const rankA = featuredOrder.indexOf(a.slug);
     const rankB = featuredOrder.indexOf(b.slug);
@@ -177,26 +453,27 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
     }
     return b.sortYear - a.sortYear || a.title.localeCompare(b.title);
   });
-  const flowColumns = canvasW < 640 ? 1 : canvasW < 1024 ? 2 : 0;
-  const flowRows = flowColumns ? Math.max(Math.ceil(ordered.length / flowColumns), 1) : 0;
-  const canvasH = flowColumns
-    ? flowRows * (flowColumns === 1 ? 560 : 320)
-    : DESKTOP_H;
-  const placed = mapLayout(ordered, feats, canvasW, canvasH);
+  const layout = mapLayout(
+    ordered,
+    feats,
+    canvasW,
+    !activeSet.size && sort === "arranged",
+  );
+  const { placed, height: canvasH } = layout;
 
   const listed = ordered;
 
-  const studyCount = pieces.filter((piece) => piece.kind === "study").length;
-  const seriesCount = pieces.filter((piece) => piece.kind !== "study").length;
+  const studyCount = collapsedPieces.filter((piece) => piece.kind === "study").length;
+  const seriesCount = collapsedPieces.filter((piece) => piece.kind !== "study").length;
   const activeLabel = activeTags.join(" + ");
+
+  const statusText = activeSet.size
+    ? `${activeLabel} · ${filtered.length} pieces · click it again to clear`
+    : `${studyCount} studies · ${seriesCount} series · click a flag to filter`;
 
   const pieceHref = (piece: PieceCard) => {
     const state = new URLSearchParams(searchParams.toString());
     state.delete("frame");
-    if (piece.slug.startsWith("photography-frame-")) {
-      state.set("frame", piece.slug.slice(-2));
-      return `/work/photography?${state.toString()}`;
-    }
     const query = state.toString();
     return `/work/${piece.slug}${query ? `?${query}` : ""}`;
   };
@@ -204,7 +481,7 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
   return (
     <>
       <PromptLine />
-      <main className={styles.wrap}>
+      <main className={cx(styles.wrap, view === "ls" && styles.wrapList)}>
         <section className={styles.intro} aria-labelledby="work-title">
           <p className={styles.eyebrow}>Technology changes constantly. Human curiosity doesn&apos;t.</p>
           <h1 id="work-title">
@@ -219,65 +496,172 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
           </p>
         </section>
 
-        <div className={styles.flagbar} aria-label="Work controls">
-          <div className={styles.flagrowPrimary}>
-            <div className={styles.flaggroup}>
-              <span className={styles.path}>./work</span>
-              {PILLARS.map((pillar) => (
-                <FlagButton
-                  key={pillar}
-                  label={tagSlug(pillar)}
-                  color={PILLAR_COLORS[pillar]}
-                  pressed={activeSet.has(tagSlug(pillar))}
-                  onClick={() => toggleTag(tagSlug(pillar))}
-                />
-              ))}
+        <div
+          ref={controlsRef}
+          className={cx(
+            styles.controlsSticky,
+            controlStage >= 1 && styles.controlsStageOne,
+            controlStage >= 2 && styles.controlsStageTwo,
+          )}
+          aria-label="Work controls"
+        >
+          <div className={styles.flagbar}>
+            <div className={styles.flagrowPrimary}>
+              <div className={styles.flaggroup}>
+                <span className={styles.path}>./work</span>
+                {PILLARS.map((pillar) => (
+                  <FlagButton
+                    key={pillar}
+                    label={tagSlug(pillar)}
+                    color={PILLAR_COLORS[pillar]}
+                    pressed={activeSet.has(tagSlug(pillar))}
+                    onClick={() => toggleTag(tagSlug(pillar))}
+                  />
+                ))}
+              </div>
+              <div className={styles.viewgroup}>
+                <FlagButton label="map" pressed={view === "map"} onClick={() => setParam("view", null)} />
+                <FlagButton label="ls" pressed={view === "ls"} onClick={() => setParam("view", "ls")} />
+                <button
+                  type="button"
+                  className={styles.sortControl}
+                  aria-label={`Sort work by ${sort === "arranged" ? "date" : "arranged order"}`}
+                  onClick={() => setParam("sort", sort === "arranged" ? "date" : null)}
+                >
+                  <span>sort={sort}</span>
+                  <span className={styles.selectArrow} aria-hidden="true">↓</span>
+                </button>
+                <button
+                  ref={drawerTriggerRef}
+                  type="button"
+                  className={styles.drawerTrigger}
+                  aria-label="Open work controls"
+                  aria-expanded={panelOpen}
+                  aria-controls="work-controls-panel"
+                  onClick={() => setPanelOpen(true)}
+                >
+                  <span className={styles.tabletControlLabel} aria-hidden="true">
+                    <span>[</span>
+                    <span>filter-sort</span>
+                    <span>]</span>
+                  </span>
+                  <span className={styles.compactControlLabel} aria-hidden="true">--controls</span>
+                </button>
+              </div>
             </div>
-            <div className={styles.viewgroup}>
-              <FlagButton label="map" pressed={view === "map"} onClick={() => setParam("view", null)} />
-              <FlagButton label="ls" pressed={view === "ls"} onClick={() => setParam("view", "ls")} />
-              <button
-                type="button"
-                className={styles.sortControl}
-                aria-label={`Sort work by ${sort === "arranged" ? "date" : "arranged order"}`}
-                onClick={() => setParam("sort", sort === "arranged" ? "date" : null)}
-              >
-                <span>sort={sort}</span>
-                <span className={styles.selectArrow} aria-hidden="true">↓</span>
-              </button>
+            <div className={styles.secondaryReveal}>
+              <div className={styles.flagrowSecondary}>
+                <span className={styles.filterBy}>filter by</span>
+                {DOMAIN_FLAGS.map((tag) => (
+                  <FlagButton
+                    key={tag}
+                    label={tagSlug(tag)}
+                    pressed={activeSet.has(tagSlug(tag))}
+                    onClick={() => toggleTag(tagSlug(tag))}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-          <div className={styles.flagrowSecondary}>
-            <span className={styles.filterBy}>filter by</span>
-            {DOMAIN_FLAGS.map((tag) => (
-              <FlagButton
-                key={tag}
-                label={tagSlug(tag)}
-                pressed={activeSet.has(tagSlug(tag))}
-                onClick={() => toggleTag(tagSlug(tag))}
-              />
-            ))}
+          <div className={styles.statusReveal}>
+            <div className={styles.status}>
+              <span>{statusText}</span>
+            </div>
           </div>
         </div>
 
-        <div className={styles.status}>
-          <span>
-            {activeSet.size
-              ? `${activeLabel} · ${filtered.length} pieces · click it again to clear`
-              : `${studyCount} studies · ${seriesCount} series · click a flag to filter`}
-          </span>
-        </div>
+        <button
+          type="button"
+          className={cx(styles.drawerBackdrop, panelOpen && styles.drawerBackdropOpen)}
+          aria-label="Close work controls"
+          aria-hidden={!panelOpen}
+          tabIndex={panelOpen ? 0 : -1}
+          onClick={() => setPanelOpen(false)}
+        />
+        <aside
+          ref={drawerRef}
+          id="work-controls-panel"
+          className={cx(styles.controlsDrawer, panelOpen && styles.controlsDrawerOpen)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Work controls panel"
+          aria-hidden={!panelOpen}
+        >
+          <div className={styles.drawerHeader}>
+            <span className={styles.path}>./work</span>
+            <button
+              ref={drawerCloseRef}
+              type="button"
+              className={styles.drawerClose}
+              onClick={() => setPanelOpen(false)}
+            >
+              <span aria-hidden="true">[</span>
+              <span>close</span>
+              <span aria-hidden="true">]</span>
+            </button>
+          </div>
+          <div className={styles.drawerBody}>
+            <section className={cx(styles.drawerSection, styles.drawerPillars)} aria-labelledby="drawer-pillars-label">
+              <h2 id="drawer-pillars-label" className={styles.drawerLabel}>pillars</h2>
+              <div className={styles.drawerOptions}>
+                {PILLARS.map((pillar) => (
+                  <FlagButton
+                    key={pillar}
+                    label={tagSlug(pillar)}
+                    color={PILLAR_COLORS[pillar]}
+                    pressed={activeSet.has(tagSlug(pillar))}
+                    onClick={() => toggleTag(tagSlug(pillar))}
+                  />
+                ))}
+              </div>
+            </section>
+            <section className={styles.drawerSection} aria-labelledby="drawer-view-label">
+              <h2 id="drawer-view-label" className={styles.drawerLabel}>view</h2>
+              <div className={styles.drawerOptions}>
+                <FlagButton label="map" pressed={view === "map"} onClick={() => setParam("view", null)} />
+                <FlagButton label="ls" pressed={view === "ls"} onClick={() => setParam("view", "ls")} />
+                <button
+                  type="button"
+                  className={styles.sortControl}
+                  aria-label={`Sort work by ${sort === "arranged" ? "date" : "arranged order"}`}
+                  onClick={() => setParam("sort", sort === "arranged" ? "date" : null)}
+                >
+                  <span>sort={sort}</span>
+                  <span className={styles.selectArrow} aria-hidden="true">↓</span>
+                </button>
+              </div>
+            </section>
+            <section className={styles.drawerSection} aria-labelledby="drawer-filter-label">
+              <h2 id="drawer-filter-label" className={styles.drawerLabel}>filter by</h2>
+              <div className={styles.drawerOptions}>
+                {DOMAIN_FLAGS.map((tag) => (
+                  <FlagButton
+                    key={tag}
+                    label={tagSlug(tag)}
+                    pressed={activeSet.has(tagSlug(tag))}
+                    onClick={() => toggleTag(tagSlug(tag))}
+                  />
+                ))}
+              </div>
+            </section>
+            <p className={styles.drawerStatus}>{statusText}</p>
+          </div>
+        </aside>
 
         <div
           ref={mapRef}
-          className={cx(styles.map, view !== "map" && styles.hide)}
+          className={cx(styles.map, !layoutReady && styles.mapPending, view !== "map" && styles.hide)}
+          aria-busy={view === "map" && !layoutReady}
           style={{ aspectRatio: `${CANVAS_W} / ${canvasH}` }}
         >
           {view === "map" &&
             placed.map((rect) => {
               const piece = rect.piece;
-              const isMosaic = piece.display === "mosaic" && piece.images.length > 0;
-              const hasPlaceholder = piece.images.some((image) => image.placeholderFileName);
+              const isMosaic = piece.slug === "photography" && piece.images.length > 0;
+              const tileImages = isMosaic
+                ? piece.images
+                : [piece.thumbnail ?? piece.images[0]].filter((image): image is PieceImage => Boolean(image));
+              const hasPlaceholder = tileImages.some((image) => image.placeholderFileName);
               const isFeatured = featSlugs.has(piece.slug);
               const pinIndex = isFeatured ? featuredOrder.indexOf(piece.slug) : -1;
               const pillar = pillarFor(piece);
@@ -376,10 +760,13 @@ function FlagButton({
 }
 
 function TileArt({ piece, mosaic }: { piece: PieceCard; mosaic: boolean }) {
-  const images = piece.images;
+  const images = mosaic
+    ? piece.images
+    : [piece.thumbnail ?? piece.images[0]].filter((image): image is PieceImage => Boolean(image));
   if (!images.length) return <div className={styles.placeholder} aria-hidden="true" />;
 
-  const hasOverflow = mosaic && images.length > 6;
+  const showCellLabels = piece.slug !== "photography";
+  const hasOverflow = mosaic && showCellLabels && images.length > 6;
   const cells = mosaic ? images.slice(0, hasOverflow ? 5 : 6) : images.slice(0, 1);
   return (
     <div
@@ -391,7 +778,14 @@ function TileArt({ piece, mosaic }: { piece: PieceCard; mosaic: boolean }) {
       }
     >
       {cells.map((image, index) => (
-        <TileCell key={`${image.src}-${index}`} image={image} lead={mosaic && index === 0} />
+        <TileCell
+          key={`${image.src}-${index}`}
+          image={image}
+          lead={mosaic && index === 0}
+          showLabel={showCellLabels}
+          alignTop={piece.slug === "saints" || (piece.slug === "photography" && index === 0)}
+          alignBottom={piece.slug === "photography" && image.src.includes("/toy-lifestyle/")}
+        />
       ))}
       {hasOverflow && (
         <span className={styles.moreCell} aria-hidden="true">
@@ -402,7 +796,19 @@ function TileArt({ piece, mosaic }: { piece: PieceCard; mosaic: boolean }) {
   );
 }
 
-function TileCell({ image, lead }: { image: PieceImage; lead: boolean }) {
+function TileCell({
+  image,
+  lead,
+  showLabel,
+  alignTop,
+  alignBottom,
+}: {
+  image: PieceImage;
+  lead: boolean;
+  showLabel: boolean;
+  alignTop: boolean;
+  alignBottom: boolean;
+}) {
   return (
     <span style={lead ? { gridColumn: "span 2", gridRow: "span 2" } : undefined}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -410,7 +816,11 @@ function TileCell({ image, lead }: { image: PieceImage; lead: boolean }) {
         src={image.src}
         alt=""
         loading="lazy"
-        style={{ objectPosition: `${image.focal[0] * 100}% ${image.focal[1] * 100}%` }}
+        style={{
+          objectPosition: alignBottom ? "center bottom" : alignTop
+            ? "center top"
+            : `${image.focal[0] * 100}% ${image.focal[1] * 100}%`,
+        }}
       />
       {image.placeholderFileName && (
         <span className={styles.placeholderDetails} aria-hidden="true">
@@ -418,7 +828,7 @@ function TileCell({ image, lead }: { image: PieceImage; lead: boolean }) {
           <i>{image.alt}</i>
         </span>
       )}
-      {image.label && <i className={styles.cellLabel}>{image.label}</i>}
+      {showLabel && image.label && <i className={styles.cellLabel}>{image.label}</i>}
     </span>
   );
 }

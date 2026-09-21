@@ -91,7 +91,11 @@
 
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+a {
+  color: var(--brand-cyan);
 }
 
 body {
@@ -111,6 +115,13 @@ body {
 }
 .prompt-line-link:hover {
   filter: brightness(1.08);
+}
+.prompt-line-link:focus-visible,
+.prompt-line-nav a:focus-visible,
+.case-back-link:focus-visible,
+.case-prose-link:focus-visible {
+  outline: 2px solid #26c5ff;
+  outline-offset: 3px;
 }
 
 /* ─── Gallery frames (masonry) ──────────────────────────────── */
@@ -308,10 +319,38 @@ body {
   .prompt-flag { display: none !important; }
 }
 
+@media (max-width: 900px) {
+  .prompt-seg-0 { display: none !important; }
+
+  .prompt-seg-1 {
+    margin-left: 0 !important;
+    padding-left: 12px !important;
+  }
+}
+
 @media (max-width: 767px) {
-  .prompt-seg-1,
-  .prompt-seg-2,
+  .prompt-seg-1 { display: none !important; }
+
+  .prompt-seg-2 {
+    margin-left: 0 !important;
+    padding-left: 12px !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .prompt-seg-2 { display: none !important; }
+
+  .prompt-seg-3 {
+    margin-left: 0 !important;
+    padding-left: 12px !important;
+  }
+}
+
+@media (max-width: 399px) {
   .prompt-seg-3 { display: none !important; }
+}
+
+@media (max-width: 767px) {
 
   .prompt-line-row {
     box-sizing: border-box;

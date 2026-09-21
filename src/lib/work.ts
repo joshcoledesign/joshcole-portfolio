@@ -18,7 +18,9 @@ const STUDY_ALLOWANCE = 20;
 
 export function resolveImageSource(src: string): Pick<PieceImage, "src" | "placeholderFileName"> {
   const [pathname] = src.split(/[?#]/, 1);
-  if (!pathname.startsWith("/case-studies/")) return { src };
+  if (!pathname.startsWith("/case-studies/") && !pathname.startsWith("/creative/")) {
+    return { src };
+  }
 
   const realPath = path.join(PUBLIC_DIR, pathname.slice(1));
   if (fs.existsSync(realPath)) return { src };
@@ -62,6 +64,8 @@ export interface Piece {
   description: string; // prose shown on the piece route
   descriptor: string;  // short second-line tile caption
   role?: string;
+  thumbnail?: PieceImage;
+  video?: string;
   images: PieceImage[];
   frames: number;      // derived: images.length
   blocks: number;      // derived: frames + (study ? 8 : 0)
@@ -124,6 +128,15 @@ function toImages(data: Frontmatter, title: string, content: string): PieceImage
   }] : [];
 }
 
+function toThumbnail(data: Frontmatter, title: string): PieceImage | undefined {
+  if (typeof data.thumbnail !== "string") return undefined;
+  return {
+    ...resolveImageSource(data.thumbnail),
+    alt: title,
+    focal: [0.5, 0.5],
+  };
+}
+
 function toPiece(raw: string): Piece {
   const { data, content } = matter(raw);
   const fm = data as Frontmatter;
@@ -132,6 +145,7 @@ function toPiece(raw: string): Piece {
   const study = kind === "study";
   const title = fm.title as string;
   const images = toImages(fm, title, content);
+  const thumbnail = toThumbnail(fm, title);
   const frames = images.length;
   const featured = fm.featured === true;
   const authoredWeight = Number(fm.weight);
@@ -160,6 +174,8 @@ function toPiece(raw: string): Piece {
     description: (fm.summary as string) ?? (fm.subline as string) ?? "",
     descriptor: (fm.descriptor as string) ?? "",
     role: typeof fm.role === "string" ? fm.role : undefined,
+    thumbnail,
+    video: typeof fm.video === "string" && fm.video.trim() ? fm.video.trim() : undefined,
     images,
     frames,
     blocks: frames + (study ? STUDY_ALLOWANCE : 0),
@@ -214,6 +230,8 @@ export function getPublishedCards(): PieceCard[] {
     description: p.description,
     descriptor: p.descriptor,
     role: p.role,
+    thumbnail: p.thumbnail,
+    video: p.video,
     images: p.images,
     frames: p.frames,
     blocks: p.blocks,

@@ -8,12 +8,12 @@ summary: "A facial-recognition check-in that pushed deals to your phone. It got 
 descriptor: "the one we shut down"
 thumbnail: "/case-studies/facedeals/grid.jpg"
 # heroImage: ""
-# TODO(josh): Replace the literal "Alt text" image descriptions.
 kind: "study"
 display: "single"
 featured: false
-weight: 3
+weight: 2
 order: 4
+shape: "square"
 sortYear: 2012
 displayDate: "2012"
 tags:
@@ -25,7 +25,7 @@ published: true
 
 # Facedeals
 
-A camera at the door of a bar recognizes your face, checks you in, and sends a deal to your phone before you've sat down. In 2012 that was a working prototype in Nashville, and for about three weeks it was the most talked-about thing a small ad agency had ever made.
+A camera at the door of a bar recognizes your face, checks you in, and sends a deal to your phone before you've sat down. In 2012 that was a working prototype in Nashville, and for about three weeks it was the talked-about widely.
 
 Then we turned it off.
 
@@ -37,9 +37,9 @@ Redpepper's lab built Facedeals as an experiment in the space between physical p
 
 The flow was opt-in from the first screen. You authorized the app through your Facebook account. It used your recent tagged photos to build a model of your face. Our cameras, mounted at the entrance of a participating venue, matched you against that model when you walked in and delivered an offer based on what you'd liked. No sign-up, no face, no deal.
 
-I was on the concept team and designed the interface: the authorization flow, the deal cards, the venue view. Everyone on the team was working outside their lane, wiring cameras one day and drawing screens the next, which is the part of the job I've never stopped doing.
+I was on the concept team and designed the interface: the authorization flow, the deal cards, the venue view. Everyone on the team was working outside their lane, wiring cameras one day and drawing screens the next, which is the part of the job I've never stopped loving.
 
-![Alt text](/case-studies/facedeals/app-flow.jpg)
+![Facedeals app screens: venue list, deal detail, and profile/settings](/case-studies/facedeals/app-flow.jpg)
 
 ---
 
@@ -49,9 +49,7 @@ We ran it at a bar across the street from the agency, after hours, on our own fa
 
 TechCrunch ran it under the headline "Creepy or Awesome?" CBS, Gizmodo, Computerworld, Adweek, and the Daily Mail followed. We read all of it, and we read the comments, because the comments were the point. The reaction split almost exactly down the middle: half the room wanted it in every bar they went to, half the room felt watched.
 
-![Alt text](/case-studies/facedeals/press.jpg)
-
----
+![Press coverage of Facedeals, including TechCrunch article](/case-studies/facedeals/press.jpg)
 
 ## The decision
 
@@ -61,7 +59,7 @@ To decide whether a face had opted in, the system had to scan every face first. 
 
 We could design a better opt-in screen. We couldn't design our way out of scanning strangers. And a system that has to do the thing people fear in order to protect them from it is a bad tool in the wrong hands, no matter how good the hands are today.
 
-So we stopped. No pilot, no funding round, no pivot. We took the cameras down.
+So we stopped. No pilot, no funding round, no pivot.
 
 ---
 

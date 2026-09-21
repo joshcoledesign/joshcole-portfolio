@@ -1,0 +1,148 @@
+.page {
+  min-height: 100vh;
+  padding-bottom: 56px;
+}
+
+.container {
+  width: min(100%, 1244px);
+  margin: 0 auto;
+  padding: 52px 30px 0;
+}
+
+.back {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  margin-bottom: 36px;
+  color: #26c5ff;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.back:hover,
+.back:focus-visible {
+  color: #26c5ff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.back:focus-visible,
+.tile:focus-visible {
+  outline: 2px solid #26c5ff;
+  outline-offset: 3px;
+}
+
+.eyebrow,
+.headingRow span,
+.caption {
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #6a6a70;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+}
+
+.headingRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.headingRow h1 {
+  margin: 0;
+  color: #e8e8ea;
+  font-family: var(--font-syne), sans-serif;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 600;
+  line-height: 1.07;
+}
+
+.headingRow span {
+  color: #6a6a70;
+  font-size: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: 15px;
+  align-items: start;
+  margin-top: 34px;
+}
+
+.tile {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #15161c;
+  color: inherit;
+  text-decoration: none;
+}
+
+.tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.empty {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  color: #6a6a70;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+}
+
+.scrim {
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(to top, rgba(8, 8, 12, 0.88), transparent);
+}
+
+.caption {
+  position: absolute;
+  right: 12px;
+  bottom: 11px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.caption b {
+  overflow: hidden;
+  color: #26c5ff;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.caption span {
+  overflow: hidden;
+  color: #b4b6c2;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 639px) {
+  .container { padding: 40px 20px 0; }
+  .grid { grid-template-columns: 1fr; }
+}

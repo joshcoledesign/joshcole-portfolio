@@ -1,225 +1,352 @@
-// Vertical four-stage pipeline diagram for the Novensia Brand Voice Engine.
-// Sibling to the UST RFP workflow diagram — same node style, square corners,
-// hairline borders, JetBrains Mono titles / Inter sub-lines.
-// Phases map to the brand gradient:
-//   Voice analysis (cyan) → Strategy & generation (violet) → Quality check (pink)
-// The story is the multi-model review loop: the Quality Check stage (a separate
-// model) judges the draft back against the voice profile and content brief.
+// Detailed four-stage pipeline for the Novensia Brand Voice Engine.
+// The browser flow pauses for a human length review after strategy. The final
+// evaluator/editor call scores the original draft and returns its revision in
+// the same structured result; that revision is not independently rescored.
 
 "use client";
 
 import { useSyncExternalStore } from "react";
 
 export function BrandVoiceEngine() {
-  // ── Responsive detection ──
   const compact = useSyncExternalStore(
-    (cb) => {
-      const mq = window.matchMedia("(max-width: 768px)");
-      mq.addEventListener("change", cb);
-      return () => mq.removeEventListener("change", cb);
+    (onChange) => {
+      const query = window.matchMedia("(max-width: 768px)");
+      query.addEventListener("change", onChange);
+      return () => query.removeEventListener("change", onChange);
     },
     () => window.matchMedia("(max-width: 768px)").matches,
-    () => false
+    () => false,
   );
 
-  // ── Tokens ──
   const CYAN = "#26C5FF";
   const VIOLET = "#CA43FF";
   const PINK = "#FF419F";
+  const GOLD = "#F1C75B";
   const FILL = "#15161c";
   const BRIGHT = "#e8e8ea";
   const MUTED = "#acacb1";
-  const DIM = "#6a6a70";
   const MONO = "var(--font-jetbrains-mono), monospace";
   const BODY = "var(--font-inter), system-ui, sans-serif";
 
-  // ── Layout — shifts for compact mode ──
-  const NW = 340; // main node width (unchanged)
-  const NH = 104; // uniform node height
-  const GAP = 52;
-
-  const NX = compact ? 40 : 310;
-  const CX = NX + NW / 2;
-  const TX = NX + 18;
-  const RTX = NX + NW - 18;
-  const BUSX = compact ? 440 : 780;
-  const tip = NX + NW;
-
-  const VB_X = compact ? 0 : 100;
   const VB_W = compact ? 520 : 760;
-  const VB_H = compact ? 760 : 720;
+  const VB_H = 1032;
+  const NX = compact ? 30 : 70;
+  const NW = compact ? 460 : 620;
+  const CX = NX + NW / 2;
+  const TX = NX + 20;
+  const RX = NX + NW - 20;
 
-  // ── Stages ──
-  const stages = [
-    {
-      title: "Voice Analysis",
-      desc: ["Reads writing samples, extracts a", "structured voice profile"],
-      model: "sonnet-4.6",
-      temp: 0.2,
-      out: "voice_profile",
-      color: CYAN,
-    },
-    {
-      title: "Content Strategy",
-      desc: ["Builds a content plan from the", "voice profile and topic"],
-      model: "sonnet-4.6",
-      temp: 0.4,
-      out: "content_brief",
-      color: VIOLET,
-    },
-    {
-      title: "Content Generation",
-      desc: ["Writes a draft against the", "profile and brief"],
-      model: "sonnet-4.6",
-      temp: 0.7,
-      out: "draft_content",
-      color: VIOLET,
-    },
-    {
-      title: "Quality Check",
-      desc: ["A separate model scores the draft,", "flags drift, returns a revision"],
-      model: "opus-4.8",
-      temp: 0.2,
-      out: "revised_content",
-      color: PINK,
-    },
-  ].map((s, i) => ({ ...s, y: 40 + i * (NH + GAP) }));
+  const nodes = {
+    voice: { y: 44, h: 130 },
+    strategy: { y: 222, h: 158 },
+    review: { y: 424, h: 78 },
+    generation: { y: 546, h: 158 },
+    quality: { y: 756, h: 200 },
+  } as const;
 
-  const cy = (i: number) => stages[i].y + NH / 2;
+  const connector = (
+    key: string,
+    fromY: number,
+    toY: number,
+    color: string,
+  ) => (
+    <g key={key}>
+      <line
+        x1={CX}
+        y1={fromY}
+        x2={CX}
+        y2={toY - 7}
+        stroke={color}
+        strokeWidth={1}
+      />
+      <path
+        d={`M ${CX - 4},${toY - 7} L ${CX},${toY} L ${CX + 4},${toY - 7} Z`}
+        fill={color}
+      />
+    </g>
+  );
 
-  // ── Legend layout ──
-  const LY = compact ? 660 : 662; // legend top y
-  const LX = compact ? NX : 186;  // legend left x
-  // Compact: two columns; Desktop: single row
-  const LX2 = compact ? NX + 220 : 0; // right column x (compact only)
+  const inputPill = (x: number, y: number, label: string, color: string) => {
+    const width = Math.max(78, label.length * 6.2 + 20);
+
+    return (
+      <g key={`${label}-${x}-${y}`}>
+        <rect
+          x={x}
+          y={y}
+          width={width}
+          height={22}
+          fill="none"
+          stroke={color}
+          strokeOpacity={0.55}
+        />
+        <text
+          x={x + 10}
+          y={y + 15}
+          fontFamily={MONO}
+          fontSize={10}
+          fill={MUTED}
+        >
+          {label}
+        </text>
+      </g>
+    );
+  };
 
   return (
     <svg
-      viewBox={`${VB_X} 0 ${VB_W} ${VB_H}`}
+      viewBox={`0 0 ${VB_W} ${VB_H}`}
       role="img"
-      aria-label="Brand Voice Engine four-stage pipeline: voice analysis, content strategy, content generation, and a separate-model quality check that judges the draft against the voice profile and brief"
+      aria-label="Brand Voice Engine pipeline. Writing samples become a voice profile. The profile, topic, platform, and Brand Foundation become a content brief. After a human reviews the length target, the profile, brief, and Foundation produce a draft. A separate evaluator and editor scores the original draft against the profile and brief, reports issues, and returns revised content that is not independently rescored."
       style={{ width: "100%", height: "auto", display: "block" }}
     >
-      {/* ── Main vertical connectors (colored by source stage) ── */}
-      {stages.map((s, i) => {
-        if (i >= stages.length - 1) return null;
-        return (
-          <line
-            key={`c${i}`}
-            x1={CX}
-            y1={s.y + NH}
-            x2={CX}
-            y2={stages[i + 1].y}
-            stroke={s.color}
-            strokeWidth={1}
-          />
-        );
-      })}
-
-      {/* ── Feedback loop: Quality Check → back up to voice + brief ── */}
-      <path
-        d={`M ${tip},${cy(3)} H ${BUSX} V ${cy(0)}`}
-        fill="none"
-        stroke={PINK}
-        strokeWidth={1}
-        strokeDasharray="5 4"
-      />
-      <line x1={BUSX} y1={cy(1)} x2={tip + 6} y2={cy(1)} stroke={PINK} strokeWidth={1} strokeDasharray="5 4" />
-      <line x1={BUSX} y1={cy(0)} x2={tip + 6} y2={cy(0)} stroke={PINK} strokeWidth={1} strokeDasharray="5 4" />
-      {[cy(0), cy(1)].map((y, i) => (
-        <path
-          key={`ah${i}`}
-          d={`M ${tip},${y} L ${tip + 6},${y - 4} L ${tip + 6},${y + 4} Z`}
-          fill={PINK}
-        />
-      ))}
-      <text
-        transform={`rotate(-90 ${BUSX + 22} ${(cy(0) + cy(3)) / 2})`}
-        x={BUSX + 22}
-        y={(cy(0) + cy(3)) / 2}
-        fontFamily={MONO}
-        fontSize={11}
-        fontWeight="normal"
-        fill={PINK}
-        textAnchor="middle"
-        letterSpacing="0.08em"
-      >
-        judges against voice + brief
-      </text>
-
-      {/* ── Stage nodes ── */}
-      {stages.map((s, i) => {
-        const fy = s.y + NH;
-        const footY = fy - 18;
-        const gx0 = TX + 142; // temp gauge track start (relative to node)
-        const gx1 = gx0 + 32; // temp gauge track end
-        const dotX = gx0 + s.temp * (gx1 - gx0);
-        return (
-          <g key={`n${i}`}>
-            <rect x={NX} y={s.y} width={NW} height={NH} fill={FILL} stroke={s.color} strokeWidth={1} />
-            <text x={TX} y={s.y + 28} fontFamily={MONO} fontSize={13} fill={BRIGHT}>
-              {s.title}
-            </text>
-            {s.desc.map((line, j) => (
-              <text key={j} x={TX} y={s.y + 50 + j * 16} fontFamily={BODY} fontSize={12} fill={MUTED}>
-                {line}
-              </text>
-            ))}
-            <text x={TX} y={footY} fontFamily={MONO} fontSize={11} fill={MUTED}>
-              {s.model} · temp {s.temp.toFixed(1)}
-            </text>
-            <line x1={gx0} y1={footY - 4} x2={gx1} y2={footY - 4} stroke={DIM} strokeWidth={1} />
-            <circle cx={dotX} cy={footY - 4} r={2.5} fill={s.color} />
-            <text x={RTX} y={footY} fontFamily={MONO} fontSize={11} fill={s.color} textAnchor="end">
-              → {s.out}
-            </text>
-          </g>
-        );
-      })}
-
-      {/* ── Legend ── */}
-      {compact ? (
-        /* Compact: two columns — colors left, line styles right */
-        <g>
-          {/* Left column: color keys */}
-          <rect x={LX} y={LY} width={12} height={12} fill={CYAN} />
-          <text x={LX + 20} y={LY + 11} fontFamily={BODY} fontSize={12} fill={MUTED}>Voice analysis</text>
-
-          <rect x={LX} y={LY + 22} width={12} height={12} fill={VIOLET} />
-          <text x={LX + 20} y={LY + 33} fontFamily={BODY} fontSize={12} fill={MUTED}>Strategy and generation</text>
-
-          <rect x={LX} y={LY + 44} width={12} height={12} fill={PINK} />
-          <text x={LX + 20} y={LY + 55} fontFamily={BODY} fontSize={12} fill={MUTED}>Quality check — separate model</text>
-
-          {/* Right column: line style keys */}
-          <line x1={LX2} y1={LY + 6} x2={LX2 + 24} y2={LY + 6} stroke={PINK} strokeWidth={1} strokeDasharray="5 4" />
-          <text x={LX2 + 32} y={LY + 11} fontFamily={BODY} fontSize={12} fill={MUTED}>Review loop</text>
-
-          <line x1={LX2} y1={LY + 28} x2={LX2 + 24} y2={LY + 28} stroke={DIM} strokeWidth={1} />
-          <circle cx={LX2 + 8} cy={LY + 28} r={2.5} fill={MUTED} />
-          <text x={LX2 + 32} y={LY + 33} fontFamily={BODY} fontSize={12} fill={MUTED}>temp · cool → warm</text>
-        </g>
-      ) : (
-        /* Desktop: single-row legend */
-        <g>
-          <rect x={186} y={662} width={12} height={12} fill={CYAN} />
-          <text x={206} y={673} fontFamily={BODY} fontSize={12} fill={MUTED}>Voice analysis</text>
-
-          <rect x={330} y={662} width={12} height={12} fill={VIOLET} />
-          <text x={350} y={673} fontFamily={BODY} fontSize={12} fill={MUTED}>Strategy and generation</text>
-
-          <rect x={540} y={662} width={12} height={12} fill={PINK} />
-          <text x={560} y={673} fontFamily={BODY} fontSize={12} fill={MUTED}>Quality check — a separate model</text>
-
-          {/* dashed-loop key + temperature key */}
-          <line x1={186} y1={693} x2={210} y2={693} stroke={PINK} strokeWidth={1} strokeDasharray="5 4" />
-          <text x={218} y={697} fontFamily={BODY} fontSize={12} fill={MUTED}>Multi-model review loop</text>
-
-          <line x1={416} y1={693} x2={448} y2={693} stroke={DIM} strokeWidth={1} />
-          <circle cx={424} cy={693} r={2.5} fill={MUTED} />
-          <text x={456} y={697} fontFamily={BODY} fontSize={12} fill={MUTED}>temp · cool → warm</text>
-        </g>
+      {connector(
+        "voice-strategy",
+        nodes.voice.y + nodes.voice.h,
+        nodes.strategy.y,
+        CYAN,
       )}
+      {connector(
+        "strategy-review",
+        nodes.strategy.y + nodes.strategy.h,
+        nodes.review.y,
+        VIOLET,
+      )}
+      {connector(
+        "review-generation",
+        nodes.review.y + nodes.review.h,
+        nodes.generation.y,
+        GOLD,
+      )}
+      {connector(
+        "generation-quality",
+        nodes.generation.y + nodes.generation.h,
+        nodes.quality.y,
+        VIOLET,
+      )}
+
+      {/* 01 — Voice analysis */}
+      <g>
+        <rect
+          x={NX}
+          y={nodes.voice.y}
+          width={NW}
+          height={nodes.voice.h}
+          fill={FILL}
+          stroke={CYAN}
+        />
+        <text
+          x={TX}
+          y={nodes.voice.y + 27}
+          fontFamily={MONO}
+          fontSize={10}
+          fill={CYAN}
+          letterSpacing="0.12em"
+        >
+          01 · ANALYZE
+        </text>
+        <text
+          x={TX}
+          y={nodes.voice.y + 51}
+          fontFamily={MONO}
+          fontSize={14}
+          fill={BRIGHT}
+        >
+          Voice Analysis
+        </text>
+        <text
+          x={TX}
+          y={nodes.voice.y + 73}
+          fontFamily={BODY}
+          fontSize={12}
+          fill={MUTED}
+        >
+          Extracts tone, rhythm, vocabulary, and patterns.
+        </text>
+        {inputPill(TX, nodes.voice.y + 88, "writing_samples", CYAN)}
+        <text
+          x={RX}
+          y={nodes.voice.y + 103}
+          fontFamily={MONO}
+          fontSize={11}
+          fill={CYAN}
+          textAnchor="end"
+        >
+          → voice_profile
+        </text>
+      </g>
+
+      {/* 02 — Content strategy */}
+      <g>
+        <rect x={NX} y={nodes.strategy.y} width={NW} height={nodes.strategy.h} fill={FILL} stroke={VIOLET} />
+        <text x={TX} y={nodes.strategy.y + 27} fontFamily={MONO} fontSize={10} fill={VIOLET} letterSpacing="0.12em">
+          02 · PLAN
+        </text>
+        <text x={TX} y={nodes.strategy.y + 51} fontFamily={MONO} fontSize={14} fill={BRIGHT}>
+          Content Strategy
+        </text>
+        <text x={TX} y={nodes.strategy.y + 73} fontFamily={BODY} fontSize={12} fill={MUTED}>
+          Turns the request and brand context into a content plan.
+        </text>
+        {inputPill(TX, nodes.strategy.y + 88, "voice_profile", VIOLET)}
+        {inputPill(TX + 116, nodes.strategy.y + 88, "topic + platform", VIOLET)}
+        {inputPill(TX, nodes.strategy.y + 116, "brand_foundation", VIOLET)}
+        <text
+          x={RX}
+          y={nodes.strategy.y + 131}
+          fontFamily={MONO}
+          fontSize={11}
+          fill={VIOLET}
+          textAnchor="end"
+        >
+          → content_brief
+        </text>
+      </g>
+
+      {/* Human checkpoint between planning and drafting */}
+      <g>
+        <rect
+          x={NX}
+          y={nodes.review.y}
+          width={NW}
+          height={nodes.review.h}
+          fill={FILL}
+          stroke={GOLD}
+          strokeDasharray="5 4"
+        />
+        <text x={TX} y={nodes.review.y + 28} fontFamily={MONO} fontSize={11} fill={GOLD}>
+          HUMAN CHECKPOINT
+        </text>
+        <text x={TX} y={nodes.review.y + 52} fontFamily={BODY} fontSize={12} fill={MUTED}>
+          Review or adjust the length target before drafting.
+        </text>
+        <text
+          x={RX}
+          y={nodes.review.y + 28}
+          fontFamily={MONO}
+          fontSize={10}
+          fill={GOLD}
+          textAnchor="end"
+        >
+          accepted brief
+        </text>
+      </g>
+
+      {/* 03 — Content generation */}
+      <g>
+        <rect
+          x={NX}
+          y={nodes.generation.y}
+          width={NW}
+          height={nodes.generation.h}
+          fill={FILL}
+          stroke={VIOLET}
+        />
+        <text
+          x={TX}
+          y={nodes.generation.y + 27}
+          fontFamily={MONO}
+          fontSize={10}
+          fill={VIOLET}
+          letterSpacing="0.12em"
+        >
+          03 · WRITE
+        </text>
+        <text x={TX} y={nodes.generation.y + 51} fontFamily={MONO} fontSize={14} fill={BRIGHT}>
+          Content Generation
+        </text>
+        <text x={TX} y={nodes.generation.y + 73} fontFamily={BODY} fontSize={12} fill={MUTED}>
+          Writes the draft from style, strategy, and brand truth.
+        </text>
+        {inputPill(TX, nodes.generation.y + 88, "voice_profile", VIOLET)}
+        {inputPill(TX + 116, nodes.generation.y + 88, "content_brief", VIOLET)}
+        {inputPill(TX, nodes.generation.y + 116, "brand_foundation", VIOLET)}
+        <text
+          x={RX}
+          y={nodes.generation.y + 131}
+          fontFamily={MONO}
+          fontSize={11}
+          fill={VIOLET}
+          textAnchor="end"
+        >
+          → draft_content
+        </text>
+      </g>
+
+      {/* 04 — Evaluation and revision happen in one model call */}
+      <g>
+        <rect
+          x={NX}
+          y={nodes.quality.y}
+          width={NW}
+          height={nodes.quality.h}
+          fill={FILL}
+          stroke={PINK}
+        />
+        <text
+          x={TX}
+          y={nodes.quality.y + 27}
+          fontFamily={MONO}
+          fontSize={10}
+          fill={PINK}
+          letterSpacing="0.12em"
+        >
+          04 · EVALUATE + REVISE
+        </text>
+        <text x={TX} y={nodes.quality.y + 51} fontFamily={MONO} fontSize={14} fill={BRIGHT}>
+          Quality Evaluator + Editor
+        </text>
+        <text x={TX} y={nodes.quality.y + 73} fontFamily={BODY} fontSize={12} fill={MUTED}>
+          Scores the original draft, identifies drift, and fixes it.
+        </text>
+        {inputPill(TX, nodes.quality.y + 88, "voice_profile", PINK)}
+        {inputPill(TX + 116, nodes.quality.y + 88, "content_brief", PINK)}
+        {inputPill(TX, nodes.quality.y + 116, "draft_content", PINK)}
+        <text x={TX} y={nodes.quality.y + 157} fontFamily={MONO} fontSize={11} fill={PINK}>
+          → quality_check
+        </text>
+        <text x={TX + 126} y={nodes.quality.y + 157} fontFamily={BODY} fontSize={10} fill={MUTED}>
+          scores · issues · revision summary
+        </text>
+        <text x={TX} y={nodes.quality.y + 177} fontFamily={MONO} fontSize={11} fill={PINK}>
+          → revised_content
+        </text>
+        <text x={TX + 138} y={nodes.quality.y + 177} fontFamily={BODY} fontSize={10} fill={MUTED}>
+          final copy · not independently rescored
+        </text>
+      </g>
+
+      {/* Legend */}
+      <g>
+        <rect x={NX} y={986} width={10} height={10} fill={CYAN} />
+        <text x={NX + 17} y={995} fontFamily={BODY} fontSize={11} fill={MUTED}>
+          analysis
+        </text>
+        <rect x={NX + 84} y={986} width={10} height={10} fill={VIOLET} />
+        <text x={NX + 101} y={995} fontFamily={BODY} fontSize={11} fill={MUTED}>
+          strategy + generation
+        </text>
+        <rect x={NX + 250} y={986} width={10} height={10} fill={GOLD} />
+        <text x={NX + 267} y={995} fontFamily={BODY} fontSize={11} fill={MUTED}>
+          human review
+        </text>
+        {!compact && (
+          <>
+            <rect x={NX + 365} y={986} width={10} height={10} fill={PINK} />
+            <text x={NX + 382} y={995} fontFamily={BODY} fontSize={11} fill={MUTED}>
+              evaluator/editor
+            </text>
+          </>
+        )}
+        {compact && (
+          <>
+            <rect x={NX} y={1008} width={10} height={10} fill={PINK} />
+            <text x={NX + 17} y={1017} fontFamily={BODY} fontSize={11} fill={MUTED}>
+              separate evaluator/editor model
+            </text>
+          </>
+        )}
+      </g>
     </svg>
   );
 }

@@ -13,8 +13,8 @@ import Link from "next/link";
 const SEGMENTS = [
   { label: "cole13",      bg: "#FFC24B", text: "#6B4500" },
   { label: "~/portfolio", bg: "#FF8E48", text: "#5E2600" },
-  { label: "⎇ main",     bg: "#FF5E54", text: "#5E120B" },
-  { label: "⬡ v20.26",   bg: "#FF4D6E", text: "#5E0A22" },
+  { label: "⎇ main",     bg: "#FF5E54", text: "#4F0C08" },
+  { label: "⬡ v20.26",   bg: "#FF4D6E", text: "#4F071C" },
 ] as const;
 
 const ARROW_W = 10; // px — horizontal depth of the chevron tip
@@ -114,7 +114,9 @@ export function PromptLine({
         )}
         <nav className="prompt-line-nav" aria-label="Utility links">
           <Link href="/about">./about</Link>
-          <Link href="/resume">./resume</Link>
+          <Link href="/resume" target="_blank" rel="noopener noreferrer">
+            ./resume
+          </Link>
         </nav>
       </div>
     </div>

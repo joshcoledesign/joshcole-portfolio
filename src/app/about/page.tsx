@@ -26,7 +26,7 @@ export default function AboutPage() {
   return (
     <div style={{ minHeight: "100vh", paddingBottom: 56 }}>
       <PromptLine href="/" />
-      <div
+      <main
         className="page-container"
         style={{
           maxWidth: 960,
@@ -44,7 +44,7 @@ export default function AboutPage() {
             gap: 6,
             fontFamily: MONO,
             fontSize: 12,
-            color: "#6a6a70",
+            color: "#26c5ff",
             textDecoration: "none",
             letterSpacing: "0.04em",
             marginBottom: 40,
@@ -59,7 +59,7 @@ export default function AboutPage() {
           style={{
             fontFamily: MONO,
             fontSize: 12,
-            color: "#6a6a70",
+            color: "#8a8a90",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             marginBottom: 7,
@@ -92,145 +92,45 @@ export default function AboutPage() {
           }}
         />
 
-        {/* ── Relocated from the former homepage hero — exact copy ── */}
-        <div
-          style={{
-            fontFamily: MONO,
-            fontSize: 12,
-            color: "#6a6a70",
-            textTransform: "uppercase",
-            letterSpacing: "0.24em",
-            marginBottom: 24,
-          }}
-        >
-          OUT OF DARKNESS, INTO THE LIGHT
-        </div>
-        <div style={{ marginBottom: 56 }}>
-          <p style={P}>
-            Hundreds of ideas in the air, waiting for their moment. That&apos;s not noise — that&apos;s the signal, waiting to be found. Explore first. The right one only reveals itself to whoever keeps looking.
-          </p>
-          <p style={P}>
-            Nobody knows exactly what they need at the start of a project — only what they want. Finding the difference takes exploring, testing, iterating. That&apos;s where the good ones start to surface.
-          </p>
-          <p style={P}>
-            One becomes a tool someone actually uses. Another becomes the voice a brand&apos;s been missing. Another, an efficiency pipeline. And in the best moments, something none of us saw coming.
-          </p>
-          <p
-            style={{
-              fontFamily: MONO,
-              fontSize: 14,
-              lineHeight: 1.5,
-              color: "#26c5ff",
-              margin: "8px 0 0",
-            }}
-          >
-            <span style={{ marginRight: "0.6ch" }}>{">"}</span>
-            The best ideas rarely show up at the starting line.
-          </p>
-        </div>
-
         {/* Bio */}
         <div>
           <p style={P}>
-            I build things that don&apos;t exist yet. That&apos;s the shortest true thing
-            I can say about myself, and it&apos;s been the same since before I had
-            any of the tools I use now.
+            I&apos;m Josh Cole, a creative technologist. I&apos;ve spent my career as a designer, creative director, and design director, and I still think that way first. What I design and build now is AI systems and the interfaces around them, for brands, agencies, and product teams that want the technology to work for the person on the other side of it.
           </p>
 
           <p style={P}>
-            My dad was a sculptor. Clay, cast in bronze, finished by hand. But
-            he wasn&apos;t satisfied just making the thing. He took a job at a
-            foundry so he&apos;d understand every step of how a sculpture came to be,
-            from armature to patina. Knowing how it worked, all the way down,
-            made him better at the part everyone else could see. I grew up
-            watching that: a man who&apos;d stay up the whole night on his own work,
-            sleep a couple hours, then go learn the materials so the work could
-            be truer.
+            The way I work is something I learned from my dad. He was a sculptor. Clay, cast in bronze, finished by hand. He took a job at a foundry so he&apos;d understand every step of how a piece came to be, from armature to patina. One of his, a war chief about three feet tall, he built from the inside out: the armature, then the skeleton, then the organs from anatomy books, then the muscles, then the skin. Nobody was meant to see the organs. But the skin sat right because the structure under it was real. He even carved a flintlock rifle to scale that you could cock and fire.
           </p>
 
           <p style={P}>
-            There&apos;s a piece of his I think about all the time, a Native American
-            war chief about three feet tall. He could have just sculpted it.
-            Instead he built the armature, then sculpted the skeleton to learn
-            the bones, then the internal organs from anatomy books, hidden inside
-            where no one would ever see them. Then the muscles and ligaments, one
-            at a time. Only then did he lay the skin over all of it, and because
-            the structure underneath was real, the skin sat right: the stretch,
-            the pull, the direction of it, all true. He even carved a tiny
-            flintlock rifle you could cock and fire.
+            This is where I learned the importance of the work nobody sees. A surface without real structure under it can look right, but
+            doesn&apos;t hold up.
           </p>
 
           <p style={P}>
-            I didn&apos;t know it then, but I&apos;ve been doing the same thing my whole
-            life. I build the part nobody sees so the part everybody sees comes
-            out true.
+            My mom was a legal secretary, and after school I&apos;d go to her office and sit with her until the day was done. She told me, and I watched her do it every afternoon, that what you do when no one&apos;s looking is the part that counts. She did the work right whether or not anyone checked. At home she made pottery and painted ceramics, and she brought the same care to that. Between the two of them, honesty was the whole point of our house, and it stuck harder than anything else they gave me.
           </p>
 
           <p style={P}>
-            My mom taught me the other half. She made pottery and painted
-            ceramics after full days as a legal secretary, and I&apos;d sit with her
-            while she worked. What I picked up at that table wasn&apos;t technique.
-            It was that what you do when no one&apos;s looking is the part that
-            counts. Both of them made honesty the whole point of our house, and
-            it stuck harder than anything else they gave me.
+            I went to school to sculpt monsters for film. Then I saw my first 3D animation and switched to animation and code. Compaq hired me before I&apos;d finished my degree and gave me the time to finish it. From there the work kept changing shape: brand and creative direction, UX and design leadership, VR and generative art. The tools kept changing. What I was after hasn&apos;t. Know how it works all the way down. Build the structure nobody sees. Make the thing that isn&apos;t there yet.
           </p>
 
           <p style={P}>
-            I went to school to sculpt monsters: special effects makeup, because
-            horror and sci-fi and fantasy let you make things that don&apos;t exist
-            anywhere else. Then I saw my first 3D animation and the floor moved.
-            I could sculpt without running out of clay or running out of money
-            for tools, and make the impossible thing at any scale I could
-            imagine. I left the makeup program, went home to Arizona, and threw
-            myself into 3D and animation, and into code: C++, Director, Flash,
-            on machines I&apos;d never touched. Bigger medium, fewer limits, same
-            thing I was after the whole time.
+            Right now the tool is AI. That means Novensia, a brand operating system I&apos;m building where one model checks another&apos;s work, and an agent I built at UST that does the first pass on six-figure RFPs so the team can decide. Both are in the case studies.
           </p>
 
           <p style={P}>
-            What I haven&apos;t said is where I was when all that started. A few
-            years before any of it, my life had come apart completely. The way
-            out wasn&apos;t something I engineered. God pulled me out of the dark and
-            into the light, and everything I&apos;ve built since stands on that.
+            A few years before any of this, my life had come apart. God pulled me out of the dark, and everything since stands on that.
           </p>
 
           <p style={P}>
-            I was partway through the degree when Compaq saw my portfolio and
-            offered me a job. They moved me to Houston, into interface design
-            before &quot;UX&quot; was a phrase anyone said out loud. I finished my
-            associate&apos;s on the way out the door. Someone had seen me, and I was
-            too new to all of it to grasp how much that meant.
+            The reason I keep building is simpler than a mission. When the work is right, the person on the other side feels what I felt making it. My dad lived that way, and it&apos;s the part of him I most wanted to keep.
           </p>
 
           <p style={P}>
-            From there, the work just kept changing shape. Brand and creative
-            direction. UX and design leadership. Immersive and generative work.
-            And now AI, one more tool in the same hands, used the way I&apos;ve used
-            all of them: to make what doesn&apos;t exist real. The tools kept
-            changing. What I was doing never did: know how it works all the way
-            down, build the unseen structure so the surface is true, make the
-            thing that isn&apos;t there yet.
-          </p>
-
-          <p style={P}>
-            These days that means agentic AI systems, generative pipelines, and
-            the interfaces that make them make sense, built the way my dad
-            sculpted, from the armature out. I still need to know how it works
-            inside. A surface without real structure under it can look right, but
-            it never is.
-          </p>
-
-          <p style={{ ...P, margin: 0 }}>
-            And the reason under all of it is the one my dad gave me without
-            ever sitting me down to say it. He never cared what degree I got or
-            where. He cared whether the work made me feel alive, and he lived
-            exactly that way. For me, that feeling is a kind of release: the
-            pressure drops, everything goes sharp and clear, and I&apos;m reminded
-            how much I&apos;ve been given and what it took to get here. I was brought
-            out of the dark for a reason, and a lot of that reason has nothing
-            to do with work. It&apos;s to do for other people what was done for me.
-            The building is one way I get to do that. When it&apos;s right, the
-            person on the other side feels what I felt making it.
+            I run Josh Cole Creative and I&apos;m open to the next project or role.{" "}
+            <Link href="/#work-title" className="case-prose-link">View my case studies</Link> or{" "}
+            <Link href="/resume" className="case-prose-link">download my résumé</Link>.
           </p>
         </div>
 
@@ -247,7 +147,7 @@ export default function AboutPage() {
           style={{
             fontFamily: MONO,
             fontSize: 12,
-            color: "#6a6a70",
+            color: "#8a8a90",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             marginBottom: 7,
@@ -256,7 +156,7 @@ export default function AboutPage() {
           RECENT COMMITS
         </div>
         <CommitLog />
-      </div>
+      </main>
     </div>
   );
 }

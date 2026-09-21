@@ -102,7 +102,7 @@ export default function UploadPage() {
             gap: 6,
             fontFamily: MONO,
             fontSize: 12,
-            color: "#6a6a70",
+            color: "#26c5ff",
             textDecoration: "none",
             letterSpacing: "0.04em",
             marginBottom: 40,

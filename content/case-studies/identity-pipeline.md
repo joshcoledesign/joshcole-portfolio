@@ -11,6 +11,7 @@ thumbnail: "/case-studies/identity-pipeline/grid.jpg"
 kind: "study"
 display: "single"
 featured: false
+published: false  # retired 2026-09-19 — folded into novensia-case-study.md ("The visual half"); kept for the image paths until they're moved
 weight: 2
 order: 11
 sortYear: 2026
@@ -21,7 +22,7 @@ tags:
   - "Brand"
 ---
 
-This is one half of a brand operating system in active development. The other half, Novensia, captures a brand's foundation and writes content in its voice. This half does the visual work: it turns a person into a brand identity. Same system, different job. Where Novensia generates words, this builds the look.
+This is one half of a brand operating system in active development. The other half, Novensia, captures a brand's foundation and writes content in its voice. This half does the visual work: it turns a person into a brand identity. Same system, different job. The engine writes the voice documents; the identity work is steered by hand against the system's logic.
 
 Brand identity work is slow and bespoke, and its quality usually lives or dies on one creative director's taste. That doesn't repeat and it doesn't scale. The AI tools aimed at the problem fix the speed and miss the point: they produce fast, generic sameness, because they have no grounding in the actual person and no judgment steering the output.
 
@@ -35,9 +36,10 @@ It isn't finished. The thinking it runs — the analysis, the direction — I do
 
 **Intake.** A structured questionnaire that pulls the raw material: who the person is, what they believe, who they serve, how they talk, what they've lived through. Not a creative brief written to sound good. The actual person, in their own words, contradictions left in.
 
-![A page of a brand intake questionnaire filled in with personal, candid answers.](/case-studies/identity-pipeline/nemo-intake.png)
+![A page of a brand intake questionnaire filled in with personal, candid answers.](/case-studies/identity-pipeline/intake.png)
+<!-- TODO(josh): was nemo-intake.png; swap for a non-Nemo or redacted intake page until NEMO clears -->
 
-**Analysis.** This stage reads the intake and returns the strategic core: an archetype stack, a positioning line, a messaging territory, a voice. It's the step that turns a person into a brand foundation — and right now it's the step I run by hand, working the system's logic against the intake rather than letting a built pipeline do it. For Nemo, a former AP reporter and self-described goofball who is open about his faith and careful never to preach, that analysis returned a Sage-led stack, the line "make your message matter, and convert," and an editorial-xerox territory.
+**Analysis.** This stage reads the intake and returns the strategic core: an archetype stack, a positioning line, a messaging territory, a voice. It's the step that turns a person into a brand foundation, and right now it's the step I run by hand, working the system's logic against the intake rather than letting a built pipeline do it.
 
 **Direction and build.** The foundation becomes a visual system and a deck: type, color, texture, imagery, logo. This is where I art-direct, and where the manual judgment is heaviest.
 
@@ -47,7 +49,7 @@ Each stage hands a real artifact to the next. An intake doc, a foundation doc, a
 
 Two things keep the output specific instead of templated.
 
-The analysis is grounded in the person's real material, not a vibe. Nemo's archetype came from what he actually said and lived: the AP-reporter and eight books read as Sage, the popcorn-bucket-on-his-head humor reads as Everyman and Jester, the "just Jesus, never preachy" line becomes a hard art-direction constraint. The system isn't guessing at a personality. It's reading one.
+The analysis is grounded in the person's real material, not a vibe. The archetypes come from what the person actually said and lived, and the hard constraints in their intake become hard constraints in the art direction. The system isn't guessing at a personality. It's reading one.
 
 And I steer every output with brand judgment. The system proposes; I decide. On Nemo, that meant catching things the system couldn't: that its type direction was too rigid to build on, that its two chosen colors vibrated against each other, that two of its four archetypes were really one man. The system reads what's written down. I can see what's on the page and know what isn't.
 
@@ -55,19 +57,11 @@ The proof that both work is range. Put the brands side by side and they look not
 
 ## The evidence
 
-### NEMO — worked example
-
-A personal brand for John Nemo: editorial-xerox, all teeth, built around a logo whose whole argument is that it refuses to be consistent. Nemo is the one I've documented end to end, intake through finished deck, including every place I overrode the system and why.
-
-![The NEMO brand identity — mismatched display type on heavy grain.](/case-studies/identity-pipeline/nemo-sl1-7.png#no-border#mb-48)
-
-[→ Full case study: NEMO (pending publication)](/)
-
 ### The range — what the system produced across four very different people
 
 The clearest proof the system isn't a template is what it does with the same starting point. Sage sits in all four of these analyses. The four brands look nothing alike. Nemo's Sage cracks a joke. Rory's is monastic. John Michael Morgan's is a rebel-philosopher. Sean's was forged in combat. The archetype is where the system starts. The person is what it's made of.
 
-**Nemo.** LinkedIn lead-generation, former AP reporter, faith-driven and funny. The system returned Sage, with Magician and a merged Everyman-Jester. I built a punk-zine identity: a mismatched, hand-drawn logo, heavy Xerox grain, kraft and a punch red, and a violet pulled straight off his own Zubaz pants. The loudest of the four. Wisdom that cracks a joke.
+**Nemo.** A LinkedIn lead-generation coach, a former reporter, and funny on purpose. The system returned Sage, with Magician and a merged Everyman-Jester. I built a punk-zine identity: a mismatched, hand-drawn logo, heavy Xerox grain, kraft and a punch red. The loudest of the four. Wisdom that cracks a joke.
 
 **Rory Miller.** A teacher of grounded spirituality for high performers who have the external success and want the internal alignment. The system returned Hero-Sage, with Rebel and Explorer, on an essence of discipline as a path to spiritual freedom. I built the opposite of Nemo: a refined gateway mark of three nested arches whose negative space reads as an M, muted earth tones with no bright accent, one clean type family, imagery of standing stones and brutalist concrete. Monastic. Built to feel carved and permanent, discovered rather than designed.
 

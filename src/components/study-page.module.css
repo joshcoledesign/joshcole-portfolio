@@ -36,7 +36,7 @@
 }
 
 .header {
-  padding-bottom: 40px;
+  padding-bottom: 20px;
   border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -82,14 +82,18 @@
 }
 
 .body h2 {
-  margin: 56px 0 20px;
+  margin: 28px 0 20px;
   font-size: 32px;
   line-height: 1.15;
   scroll-margin-top: 72px;
 }
 
+.body > h2:first-child {
+  margin-top: 24px;
+}
+
 .body h3 {
-  margin: 40px 0 14px;
+  margin: 20px 0 14px;
   font-size: 24px;
   line-height: 1.2;
 }
@@ -179,7 +183,7 @@
 
 .rule {
   height: 0;
-  margin: 48px 0;
+  margin: 24px 0;
   border-top: 0.5px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -278,8 +282,8 @@
 }
 
 .documentSection {
-  margin-top: 72px;
-  padding-top: 48px;
+  margin-top: 36px;
+  padding-top: 24px;
   border-top: 0.5px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -465,7 +469,7 @@
   }
 
   .header {
-    padding-bottom: 32px;
+    padding-bottom: 16px;
   }
 
   .descriptor {
@@ -485,8 +489,8 @@
   }
 
   .documentSection {
-    margin-top: 56px;
-    padding-top: 36px;
+    margin-top: 28px;
+    padding-top: 18px;
   }
 
   .documentHeader h2 {

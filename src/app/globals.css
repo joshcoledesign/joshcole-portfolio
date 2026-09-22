@@ -156,6 +156,42 @@ body {
   text-decoration: underline;
 }
 
+/* About portrait aligns with the right edge of the title divider. */
+.about-portrait {
+  float: right;
+  display: block;
+  width: min(51%, 440px);
+  margin: 0 0 24px 32px;
+}
+
+.about-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.about-portrait figcaption {
+  margin-top: 10px;
+  color: #8c8e9c;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1023px) {
+  .about-portrait {
+    width: min(38%, 320px);
+  }
+}
+
+@media (max-width: 639px) {
+  .about-portrait {
+    float: none;
+    width: 100%;
+    margin: 0 0 28px;
+  }
+}
+
 /* ─── Locked case study redaction overlay ───────────────────── */
 /* Heavier scanline + glitch for redaction, not just atmosphere  */
 @keyframes locked-glitch {

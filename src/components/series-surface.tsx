@@ -139,9 +139,13 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
     <div className={styles.page}>
       <PromptLine href={backHref} command={`./work/${piece.slug}`} flag="" />
       <main className={styles.container}>
-        <Link href={backHref} className={styles.back}>
+        <Link
+          href={backHref}
+          className={styles.back}
+          aria-label={backHref.startsWith("/work/photography") ? "Back to Photography" : "Back to Home"}
+        >
           <span aria-hidden="true">&lt;</span>
-          <span>cd ..</span>
+          <span>{backHref.startsWith("/work/photography") ? "cd ../photography" : "cd / # home"}</span>
         </Link>
 
         <p className={styles.eyebrow}>SERIES · {piece.displayDate || "ARCHIVE"}</p>

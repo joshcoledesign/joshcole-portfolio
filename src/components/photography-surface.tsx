@@ -23,9 +23,9 @@ export function PhotographySurface({
     <div className={styles.page}>
       <PromptLine href={backHref} command="./work/photography" flag="" />
       <main className={styles.container}>
-        <Link href={backHref} className={styles.back}>
+        <Link href={backHref} className={styles.back} aria-label="Back to Home">
           <span aria-hidden="true">&lt;</span>
-          <span>cd ..</span>
+          <span>cd / # home</span>
         </Link>
 
         <p className={styles.eyebrow}>SERIES · ARCHIVE</p>

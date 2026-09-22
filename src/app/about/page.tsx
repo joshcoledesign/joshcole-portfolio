@@ -2,6 +2,7 @@
 // Real bio. Visual system identical to case study pages.
 
 import Link from "next/link";
+import Image from "next/image";
 import { PromptLine } from "@/components/prompt-line";
 import { CommitLog } from "@/components/commit-log";
 
@@ -14,7 +15,6 @@ const P: React.CSSProperties = {
   fontSize: 18,
   lineHeight: 1.7,
   color: "#acacb1",
-  maxWidth: "65ch",
   margin: "0 0 28px",
 };
 
@@ -38,6 +38,7 @@ export default function AboutPage() {
         <Link
           href="/"
           className="case-back-link"
+          aria-label="Back to Home"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -51,7 +52,7 @@ export default function AboutPage() {
           }}
         >
           <span aria-hidden="true">&lt;</span>
-          <span>Back to Home</span>
+          <span>cd / # home</span>
         </Link>
 
         {/* Eyebrow */}
@@ -65,7 +66,7 @@ export default function AboutPage() {
             marginBottom: 7,
           }}
         >
-          THE AUTHOR
+          JOSH COLE
         </div>
 
         {/* Title */}
@@ -76,7 +77,7 @@ export default function AboutPage() {
             fontWeight: 600,
             lineHeight: 1.07,
             color: "#e8e8ea",
-            margin: "0 0 40px",
+            margin: "0 0 20px",
           }}
         >
           About
@@ -88,18 +89,28 @@ export default function AboutPage() {
           style={{
             height: 0,
             borderTop: "0.5px solid rgba(255,255,255,0.1)",
-            marginBottom: 56,
+            marginBottom: 28,
           }}
         />
 
         {/* Bio */}
         <div>
+          <figure className="about-portrait">
+            <Image
+              src="/about/josh-kelly.png"
+              alt="ASCII-style portrait of Josh and Kelly Cole"
+              width={720}
+              height={955}
+              sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1023px) 38vw, 440px"
+            />
+            <figcaption>Josh &amp; Kelly Cole</figcaption>
+          </figure>
           <p style={P}>
             I&apos;m Josh Cole, a creative technologist. I&apos;ve spent my career as a designer, creative director, and design director, and I still think that way first. What I design and build now is AI systems and the interfaces around them, for brands, agencies, and product teams that want the technology to work for the person on the other side of it.
           </p>
 
           <p style={P}>
-            The way I work is something I learned from my dad. He was a sculptor. Clay, cast in bronze, finished by hand. He took a job at a foundry so he&apos;d understand every step of how a piece came to be, from armature to patina. One of his, a war chief about three feet tall, he built from the inside out: the armature, then the skeleton, then the organs from anatomy books, then the muscles, then the skin. Nobody was meant to see the organs. But the skin sat right because the structure under it was real. He even carved a flintlock rifle to scale that you could cock and fire.
+            The way I work is something I learned from my dad. He was a sculptor. Clay, cast in bronze, finished by hand. He took a job at a foundry so he&apos;d understand every step of how a piece came to be, from armature to patina. One of his, a war chief about three feet tall, he built from the inside out: the armature, then the skeleton, then the organs from anatomy books, then the muscles, then the skin. Nobody was meant to see the organs. But the skin sat right because the structure under it was real. He even carved a flintlock rifle to scale, with a hammer you could pull back and a trigger you could pull.
           </p>
 
           <p style={P}>
@@ -120,11 +131,7 @@ export default function AboutPage() {
           </p>
 
           <p style={P}>
-            A few years before any of this, my life had come apart. God pulled me out of the dark, and everything since stands on that.
-          </p>
-
-          <p style={P}>
-            The reason I keep building is simpler than a mission. When the work is right, the person on the other side feels what I felt making it. My dad lived that way, and it&apos;s the part of him I most wanted to keep.
+            The reason I keep building is simpler than a mission. When the work is right, the person on the other side feels what I felt making it. My parents lived with that kind of care, and I want to carry it into everything I make.
           </p>
 
           <p style={P}>
@@ -140,7 +147,7 @@ export default function AboutPage() {
           style={{
             height: 0,
             borderTop: "0.5px solid rgba(255,255,255,0.1)",
-            margin: "56px 0",
+            margin: "28px 0",
           }}
         />
         <div

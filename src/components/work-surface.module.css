@@ -2,7 +2,7 @@
   box-sizing: border-box;
   width: min(100%, 1244px);
   margin: 0 auto;
-  padding: 0 32px 40px;
+  padding: 0 32px;
   /* Row-height transitions must not generate counter-scroll events. */
   overflow-anchor: none;
 }
@@ -34,7 +34,7 @@
 }
 
 .deck {
-  max-width: 880px;
+  max-width: 960px;
   margin: 18px 0 0;
   font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 18px;
@@ -263,7 +263,7 @@
   position: relative;
   width: calc(100vw - 55px);
   aspect-ratio: 16 / 10;
-  margin-bottom: 25px;
+  margin-bottom: 0;
   margin-left: calc(50% - 50vw + 30px);
   margin-top: 30px;
 }

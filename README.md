@@ -1,79 +1,64 @@
-# joshcole-portfolio
+# Josh Cole - Portfolio
 
-Personal portfolio site built with Next.js, Tailwind CSS, and shadcn/ui.
+[joshcolecreative.com](https://joshcolecreative.com) is Josh Cole's portfolio for AI systems design, UX leadership, creative direction, and photography. It is built with Next.js 16 App Router, React 19, and TypeScript, with content authored in Markdown.
 
-## Getting Started
+## Local development
+
+The repository uses the Node and pnpm versions pinned in `package.json` via Volta.
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the site.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Case Study Authoring
+Before shipping a change, run:
 
-Case studies live in `content/case-studies/*.md` and use standard markdown rendered via `react-markdown`.
-
-### Links
-
-Standard markdown links render in brand cyan (`#26c5ff`) with an underline on hover:
-
-```markdown
-[Link text](https://example.com)
-[Internal link](/volumes/creative-immersive/nemo-brand)
+```bash
+pnpm lint
+pnpm exec tsc --noEmit
+pnpm build
 ```
 
-### Images
+## Content authoring
+
+[`docs/content-authoring.md`](docs/content-authoring.md) is the source of truth for frontmatter, image handling, publishing, and route behavior.
+
+- Case studies live in `content/case-studies/`.
+- Photography series and singles live in `content/creative/`.
+- Case-study assets live in `public/case-studies/<slug>/`.
+- Photography assets live in `public/creative/<slug>/`.
+- Use `thumbnail` for the homepage work surface. It is independent from `heroImage`.
+- Counts are computed from published content; never type them into page copy.
+- Do not edit a Markdown body when only a frontmatter change is required.
+
+Standard Markdown links and images are supported:
 
 ```markdown
-![Alt text](/case-studies/path/to/image.png)
+[Internal link](/work/nemo-brand)
+![A useful image description](/case-studies/example-study/image.jpg)
 ```
 
-#### Image modifiers
+Image layout modifiers such as `#no-border`, `#pair`, `#feature`, and margin fragments are documented in the authoring guide.
 
-Append hash fragments to the image URL to control rendering. All modifiers are stackable:
-
-| Fragment | Effect | Default |
-|---|---|---|
-| `#no-border` | Removes the subtle border | Border on |
-| `#mt-{px}` | Sets margin-top in pixels | `32px` |
-| `#mb-{px}` | Sets margin-bottom in pixels | `32px` |
-
-Examples:
-
-```markdown
-<!-- Remove border -->
-![Alt](/case-studies/img.png#no-border)
-
-<!-- Custom spacing -->
-![Alt](/case-studies/img.png#mt-48#mb-8)
-
-<!-- Combine all -->
-![Alt](/case-studies/img.png#no-border#mt-48#mb-0)
-```
-
-### Live components
-
-Embed interactive React diagrams using the `component:` prefix:
+Interactive diagrams use the `component:` image prefix:
 
 ```markdown
 ![Brand Voice Engine](component:voice-engine)
 ![Identity Pipeline](component:identity-pipeline)
 ```
 
-Available components are registered in `INLINE_COMPONENTS` in `src/components/case-study.tsx`.
+Available inline components are registered in `INLINE_COMPONENTS` in `src/components/study-page.tsx`.
 
-### Case study ordering and "Next" end-cap
+## Metadata assets
 
-Each case study shows a "NEXT" card at the bottom linking to the next study in a continuous sequence across all volumes. The order is defined in `CASE_STUDY_ORDER` in `src/lib/case-studies.ts`:
+Next.js App Router serves the site's file-based metadata from `src/app/`:
 
-```
-Vol I  (AI Systems):        novensia → emergence → ust-rfp-agent
-Vol II (UX & Enterprise):   vrc-suite → gprs-sitemap
-Vol III (Creative):         lp-7d-ride → union-station-hotel → hype-js
-```
+- `icon.png` - browser and site icon
+- `opengraph-image.png` - 1200x630 social-sharing image
+- `opengraph-image.alt.txt` - social image description
 
-The last study in the sequence shows only a `> cd ../volumes` link back to the volumes index.
+## Deployment
 
-To add a new case study to the chain, insert its slug into `CASE_STUDY_ORDER` at the desired position.
+Vercel deploys the site automatically when changes are merged to `main`. Production is available at [joshcolecreative.com](https://joshcolecreative.com); no manual CLI deployment is required for the normal release workflow.

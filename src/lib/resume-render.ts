@@ -6,7 +6,7 @@
 // resume.ts can never disturb the design.
 
 import { RESUME_SHELL } from "./resume-shell-print";
-import type { ResumeData, ResumeRole } from "./resume";
+import type { ResumeData, ResumeExperienceEntry, ResumeRole, ResumeRoleGroup } from "./resume";
 
 /** Escape the three characters that are unsafe in HTML text/attribute content. */
 function esc(s: string): string {
@@ -17,17 +17,19 @@ function esc(s: string): string {
 
 function contactHtml(c: ResumeData["contact"]): string {
   const sep = '<span class="sep">·</span>';
-  return (
-    `<span class="contact-item">${esc(c.location)}</span>` +
-    sep +
-    `<a class="contact-item" href="${c.site.href}">${esc(c.site.label)}</a>` +
-    sep +
-    `<a class="contact-item" href="${c.linkedin.href}">${esc(c.linkedin.label)}</a>` +
-    sep +
-    `<a class="contact-item" href="mailto:${c.email}">${esc(c.email)}</a>` +
-    sep +
-    `<span class="contact-item">${esc(c.phone)}</span>`
-  );
+  const items = [
+    `<span class="contact-item">${esc(c.location)}</span>`,
+    `<a class="contact-item" href="${c.site.href}">${esc(c.site.label)}</a>`,
+    `<a class="contact-item" href="${c.linkedin.href}">${esc(c.linkedin.label)}</a>`,
+    `<a class="contact-item" href="mailto:${c.email}">${esc(c.email)}</a>`,
+    `<span class="contact-item">${esc(c.phone)}</span>`,
+  ];
+
+  return items
+    .map((item, index) =>
+      `<span class="contact-group">${item}${index < items.length - 1 ? sep : ""}</span>`
+    )
+    .join("");
 }
 
 function roleTitleHtml(role: ResumeRole): string {
@@ -58,12 +60,44 @@ function roleHtml(role: ResumeRole): string {
   );
 }
 
+function isRoleGroup(entry: ResumeExperienceEntry): entry is ResumeRoleGroup {
+  return "kind" in entry && entry.kind === "group";
+}
+
+function roleGroupHtml(group: ResumeRoleGroup): string {
+  const roles = group.roles.map(roleHtml).join("\n\n");
+  return (
+    `    <div class="role-group">\n` +
+    `      <div class="role-head role-group-head">\n` +
+    `        <h3 class="role-title">${esc(group.title)}</h3>\n` +
+    `        <span class="role-date">${esc(group.date)}</span>\n` +
+    `      </div>\n` +
+    `      <p class="role-summary role-group-summary">${esc(group.summary)}</p>\n` +
+    `      <div class="role-group-roles">\n` +
+    `${roles}\n` +
+    `      </div>\n` +
+    `    </div>`
+  );
+}
+
 function roleSectionHtml(title: string, roles: ResumeRole[], extraClass = ""): string {
   const cls = extraClass ? `section ${extraClass}` : "section";
   const body = roles.map(roleHtml).join("\n\n");
   return (
     `  <section class="${cls}">\n` +
     `    <h2>${esc(title)}</h2>\n\n` +
+    `${body}\n` +
+    `  </section>`
+  );
+}
+
+function experienceSectionHtml(entries: ResumeExperienceEntry[]): string {
+  const body = entries
+    .map((entry) => (isRoleGroup(entry) ? roleGroupHtml(entry) : roleHtml(entry)))
+    .join("\n\n");
+  return (
+    `  <section class="section">\n` +
+    `    <h2>Experience</h2>\n\n` +
     `${body}\n` +
     `  </section>`
   );
@@ -99,8 +133,9 @@ export function renderResumeBody(data: ResumeData): string {
     summary,
     roleSectionHtml("Selected AI Work", data.selectedWork),
     skills,
-    roleSectionHtml("Experience", data.experience),
-    roleSectionHtml("Earlier Career", data.earlier, "earlier"),
+    experienceSectionHtml(data.experience),
+    roleSectionHtml("Independent Experience", data.independent),
+    roleSectionHtml("Selected Earlier Experience", data.earlier, "earlier"),
   ];
 
   // Leading "\n\n" and trailing "\n" match the whitespace the shell expects
@@ -118,6 +153,14 @@ function roleText(role: ResumeRole): string {
   if (role.summary) lines.push(role.summary);
   for (const b of role.bullets) lines.push(`- ${b}`);
   return lines.join("\n");
+}
+
+function roleGroupText(group: ResumeRoleGroup): string {
+  return [
+    `${group.title}  |  ${group.date}`,
+    group.summary,
+    ...group.roles.map(roleText),
+  ].join("\n\n");
 }
 
 export function renderResumePlainText(data: ResumeData): string {
@@ -138,9 +181,14 @@ export function renderResumePlainText(data: ResumeData): string {
   for (const s of data.skills) blocks.push(`${s.label}: ${s.items}`);
 
   blocks.push("EXPERIENCE");
-  for (const r of data.experience) blocks.push(roleText(r));
+  for (const entry of data.experience) {
+    blocks.push(isRoleGroup(entry) ? roleGroupText(entry) : roleText(entry));
+  }
 
-  blocks.push("EARLIER CAREER");
+  blocks.push("INDEPENDENT EXPERIENCE");
+  for (const r of data.independent) blocks.push(roleText(r));
+
+  blocks.push("SELECTED EARLIER EXPERIENCE");
   for (const r of data.earlier) blocks.push(roleText(r));
 
   // Leading/trailing newline match the original <script id="plaintext"> content;

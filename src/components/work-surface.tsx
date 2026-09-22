@@ -490,9 +490,8 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
             AI systems designer.
           </h1>
           <p className={styles.deck}>
-            I design and build AI systems, products, and brands, and make them usable for the person
-            on the other side. {studyCount} case studies and {seriesCount} series are below. The flags
-            filter the work; the map is the site.
+            I design and build AI systems, products, and brands, and make them usable for the person on
+            the other&nbsp;side.
           </p>
         </section>
 

@@ -40,21 +40,17 @@ export function SiteFooter() {
           </span>
         </section>
 
-        <section>
+        <section className={styles.uplinks}>
           <h2>ls ./uplinks</h2>
           <ul>
             <li><a href="https://www.linkedin.com/in/joshcolecreative/" target="_blank" rel="noopener noreferrer">linkedin</a></li>
             <li><a href="https://www.instagram.com/joshuacolecreative/" target="_blank" rel="noopener noreferrer">instagram</a></li>
             <li>
-              <a href="https://github.com/joshcoledesign/joshcole-portfolio" target="_blank" rel="noopener noreferrer">
-                github&nbsp;&nbsp;joshcoledesign/joshcole-portfolio
-              </a>
+              <a href="https://github.com/joshcoledesign" target="_blank" rel="noopener noreferrer">github</a>
             </li>
             <li className={styles.muted}>substack&nbsp;&nbsp;writing and thinking, soon</li>
           </ul>
         </section>
-
-        <div className={styles.site}>joshcolecreative.com</div>
       </div>
     </footer>
   );

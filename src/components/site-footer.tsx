@@ -36,7 +36,7 @@ export function SiteFooter() {
           <span className={styles.inlineItem}>
             <a href="/resume" target="_blank" rel="noopener noreferrer">view</a>
             <i>·</i>
-            <a href="/resume" target="_blank" rel="noopener noreferrer">print</a>
+            <a href="/resume/download">download PDF</a>
           </span>
         </section>
 

@@ -137,7 +137,7 @@ export default function AboutPage() {
           <p style={P}>
             I run Josh Cole Creative and I&apos;m open to the next project or role.{" "}
             <Link href="/#work-title" className="case-prose-link">View my case studies</Link> or{" "}
-            <Link href="/resume" className="case-prose-link">download my résumé</Link>.
+            <a href="/resume/download" className="case-prose-link">download my résumé</a>.
           </p>
         </div>
 

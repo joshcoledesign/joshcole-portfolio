@@ -244,7 +244,7 @@ export function renderResumeDocument(data: ResumeData): string {
     "<title>Josh Cole — Creative Technologist · AI</title>",
     `<title>Resume — ${esc(data.name)}</title>\n${headMetaHtml()}`
   )
-    .replace("%%PDF_HREF%%", resumePdfPath(data))
+    .replace("%%PDF_HREF%%", "/resume/download")
     .replace("%%PLAINTEXT%%", () => renderResumePlainText(data))
     .replace("%%BODY%%", () => renderResumeBody(data));
 

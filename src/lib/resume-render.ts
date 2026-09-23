@@ -7,6 +7,7 @@
 
 import { RESUME_SHELL } from "./resume-shell-print";
 import type { ResumeData, ResumeExperienceEntry, ResumeRole, ResumeRoleGroup } from "./resume";
+import { SITE_DESCRIPTION, SITE_OG_IMAGE } from "./site-metadata";
 
 /** Escape the three characters that are unsafe in HTML text/attribute content. */
 function esc(s: string): string {
@@ -21,8 +22,6 @@ function contactHtml(c: ResumeData["contact"]): string {
     `<span class="contact-item">${esc(c.location)}</span>`,
     `<a class="contact-item" href="${c.site.href}">${esc(c.site.label)}</a>`,
     `<a class="contact-item" href="${c.linkedin.href}">${esc(c.linkedin.label)}</a>`,
-    `<a class="contact-item" href="mailto:${c.email}">${esc(c.email)}</a>`,
-    `<span class="contact-item">${esc(c.phone)}</span>`,
   ];
 
   return items
@@ -43,9 +42,13 @@ function roleHtml(role: ResumeRole): string {
   const summary = role.summary
     ? `      <p class="role-summary">${esc(role.summary)}</p>\n`
     : "";
-  const bullets = role.bullets
-    .map((b) => `        <li>${esc(b)}</li>`)
-    .join("\n");
+  // Earlier-career entries have no bullets; skip the list so screen readers
+  // don't announce an empty one.
+  const bullets = role.bullets.length
+    ? `      <ul>\n` +
+      role.bullets.map((b) => `        <li>${esc(b)}</li>`).join("\n") +
+      `\n      </ul>\n`
+    : "";
   return (
     `    <div class="role">\n` +
     `      <div class="role-head">\n` +
@@ -53,9 +56,7 @@ function roleHtml(role: ResumeRole): string {
     `        <span class="role-date">${esc(role.date)}</span>\n` +
     `      </div>\n` +
     summary +
-    `      <ul>\n` +
-    `${bullets}\n` +
-    `      </ul>\n` +
+    bullets +
     `    </div>`
   );
 }
@@ -143,7 +144,7 @@ export function renderResumeBody(data: ResumeData): string {
   return "\n\n" + parts.join("\n\n") + "\n";
 }
 
-// ── Plaintext block (drives Copy / Download .txt / ATS parsing) ──────────────
+// ── Plaintext block (drives Copy plain text) ─────────────────────────────────
 
 function roleText(role: ResumeRole): string {
   const qual = role.qual ? ` ${role.qual}` : "";
@@ -165,9 +166,7 @@ function roleGroupText(group: ResumeRoleGroup): string {
 
 export function renderResumePlainText(data: ResumeData): string {
   const c = data.contact;
-  const contactLine = [c.location, c.site.label, c.linkedin.label, c.email, c.phone].join(
-    " | "
-  );
+  const contactLine = [c.location, c.site.label, c.linkedin.label].join(" | ");
   const blocks: string[] = [];
   blocks.push(`${data.name.toUpperCase()}\n${data.discipline}\n${contactLine}`);
 
@@ -198,15 +197,63 @@ export function renderResumePlainText(data: ResumeData): string {
 
 // ── Full document ────────────────────────────────────────────────────────────
 
-export function renderResumeDocument(data: ResumeData): string {
-  return RESUME_SHELL.replace(
-    "<title>Josh Cole — Creative Technologist · AI</title>",
-    `<title>${esc(data.name)} — ${esc(data.discipline)}</title>`
-  )
-    .replace(
-      '<meta name="author" content="Josh Cole">',
-      `<meta name="author" content="Josh Cole">\n<!-- resume-version: ${esc(data.resumeVersion)} -->`
+/**
+ * Remove authoring notes from the shell so none ship in production: HTML
+ * comments, CSS comments, and whole-line JavaScript comments.
+ */
+function stripComments(html: string): string {
+  return html
+    .replace(/<!--[\s\S]*?-->\n?/g, "")
+    .replace(/(<style[^>]*>)([\s\S]*?)(<\/style>)/g, (_, open, css: string, close) =>
+      open + css.replace(/[ \t]*\/\*[\s\S]*?\*\/[ \t]*\n?/g, "") + close
     )
+    .replace(/(<script>)([\s\S]*?)(<\/script>)/g, (_, open, js: string, close) =>
+      open + js.replace(/^[ \t]*\/\/.*\n/gm, "") + close
+    )
+    .replace(/\n{3,}/g, "\n\n");
+}
+
+const PRODUCTION_SHELL = stripComments(RESUME_SHELL);
+
+/** Public path of the approved ColeOS PDF for this content version. */
+export function resumePdfPath(data: ResumeData): string {
+  return `/files/josh-cole-resume-${data.resumeVersion}.pdf`;
+}
+
+function headMetaHtml(): string {
+  const title = "Resume — Josh Cole";
+  const img = SITE_OG_IMAGE;
+  return [
+    `<meta name="description" content="${esc(SITE_DESCRIPTION)}">`,
+    `<meta property="og:title" content="${esc(title)}">`,
+    `<meta property="og:description" content="${esc(SITE_DESCRIPTION)}">`,
+    `<meta property="og:image" content="${img.url}">`,
+    `<meta property="og:image:type" content="${img.type}">`,
+    `<meta property="og:image:width" content="${img.width}">`,
+    `<meta property="og:image:height" content="${img.height}">`,
+    `<meta name="twitter:card" content="summary_large_image">`,
+    `<meta name="twitter:title" content="${esc(title)}">`,
+    `<meta name="twitter:description" content="${esc(SITE_DESCRIPTION)}">`,
+    `<meta name="twitter:image" content="${img.url}">`,
+    `<link rel="icon" href="/icon.png" type="image/png">`,
+  ].join("\n");
+}
+
+export function renderResumeDocument(data: ResumeData): string {
+  const doc = PRODUCTION_SHELL.replace(
+    "<title>Josh Cole — Creative Technologist · AI</title>",
+    `<title>Resume — ${esc(data.name)}</title>\n${headMetaHtml()}`
+  )
+    .replace("%%PDF_HREF%%", resumePdfPath(data))
     .replace("%%PLAINTEXT%%", () => renderResumePlainText(data))
     .replace("%%BODY%%", () => renderResumeBody(data));
+
+  // The shell is a fragment: everything before the plaintext block belongs in
+  // <head>. Wrapping it gives a standards-mode document with a language.
+  const bodyStart = doc.indexOf('<script type="text/plain" id="plaintext">');
+  if (bodyStart < 0) throw new Error("Resume shell is missing its plaintext block");
+  return (
+    `<!DOCTYPE html>\n<html lang="en">\n<head>\n${doc.slice(0, bodyStart)}</head>\n` +
+    `<body>\n${doc.slice(bodyStart)}</body>\n</html>\n`
+  );
 }

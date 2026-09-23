@@ -15,12 +15,11 @@ export interface ContactLink {
   href: string;
 }
 
+/** Public contact only. Email and phone appear solely in the downloadable PDF. */
 export interface ResumeContact {
   location: string;
   site: ContactLink;
   linkedin: ContactLink;
-  email: string;
-  phone: string;
 }
 
 export interface ResumeSkill {
@@ -79,8 +78,6 @@ export const resume: ResumeData = {
       label: "linkedin.com/in/joshcolecreative",
       href: "https://linkedin.com/in/joshcolecreative",
     },
-    email: "colethirteen@pm.me",
-    phone: "(615) 945-3302",
   },
 
   summary: [

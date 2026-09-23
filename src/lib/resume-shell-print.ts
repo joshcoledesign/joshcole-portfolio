@@ -53,7 +53,8 @@ const SITE_SCREEN_CSS = `
       margin-bottom: 12px;
     }
 
-    .toolbar button {
+    .toolbar button,
+    .toolbar a {
       display: inline-flex;
       min-height: 44px;
       align-items: center;
@@ -69,16 +70,25 @@ const SITE_SCREEN_CSS = `
     }
   }
 
-  .toolbar button {
+  .toolbar button,
+  .toolbar a {
     padding: 0;
     border: 0;
     background: transparent;
     color: #26c5ff;
+    font-family: var(--mono);
+    font-size: 8.5pt;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-decoration: none;
   }
 
-  .toolbar button:hover {
+  .toolbar button:hover,
+  .toolbar a:hover {
     color: #e8e8ea;
   }
+
+  .toolbar a:focus-visible { outline: 2px solid #26C5FF; outline-offset: 2px; }
 
   .role-group {
     margin-bottom: 9px;
@@ -142,7 +152,7 @@ const APPROVED_PRINT_CSS = `
   .section { break-inside: auto; margin-top: 0; }
   .role-group-summary { break-inside: avoid; }
   .section > h2 {
-    margin: 2pt 0 1pt;
+    margin: 6pt 0 2.5pt;
     padding: 0 0 1.5pt;
     border-bottom-width: 0.5pt;
     break-after: avoid;
@@ -153,7 +163,7 @@ const APPROVED_PRINT_CSS = `
   }
   .summary p { margin: 0 0 3pt; }
   .skill { margin: 0 0 1pt; line-height: 1.10; }
-  .role { margin: 1.5pt 0 0; }
+  .role { margin: 3.5pt 0 0; }
   .role-head { gap: 12pt; }
   .role-title { margin: 0 0 1pt; font-size: 11pt; line-height: 1.2; }
   .role-date { font-size: 10pt; }
@@ -168,7 +178,7 @@ const APPROVED_PRINT_CSS = `
     line-height: 1.10;
   }
   .role li::before {
-    top: 0.66em;
+    top: 0.53em;
     width: 2.25pt;
     height: 2.25pt;
   }
@@ -177,24 +187,69 @@ const APPROVED_PRINT_CSS = `
     display: contents;
   }
   .role-group-roles .role {
-    margin: 1.5pt 0 0 9pt;
+    margin: 3.5pt 0 0 9pt;
     padding-left: 9pt;
     border-left: 0.5pt solid var(--rule);
   }
-  /* Keep page two from opening in the middle of a role. */
+  .role { break-inside: avoid; }
+  /* At true 10pt the UST roles cannot share page one, so page two opens on
+     them rather than splitting a role across the break. */
   .role-group-roles .role:first-child { break-before: page; }
   .earlier .role { margin: 1.5pt 0 0; }
   .earlier .role-title { font-size: 10pt; }
   a { color: inherit; text-decoration: none; }
 </style>`;
 
-export const RESUME_SHELL = RESUME_SCREEN_SHELL
-  .replace(">Copy plain text</button>", ">--copy-plain-text</button>")
-  .replace(">Save as PDF</button>", ">--save-as-pdf</button>")
-  .replace(">Download .txt</button>", ">--download-txt</button>")
-  .replace(
-    "</style>",
-    `</style>\n${SITE_SCREEN_CSS}\n${APPROVED_PRINT_CSS}`
-  )
-  .replace('<div class="sheet">', '<main class="sheet">')
-  .replace("\n</div>\n\n<script>\n(function () {", "\n</main>\n\n<script>\n(function () {");
+// The PDF link points at the approved ColeOS export copied into /public, so the
+// site offers the same reviewed file instead of a browser print.
+const PDF_BUTTON_JS = `  // Opens the print dialog so the PDF comes from the browser's own renderer —
+  // full type quality, real text layer. Client-side PDF libraries rasterize
+  // the page and produce a file no applicant tracking system can read.
+  // ON THE LIVE SITE: replace this with a link to a PDF built at deploy time.
+  document.getElementById('btn-pdf').addEventListener('click', function () {
+    window.print();
+  });
+`;
+
+const TXT_BUTTON_JS = `  document.getElementById('btn-txt').addEventListener('click', function () {
+    var url = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'josh-cole-resume.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    flash('Downloaded');
+  });
+
+`;
+
+/** Replace exactly one occurrence, failing the build if the shell has drifted. */
+function replaceOnce(source: string, search: string, replacement: string): string {
+  const index = source.indexOf(search);
+  if (index < 0 || source.indexOf(search, index + search.length) >= 0) {
+    throw new Error(`Resume shell transform expected one match for: ${search.slice(0, 60)}`);
+  }
+  return source.slice(0, index) + replacement + source.slice(index + search.length);
+}
+
+const SHELL_TRANSFORMS: [string, string][] = [
+  [">Copy plain text</button>", ">--copy-plain-text</button>"],
+  [
+    '<button type="button" id="btn-pdf">Save as PDF</button>',
+    '<a id="btn-pdf" href="%%PDF_HREF%%" download="josh-cole-resume.pdf">--save-as-pdf</a>',
+  ],
+  ['\n  <button type="button" id="btn-txt">Download .txt</button>', ""],
+  ["'Copy failed — use Download .txt'", "'Copy failed'"],
+  [TXT_BUTTON_JS, ""],
+  [PDF_BUTTON_JS, ""],
+  ["</style>", `</style>\n${SITE_SCREEN_CSS}\n${APPROVED_PRINT_CSS}`],
+  ['<div class="sheet">', '<main class="sheet">'],
+  ["\n</div>\n\n<script>\n(function () {", "\n</main>\n\n<script>\n(function () {"],
+];
+
+export const RESUME_SHELL = SHELL_TRANSFORMS.reduce(
+  (shell, [search, replacement]) => replaceOnce(shell, search, replacement),
+  RESUME_SCREEN_SHELL
+);

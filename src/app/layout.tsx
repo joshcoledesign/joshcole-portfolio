@@ -3,6 +3,7 @@ import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/site-chrome";
 import { Analytics } from "@vercel/analytics/next";
+import { SITE_DESCRIPTION, SITE_URL } from "@/lib/site-metadata";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -23,9 +24,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://joshcolecreative.com"),
+  metadataBase: new URL(SITE_URL),
   title: "Josh Cole",
-  description: "Creative technologist and AI systems designer building usable systems, products, and brands.",
+  description: SITE_DESCRIPTION,
 };
 
 export default function RootLayout({

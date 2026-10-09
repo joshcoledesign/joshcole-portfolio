@@ -82,7 +82,7 @@ The creative direction said minimal color, and adding this much pushes against t
 
 ![Editorial With Teeth headline over a large fingerprint texture.](/case-studies/nemo/nemo-teeth.jpg)
 
-The texture system is where the brand stops looking designed and starts looking printed. Xerox grit is the primary texture, the grain you get dragging a page across a copier. Under it sit halftone dots, scanned paper, torn edges, masking tape. The rule behind all of it is one the deck states plainly: if it's too clean, it's too forgettable.
+The texture system is where the brand stops looking designed and starts looking printed. Xerox grit is the primary texture, the grain you get dragging a page across a copier. The rule behind all of it is one the deck states plainly: if it's too clean, it's too forgettable.
 
 ![A spread of analog textures labeled by type, with patterned trousers at the edge.](/case-studies/nemo/nemo-texture.jpg)
 

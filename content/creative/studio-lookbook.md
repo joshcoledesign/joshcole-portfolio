@@ -1,7 +1,7 @@
 ---
 title: STUDIO LOOKBOOK
 subline: Five looks, two models, one built set.
-descriptor: "five looks, two models, one built set: corrugated steel, confetti, surplus props"
+descriptor: "five looks, two models, one built set"
 processLine: "> studio lookbook · one built set · corrugated steel, confetti, surplus props"
 credit: ""  # TODO(josh): designer's name, if wanted
 slug: studio-lookbook

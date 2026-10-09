@@ -94,7 +94,7 @@ Four principles ran through all four products.
 
 ![Confirmation dialog: 89 assets will be affected by this policy update](/case-studies/vrc/confirmation-dialog.png)
 
-**Status as visual rhythm.** Someone processing 200 records a day shouldn't have to read every word to know where they are. Logged is purple. QA is pink. Processing is blue. Finished is green. Completed is checked. The colors carry the work.
+**Status as visual rhythm.** Someone processing 200 records a day shouldn't have to read every word to know where they are. The colors carry the work.
 
 ![Container detail with color-coded record status pipeline](/case-studies/vrc/container-details.png)
 

@@ -1,7 +1,7 @@
 ---
-title: FIELD
-subline: Available light, tall grass.
-descriptor: available-light portrait in tall grass
+title: IN THE TALL GRASS
+subline: ""
+descriptor: available-light portrait
 processLine: "> single frame · available light"
 credit: ""
 slug: field
@@ -21,5 +21,3 @@ tags:
   - "Photography"
   - "Portrait"
 ---
-
-A portrait in tall grass, in whatever light the afternoon had. No modifiers, no set. One frame.

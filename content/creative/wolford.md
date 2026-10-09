@@ -1,7 +1,7 @@
 ---
 title: WOLFORD
 subline: Ivy, dead leaves, and the tights in every frame.
-descriptor: "fall editorial shot for a hosiery brand: ivy, dead leaves, a peacock chair, the tights in every frame"
+descriptor: "fall editorial shot for a hosiery brand"
 processLine: "> fashion editorial · location · available light"
 credit: "Client: Wolford"
 slug: wolford
@@ -29,6 +29,6 @@ tags:
   - "Commercial"
 ---
 
-A fall editorial shot for Wolford. The rule for the day was that the tights had to be in every frame and never look like the point, so the pictures are built around what was already there: an ivy wall, a peacock chair, a mantel left out in the weather, a yard full of leaves. The palette stays in one place, green and black and brown, and the product sits inside it.
+A fall editorial shot for Wolford. The rule for the day was that the tights had to be in every frame and never look like the point.
 
 Client: Wolford.

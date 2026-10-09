@@ -1,7 +1,7 @@
 ---
 title: STILL HERE
 subline: An abandoned amusement park, on plastic and film.
-descriptor: an abandoned amusement park and the empty streets around it, on a plastic Diana+ and black-and-white film
+descriptor: an abandoned amusement park on a plastic Diana+ and black-and-white film
 processLine: "> Diana+ · black-and-white film · film borders kept"
 credit: ""
 slug: still-here

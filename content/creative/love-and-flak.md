@@ -1,7 +1,7 @@
 ---
 title: LOVE & FLAK
 subline: Jewelry made from spent bullets, worn where it was fired.
-descriptor: promo film for a jewelry line made from spent bullets; one woman, a field, the pendants doing the talking
+descriptor: promo film for a jewelry line made from spent bullets
 processLine: "> promo film · directed with Eli McFadden · frames from the cut"
 credit: "Client: Love & Flak · directed with Eli McFadden"  # TODO(josh): confirm credit wording
 slug: love-and-flak
@@ -33,6 +33,6 @@ tags:
   - "Commercial"
 ---
 
-Love & Flak makes jewelry out of spent bullet casings, so the film takes the pendants back outside: one woman, a field, the hills behind her, and the brass catching what light there is. No product-on-white, no voiceover. The chains and the casings carry it.
+Love & Flak makes jewelry out of spent bullet casings, so the film takes the pendants back outside. No product-on-white, no voiceover.
 
 Co-directed with Eli McFadden. Frames are from the cut.

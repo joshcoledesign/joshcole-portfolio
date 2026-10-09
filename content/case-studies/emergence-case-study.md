@@ -28,7 +28,7 @@ Emergence is the design system that runs Novensia. It's named for what it's tryi
 
 ![The System](/case-studies/emergence/system-sections.png)
 
-The system is a cool near-black void with a hot accent that condenses from gold into coral. The void recedes. The accent emerges. The content sits on top, bright and warm, because content is what the product is for. The whole system is dark-mode-first by intent, not by user preference. Dark is what lets warm read as warm and lets the content sit above everything else.
+Content is what the product is for. The whole system is dark-mode-first by intent, not by user preference. Dark is what lets warm read as warm and lets the content sit above everything else.
 
 The system came before the product. The thesis showed up before the name did, which is why the tokens are named for the idea, not the product. Novensia sits on top of it; the system underneath doesn't depend on it.
 

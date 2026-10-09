@@ -32,7 +32,7 @@ The hotel had just completed a full interior renovation and wanted a brand to ma
 
 ## The anchor
 
-The strategic anchor we landed on after discovery: the monogram. A single USH mark designed to live everywhere. Pressed into the tile mosaic at the entrance, embroidered on staff cuffs, stamped into leather, suspended from suspender hardware, printed across pocket squares and bow ties. The logic was that a hotel with this much physical presence needed a brand that worked the same way. Not a logo applied to things. A mark woven into the place itself.
+The strategic anchor we landed on after discovery: the monogram. A single USH mark designed to live everywhere. The logic was that a hotel with this much physical presence needed a brand that worked the same way. Not a logo applied to things. A mark woven into the place itself.
 
 ![USH monogram embroidered on a staff cuff](/case-studies/ush/monogram-cuff.png)
 
@@ -46,11 +46,7 @@ The primary typeface, Fortescue, brought the historical weight the architecture 
 
 ![Fortescue as the primary typeface, GT Pressura Mono as the secondary](/case-studies/ush/ush-type.png)
 
-The primary logo pairs the wordmark with an illustration of the station's clock tower, and the alternates carry the wordmark on its own, including a vertical treatment that echoes the tower.
-
 ![Primary logo with the clock tower illustration, and the lockup alternates](/case-studies/ush/logo-lockup.jpg)
-
-The copper foil on stationery, the illustrated Nashville map, the "out too late" door hanger, the digital press kit: each a touchpoint carrying the same voice and the same level of care.
 
 ![Uniform details, bow tie, tie bar, monogram buttons and suspenders, with the stationery folder and room service menu](/case-studies/ush/ush-uniform-room-service.jpg)
 

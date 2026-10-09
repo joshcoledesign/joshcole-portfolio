@@ -1,7 +1,7 @@
 ---
 title: BREAKFAST OF CHAMPIONS  # TODO(josh): retitle if wanted
 subline: The props tell the story.
-descriptor: satirical portrait; the props tell the story
+descriptor: satirical portrait
 processLine: "> single frame · studio portrait · propped"
 credit: ""
 slug: breakfast-of-champions
@@ -22,4 +22,4 @@ tags:
   - "Portrait"
 ---
 
-A satirical portrait. The subject holds still; the props on the table do the talking.
+A satirical portrait.

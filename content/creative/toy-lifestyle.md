@@ -41,8 +41,6 @@ tags:
   - "Set Design"
 ---
 
-Designer vinyl toys, cast as actors. Each frame is a small built set with a scene playing out in it.
-
 The stages were a few inches across, which made the studio strobes useless. The light was improvised from whatever fit: desk lamps, flashlights, LED lights, cards, whatever could get close enough.
 
 The toys are the work of their designers.

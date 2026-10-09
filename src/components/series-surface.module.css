@@ -71,25 +71,7 @@
   margin-top: 34px;
 }
 
-.video {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  margin-top: 34px;
-  background: #101117;
-}
-
-.video iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.video + .map {
-  margin-top: 15px;
-}
+.draft { color: #26c5ff; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; margin: 0 0 16px; }
 
 .frame {
   position: absolute;
@@ -127,7 +109,8 @@
 
 .frame:focus-visible,
 .close:focus-visible,
-.nav:focus-visible {
+.nav:focus-visible,
+.viewToggle:focus-visible {
   outline: 2px solid #26c5ff;
   outline-offset: 2px;
 }
@@ -166,6 +149,10 @@
   margin: 0 0 24px;
 }
 
+.intro { margin-top: 22px; }
+.intro p { margin-bottom: 12px; }
+.intro p:last-child { margin-bottom: 0; }
+
 .prose a,
 .story a {
   color: #26c5ff;
@@ -198,25 +185,64 @@
 }
 
 .dialog {
+  --dialog-side-padding: clamp(44px, 4vw, 64px);
   position: fixed;
   z-index: 200;
   inset: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
-  gap: 28px;
+  height: 100vh;
+  height: 100dvh;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 24px;
   align-items: center;
-  padding: clamp(20px, 5vw, 72px);
+  padding: 58px var(--dialog-side-padding) 28px;
   background: rgba(10, 11, 15, 0.96);
+}
+
+.imageViewport {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  overflow: auto;
+  overscroll-behavior: contain;
 }
 
 .dialogImage {
   display: block;
   width: 100%;
-  max-height: calc(100vh - 96px);
+  height: auto;
+  flex: 0 0 auto;
+  margin: auto;
+}
+
+.fitView .dialogImage {
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
+.imageOnlyDialog {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 16px;
+}
+
+.imageOnlyDialog .story {
+  text-align: center;
+}
+
+.imageOnlyDialog .storyIndex {
+  margin-bottom: 0;
+}
+
 .story {
+  max-height: 100%;
+  overflow-y: auto;
   color: #b4b6c2;
   font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 16px;
@@ -236,7 +262,8 @@
 }
 
 .close,
-.nav {
+.nav,
+.viewToggle {
   position: absolute;
   border: 0;
   background: rgba(21, 22, 28, 0.75);
@@ -246,7 +273,8 @@
 }
 
 .close:hover,
-.nav:hover {
+.nav:hover,
+.viewToggle:hover {
   color: #26c5ff;
   filter: brightness(1.18);
 }
@@ -256,6 +284,13 @@
   right: 20px;
   padding: 8px;
   font-size: 18px;
+}
+
+.viewToggle {
+  top: 18px;
+  left: var(--dialog-side-padding);
+  padding: 8px 0;
+  font-size: 12px;
 }
 
 .nav {
@@ -291,17 +326,15 @@
   }
 
   .dialog {
+    --dialog-side-padding: 20px;
     grid-template-columns: 1fr;
     grid-template-rows: minmax(0, 1fr) auto;
     gap: 18px;
-    padding: 54px 20px 24px;
-  }
-
-  .dialogImage {
-    max-height: 68vh;
+    padding: 54px 20px 20px;
   }
 
   .story {
+    max-height: 22vh;
     font-size: 14px;
   }
 }

@@ -44,7 +44,9 @@ tags:
 
 Required fields are `title`, `slug`, `kind`, `descriptor`, `thumbnail`, `images`, `weight`, `order`, `shape`, `sortYear`, `displayDate`, and `tags`. Use `display: "mosaic"` for a series that should show multiple frames and `display: "single"` for one image. `thumbnail` controls the map and photography mosaic but never changes the order of `images` on the piece route.
 
-An image may be a path string or an object. Use an object when the frame needs authored `alt`, `focal`, or `story` data. `story` appears in the frame lightbox. `focal` is an `[x, y]` pair from 0–1. `video` is optional; when present, use a YouTube URL or ID. It renders above the frames only on the piece route. Keep an unfinished video piece at `published: false`.
+An image may be a path string or an object. Use an object when the frame needs authored `alt`, `focal`, or `story` data. `story` appears in the frame lightbox. `focal` is an `[x, y]` pair from 0–1. `video` is optional; when present, use a YouTube URL or 11-character ID. A valid video creates a Film + Photography page: the Markdown context comes first, followed by a click-to-play video and the photographs. `thumbnail` is the video poster as well as the work-surface cover. YouTube is loaded only after Play is pressed; the player uses the privacy-enhanced embed domain and includes a direct YouTube fallback link.
+
+Keep unfinished pieces at `published: false`. During `pnpm dev`, their `/work/<slug>` routes can be reviewed locally, with a draft indicator on series pages. Production still returns 404 for unpublished pieces; they remain absent from the homepage, sitemap, and counts in both environments.
 
 ```yaml
 ---

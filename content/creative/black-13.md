@@ -2,11 +2,11 @@
 title: BLACK 13
 subline: A fighter wraps his hands. A 1920s room fills with smoke.
 descriptor: promo film for a Nashville tattoo studio; a fighter wraps his hands, a 1920s room fills with smoke
-processLine: "> promo film · directed with Eli McFadden · stills from the shoot"
-credit: "Client: Black 13 Tattoo · directed with Eli McFadden"  # TODO(josh): confirm credit wording
+processLine: "> promo film · Director: Josh Cole · DP: Eli McFadden · stills from the shoot"
+credit: "Client: Black 13 Tattoo · Director: Josh Cole · DP: Eli McFadden"
 slug: black-13
-published: false  # TODO(josh): flip to true once the video link lands
-video: ""  # TODO(josh): unlisted YouTube link
+published: false  # TODO(josh): publish after preview and date are approved
+video: "https://youtu.be/l_hU_MULjaQ"
 thumbnail: /creative/black-13/black13-05.jpg
 images:
   - src: /creative/black-13/black13-05.jpg
@@ -36,4 +36,7 @@ tags:
 
 A promo film for Black 13 Tattoo in Nashville, TN. 
 
-Co-directed with Eli McFadden. The stills here were shot during the production, not pulled from the cut.
+The stills here were shot during the production, not pulled from the cut.
+
+Director: Josh Cole\
+DP: Eli McFadden

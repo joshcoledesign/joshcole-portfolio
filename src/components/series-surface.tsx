@@ -6,25 +6,16 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { PromptLine } from "@/components/prompt-line";
+import { FilmPlayer } from "@/components/film-player";
 import type { Piece } from "@/lib/work";
 import { layout } from "@/lib/treemap";
+import { youtubeId } from "@/lib/youtube";
 import styles from "./series-surface.module.css";
 
 const CANVAS_W = 1000;
 const DESKTOP_H = 625;
 const MOBILE_H = 1333;
 const GUTTER = 5;
-
-function youtubeId(value: string): string {
-  try {
-    const url = new URL(value);
-    if (url.hostname === "youtu.be") return url.pathname.slice(1);
-    if (url.pathname.startsWith("/embed/")) return url.pathname.split("/")[2] ?? "";
-    return url.searchParams.get("v") ?? "";
-  } catch {
-    return value;
-  }
-}
 
 export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: string }) {
   const router = useRouter();
@@ -35,6 +26,10 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
   const closeRef = useRef<HTMLButtonElement>(null);
   const activeRef = useRef<number | null>(null);
   const [mapWidth, setMapWidth] = useState(CANVAS_W);
+  const [fitFrame, setFitFrame] = useState<number | null>(null);
+  const videoId = piece.video ? youtubeId(piece.video) : null;
+  const mediaType = videoId ? (piece.frames ? "FILM + PHOTOGRAPHY" : "FILM") : "SERIES";
+  const frameNoun = videoId ? "photograph" : "frame";
 
   useEffect(() => {
     const element = mapRef.current;
@@ -50,6 +45,8 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
   const activeIndex = frameParam ? Number.parseInt(frameParam, 10) - 1 : -1;
   const active = activeIndex >= 0 && activeIndex < piece.images.length ? activeIndex : null;
   const dialogOpen = active !== null;
+  const fitImage = active !== null && fitFrame === active;
+  const hasStoryPanel = active !== null && (!videoId || Boolean(piece.images[active].story));
 
   useEffect(() => {
     activeRef.current = active;
@@ -57,6 +54,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
 
   const setFrame = useCallback(
     (index: number | null) => {
+      setFitFrame(null);
       const next = new URLSearchParams(searchParams.toString());
       if (index === null) next.delete("frame");
       else next.set("frame", String(index + 1).padStart(2, "0"));
@@ -65,6 +63,11 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
     },
     [pathname, router, searchParams],
   );
+  const setFrameRef = useRef(setFrame);
+
+  useEffect(() => {
+    setFrameRef.current = setFrame;
+  }, [setFrame]);
 
   useEffect(() => {
     if (!dialogOpen) return;
@@ -76,18 +79,18 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
       if (current === null) return;
       if (event.key === "Escape") {
         event.preventDefault();
-        setFrame(null);
+        setFrameRef.current(null);
         return;
       }
       if (event.key === "ArrowLeft") {
         const next = (current - 1 + piece.images.length) % piece.images.length;
         activeRef.current = next;
-        setFrame(next);
+        setFrameRef.current(next);
       }
       if (event.key === "ArrowRight") {
         const next = (current + 1) % piece.images.length;
         activeRef.current = next;
-        setFrame(next);
+        setFrameRef.current(next);
       }
       if (event.key !== "Tab") return;
       const dialog = dialogRef.current;
@@ -114,7 +117,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
       document.body.style.overflow = previousOverflow;
       previousFocus?.focus();
     };
-  }, [dialogOpen, piece.images.length, setFrame]);
+  }, [dialogOpen, piece.images.length]);
 
   const canvasH = mapWidth <= 900 ? MOBILE_H : DESKTOP_H;
   const frames = useMemo(
@@ -148,24 +151,25 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
           <span>{backHref.startsWith("/work/photography") ? "cd ../photography" : "cd / # home"}</span>
         </Link>
 
-        <p className={styles.eyebrow}>SERIES · {piece.displayDate || "ARCHIVE"}</p>
+        {!piece.published && <p className={styles.draft}>Draft preview · not published</p>}
+        <p className={styles.eyebrow}>{mediaType}{piece.displayDate ? ` · ${piece.displayDate}` : videoId ? "" : " · ARCHIVE"}</p>
         <div className={styles.headingRow}>
           <h1>{piece.title}</h1>
-          <span className={styles.count}>{String(piece.frames).padStart(2, "0")} frames</span>
+          <span className={styles.count}>
+            {videoId ? `1 film · ${piece.frames} photograph${piece.frames === 1 ? "" : "s"}` : `${String(piece.frames).padStart(2, "0")} frames`}
+          </span>
         </div>
 
-        {piece.video && youtubeId(piece.video) && (
-          <div className={styles.video}>
-            <iframe
-              src={`https://www.youtube-nocookie.com/embed/${youtubeId(piece.video)}`}
-              title={`${piece.title} video`}
-              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+        {videoId && (
+          <div className={`${styles.prose} ${styles.intro}`}>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+              {piece.content || piece.description}
+            </ReactMarkdown>
           </div>
         )}
+        {videoId && <FilmPlayer key={videoId} id={videoId} title={piece.title} poster={piece.thumbnail ?? piece.images[0]} />}
 
-        <div ref={mapRef} className={styles.map}>
+        <div ref={mapRef} className={styles.map} style={{ aspectRatio: `${CANVAS_W} / ${canvasH}` }}>
           {placed.length ? (
             placed.map((rect) => {
               const frame = rect.piece;
@@ -180,7 +184,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
                     width: `calc(${(rect.w / CANVAS_W) * 100}% - ${GUTTER}px)`,
                     height: `calc(${(rect.h / canvasH) * 100}% - ${GUTTER}px)`,
                   }}
-                  aria-label={`Open frame ${frame.index + 1} of ${piece.frames}${frame.image.story ? ", includes a story" : ""}`}
+                  aria-label={`Open ${frameNoun} ${frame.index + 1} of ${piece.frames}${frame.image.story ? ", includes a story" : ""}`}
                   onClick={() => setFrame(frame.index)}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -202,31 +206,42 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
           )}
         </div>
 
-        <div className={styles.prose}>
+        {!videoId && <div className={styles.prose}>
           <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
             {piece.content || piece.description}
           </ReactMarkdown>
-        </div>
+        </div>}
       </main>
 
       {active !== null && (
         <div
           ref={dialogRef}
-          className={styles.dialog}
+          className={`${styles.dialog} ${hasStoryPanel ? "" : styles.imageOnlyDialog}`}
           role="dialog"
           aria-modal="true"
-          aria-label={`Frame ${active + 1} of ${piece.frames}`}
+          aria-label={`${videoId ? "Photograph" : "Frame"} ${active + 1} of ${piece.frames}`}
           onClick={() => setFrame(null)}
         >
-          <button ref={closeRef} className={styles.close} type="button" aria-label="Close frame" onClick={() => setFrame(null)}>
+          <button ref={closeRef} className={styles.close} type="button" aria-label={`Close ${frameNoun}`} onClick={() => setFrame(null)}>
             ✕
+          </button>
+          <button
+            className={styles.viewToggle}
+            type="button"
+            aria-label={fitImage ? "Show image at readable width" : "Fit whole image in view"}
+            onClick={(event) => {
+              event.stopPropagation();
+              setFitFrame(fitImage ? null : active);
+            }}
+          >
+            {fitImage ? "[ view details ]" : "[ fit whole image ]"}
           </button>
           {piece.images.length > 1 && (
             <>
               <button
                 className={`${styles.nav} ${styles.prev}`}
                 type="button"
-                aria-label="Previous frame"
+                aria-label={`Previous ${frameNoun}`}
                 onClick={(event) => {
                   event.stopPropagation();
                   setFrame((active - 1 + piece.images.length) % piece.images.length);
@@ -237,7 +252,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
               <button
                 className={`${styles.nav} ${styles.next}`}
                 type="button"
-                aria-label="Next frame"
+                aria-label={`Next ${frameNoun}`}
                 onClick={(event) => {
                   event.stopPropagation();
                   setFrame((active + 1) % piece.images.length);
@@ -247,20 +262,25 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
               </button>
             </>
           )}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className={styles.dialogImage}
-            src={piece.images[active].src}
-            alt={piece.images[active].alt}
+          <div
+            key={active}
+            className={`${styles.imageViewport} ${fitImage ? styles.fitView : ""}`}
             onClick={(event) => event.stopPropagation()}
-          />
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className={styles.dialogImage}
+              src={piece.images[active].src}
+              alt={piece.images[active].alt}
+            />
+          </div>
           <div className={styles.story} onClick={(event) => event.stopPropagation()}>
             <div className={styles.storyIndex}>
               [{String(active + 1).padStart(2, "0")} / {String(piece.frames).padStart(2, "0")}]
             </div>
-            <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+            {hasStoryPanel && <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
               {piece.images[active].story || piece.images[active].alt}
-            </ReactMarkdown>
+            </ReactMarkdown>}
           </div>
         </div>
       )}

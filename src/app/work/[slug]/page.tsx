@@ -5,7 +5,7 @@ import { StudyPage } from "@/components/study-page";
 import { PhotographySurface } from "@/components/photography-surface";
 import { getPhotographyCard, getPhotographyPieces } from "@/lib/photography";
 import { getStudyDocuments } from "@/lib/study-documents";
-import { getPiece, getPublishedPieces, resolveImageSource, type Piece } from "@/lib/work";
+import { getAllPieces, getPiece, getPublishedPieces, resolveImageSource, type Piece } from "@/lib/work";
 
 type Query = Record<string, string | string[] | undefined>;
 type Props = {
@@ -60,7 +60,10 @@ function photographyPiece(): Piece {
 }
 
 function resolvePiece(slug: string) {
-  return slug === "photography" ? photographyPiece() : getPiece(slug);
+  if (slug === "photography") return photographyPiece();
+  return getPiece(slug) ?? (process.env.NODE_ENV === "development"
+    ? getAllPieces().find((piece) => piece.slug === slug) ?? null
+    : null);
 }
 
 function studyImageSources(content: string): Record<string, string> {

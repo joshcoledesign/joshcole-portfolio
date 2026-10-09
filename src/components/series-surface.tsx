@@ -46,7 +46,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
   const active = activeIndex >= 0 && activeIndex < piece.images.length ? activeIndex : null;
   const dialogOpen = active !== null;
   const fitImage = active !== null && fitFrame === active;
-  const hasStoryPanel = active !== null && (!videoId || Boolean(piece.images[active].story));
+  const hasStoryPanel = active !== null && Boolean(piece.images[active].story);
 
   useEffect(() => {
     activeRef.current = active;
@@ -159,6 +159,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
             {videoId ? `1 film · ${piece.frames} photograph${piece.frames === 1 ? "" : "s"}` : `${String(piece.frames).padStart(2, "0")} frames`}
           </span>
         </div>
+        {piece.description && <p className={styles.descriptor}>{piece.description}</p>}
 
         {videoId && (
           <div className={`${styles.prose} ${styles.intro}`}>
@@ -274,14 +275,16 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
               alt={piece.images[active].alt}
             />
           </div>
-          <div className={styles.story} onClick={(event) => event.stopPropagation()}>
-            <div className={styles.storyIndex}>
-              [{String(active + 1).padStart(2, "0")} / {String(piece.frames).padStart(2, "0")}]
+          {hasStoryPanel && (
+            <div className={styles.story} onClick={(event) => event.stopPropagation()}>
+              <div className={styles.storyIndex}>
+                [{String(active + 1).padStart(2, "0")} / {String(piece.frames).padStart(2, "0")}]
+              </div>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+                {piece.images[active].story}
+              </ReactMarkdown>
             </div>
-            {hasStoryPanel && <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-              {piece.images[active].story || piece.images[active].alt}
-            </ReactMarkdown>}
-          </div>
+          )}
         </div>
       )}
     </div>

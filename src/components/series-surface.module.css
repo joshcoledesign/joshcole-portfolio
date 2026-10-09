@@ -64,6 +64,15 @@
   letter-spacing: 0.08em;
 }
 
+.descriptor {
+  max-width: 720px;
+  margin: 14px 0 0;
+  color: #acacb1;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
 .map {
   position: relative;
   width: 100%;
@@ -228,16 +237,7 @@
 
 .imageOnlyDialog {
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) auto;
-  gap: 16px;
-}
-
-.imageOnlyDialog .story {
-  text-align: center;
-}
-
-.imageOnlyDialog .storyIndex {
-  margin-bottom: 0;
+  grid-template-rows: minmax(0, 1fr);
 }
 
 .story {

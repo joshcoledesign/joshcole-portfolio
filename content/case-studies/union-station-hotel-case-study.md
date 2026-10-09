@@ -40,11 +40,11 @@ The strategic anchor we landed on after discovery: the monogram. A single USH ma
 
 Everything followed from that decision. The color system pulled from the building's own materials and history: Chambray Blue, Palliser Copper, the warmth of aged brass and dark wood.
 
-![Color system: Chambray Blue, Palliser Copper, brass, dark wood](/case-studies/ush/ush-palette.jpg)
+![Color system: Chambray Blue, Palliser Copper, brass, dark wood](/case-studies/ush/ush-palette.jpg "Color system: Chambray Blue, Palliser Copper, brass, dark wood")
 
 The primary typeface, Fortescue, brought the historical weight the architecture deserved, with GT Pressura Mono as the secondary face.
 
-![Fortescue as the primary typeface, GT Pressura Mono as the secondary](/case-studies/ush/ush-type.png)
+![Fortescue as the primary typeface, GT Pressura Mono as the secondary](/case-studies/ush/ush-type.png "Fortescue as the primary typeface, GT Pressura Mono as the secondary")
 
 ![Primary logo with the clock tower illustration, and the lockup alternates](/case-studies/ush/logo-lockup.jpg)
 

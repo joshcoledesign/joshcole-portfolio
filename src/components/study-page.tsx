@@ -16,6 +16,7 @@ import styles from "./study-page.module.css";
 type ActiveImage = {
   src: string;
   alt: string;
+  caption?: string;
 };
 
 const INLINE_COMPONENTS: Record<string, React.ComponentType> = {
@@ -135,7 +136,7 @@ function markdownComponents(
         </h2>
       );
     },
-    img({ src, alt }) {
+    img({ src, alt, title }) {
       if (typeof src !== "string") return null;
 
       if (src.startsWith("component:")) {
@@ -153,7 +154,8 @@ function markdownComponents(
       const noBorder = hash.includes("no-border");
       const marginTop = hash.match(/mt-(\d+)/)?.[1];
       const marginBottom = hash.match(/mb-(\d+)/)?.[1];
-      const caption = alt ?? "";
+      const altText = alt ?? "";
+      const caption = typeof title === "string" && title.trim() ? title : undefined;
 
       return (
         <figure
@@ -166,13 +168,13 @@ function markdownComponents(
           <button
             type="button"
             className={`${styles.imageButton} ${noBorder ? styles.noBorder : ""}`}
-            aria-label={`Open image: ${caption}`}
-            onClick={() => openImage({ src: resolvedSource, alt: caption })}
+            aria-label={`Open image: ${altText}`}
+            onClick={() => openImage({ src: resolvedSource, alt: altText, caption })}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={resolvedSource}
-              alt={caption}
+              alt={altText}
               loading="lazy"
               onError={(event) => {
                 const image = event.currentTarget;
@@ -185,7 +187,7 @@ function markdownComponents(
               }}
             />
           </button>
-          <figcaption>{caption}</figcaption>
+          {caption && <figcaption>{caption}</figcaption>}
         </figure>
       );
     },
@@ -365,7 +367,9 @@ export function StudyPage({
             alt={activeImage.alt}
             onClick={(event) => event.stopPropagation()}
           />
-          <p onClick={(event) => event.stopPropagation()}>{activeImage.alt}</p>
+          {activeImage.caption && (
+            <p onClick={(event) => event.stopPropagation()}>{activeImage.caption}</p>
+          )}
         </div>
       )}
     </div>

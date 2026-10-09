@@ -14,7 +14,6 @@ images:
   - /creative/plurality/multiples-03.jpg
   - src: /creative/plurality/multiples-nurses.jpg
     alt: The nurses, wide
-    story: The nurses, wide.
 kind: "series"
 display: "mosaic"
 featured: false

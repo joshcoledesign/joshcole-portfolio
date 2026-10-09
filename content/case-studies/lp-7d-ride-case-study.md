@@ -47,7 +47,7 @@ I was Design Director on the project and drove the production end to end, making
 
 That meant shaping and editing the script, working with an illustrator on the storyboard, sourcing the motion chair vendor, finding the animation studio, finding the programming team who could sync chair movement and environmental effects to the animation frame-by-frame. It meant flying to LA to spec the chairs in person: riding them, giving direction on where the drops and jolts landed relative to what was on screen. It meant choosing Oculus headsets and coordinating every vendor toward a single experience that had to land in one take, in a loud convention hall, for someone who had no idea what they were walking into.
 
-![Illustrated storyboard, ride sequence. Artwork by the amazing Roland Gibbons](/case-studies/lp-7d-ride/lp-storyboard.png)
+![Illustrated storyboard, ride sequence. Artwork by the amazing Roland Gibbons](/case-studies/lp-7d-ride/lp-storyboard.png "Illustrated storyboard, ride sequence. Artwork by the amazing Roland Gibbons")
 
 ![The LP tour vehicle on loadup](/case-studies/lp-7d-ride/lp-truck.png)
 

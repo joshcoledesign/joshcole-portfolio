@@ -23,6 +23,7 @@ const DOMAIN_FLAGS = [
   "Generative AI",
   "Design Systems",
   "Generative",
+  "Video",
   "Photography",
 ] as const;
 
@@ -402,7 +403,10 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
   const photography = pieces.find((piece) => piece.slug === "photography");
   const collapsedPieces = [
     ...pieces.filter(
-      (piece) => piece.slug !== "photography" && !piece.tags.includes("Photography"),
+      // A film with its own photographs stays a standalone tile as well as a collection.
+      (piece) =>
+        piece.slug !== "photography" &&
+        (!piece.tags.includes("Photography") || Boolean(piece.video)),
     ),
     ...(photography ? [photography] : []),
   ];
@@ -412,17 +416,12 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
     ? pieces.filter((piece) => piece.slug !== "photography")
     : collapsedPieces;
 
-  // Photography is an expansion control as well as a visible flag: it releases
-  // the complete file-backed set without hiding the studies and the two
-  // standalone creative series. Any additional active flag still filters the
-  // expanded surface normally.
-  const filteringTags = activeTags.filter((tag) => tag !== "photography");
-  const filteringSet = new Set(filteringTags);
-
-  const filtered = !filteringSet.size
+  // Release the individual photography pieces before applying active tags;
+  // Photography itself still filters, just like every other visible flag.
+  const filtered = !activeSet.size
     ? surfacePieces
     : surfacePieces.filter((piece) =>
-        piece.tags.some((tag) => filteringSet.has(tagSlug(tag))),
+        piece.tags.some((tag) => activeSet.has(tagSlug(tag))),
       );
 
   const featCards = useMemo(
@@ -519,7 +518,7 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
                 ))}
               </div>
               <div className={styles.viewgroup}>
-                <FlagButton label="map" pressed={view === "map"} onClick={() => setParam("view", null)} />
+                <FlagButton label="grid" pressed={view === "map"} onClick={() => setParam("view", null)} />
                 <FlagButton label="ls" pressed={view === "ls"} onClick={() => setParam("view", "ls")} />
                 <button
                   type="button"
@@ -617,7 +616,7 @@ export function WorkSurface({ pieces, featuredOrder }: Props) {
             <section className={styles.drawerSection} aria-labelledby="drawer-view-label">
               <h2 id="drawer-view-label" className={styles.drawerLabel}>view</h2>
               <div className={styles.drawerOptions}>
-                <FlagButton label="map" pressed={view === "map"} onClick={() => setParam("view", null)} />
+                <FlagButton label="grid" pressed={view === "map"} onClick={() => setParam("view", null)} />
                 <FlagButton label="ls" pressed={view === "ls"} onClick={() => setParam("view", "ls")} />
                 <button
                   type="button"

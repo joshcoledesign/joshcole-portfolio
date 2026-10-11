@@ -19,7 +19,7 @@ const P: React.CSSProperties = {
 };
 
 export const metadata = {
-  title: "About — Josh Cole",
+  title: "About | Josh Cole",
 };
 
 export default function AboutPage() {
@@ -110,7 +110,7 @@ export default function AboutPage() {
           </p>
 
           <p style={P}>
-            The way I work is something I learned from my dad. He was a sculptor. Clay, cast in bronze, finished by hand. He took a job at a foundry so he&apos;d understand every step of how a piece came to be, from armature to patina. One of his, a war chief about three feet tall, he built from the inside out: the armature, then the skeleton, then the organs from anatomy books, then the muscles, then the skin. Nobody was meant to see the organs. But the skin sat right because the structure under it was real. He even carved a flintlock rifle to scale, with a hammer you could pull back and a trigger you could pull.
+            The way I work is something I learned from my dad. He was a sculptor. Clay, cast in bronze, finished by hand. He took a job at a foundry so he&apos;d understand every step of how a piece came to be, from armature to patina. One of his, a war chief about three feet tall, he built from the inside out. The armature, then the skeleton, then the organs from anatomy books, then the muscles, then the skin. Nobody was meant to see the organs. But the skin sat right because the structure under it was real. He even carved a flintlock rifle to scale, with a hammer you could pull back and a trigger you could pull.
           </p>
 
           <p style={P}>
@@ -123,7 +123,7 @@ export default function AboutPage() {
           </p>
 
           <p style={P}>
-            I went to school to sculpt monsters for film. Then I saw my first 3D animation and switched to animation and code. Compaq hired me before I&apos;d finished my degree and gave me the time to finish it. From there the work kept changing shape: brand and creative direction, UX and design leadership, VR and generative art. The tools kept changing. What I was after hasn&apos;t. Know how it works all the way down. Build the structure nobody sees. Make the thing that isn&apos;t there yet.
+            I went to school to sculpt monsters for film. Then I saw my first 3D animation and switched to animation and code. Compaq hired me before I&apos;d finished my degree and gave me the time to finish it. From there the work kept changing shape. Brand and creative direction, UX and design leadership, VR and generative art. The tools kept changing. What I was after hasn&apos;t. Know how it works all the way down. Build the structure nobody sees. Make the thing that isn&apos;t there yet.
           </p>
 
           <p style={P}>

@@ -48,7 +48,6 @@ export function SiteFooter() {
             <li>
               <a href="https://github.com/joshcoledesign" target="_blank" rel="noopener noreferrer">github</a>
             </li>
-            <li className={styles.muted}>substack&nbsp;&nbsp;writing and thinking, soon</li>
           </ul>
         </section>
       </div>

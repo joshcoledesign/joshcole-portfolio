@@ -1,7 +1,7 @@
 ---
 title: STILL HERE
-subline: An abandoned amusement park, on plastic and film.
-descriptor: an abandoned amusement park on a plastic Diana+ and black-and-white film
+subline:
+descriptor: abandoned spaces shot on a plastic Diana+ and black-and-white film
 processLine: "> Diana+ · black-and-white film · film borders kept"
 credit: ""
 slug: still-here
@@ -25,8 +25,8 @@ featured: false
 weight: 2
 order: 29
 shape: "landscape"
-sortYear: 2012  # TODO(josh): provisional — date owed
-displayDate: ""  # TODO(josh): displayDate owed
+sortYear: 2010  # TODO(josh): provisional — date owed
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Photography"
@@ -34,4 +34,4 @@ tags:
   - "Personal"
 ---
 
-An amusement park that closed and never got torn down. Streets emptied. Shot on a plastic Diana+ with black-and-white film, because the camera's soft edges and light leaks were the right tool for a place that was already half gone.
+An amusement park that closed and never got torn down. Streets emptied. Shot on a plastic Diana+ with black-and-white film.

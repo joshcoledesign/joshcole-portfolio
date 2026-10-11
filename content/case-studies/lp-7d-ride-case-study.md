@@ -2,7 +2,7 @@
 title: "LP 7D Ride"
 volume: "creative-immersive"
 slug: "lp-7d-ride"
-role: "Design Director — end to end"
+role: "Design Director, end to end"
 year: "2019"
 summary: "A full 7D experiential ride that made building materials unforgettable. 485+ leads, 2.2M+ media impressions."
 descriptor: "a trade-show ride experience"
@@ -13,8 +13,8 @@ display: "single"
 featured: true
 weight: 3
 order: 3
-sortYear: 2019
-displayDate: "2019"
+sortYear: 2020
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Immersive"
@@ -23,17 +23,17 @@ tags:
 
 # LP 7D Ride
 
-The brief was simple but not obvious: make building materials unforgettable.
+The brief was simple but not obvious. Make building materials unforgettable.
 
 If you came for the numbers check out the [results](#the-result).
 
-LP Building Solutions needed a reason for contractors and builders to stop walking the floor of the International Builders' Show and come into their booth. IBS is the largest annual light construction show in the world: 1,400+ exhibitors across 600,000 square feet. Not browse. Stop. Stay. Tell someone else.
+LP Building Solutions needed a reason for contractors and builders to stop walking the floor of the International Builders' Show and come into their booth. IBS is the largest annual light construction show in the world, with 1,400+ exhibitors across 600,000 square feet. Not browse. Stop. Stay. Tell someone else.
 
 ---
 
 ## The answer
 
-A full 7D experiential ride. VR headsets, motion chairs, water spray, scent. A multi-stop journey through LP's product portfolio that put you inside the materials: moving through weather events, watching siding hold while everything around it gave way, feeling the environment react as each product performed. Every stop in the ride, a different part of the line.
+A full 7D experiential ride. VR headsets, motion chairs, water spray, scent. A multi-stop journey through LP's product portfolio that put you inside the materials. Moving through weather events, watching siding hold while everything around it gave way, feeling the environment react as each product performed. Every stop in the ride, a different part of the line.
 
 ![Riders in motion chairs and headsets at the IBS booth](/case-studies/lp-7d-ride/riders.png)
 
@@ -45,13 +45,13 @@ A full 7D experiential ride. VR headsets, motion chairs, water spray, scent. A m
 
 I was Design Director on the project and drove the production end to end, making all creative and design decisions from concept through delivery, in under 90 days.
 
-That meant shaping and editing the script, working with an illustrator on the storyboard, sourcing the motion chair vendor, finding the animation studio, finding the programming team who could sync chair movement and environmental effects to the animation frame-by-frame. It meant flying to LA to spec the chairs in person: riding them, giving direction on where the drops and jolts landed relative to what was on screen. It meant choosing Oculus headsets and coordinating every vendor toward a single experience that had to land in one take, in a loud convention hall, for someone who had no idea what they were walking into.
+That meant shaping and editing the script, working with an illustrator on the storyboard, sourcing the motion chair vendor, finding the animation studio, finding the programming team who could sync chair movement and environmental effects to the animation frame-by-frame. It meant flying to LA to spec the chairs in person, riding them and giving direction on where the drops and jolts landed relative to what was on screen. It meant choosing Oculus headsets and coordinating every vendor toward a single experience that had to land in one take, in a loud convention hall, for someone who had no idea what they were walking into.
 
 ![Illustrated storyboard, ride sequence. Artwork by the amazing Roland Gibbons](/case-studies/lp-7d-ride/lp-storyboard.png "Illustrated storyboard, ride sequence. Artwork by the amazing Roland Gibbons")
 
 ![The LP tour vehicle on loadup](/case-studies/lp-7d-ride/lp-truck.png)
 
-The moment I knew it worked: my own team rode it. They'd been in every brief, reviewed every storyboard frame, knew every beat. They still flinched.
+The moment I knew it worked came when my own team rode it. They'd been in every brief, reviewed every storyboard frame, knew every beat. They still flinched and laughed out loud.
 
 ---
 

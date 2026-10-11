@@ -1,7 +1,7 @@
 ---
 title: MIRROR MIRROR
 subline: One woman and her reflection, all in camera.
-descriptor: "an editorial shot entirely in camera: one woman and her reflection, available light"
+descriptor: "an editorial shot entirely in camera, one woman and her reflection, available light"
 processLine: "> all in camera · no compositing · available light"
 credit: ""
 slug: mirror-mirror
@@ -16,8 +16,8 @@ featured: false
 weight: 2
 order: 24
 shape: "landscape"
-sortYear: 2012  # TODO(josh): provisional — date owed
-displayDate: ""  # TODO(josh): displayDate owed
+sortYear: 2012
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Photography"

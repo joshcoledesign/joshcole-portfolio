@@ -19,12 +19,12 @@ featured: false
 weight: 3
 order: 13
 shape: "square"
-sortYear: 2015  # TODO(josh): provisional — date owed
-displayDate: ""  # TODO(josh): displayDate owed
+sortYear: 2016
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Portrait"
   - "Gallery"
 ---
 
-One subject in camera, multiple perspectives, a touch of compositing.
+One subject in camera, multiple perspectives, and some advanced compositing.

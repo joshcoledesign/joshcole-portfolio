@@ -4,7 +4,7 @@ volume: "creative-immersive"
 slug: "union-station-hotel"
 role: "Creative Director & Brand Strategist"
 year: "mid-2010s"
-summary: "A brand woven into a 125-year-old Gothic train station — from the tile mosaic to the staff cuffs."
+summary: "A brand woven into a 125-year-old Gothic train station, from the tile mosaic to the staff cuffs."
 descriptor: "a place-led hospitality brand"
 thumbnail: "/case-studies/ush/grid.jpg"
 heroImage: "/case-studies/ush/tile-mosaic.png"
@@ -15,7 +15,7 @@ weight: 2
 order: 7
 shape: "landscape"
 sortYear: 2016  # TODO(josh): provisional — confirm most-recent year
-displayDate: "mid-2010s"
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Brand"
@@ -24,7 +24,7 @@ tags:
 
 # Union Station Hotel
 
-Nashville in the mid-2010s was filling up fast. New hotels were opening constantly, tourism was accelerating, and the city's hospitality market was getting crowded. Union Station had something none of the new builds had: a 125-year-old Gothic train station on Broadway, a soaring lobby atrium, a history that predated the city's modern identity. The question was how to make that clear, coherent, and competitive in a market that was suddenly paying attention.
+Nashville in the mid-2010s was filling up fast. New hotels were opening constantly, tourism was accelerating, and the city's hospitality market was getting crowded. Union Station had something none of the new builds had. A 125-year-old Gothic train station on Broadway, a soaring lobby atrium, a history that predated the city's modern identity. The question was how to make that clear, coherent, and competitive in a market that was suddenly paying attention.
 
 The hotel had just completed a full interior renovation and wanted a brand to match. I was at ST8MNT and co-led the engagement as Creative Director and Brand Strategist, alongside a second creative director and a second strategist, with two art directors and a designer on the team.
 
@@ -32,13 +32,13 @@ The hotel had just completed a full interior renovation and wanted a brand to ma
 
 ## The anchor
 
-The strategic anchor we landed on after discovery: the monogram. A single USH mark designed to live everywhere. The logic was that a hotel with this much physical presence needed a brand that worked the same way. Not a logo applied to things. A mark woven into the place itself.
+The strategic anchor we landed on after discovery was the monogram. A single USH mark designed to live everywhere. The logic was that a hotel with this much physical presence needed a brand that worked the same way. Not a logo applied to things. A mark woven into the place itself.
 
 ![USH monogram embroidered on a staff cuff](/case-studies/ush/monogram-cuff.png)
 
 ## The system
 
-Everything followed from that decision. The color system pulled from the building's own materials and history: Chambray Blue, Palliser Copper, the warmth of aged brass and dark wood.
+Everything followed from that decision. The color system pulled from the building's own materials and history. Chambray Blue, Palliser Copper, the warmth of aged brass and dark wood.
 
 ![Color system: Chambray Blue, Palliser Copper, brass, dark wood](/case-studies/ush/ush-palette.jpg "Color system: Chambray Blue, Palliser Copper, brass, dark wood")
 

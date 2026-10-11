@@ -17,8 +17,8 @@ featured: false
 weight: 2
 order: 23
 shape: "landscape"
-sortYear: 2012  # TODO(josh): provisional — date owed
-displayDate: ""  # TODO(josh): displayDate owed
+sortYear: 2011
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Photography"
@@ -26,4 +26,4 @@ tags:
   - "Fashion"
 ---
 
-A fashion editorial with one rule: every frame is shot through the car. The red convertible isn't a prop it serves as the frame.
+A fashion editorial with one rule. Every frame is shot through the car. The red convertible isn't a prop. It serves as the frame.

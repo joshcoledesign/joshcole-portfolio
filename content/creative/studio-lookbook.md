@@ -18,8 +18,8 @@ featured: false
 weight: 2
 order: 27
 shape: "landscape"
-sortYear: 2012  # TODO(josh): provisional — date owed
-displayDate: ""  # TODO(josh): displayDate owed
+sortYear: 2012
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Photography"
@@ -27,4 +27,4 @@ tags:
   - "Editorial"
 ---
 
-A lookbook for a fashion design student's portfolio: five looks, two models, and one set built for the day out of corrugated steel, surplus props, and a lot of confetti. The set had to carry every look without competing with any of them, so it stayed rough and the clothes stayed sharp.
+A lookbook for a fashion design student's portfolio. Five looks, two models, and one set built for the day out of corrugated steel and surplus props. The set had to carry every look without competing with any of them, so it stayed rough and the clothes stayed sharp.

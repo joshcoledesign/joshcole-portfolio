@@ -6,7 +6,7 @@ import styles from "./photography-surface.module.css";
 const CENTERED_THUMBNAIL_SLUGS = new Set([
   "the-box",
   "plurality",
-  "death-rallies-so-divine",
+  "death-rallies-the-divine",
   "breakfast-of-champions",
 ]);
 

@@ -14,13 +14,13 @@ const DUMMY_STUDY: LockedStudyData = {
   role: "UX + AI lead",
   year: "2025",
   summary:
-    "End-to-end redesign of a clinical records pipeline serving 40+ facilities — intake automation, agentic triage, and a provider-facing dashboard built under HIPAA constraints. The system cut average processing time from days to hours.",
+    "End-to-end redesign of a clinical records pipeline serving 40+ facilities, with intake automation, agentic triage, and a provider-facing dashboard built under HIPAA constraints. The system cut average processing time from days to hours.",
   heroImage: "/case-studies/ush/tile-mosaic.png",
   volumePath: "volume-ii/[redacted]-platform.md",
 };
 
 export const metadata = {
-  title: "Locked Study Preview — Josh Cole",
+  title: "Locked Study Preview | Josh Cole",
 };
 
 export default function LockedPreviewPage() {

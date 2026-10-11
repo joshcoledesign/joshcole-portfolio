@@ -5,7 +5,7 @@ descriptor: rebrand and website refresh for an experience design agency that wan
 processLine: "> design direction · identity, print, web"
 credit: "Team: Bradley Hawkins, Madeline Pellman, Kate Ferrara, Brian Zeiders, Anna Spisak"
 slug: andculture
-published: false
+published: true
 thumbnail: /creative/andculture/andculture-identity.jpg
 images:
   - src: /creative/andculture/andculture-identity.jpg
@@ -26,8 +26,8 @@ featured: false
 weight: 2
 order: 36
 shape: "landscape"
-sortYear: 2014
-displayDate: "2014"
+sortYear: 2013
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Brand"

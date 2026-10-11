@@ -28,8 +28,9 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
   const [mapWidth, setMapWidth] = useState(CANVAS_W);
   const [fitFrame, setFitFrame] = useState<number | null>(null);
   const videoId = piece.video ? youtubeId(piece.video) : null;
-  const mediaType = videoId ? (piece.frames ? "FILM + PHOTOGRAPHY" : "FILM") : "SERIES";
-  const frameNoun = videoId ? "photograph" : "frame";
+  const hasPhotography = piece.tags.includes("Photography");
+  const mediaType = videoId ? (hasPhotography ? "SERIES · VIDEO + PHOTOGRAPHY" : "SERIES · VIDEO") : "SERIES";
+  const frameNoun = videoId && hasPhotography ? "photograph" : "frame";
 
   useEffect(() => {
     const element = mapRef.current;
@@ -156,7 +157,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
         <div className={styles.headingRow}>
           <h1>{piece.title}</h1>
           <span className={styles.count}>
-            {videoId ? `1 film · ${piece.frames} photograph${piece.frames === 1 ? "" : "s"}` : `${String(piece.frames).padStart(2, "0")} frames`}
+            {videoId ? `1 film · ${piece.frames} ${frameNoun}${piece.frames === 1 ? "" : "s"}` : `${String(piece.frames).padStart(2, "0")} frames`}
           </span>
         </div>
         {piece.description && <p className={styles.descriptor}>{piece.description}</p>}
@@ -220,7 +221,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
           className={`${styles.dialog} ${hasStoryPanel ? "" : styles.imageOnlyDialog}`}
           role="dialog"
           aria-modal="true"
-          aria-label={`${videoId ? "Photograph" : "Frame"} ${active + 1} of ${piece.frames}`}
+          aria-label={`${frameNoun === "photograph" ? "Photograph" : "Frame"} ${active + 1} of ${piece.frames}`}
           onClick={() => setFrame(null)}
         >
           <button ref={closeRef} className={styles.close} type="button" aria-label={`Close ${frameNoun}`} onClick={() => setFrame(null)}>

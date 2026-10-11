@@ -2,7 +2,7 @@
 title: "HYPE"
 volume: "creative-immersive"
 slug: "hype-js"
-role: "Illustration, code, and print — personal work"
+role: "Illustration, code, and print (personal work)"
 year: "c. 2018"
 summary: "Hand-drawn vector shapes, pulled at random and colored at random, once to animate and once to print. Processing with the HYPE framework, later hype.js."
 descriptor: "hand-drawn shapes, laid out by code"
@@ -15,7 +15,7 @@ weight: 3
 order: 8
 shape: "square"
 sortYear: 2018
-displayDate: "c. 2018"
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Generative"
@@ -29,23 +29,23 @@ Generative art has a look. Oftentimes the look belongs to the tool. These experi
 
 ![Still from animated triptych output](/case-studies/hype-js/signal-root.jpg)
 
-The method is the same across all of them. I draw a pool of vector shapes by hand. The code pulls shapes from the pool at random, places them by a rule, and colors each one at random from a palette I chose. The system decides where and which; I decided what and what colors. Change the seed and you get a new piece that is unmistakably from the same hand.
+The method is the same across all of them. I draw a pool of vector shapes by hand. The code pulls shapes from the pool at random, places them by a rule, and colors each one at random from a palette I chose. The system decides where and which. I decided what and what colors. Change the seed and you get a new piece that is unmistakably from the same hand.
 
 ---
 
 ## The tools
 
-Processing, with the HYPE framework: `HDrawablePool` to hold the shapes, `HColorPool` for the palette, `HShapeLayout` and callbacks to place and transform each instance. Later, the same ideas in hype.js for the browser. `saveVector()` writes to PDF, which is what makes the print series possible: the output is real vectors, not a screenshot.
+Processing, with the HYPE framework. `HDrawablePool` to hold the shapes, `HColorPool` for the palette, `HShapeLayout` and callbacks to place and transform each instance. Later, the same ideas in hype.js for the browser. `saveVector()` writes to PDF, which is what makes the print series possible. The output is real vectors, not a screenshot.
 
 ---
 
 ## Two experiments
 
-**The animated rings.** A study in seeding color across motion. Three canvases, one pool of drawn shapes, each canvas rotating and layering its own random draw from the pool. The colors come from a small fixed list; the composition comes from chance inside constraints I set.
+**The animated rings.** A study in seeding color across motion. Three canvases, one pool of drawn shapes, each canvas rotating and layering its own random draw from the pool. The colors come from a small fixed list. The composition comes from chance inside constraints I set.
 
 ![Three animated ring compositions, each a different random draw from the same shape pool](/case-studies/hype-js/rings-triptych.png)
 
-**The 13/13 print.** A hand-drawn crest at the center, surrounded by a field generated from a second pool of drawn ornaments, colored from a list, rendered to vector for print. The center is fully authored. The field is fully generated. The piece is both, and you can't see the seam.
+**The 13/13 print.** A hand-drawn character crest at the center, surrounded by a field generated from a second pool of drawn ornaments, colored from a list, rendered to vector for print. The center is fully authored. The field is fully generated. The piece is both, and you can't see the seam.
 
 ![The 13/13 print: a hand-drawn crest surrounded by a generated field of ornaments](/case-studies/hype-js/thirteen-print.jpg)
 
@@ -53,6 +53,6 @@ Processing, with the HYPE framework: `HDrawablePool` to hold the shapes, `HColor
 
 ## Why it's here
 
-This is the same idea as the AI systems I build now, years earlier and in a different medium: a person supplies the taste and the raw material, a system supplies the scale and the variation, and the result is only good if the boundary between the two was drawn on purpose.
+This is the same idea as the AI systems I build now, years earlier and in a different medium. A person supplies the taste and the raw material, a system supplies the scale and the variation, and the result is only good if the boundary between the two was drawn on purpose.
 
-Random inside a pool I drew is different from random. That's the whole point.
+Random inside a pool of my own hand-drawn assets is different from random. That's the whole point.

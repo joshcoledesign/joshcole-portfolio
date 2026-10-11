@@ -1,7 +1,7 @@
 ---
 title: PLURALITY
 subline: One subject, several times.
-descriptor: one subject, several times, composited into one frame; sets built or dressed per shoot
+descriptor: one subject, several times, composited into one frame, with sets built or dressed per shoot
 processLine: "> photoshop composite · one subject, multiplied · sets built or dressed per shoot"
 credit: ""
 slug: plurality
@@ -20,8 +20,8 @@ featured: false
 weight: 2
 order: 25
 shape: "landscape"
-sortYear: 2012  # TODO(josh): provisional — date owed
-displayDate: ""  # TODO(josh): displayDate owed
+sortYear: 2010
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Photography"

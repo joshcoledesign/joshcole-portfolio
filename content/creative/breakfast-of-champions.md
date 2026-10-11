@@ -14,8 +14,8 @@ featured: false
 weight: 1
 order: 31
 shape: "landscape"
-sortYear: 2012  # TODO(josh): provisional — date owed
-displayDate: ""  # TODO(josh): displayDate owed
+sortYear: 2012
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Photography"

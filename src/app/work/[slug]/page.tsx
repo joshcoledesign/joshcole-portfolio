@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const piece = await resolvePiece(slug);
   if (!piece) return {};
-  const title = `${piece.title} — Josh Cole`;
+  const title = `${piece.title} | Josh Cole`;
   return {
     title,
     description: piece.description,

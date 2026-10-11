@@ -5,7 +5,7 @@ descriptor: brand, marketing, web, and on-console surfaces for the OUYA game con
 processLine: "> creative and design direction · strategy, art direction, UX · illustrated the ChronoBlade poster"
 credit: "Agency: Andculture · Team: Madeline Pellman, Bradley Hawkins, James Hess, Kate Ferrara"
 slug: ouya
-published: false
+published: true
 thumbnail: /creative/ouya/ouya-featured.jpg
 images:
   - src: /creative/ouya/ouya-featured.jpg
@@ -40,8 +40,8 @@ featured: false
 weight: 2
 order: 37
 shape: "landscape"
-sortYear: 2013
-displayDate: "2012–2013"
+sortYear: 2014
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Brand"

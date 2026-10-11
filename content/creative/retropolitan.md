@@ -1,7 +1,7 @@
 ---
 title: RETROPOLITAN
 subline: Eight rooms, one story.
-descriptor: "eight built rooms, one story: a lookbook for an interior and set designer, shot in studio"
+descriptor: "eight built rooms, one story. A lookbook for an interior and set designer, shot in studio"
 processLine: "> studio lookbook · 8 built rooms · story order preserved"
 credit: ""  # TODO(josh): interior and set designer's name, if credited
 slug: retropolitan
@@ -21,8 +21,8 @@ featured: false
 weight: 3
 order: 20
 shape: "landscape"
-sortYear: 2012  # TODO(josh): provisional — date owed
-displayDate: ""  # TODO(josh): displayDate owed
+sortYear: 2012
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Photography"

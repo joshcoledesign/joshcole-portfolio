@@ -1,6 +1,6 @@
 ---
 title: WOLFORD
-subline: Ivy, dead leaves, and the tights in every frame.
+subline:
 descriptor: "fall editorial shot for a hosiery brand"
 processLine: "> fashion editorial · location · available light"
 credit: "Client: Wolford"

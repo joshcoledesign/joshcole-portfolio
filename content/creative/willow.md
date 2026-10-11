@@ -5,7 +5,7 @@ descriptor: identity and brand strategy for a new bed-in-a-box mattress brand, d
 processLine: "> creative direction · design by Parker Foote · art direction by Aaron Rayburn"
 credit: "Agency: ST8MNT · Design: Parker Foote · Art direction: Aaron Rayburn"
 slug: willow
-published: false
+published: true
 thumbnail: /creative/willow/willow-box.jpg
 images:
   - src: /creative/willow/willow-box.jpg
@@ -24,8 +24,8 @@ featured: false
 weight: 1
 order: 38
 shape: "landscape"
-sortYear: 2016
-displayDate: "c. 2016"
+sortYear: 2017
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Brand"

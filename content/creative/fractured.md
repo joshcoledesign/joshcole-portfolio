@@ -18,14 +18,14 @@ featured: false
 weight: 2
 order: 14
 shape: "square"
-sortYear: 2014  # TODO(josh): provisional — date owed
-displayDate: ""  # TODO(josh): displayDate owed
+sortYear: 2014
+displayDate: ""
 tags:
   - "Creative Direction"
   - "Portrait"
   - "Generative"
 ---
 
-We've gotten good at showing one frame. The good one — the version where everything's working, where the answer to "how are you" is "I'm good." The reel everyone keeps. Fractured is built out of everything that frame leaves out.
+We've gotten good at showing one frame. The good one, the version where everything's working, where the answer to "how are you" is "I'm good." The reel everyone keeps. Fractured is built out of everything that frame leaves out.
 
-Each piece stacks 40 to 80 frames of one person, a script randomizing the opacity and order so no single moment wins. The up and the down, blurred into one image you can almost resolve but never quite happens. Because that's what a person actually is — not the best frame, but all of them at once. The whole picture is harder to look at. It's also the true one, and there's something worth feeling in it.
+Each piece stacks 40 to 80 frames of one person, a script randomizing the opacity and order so no single moment wins. The up and the down, blurred into one image you can almost resolve but never quite happens. Because that's what a person actually is, not the best frame, but all of them at once. The whole picture is harder to look at. It's also the true one, and there's something worth feeling in it.

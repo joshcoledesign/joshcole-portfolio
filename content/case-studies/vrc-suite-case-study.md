@@ -2,7 +2,7 @@
 title: "VRC Suite"
 volume: "ux-enterprise"
 slug: "vrc-suite"
-role: "UX Lead — four products"
+role: "UX Lead, four products"
 year: "2022–2026"
 summary: "Four products, one connected suite, high-volume records requests in regulated industries."
 descriptor: "a four-product records suite"
@@ -34,15 +34,15 @@ tags:
 - [What I built, in screens](#what-i-built-in-screens): a representative slice of the suite.
 - [What I take from it](#what-i-take-from-it): coherence across a suite is a documentation discipline.
 
-Vital Records Control is one of the largest records and information management companies in the U.S., handling the full information lifecycle for regulated industries from healthcare to banking to government. I led UX for four of their products over four years: VitalChart, Payer Audit, Pricing Tables, and Vital Retain. Four products, one connected suite, a high volume of requests moving through the systems every month.
+Vital Records Control is one of the largest records and information management companies in the U.S., handling the full information lifecycle for regulated industries from healthcare to banking to government. I led UX for four of their products over four years. VitalChart, Payer Audit, Pricing Tables, and Vital Retain. Four products, one connected suite, a high volume of requests moving through the systems every month.
 
-The question underneath all four: when a regulator asks "prove it," can the system answer?
+The question underneath all four. When a regulator asks "prove it," can the system answer?
 
 ---
 
 ## The four products
 
-**VitalChart** is VRC's healthcare information management product: medical records request, retrieval, and release. It's the spine of the healthcare arm of the business and the surface most healthcare clients touch daily.
+**VitalChart** is VRC's healthcare information management product. Medical records request, retrieval, and release. It's the spine of the healthcare arm of the business and the surface most healthcare clients touch daily.
 
 **Payer Audit** is a high-volume workflow inside VitalChart for the bulk record requests that come from insurance payers for HEDIS audits and similar compliance reviews. A payer sends a CSV of the records they need and a PDF of the request letter. The system ingests the batch, validates each request against a layered set of rejection rules, creates a container per request, and breaks it into individual release-of-information records, each with its own lifecycle from logged through QA through processing to completed.
 
@@ -62,7 +62,7 @@ Three of the four share branding under VitalChart. Vital Retain is its own produ
 
 ## The engagement
 
-Four years. I led a team of four UX/UI designers and stayed hands-on every day: directing the work, doing the work, and holding the suite together as one product experience across four stacks and three years of organizational change on the client side.
+Four years. I led a team of four UX/UI designers and stayed hands-on every day. Directing the work, doing the work, and holding the suite together as one product experience across four stacks and three years of organizational change on the client side.
 
 I authored the information architecture, user flows, and system maps across all four products. On the broader IA I co-authored with another architect who brought depth on specific pieces, like the AWS-based address normalization service Payer Audit depends on. Everything else was mine to design and direct. The team delivered IA, flows, design systems, screen designs, and product strategy support across the four products, and we documented as we built.
 
@@ -74,7 +74,7 @@ I authored the information architecture, user flows, and system maps across all 
 
 This was more of an uphill build than the deliverables suggest.
 
-The four products ran on four tech stacks. The databases had grown organically for years. There was no appetite to fix all of it at once, and that was the right call: consolidating onto one stack and rebuilding the data layer would have meant re-platforming the company, multi-year and multi-million, the kind of project that puts a business on hold. So the work was designing solutions that could scale into the infrastructure as it stabilized, rather than waiting for stability that wasn't coming.
+The four products ran on four tech stacks. The databases had grown organically for years. There was no appetite to fix all of it at once, and that was the right call. Consolidating onto one stack and rebuilding the data layer would have meant re-platforming the company, multi-year and multi-million, the kind of project that puts a business on hold. So the work was designing solutions that could scale into the infrastructure as it stabilized, rather than waiting for stability that wasn't coming.
 
 The first year was turbulent. Product managers cycled through. The development team was replaced mid-engagement. There was no business analyst until year three, so the design team carried more of the discovery, requirements, and cross-team translation than is typical.
 
@@ -90,7 +90,7 @@ Four principles ran through all four products.
 
 ![Pricing Tables administration with the history panel open: who changed the Texas rate, when, and against which legal reference](/case-studies/vrc/pt-history-audit.png)
 
-**Bulk operations, calm interfaces.** Payer Audit processes requests by the batch, thousands at a time. Vital Retain assigns retention policies across a client's entire inventory, boxes and files alike. High-volume operations had to feel calm: a filterable list, a side panel, and an explicit confirmation when an action touches a lot of things. The "89 Assets Will Be Affected" modal exists because silent bulk changes are how regulated-industry products lose trust.
+**Bulk operations, calm interfaces.** Payer Audit processes requests by the batch, thousands at a time. Vital Retain assigns retention policies across a client's entire inventory, boxes and files alike. High-volume operations had to feel calm. A filterable list, a side panel, and an explicit confirmation when an action touches a lot of things. The "89 Assets Will Be Affected" modal exists because silent bulk changes are how regulated-industry products lose trust.
 
 ![Confirmation dialog: 89 assets will be affected by this policy update](/case-studies/vrc/confirmation-dialog.png)
 

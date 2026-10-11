@@ -1,7 +1,7 @@
 ---
 title: SPRAGWERKS
-subline: One window-light look across the range.
-descriptor: product shoot for a handmade jewelry brand, used for editorial, advertising, and the catalog; one window-light look across the range
+subline:
+descriptor: product shoot for a handmade jewelry brand, used for editorial, advertising, and the catalog, with one window-light look across the range
 processLine: "> product photography · window light · editorial, advertising, catalog"
 credit: "Client: Spragwerks"
 slug: spragwerks

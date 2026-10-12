@@ -29,6 +29,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
   const [fitFrame, setFitFrame] = useState<number | null>(null);
   const videoId = piece.video ? youtubeId(piece.video) : null;
   const hasPhotography = piece.tags.includes("Photography");
+  const fitMediaByDefault = hasPhotography || piece.tags.includes("Portrait") || Boolean(videoId);
   const mediaType = videoId ? (hasPhotography ? "SERIES · VIDEO + PHOTOGRAPHY" : "SERIES · VIDEO") : "SERIES";
   const frameNoun = videoId && hasPhotography ? "photograph" : "frame";
 
@@ -46,7 +47,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
   const activeIndex = frameParam ? Number.parseInt(frameParam, 10) - 1 : -1;
   const active = activeIndex >= 0 && activeIndex < piece.images.length ? activeIndex : null;
   const dialogOpen = active !== null;
-  const fitImage = active !== null && fitFrame === active;
+  const fitImage = fitMediaByDefault || (active !== null && fitFrame === active);
   const hasStoryPanel = active !== null && Boolean(piece.images[active].story);
 
   useEffect(() => {
@@ -73,6 +74,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
   useEffect(() => {
     if (!dialogOpen) return;
     const previousOverflow = document.body.style.overflow;
+    const previousRootOverflow = document.documentElement.style.overflow;
     const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const focusFrame = requestAnimationFrame(() => closeRef.current?.focus());
     const onKeyDown = (event: KeyboardEvent) => {
@@ -112,10 +114,12 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
     };
     window.addEventListener("keydown", onKeyDown);
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     return () => {
       cancelAnimationFrame(focusFrame);
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = previousOverflow;
+      document.documentElement.style.overflow = previousRootOverflow;
       previousFocus?.focus();
     };
   }, [dialogOpen, piece.images.length]);
@@ -227,17 +231,19 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
           <button ref={closeRef} className={styles.close} type="button" aria-label={`Close ${frameNoun}`} onClick={() => setFrame(null)}>
             ✕
           </button>
-          <button
-            className={styles.viewToggle}
-            type="button"
-            aria-label={fitImage ? "Show image at readable width" : "Fit whole image in view"}
-            onClick={(event) => {
-              event.stopPropagation();
-              setFitFrame(fitImage ? null : active);
-            }}
-          >
-            {fitImage ? "[ view details ]" : "[ fit whole image ]"}
-          </button>
+          {!fitMediaByDefault && (
+            <button
+              className={styles.viewToggle}
+              type="button"
+              aria-label={fitImage ? "Show image at readable width" : "Fit whole image in view"}
+              onClick={(event) => {
+                event.stopPropagation();
+                setFitFrame(fitImage ? null : active);
+              }}
+            >
+              {fitImage ? "[ view details ]" : "[ fit whole image ]"}
+            </button>
+          )}
           {piece.images.length > 1 && (
             <>
               <button

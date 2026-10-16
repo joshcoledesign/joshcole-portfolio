@@ -5,9 +5,8 @@ descriptor: one subject, several times, composited into one frame, with sets bui
 processLine: "> photoshop composite · one subject, multiplied · sets built or dressed per shoot"
 credit: ""
 slug: plurality
-thumbnail: /creative/plurality/multiples-woodset.jpg
+thumbnail: /creative/plurality/multiples-red-couch.jpg
 images:
-  - /creative/plurality/multiples-woodset.jpg
   - src: /creative/plurality/multiples-red-couch.jpg
     alt: Rachael Lampa on the red couch
     story: "Rachael Lampa. See also her press session in [Artists](/work/artists)."

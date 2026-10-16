@@ -12,8 +12,6 @@ images:
     alt: Rachael Lampa on the red couch
     story: "Rachael Lampa. See also her press session in [Artists](/work/artists)."
   - /creative/plurality/multiples-03.jpg
-  - src: /creative/plurality/multiples-nurses.jpg
-    alt: The nurses, wide
 kind: "series"
 display: "mosaic"
 featured: false

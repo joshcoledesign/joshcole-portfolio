@@ -5,6 +5,7 @@ descriptor: product shoot for a handmade jewelry brand, used for editorial, adve
 processLine: "> product photography · window light · editorial, advertising, catalog"
 credit: "Client: Spragwerks"
 slug: spragwerks
+published: false
 thumbnail: /creative/spragwerks/spragwerks-ring.jpg
 images:
   - /creative/spragwerks/spragwerks-ring.jpg

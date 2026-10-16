@@ -5,6 +5,7 @@ descriptor: "an editorial shot entirely in camera, one woman and her reflection,
 processLine: "> all in camera · no compositing · available light"
 credit: ""
 slug: mirror-mirror
+published: false
 thumbnail: /creative/mirror-mirror/mirror-mirror-05.jpg
 images:
   - /creative/mirror-mirror/mirror-mirror-05.jpg

@@ -5,6 +5,7 @@ descriptor: editorial shot inside a room-sized softbox I built and repainted per
 processLine: "> built softbox · 2x4 + plywood prism · scrim lid · walls painted per color"
 credit: ""
 slug: the-box
+published: false
 thumbnail: /creative/the-box/box-blue.jpg
 images:
   - /creative/the-box/box-blue.jpg

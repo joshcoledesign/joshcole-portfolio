@@ -1,0 +1,72 @@
+{
+  "sourceRepository": "https://github.com/joshcoledesign/genSound",
+  "sourceRevision": "5b2012df4e5945986eef1d120f25f465aa209ec7",
+  "preparedAt": "2026-11-03T18:13:15.869Z",
+  "derived": true,
+  "adaptation": "index.html receives doctype, English language and mobile viewport metadata; all other copied bytes are unchanged.",
+  "files": [
+    {
+      "sourcePath": "playground/index.html",
+      "publicPath": "index.html",
+      "sourceSha256": "0d9909886e0cddd10a7ac7d11d5ae3b7c51d3225528a66633bf233f44c3daa47",
+      "sha256": "cee3aa80f70d7d2ed5926dacaf21f593141d9e9be809fac211dd373dd4322965",
+      "bytes": 37171
+    },
+    {
+      "sourcePath": "playground/analyzer.js",
+      "publicPath": "analyzer.js",
+      "sourceSha256": "7806ff867e55c7ac53df0cece7d751598faa74693b23bfbf263b261253909d7d",
+      "sha256": "7806ff867e55c7ac53df0cece7d751598faa74693b23bfbf263b261253909d7d",
+      "bytes": 12769
+    },
+    {
+      "sourcePath": "playground/data/manifest.json",
+      "publicPath": "data/manifest.json",
+      "sourceSha256": "30caafe9e40f3c3a4dab7981ef895f5401799a21de54ae35534556a12aa2d15a",
+      "sha256": "30caafe9e40f3c3a4dab7981ef895f5401799a21de54ae35534556a12aa2d15a",
+      "bytes": 88
+    },
+    {
+      "sourcePath": "playground/data/beethoven-symphony-8-finale.json",
+      "publicPath": "data/beethoven-symphony-8-finale.json",
+      "sourceSha256": "22bf451307b259ccef1eac362ad9989a2553cd16893662c7e14c1d8954c7bfdc",
+      "sha256": "22bf451307b259ccef1eac362ad9989a2553cd16893662c7e14c1d8954c7bfdc",
+      "bytes": 1333504
+    },
+    {
+      "sourcePath": "playground/data/chopin-nocturne-op9-no2.json",
+      "publicPath": "data/chopin-nocturne-op9-no2.json",
+      "sourceSha256": "1bcce57c2919cb25b5b75af0a08f4b206b7476adf56301f28cc483b05679d96f",
+      "sha256": "1bcce57c2919cb25b5b75af0a08f4b206b7476adf56301f28cc483b05679d96f",
+      "bytes": 1333500
+    },
+    {
+      "sourcePath": "playground/data/macleod-hitman.json",
+      "publicPath": "data/macleod-hitman.json",
+      "sourceSha256": "4dd80f470d3451d047caf3bf1d3fd9716f21ed1733f1e237c33983e27ba88726",
+      "sha256": "4dd80f470d3451d047caf3bf1d3fd9716f21ed1733f1e237c33983e27ba88726",
+      "bytes": 1333491
+    },
+    {
+      "sourcePath": "THIRD_PARTY_NOTICES.md",
+      "publicPath": "THIRD_PARTY_NOTICES.md",
+      "sourceSha256": "30deecf0c5efa1dd1efacfb7a5107a7006c390153d902383d8f1c04b2a40d4ed",
+      "sha256": "30deecf0c5efa1dd1efacfb7a5107a7006c390153d902383d8f1c04b2a40d4ed",
+      "bytes": 1618
+    },
+    {
+      "sourcePath": "LICENSE",
+      "publicPath": "LICENSE",
+      "sourceSha256": "c6ca23fe762f2c238591f188a28ae44e30b0e5ff8b6df64a295b1ea32f82375c",
+      "sha256": "c6ca23fe762f2c238591f188a28ae44e30b0e5ff8b6df64a295b1ea32f82375c",
+      "bytes": 1092
+    },
+    {
+      "sourcePath": "examples/README.md",
+      "publicPath": "EXAMPLE_TRACK_CREDITS.md",
+      "sourceSha256": "abc7cc72d4dc120c8ed6ad296bcbd633431a12f5be7aa42ac4ffb8a2fbc291ae",
+      "sha256": "abc7cc72d4dc120c8ed6ad296bcbd633431a12f5be7aa42ac4ffb8a2fbc291ae",
+      "bytes": 1795
+    }
+  ]
+}

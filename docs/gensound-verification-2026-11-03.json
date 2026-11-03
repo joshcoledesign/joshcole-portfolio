@@ -1,0 +1,262 @@
+{
+  "verifiedAt": "2026-11-03T18:20:55.686Z",
+  "sourceRevision": "5b2012df4e5945986eef1d120f25f465aa209ec7",
+  "baseUrl": "http://127.0.0.1:3109",
+  "results": [
+    {
+      "engine": "chromium",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "examples": [
+        {
+          "track": "beethoven-symphony-8-finale",
+          "sum": 517362487,
+          "colored": 247769
+        },
+        {
+          "track": "chopin-nocturne-op9-no2",
+          "sum": 523237068,
+          "colored": 249584
+        },
+        {
+          "track": "macleod-hitman",
+          "sum": 529767978,
+          "colored": 243373
+        }
+      ],
+      "localWavAnalysis": "passed",
+      "analysisRequests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:3109/experiments/gensound/analyzer.js",
+          "type": "script"
+        }
+      ],
+      "invalidAudioRecovery": "passed",
+      "presetsPaletteBlendCopy": "passed",
+      "fullScreenBothLayouts": [
+        {
+          "layout": "Rings · macleod-hitman",
+          "native": true
+        },
+        {
+          "layout": "Hilbert · macleod-hitman",
+          "native": true
+        }
+      ],
+      "resize": {
+        "phoneHeight": 2971,
+        "desktopHeight": 1513
+      },
+      "layout": {
+        "outerOverflow": false,
+        "frameWidth": 1326,
+        "innerOverflow": false,
+        "contentHeight": 1491,
+        "height": 1513
+      },
+      "errors": [],
+      "failures": [
+        {
+          "url": "http://127.0.0.1:3109/_vercel/insights/script.js",
+          "status": 404
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "examples": [
+        {
+          "track": "beethoven-symphony-8-finale",
+          "sum": 517362487,
+          "colored": 247769
+        },
+        {
+          "track": "chopin-nocturne-op9-no2",
+          "sum": 523237068,
+          "colored": 249584
+        },
+        {
+          "track": "macleod-hitman",
+          "sum": 529767978,
+          "colored": 243373
+        }
+      ],
+      "localWavAnalysis": "passed",
+      "analysisRequests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:3109/experiments/gensound/analyzer.js",
+          "type": "script"
+        }
+      ],
+      "invalidAudioRecovery": "passed",
+      "presetsPaletteBlendCopy": "passed",
+      "fullScreenBothLayouts": [
+        {
+          "layout": "Rings · macleod-hitman",
+          "native": true
+        },
+        {
+          "layout": "Hilbert · macleod-hitman",
+          "native": true
+        }
+      ],
+      "resize": {
+        "phoneHeight": 2971,
+        "desktopHeight": 1513
+      },
+      "layout": {
+        "outerOverflow": false,
+        "frameWidth": 348,
+        "innerOverflow": false,
+        "contentHeight": 2949,
+        "height": 2971
+      },
+      "errors": [],
+      "failures": [
+        {
+          "url": "http://127.0.0.1:3109/_vercel/insights/script.js",
+          "status": 404
+        }
+      ]
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "examples": [
+        {
+          "track": "beethoven-symphony-8-finale",
+          "sum": 517362487,
+          "colored": 247769
+        },
+        {
+          "track": "chopin-nocturne-op9-no2",
+          "sum": 523237068,
+          "colored": 249584
+        },
+        {
+          "track": "macleod-hitman",
+          "sum": 529767978,
+          "colored": 243373
+        }
+      ],
+      "localWavAnalysis": "passed",
+      "analysisRequests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:3109/experiments/gensound/analyzer.js",
+          "type": "script"
+        }
+      ],
+      "invalidAudioRecovery": "passed",
+      "presetsPaletteBlendCopy": "passed",
+      "fullScreenBothLayouts": [
+        {
+          "layout": "Rings · macleod-hitman",
+          "native": true
+        },
+        {
+          "layout": "Hilbert · macleod-hitman",
+          "native": true
+        }
+      ],
+      "resize": {
+        "phoneHeight": 2980,
+        "desktopHeight": 1523
+      },
+      "layout": {
+        "outerOverflow": false,
+        "frameWidth": 1326,
+        "innerOverflow": false,
+        "contentHeight": 1501,
+        "height": 1523
+      },
+      "errors": [],
+      "failures": [
+        {
+          "url": "http://127.0.0.1:3109/_vercel/insights/script.js",
+          "status": 404
+        }
+      ]
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "examples": [
+        {
+          "track": "beethoven-symphony-8-finale",
+          "sum": 517362487,
+          "colored": 247769
+        },
+        {
+          "track": "chopin-nocturne-op9-no2",
+          "sum": 523237068,
+          "colored": 249584
+        },
+        {
+          "track": "macleod-hitman",
+          "sum": 529767978,
+          "colored": 243373
+        }
+      ],
+      "localWavAnalysis": "passed",
+      "analysisRequests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:3109/experiments/gensound/analyzer.js",
+          "type": "script"
+        }
+      ],
+      "invalidAudioRecovery": "passed",
+      "presetsPaletteBlendCopy": "passed",
+      "fullScreenBothLayouts": [
+        {
+          "layout": "Rings · macleod-hitman",
+          "native": true
+        },
+        {
+          "layout": "Hilbert · macleod-hitman",
+          "native": true
+        }
+      ],
+      "resize": {
+        "phoneHeight": 2980,
+        "desktopHeight": 1523
+      },
+      "layout": {
+        "outerOverflow": false,
+        "frameWidth": 348,
+        "innerOverflow": false,
+        "contentHeight": 2958,
+        "height": 2980
+      },
+      "errors": [],
+      "failures": [
+        {
+          "url": "http://127.0.0.1:3109/_vercel/insights/script.js",
+          "status": 404
+        }
+      ]
+    }
+  ],
+  "homepageLink": "passed",
+  "sitemap": "passed",
+  "safari": "Not tested: Safari and WebKit runtime unavailable on this Windows machine.",
+  "limitations": [
+    "Phone widths are desktop-browser viewport tests, not physical-device tests.",
+    "WAV tested; other upload codecs not tested."
+  ]
+}

@@ -1,0 +1,110 @@
+# genSound browser experiment
+
+```powershell
+pnpm start --port 3108 --hostname 127.0.0.1
+```
+
+Preview the production experiment after a successful build at
+[http://127.0.0.1:3108/experiments/gensound](http://127.0.0.1:3108/experiments/gensound).
+The homepage work surface links to it, and the sitemap includes it. The lab also
+opens directly at `/experiments/gensound/index.html`.
+
+## Snapshot and refresh
+
+```powershell
+node scripts/prepare-gensound.mjs "<gensound-repository>"
+```
+
+Refresh the owned, derived snapshot from the genSound repository. The source is
+[joshcoledesign/genSound](https://github.com/joshcoledesign/genSound), revision
+`5b2012df4e5945986eef1d120f25f465aa209ec7` for this release. The script validates
+the three approved 250,000-window datasets before writing and records source and
+output SHA-256 hashes in `public/experiments/gensound/snapshot.json`. Existing
+files in this owned snapshot are replaced; review the resulting diff. Never edit
+the copied analysis code, data, styling or copy in place. Source changes belong
+in the genSound workbench.
+
+The source repository must already contain `playground/data/manifest.json` and
+the three generated datasets. This run reused those existing files; no audio
+downloads or Python environment changes were needed. If absent, follow genSound's
+own export instructions in its existing environment before running this command.
+
+The copied page receives only HTML document metadata: doctype, `lang="en"`,
+and a standard device-width viewport. These are hosting adaptations in the
+preparation script, so the original stays intact. The worker, datasets, licenses
+and credits remain byte-identical to their sources. The complete snapshot is
+about 4.1 MB; no audio recordings or package dependencies are included.
+
+## Integration choices approved by Josh on 2026-11-03
+
+- A same-origin static snapshot in an iframe, retaining genSound's fonts and dark
+  palette. The existing thesis and descriptive copy are unchanged.
+- A link from the homepage work surface rather than a new case study.
+- Both rings and Hilbert layouts, with full-screen access. The iframe enables
+  fullscreen and clipboard access, follows its content height, and shrinks again
+  when resized from phone to desktop width. A direct Open lab link is available.
+- Visible recording attribution, with the required Kevin MacLeod CC BY 4.0
+  credit, plus the MIT license and gilbert BSD 2-Clause notice in the snapshot.
+
+The page, worker and `data/` remain together under
+`public/experiments/gensound/`. A visitor's file is decoded and analyzed locally;
+the portfolio adds no upload endpoint. The source's Google Fonts requests remain.
+The portfolio's existing Vercel Analytics remains on the outer route; no file
+contents, filenames or analysis data are supplied to it by this integration.
+
+## Verification
+
+```powershell
+pnpm lint
+```
+
+Check lint rules, including the integration and preparation scripts.
+
+```powershell
+pnpm exec tsc --noEmit
+```
+
+Check TypeScript types.
+
+```powershell
+pnpm build
+```
+
+Build the production site. The experiment is statically rendered.
+
+```powershell
+node scripts/verify-gensound.mjs
+```
+
+Exercise the running production site with an existing Playwright installation
+and Chromium and Firefox browser runtimes. This project adds no test dependency.
+If Playwright is outside this repository, set `PLAYWRIGHT_MODULE_PATH` to its
+installed package directory first. `GENSOUND_BASE_URL` optionally overrides the
+default preview origin above. Do not install software as part of this command.
+
+The 2026-11-03 run passed lint, TypeScript and production build. Browser evidence
+is in [gensound-verification-2026-11-03.json](gensound-verification-2026-11-03.json),
+with derived [desktop](gensound-1440.png) and [phone-width](gensound-390.png)
+screenshots. Chromium and Firefox passed at 1440 × 900 and 390 × 844:
+all three examples, changed canvas output, presets, palette editing, blending,
+copy settings, native fullscreen for both layouts, local two-second WAV analysis,
+invalid-file recovery, no horizontal overflow, and iframe resizing in both
+directions. Homepage navigation, canonical URL and sitemap were verified.
+Network observation during local analysis showed only a GET for `analyzer.js`;
+the audio was not sent. The existing Vercel Analytics script returns an expected
+404 on a local production server; it is recorded separately from lab failures.
+
+Safari remains **untested**: this Windows machine has neither Safari nor an
+installed WebKit runtime. Viewport tests do not replace physical-phone tests.
+Other upload codecs and long tracks were not tested here.
+
+## Release boundary
+
+Josh explicitly authorized production publication on 2026-11-03 with Safari
+still untested. Safari remains an open verification item. The release is prepared
+in an isolated worktree from `main`, containing genSound changes only.
+
+The existing Totem work is unrelated and remains untouched in the original
+worktree. This release adds only `/experiments/gensound` to the clean base
+sitemap. Totem's in-progress route, assets, components, work-page changes and
+sitemap addition are excluded from the release.

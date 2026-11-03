@@ -60,4 +60,6 @@ for (const { publicPath, bytes } of files) {
   await writeFile(target, bytes);
 }
 await writeFile(path.join(destination, "snapshot.json"), JSON.stringify(provenance, null, 2) + "\n");
+// Retain exact copied bytes on both Windows checkouts and Linux deployments.
+await writeFile(path.join(destination, ".gitattributes"), "* -text whitespace=cr-at-eol\n");
 console.log(`Prepared ${files.length} genSound files from ${revision} (${files.reduce((n, f) => n + f.bytes.length, 0).toLocaleString()} bytes).`);

@@ -19,7 +19,9 @@ Refresh the owned, derived snapshot from the genSound repository. The source is
 [joshcoledesign/genSound](https://github.com/joshcoledesign/genSound), revision
 `5b2012df4e5945986eef1d120f25f465aa209ec7` for this release. The script validates
 the three approved 250,000-window datasets before writing and records source and
-output SHA-256 hashes in `public/experiments/gensound/snapshot.json`. Existing
+output SHA-256 hashes in `public/experiments/gensound/snapshot.json`.
+The generated `.gitattributes` rule in that directory preserves exact snapshot
+bytes across Windows checkouts and Linux deployments. Existing
 files in this owned snapshot are replaced; review the resulting diff. Never edit
 the copied analysis code, data, styling or copy in place. Source changes belong
 in the genSound workbench.

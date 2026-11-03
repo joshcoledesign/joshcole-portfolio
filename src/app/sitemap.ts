@@ -4,7 +4,7 @@ import { getPublishedPieces } from "@/lib/work";
 const SITE_URL = "https://joshcolecreative.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/about", "/resume", "/work/photography"];
+  const staticRoutes = ["", "/about", "/resume", "/work/photography", "/experiments/gensound"];
   const workRoutes = getPublishedPieces().map((piece) => `/work/${piece.slug}`);
 
   return [...staticRoutes, ...workRoutes].map((pathname) => ({

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import "../portfolio/story.css";
+import "../portfolio/lab-cursor.css";
 import { SiteChrome } from "@/components/site-chrome";
 import { Analytics } from "@vercel/analytics/next";
 import { SITE_DESCRIPTION, SITE_URL } from "@/lib/site-metadata";

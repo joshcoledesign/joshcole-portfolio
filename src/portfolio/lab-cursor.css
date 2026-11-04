@@ -1,0 +1,19 @@
+.lab-specimen{--specimen-ink:#42e2ed;position:fixed;left:0;top:0;z-index:80;display:flex;align-items:center;gap:12px;width:max-content;max-width:calc(100vw - 24px);padding:11px 15px 11px 11px;border-left:1px solid var(--specimen-ink);background:linear-gradient(100deg,#090d0bf5,#090d0bda);color:#efece3;backdrop-filter:blur(12px);box-shadow:0 12px 32px #0003;pointer-events:none;user-select:none;font:11px/1.4 'Courier New',monospace;box-sizing:border-box;}
+.lab-specimen[hidden]{display:none;}
+.lab-specimen.is-following{transition:transform 140ms cubic-bezier(.18,.8,.25,1);}
+.lab-specimen-cross{position:absolute;left:-7px;top:-7px;width:9px;height:9px;background:linear-gradient(var(--specimen-ink),var(--specimen-ink)) center/1px 9px no-repeat,linear-gradient(var(--specimen-ink),var(--specimen-ink)) center/9px 1px no-repeat;}
+.lab-specimen-copy{display:grid;gap:5px;min-width:0;}
+.lab-specimen-action{font-size:11px;letter-spacing:.055em;color:var(--specimen-ink);white-space:nowrap;}
+.lab-specimen-meta{font-size:9px;letter-spacing:.025em;color:#b8c0b9;white-space:nowrap;}
+.lab-specimen-fragment{position:relative;display:block;width:40px;height:40px;flex:none;color:var(--specimen-ink);}
+.lab-specimen[data-project=culture] .lab-specimen-fragment{border-radius:47% 53% 44% 56%;border:1px solid color-mix(in srgb,currentColor 55%,transparent);background:radial-gradient(ellipse at 36% 30%,#fff5,transparent 38%),radial-gradient(ellipse at 55% 59%,currentColor,transparent 72%);box-shadow:inset 0 0 8px currentColor,0 0 10px color-mix(in srgb,currentColor 15%,transparent);transform:rotate(-17deg);}
+.lab-specimen[data-project=culture] i{position:absolute;width:4px;height:5px;border-radius:50%;background:#c4fafd8c;left:12px;top:10px;box-shadow:8px 12px 3px #c4fafd69;}
+.lab-specimen[data-project=culture] i:nth-child(2){left:22px;top:13px;width:8px;height:10px;opacity:.5;}.lab-specimen[data-project=culture] i:nth-child(3){left:10px;top:26px;width:3px;height:3px;}
+.lab-specimen[data-project=hype] img{width:40px;height:40px;object-fit:contain;filter:brightness(0) invert(1);transform:rotate(-15deg);}
+.lab-specimen[data-project=gensound] .lab-specimen-fragment{display:flex;align-items:center;justify-content:center;gap:3px;}
+.lab-specimen[data-project=gensound] i{width:2px;height:12px;background:currentColor;}.lab-specimen[data-project=gensound] i:nth-child(2n){height:25px;opacity:.7;}.lab-specimen[data-project=gensound] i:nth-child(3n){height:34px;}.lab-specimen[data-project=gensound] i:nth-child(4){height:18px;}
+.lab-specimen[data-project=worldstage] .lab-specimen-fragment{background:linear-gradient(currentColor,currentColor) left top/11px 1px no-repeat,linear-gradient(currentColor,currentColor) left top/1px 11px no-repeat,linear-gradient(currentColor,currentColor) right top/11px 1px no-repeat,linear-gradient(currentColor,currentColor) right top/1px 11px no-repeat,linear-gradient(currentColor,currentColor) left bottom/11px 1px no-repeat,linear-gradient(currentColor,currentColor) left bottom/1px 11px no-repeat,linear-gradient(currentColor,currentColor) right bottom/11px 1px no-repeat,linear-gradient(currentColor,currentColor) right bottom/1px 11px no-repeat;}
+.lab-specimen[data-project=worldstage] i:first-child{position:absolute;inset:18px 8px;border-top:1px solid currentColor;transform:rotate(-12deg);opacity:.55;}
+.lab-specimen[data-project=dungeon] .lab-specimen-fragment{display:grid;grid-template-columns:repeat(2,12px);grid-template-rows:repeat(2,12px);gap:4px;padding:5px;}.lab-specimen[data-project=dungeon] i{border:1px solid currentColor;background:color-mix(in srgb,currentColor 15%,transparent);}.lab-specimen[data-project=dungeon] i:nth-child(2),.lab-specimen[data-project=dungeon] i:nth-child(3){color:#aaa0ff;transform:translate(2px,-2px);}
+@media(prefers-reduced-motion:reduce){.lab-specimen.is-following{transition:none;}}
+@media(hover:none) and (pointer:coarse){.lab-specimen{display:none;}}

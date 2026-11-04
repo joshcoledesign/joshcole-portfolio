@@ -42,8 +42,10 @@ const motionSource=fs.readFileSync(path.join(root,'src/lib/story-motion.ts'),'ut
 const motion=ts.transpileModule(motionSource,{compilerOptions:{target:ts.ScriptTarget.ES2020,module:ts.ModuleKind.None}}).outputText;
 const motionName='story-'+digest(motion).slice(0,16)+'.js';
 scripts.push(`(()=>{${motion};const root=document.getElementById('culture-case-studies');if(root)mountStoryMotion(root);})();`);
+const cursor=ts.transpileModule(fs.readFileSync(path.join(root,'src/lib/lab-cursor.ts'),'utf8').replace('export function','function'),{compilerOptions:{target:ts.ScriptTarget.ES2020,module:ts.ModuleKind.None}}).outputText;
+scripts.push(`(()=>{${cursor};const root=document.getElementById('culture-case-studies');if(root)mountLabCursor(root);})();`);
 const runtime=scripts.join('\n;\n');
-const css=read('site.css')+'\n'+read('story.css');
+const css=read('site.css')+'\n'+read('story.css')+'\n'+read('lab-cursor.css');
 const jsName='site-'+digest(runtime).slice(0,16)+'.js',cssName='site-'+digest(css).slice(0,16)+'.css';
 fs.mkdirSync(output,{recursive:true});
 fs.writeFileSync(path.join(output,motionName),`(()=>{${motion};const root=document.querySelector('[data-story-root]');if(root)mountStoryMotion(root);})();`);

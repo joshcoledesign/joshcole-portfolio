@@ -139,6 +139,23 @@ limitation. Actual Safari and physical phones remain deferred.
 The PNG text chunks follow the [W3C PNG iTXt specification](https://www.w3.org/TR/png-3/#11iTXt).
 No dependency, backend upload route, analyzer or example-data change was added.
 
+## Larger PNGs and public source link (2026-11-04)
+
+The shared PNG size selector now defaults to **2000 × 2000**, with the original
+**500 × 500** option retained. Large exports use exact nearest-neighbor 4× scaling:
+each original point becomes a uniform 4 × 4 block, preserving the grid without
+blur or invented detail. Large filenames include `2000x2000`; PNG metadata records
+both exported and source dimensions and the scaling method. Settings and example
+credits remain embedded. The lab header links to the public genSound repository.
+
+Source: [genSound PR 3](https://github.com/joshcoledesign/genSound/pull/3), revision
+`4eba1a570100d114b689cc61729e38634bde38e9`. Source regression passed 64 actual
+exports across Chromium, Firefox and Playwright WebKit at desktop and phone
+widths, including both output sizes, exact per-pixel native/nearest-neighbor
+mapping, valid PNG chunks, current settings, credits, filenames, visible public
+repository link, loading guards and error recovery. Actual Safari remains
+deferred; Windows WebKit visitor-audio decoding limitations still apply.
+
 ## Initial release boundary (2026-11-03)
 
 Josh explicitly authorized production publication on 2026-11-03 with Safari

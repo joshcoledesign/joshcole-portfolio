@@ -1,7 +1,7 @@
 {
-  "htmlSha256": "ec6f797ba6935c9ed52f6278431d260f74a951752add4a5b2d02b5b9f99cc2bf",
-  "scripts": "site-21f589082f7c3b97.js",
-  "styles": "site-1d2af47e25f66228.css",
+  "htmlSha256": "10bc7a62b9d2960ce49bfa0b0c93773a17b9c086c228fb4703762463f29a3f86",
+  "scripts": "site-1674c53c15aa89a9.js",
+  "styles": "site-f60bbba97b500892.css",
   "routes": [
     "/",
     "/work/gprs-sitemap",

@@ -231,10 +231,12 @@ function headMetaHtml(): string {
     `<meta property="og:image:type" content="${img.type}">`,
     `<meta property="og:image:width" content="${img.width}">`,
     `<meta property="og:image:height" content="${img.height}">`,
+    `<meta property="og:image:alt" content="${esc(img.alt)}">`,
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta name="twitter:title" content="${esc(title)}">`,
     `<meta name="twitter:description" content="${esc(SITE_DESCRIPTION)}">`,
     `<meta name="twitter:image" content="${img.url}">`,
+    `<meta name="twitter:image:alt" content="${esc(img.alt)}">`,
     `<link rel="icon" href="/icon.png" type="image/png">`,
   ].join("\n");
 }

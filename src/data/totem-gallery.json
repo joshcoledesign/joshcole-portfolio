@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 2,
+  "title": "Totem",
+  "provenance": {
+    "type": "curated-original-illustrations-and-live-adaptations",
+    "sourceSelection": "exhibition.json",
+    "selectionSha256": "f75d4d25f2ac3de7481df2af3a92de252ceba412bcad44884ec4e053d114b434",
+    "generatedAt": "2026-11-03T18:02:31.804Z"
+  },
+  "experiments": [
+    {
+      "id": "the-cast",
+      "title": "The Cast",
+      "description": "Illustrated in Procreate and Adobe Illustrator",
+      "kind": "illustration",
+      "sourceExperiment": "artwork-01",
+      "thumbnail": "/case-studies/hype-js/totem/cast/character.svg",
+      "assets": [
+        {
+          "src": "/case-studies/hype-js/totem/cast/character.svg",
+          "label": "Character illustration",
+          "source": "Totem/Artwork/step 1/build/data/totemCat.svg",
+          "sha256": "e73884d76ff1563637ac5640f3536f5ca06e2e6b2b00a9bc68d8f224c8ab83ae"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/cast/crest.svg",
+          "label": "13/13 character illustration",
+          "source": "Totem/Artwork/step 11/build/data/totemStrokesDude.svg",
+          "sha256": "b5c64f91c672a7ea639577f8523d8042f28802c8361168626304f16d89f91c92"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/cast/ornaments.svg",
+          "label": "Ornamental illustration",
+          "source": "Totem/Artwork/step 11/build/data/totemStrokes.svg",
+          "sha256": "5bab911d59e4ef5af6dbdd7a1d1d15bed8b9d78896dbb79f05364af70bd27216"
+        }
+      ]
+    },
+    {
+      "id": "the-field",
+      "title": "The Field",
+      "description": "Thirteen drawn fragments. A different composition with every seed.",
+      "kind": "live-print",
+      "sourceExperiment": "artwork-15",
+      "thumbnail": "/case-studies/hype-js/totem/cast/ornaments.svg",
+      "assets": [
+        {
+          "src": "/case-studies/hype-js/totem/field/01.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-01.svg",
+          "sha256": "72b0a165dd99c29fcba8d0079a4b8363814c9b7a764462142959018f09ead473"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/02.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-02.svg",
+          "sha256": "42d6b99230d02c667f1f280e5263d4cbe74d1bb1da7ce14b946865f8e1563263"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/03.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-03.svg",
+          "sha256": "eb1051e830d648c3f802bea32308fdb0ee4e38a85a587ba6c5ab382e366345e9"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/04.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-04.svg",
+          "sha256": "d529be7314cb668668a08af8f39cda42caaeec456ff6736ef95ca4429a9bf59f"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/05.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-05.svg",
+          "sha256": "0d6321bed0c0ec350514c0a29909941644fe130f2f07193ae4b8be6224322fc5"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/06.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-06.svg",
+          "sha256": "5d79515cb92250d40b5aa2e0e3c4e3a99d37a1a8a491551762a22a5860beb56a"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/07.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-07.svg",
+          "sha256": "b91117d0a39fd136c68d55620bd942b08de38b2729fcf8d841ab6c9498d2c1ad"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/08.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-08.svg",
+          "sha256": "8b574bdb9ab74e59cf185800c70436b28ba720eb2dd3764f223fb40ed8754e91"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/09.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-09.svg",
+          "sha256": "d29a2009fef8954b4a649993ab3c91189659c23e992cc203dedcfb35c2ba3b04"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/10.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-10.svg",
+          "sha256": "baa8f8b0c4182996903bd3c758d2abe0fa127061999d16fa17c7602277546122"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/11.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-11.svg",
+          "sha256": "b62c3487dc4cf4223354647b9890ae4ef8cbc5b77268332889d08a1950e2cfd6"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/12.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-12.svg",
+          "sha256": "7d46193213f0daa7b4fe5a6e39dedb73165cef8cc04dce2841eae69044727daf"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/field/13.svg",
+          "label": "The Field",
+          "source": "Totem/Artwork/step 15/build/data/totemStrokes1-13.svg",
+          "sha256": "7f2ab0fa998d5c5891158fafd00e3d7c066f7c94ca83be4f4b641dc8ee5bfcb5"
+        }
+      ]
+    },
+    {
+      "id": "oscillating",
+      "title": "Oscillating",
+      "description": "Rotation and scale leave a changing trace.",
+      "kind": "live-motion",
+      "sourceExperiment": "oscillating-01",
+      "thumbnail": "/case-studies/hype-js/totem/oscillating/01.svg",
+      "assets": [
+        {
+          "src": "/case-studies/hype-js/totem/oscillating/01.svg",
+          "label": "Oscillating",
+          "source": "Totem/Oscillating/Step 1/build/data/totemStrokes1.svg",
+          "sha256": "bf7b06af39fbddf83051a2350eb5ac82a644adc707013aba438379eeafd38046"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/oscillating/02.svg",
+          "label": "Oscillating",
+          "source": "Totem/Oscillating/Step 1/build/data/totemStrokes2.svg",
+          "sha256": "037f74a5c9273794abaf47e4621ea75f6f206196a7b481661a85649911303255"
+        },
+        {
+          "src": "/case-studies/hype-js/totem/oscillating/03.svg",
+          "label": "Oscillating",
+          "source": "Totem/Oscillating/Step 1/build/data/totemStrokes3.svg",
+          "sha256": "556a9c9c511f74dbae74d50aacec4b36e57b9c963e0b0459b064d1840b5d53a6"
+        }
+      ]
+    }
+  ]
+}

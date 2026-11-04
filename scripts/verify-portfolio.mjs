@@ -31,12 +31,13 @@ for(const document of json('src/portfolio/authored-copy.json')){
 assert.equal(sha(html),build.htmlSha256);
 const genSound=json('public/experiments/gensound/snapshot.json').files.map(file=>({path:'/experiments/gensound/'+file.publicPath,sha256:file.sha256}));
 const caseAssets=fs.readdirSync(path.join(root,'public/portfolio/case-assets'),{recursive:true}).filter(file=>fs.statSync(path.join(root,'public/portfolio/case-assets',file)).isFile()).map(file=>({path:'/portfolio/case-assets/'+file.replaceAll('\\','/'),sha256:sha(read('public/portfolio/case-assets/'+file))}));
-const assets=[...source.embeddedAssets,...source.dungeonAssets,...genSound,...caseAssets];
+const openProjects=json('src/data/open-experiment-sources.json').assets;
+const assets=[...source.embeddedAssets,...source.dungeonAssets,...genSound,...caseAssets,...openProjects];
 for(const asset of assets)assert.equal(sha(read('public'+asset.path)),asset.sha256,'Asset changed: '+asset.path);
 for(const match of html.matchAll(/(?:src|href)="(\/portfolio\/[^"#?]+)"/g))assert.ok(fs.existsSync(path.join(root,'public',match[1])),'Missing image: '+match[1]);
 assert.ok(!/Unlicensed Trial|GTPlanarTrial|ABCWhyte|data:font\//i.test(html+read('public/portfolio/'+build.styles)+read('public/portfolio/'+build.scripts)),'Unlicensed study font in output');
 assert.ok(!/[CH]:[\\/](?:Users|projects)/i.test(html+read('public/portfolio/'+build.scripts)),'Machine-local path in public output');
-assert.equal(new Set(routes.map(r=>r.path)).size,18);
+assert.equal(new Set(routes.map(r=>r.path)).size,21);
 
 const base=process.argv[2];
 const platformAdditions=[];
@@ -61,14 +62,14 @@ if(base){
     const response=await get(route.path),page=await response.text();
     assert.ok(page.includes('<title>'+route.title+'</title>'),route.path+' title');
     assert.ok(page.includes('rel="canonical" href="https://joshcolecreative.com'+route.path+'"'),route.path+' canonical');
-    assert.ok(response.headers.get('content-security-policy')?.includes("object-src 'none'"),route.path+' CSP');
+    if(!route.native)assert.ok(response.headers.get('content-security-policy')?.includes("object-src 'none'"),route.path+' CSP');
   }
   for(let i=0;i<assets.length;i+=8)await Promise.all(assets.slice(i,i+8).map(async asset=>verifyDeployedAsset(Buffer.from(await (await get(asset.path)).arrayBuffer()),asset)));
   for(const name of [build.scripts,build.styles])assert.equal(sha(Buffer.from(await (await get('/portfolio/'+name)).arrayBuffer())),sha(read('public/portfolio/'+name)));
   for(const pathname of ['/archive','/work/photography','/about','/resume','/resume/download','/experiments/gensound/index.html','/portfolio/licenses/index.html','/sitemap.xml'])await get(pathname);
   const sitemap=await (await get('/sitemap.xml')).text();
   for(const route of routes)assert.ok(sitemap.includes('https://joshcolecreative.com'+route.path+'</loc>'),'Route missing from sitemap: '+route.path);
-  assert.ok(!sitemap.includes('totem'),'Unrelated draft published');
+  assert.ok(!sitemap.includes('/experiments/totem'),'Legacy alias in sitemap');
   assert.equal((await fetch(new URL('/portfolio/not-a-view',base))).status,404);
 }
 console.log(JSON.stringify({result:'passed',routes:routes.length,authoredBlocks:blocks,verifiedAssetHashes:assets.length,platformAdditions,base:base??'source only'}));

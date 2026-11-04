@@ -29,7 +29,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .resume-rule{height:1px;background:var(--accent);margin:32px 0 22px}
 .contact{display:flex;flex-wrap:wrap;gap:6px 0;margin:0;color:var(--muted);font:12px/1.7 monospace}
 .contact-group{display:inline-flex;align-items:baseline;flex-wrap:wrap}.contact-item{overflow-wrap:anywhere}.contact .sep{padding:0 14px;color:var(--rule)}
-.section{margin-top:48px;border-top:1px solid var(--rule);padding-top:28px;scroll-margin-top:calc(var(--site-header-height,112px) + 24px)}
+.section{margin-top:48px;padding-top:28px;scroll-margin-top:calc(var(--site-header-height,112px) + 24px)}
 [data-story-section]{position:relative}
 [data-story-rule]{position:absolute;inset-inline:0;top:0;height:1px;background:var(--accent);transform-origin:left;pointer-events:none}
 @media screen and (min-width:901px){.section{display:grid;grid-template-columns:240px minmax(0,1fr);column-gap:6%}.section>h2{grid-column:1;grid-row:1/span 30;align-self:start}.section>:not(h2):not([data-story-rule]){grid-column:2}.section p{max-width:78ch}}

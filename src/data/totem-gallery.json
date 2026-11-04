@@ -39,7 +39,7 @@
     {
       "id": "the-field",
       "title": "The Field",
-      "description": "Thirteen drawn fragments. A different composition with every seed.",
+      "description": "The code selects from thirteen drawn fragments and varies their position, rotation, size, and color. Change the seed to generate another arrangement.",
       "kind": "live-print",
       "sourceExperiment": "artwork-15",
       "thumbnail": "/case-studies/hype-js/totem/cast/ornaments.svg",
@@ -127,7 +127,7 @@
     {
       "id": "oscillating",
       "title": "Oscillating",
-      "description": "Rotation and scale leave a changing trace.",
+      "description": "Three drawn layers rotate and change size over time. Adjust the rotation speed, scale speed, and trail fade to compare the motion.",
       "kind": "live-motion",
       "sourceExperiment": "oscillating-01",
       "thumbnail": "/case-studies/hype-js/totem/oscillating/01.svg",

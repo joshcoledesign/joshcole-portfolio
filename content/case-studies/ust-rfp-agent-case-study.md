@@ -29,7 +29,7 @@ That decision wasn't simple. It depended on what the team does and doesn't do, t
 
 The question I asked before building anything. Which parts of this decision repeat the same way every time, and which need a person? The rubric repeated. The final call didn't. That split became the architecture.
 
-I built a system that does the first pass.
+I built a working pilot to handle the first pass.
 
 ---
 
@@ -41,11 +41,11 @@ Each morning's requests flow through Power Automate, which simplifies every emai
 
 Sometimes scraping hits a wall. A request gated behind a login, a system that blocks automated access. The system doesn't pretend that case away. It hands it to a person, who logs in, copies or downloads the full RFP, and pushes it back into the flow. A designed fallback, not a failure.
 
-Once the agent has the complete request, it scores it against every rule in the table. A couple of rules are hard stops. If one of them trips, the request is an instant no-go and nothing else needs checking. For everything else, the agent writes a per-request spreadsheet with each rule scored, stores it, and generates a summary document. A synopsis of the request, the results, a final score, and the flags behind it. Go, maybe, or no-go, with the reasons attached.
+The agent checks each request against the team's rules. A couple are hard stops. If one applies, the request is marked no-go and recorded with the rejection reason. For the other requests, the agent creates a spreadsheet with the rule scores and a summary with a synopsis, final score, flags, and a go, maybe, or no-go recommendation.
 
-A no-go doesn't disappear. Every request gets scored and stored, including the ones a hard stop rejected, so the team can go back and audit what the agent turned away and why.
+Every request is stored, including hard-stop rejections, so the team can review what was turned away and why.
 
-The summary lands in a Teams channel. The whole team scans it over coffee. A morning of senior-people judgment becomes a digest they can read in minutes, and the handful of requests actually worth pursuing get pulled out and scrubbed by humans before anyone commits real time.
+The summaries are posted to a Teams channel each morning. The team can review them whenever they choose and decide which requests to pursue.
 
 ---
 
@@ -53,7 +53,7 @@ The summary lands in a Teams channel. The whole team scans it over coffee. A mor
 
 The hard part wasn't the plumbing. It was trust.
 
-These are six-figure pursuit decisions. For a team to rely on an agent's read of an RFP, the agent has to be right in a way that holds up. Not in a demo, in production, every morning, on messy inputs. That takes real work. When I left UST the system was a working pilot, still in testing, still being tuned. That wasn't unfinished business. That was the business. You don't ship an AI system that influences where a team spends half a million dollars and call it done after the first good output. You calibrate it until the people using it would stake a decision on it.
+These were recommendations about six-figure opportunities. When I left UST, the system was a working pilot, still in testing and being tuned.
 
 The other thing I took away was about the tools themselves. Working in Power Automate, the logic was sound but the experience of assembling it fought me the whole way. The machine sits at the center of these builders, not the person, which makes the build far more complicated than it needs to be.
 

@@ -43,6 +43,6 @@ The brand also chose who it was for. We aimed it at startups, mainly well-funded
 
 Nobody ordered business cards. Each person had their own stamp, and when they ran low, they stamped more. The craft line wasn't only on the website. Everyone at the agency did it by hand.
 
-Business went up after the rebrand, and Andculture got talked about in the startup community. Startups liked that the same team could make something by hand and build the software behind it.
+After the rebrand, we saw more leads and more startup work.
 
 Team: Bradley Hawkins, Madeline Pellman, Kate Ferrara, Brian Zeiders, Anna Spisak

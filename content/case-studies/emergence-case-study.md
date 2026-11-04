@@ -4,7 +4,7 @@ volume: "ai-systems"
 slug: "emergence"
 role: "Design system architect"
 year: "2025"
-summary: "The design system that runs Novensia. Something new forming out of something larger."
+summary: "Emergence is the design system I built for Novensia. It defines the colors, type, components, and interaction states used across the product."
 descriptor: "the design system behind Novensia"
 thumbnail: "/case-studies/emergence/grid.jpg"
 heroImage: "/case-studies/emergence/emergence-01.png"
@@ -24,7 +24,7 @@ tags:
 
 # Emergence
 
-Emergence is the design system that assembles to create Novensia. It's named for what it's meant to do. Give one idea a visual form. _Something new forming out of something larger._
+Emergence is the design system I built for Novensia. It defines the colors, type, components, and interaction states used across the product.
 
 ![The System](/case-studies/emergence/system-sections.png)
 
@@ -46,7 +46,7 @@ The grays carry a deliberate blue-violet bias, not neutral. That bias is what ma
 
 Three typefaces, three jobs. Geist Sans for interface (labels, controls, headings). Newsreader for content (your writing samples and the drafts, and nothing else). Geist Mono for machine values (model strings, temperatures, scores, JSON).
 
-The rule that decides between them. A label is a word a human wrote ("Temperature"). A value is data the machine produced ("0.7"). Label gets Geist. Value gets Mono. The reader knows what kind of thing they're looking at before they read a word of it.
+The rule that decides between them. A label is a word a human wrote ("Temperature"). A value is data the machine produced ("0.7"). Label gets Geist. Value gets Mono. The type choices give interface labels, written content, and machine values different visual treatments.
 
 Two weights across all three faces, regular and medium. Emphasis comes from size, color, and the step between them, never a third weight.
 

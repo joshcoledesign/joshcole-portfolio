@@ -25,11 +25,11 @@ published: true
 
 # HYPE
 
-Generative art has a look. Oftentimes the look belongs to the tool. These experiments were an attempt to make the output belong to the hand instead.
+I wanted to see how much variation I could get from a fixed set of hand-drawn shapes. I kept the drawings and palette under my control and let the code vary their selection and placement.
 
 ![Still from animated triptych output](/case-studies/hype-js/signal-root.jpg)
 
-The method is the same across all of them. I draw a pool of vector shapes by hand. The code pulls shapes from the pool at random, places them by a rule, and colors each one at random from a palette I chose. The system decides where and which. I decided what and what colors. Change the seed and you get a new piece that is unmistakably from the same hand.
+The method is the same across all of them. I draw a pool of vector shapes by hand. The code pulls shapes from the pool at random, places them by a rule, and colors each one at random from a palette I chose. The system decides where and which. I decided what and what colors. Changing the seed changes the composition while keeping the same pool of drawings and colors.
 
 ---
 
@@ -45,7 +45,7 @@ Processing, with the HYPE framework. `HDrawablePool` to hold the shapes, `HColor
 
 ![Three animated ring compositions, each a different random draw from the same shape pool](/case-studies/hype-js/rings-triptych.png)
 
-**The 13/13 print.** A hand-drawn character crest at the center, surrounded by a field generated from a second pool of drawn ornaments, colored from a list, rendered to vector for print. The center is fully authored. The field is fully generated. The piece is both, and you can't see the seam.
+**The 13/13 print.** A hand-drawn character crest at the center, surrounded by a field generated from a second pool of drawn ornaments, colored from a list, rendered to vector for print. I drew the center crest and the surrounding ornaments. The code arranged and colored the ornament field.
 
 ![The 13/13 print: a hand-drawn crest surrounded by a generated field of ornaments](/case-studies/hype-js/thirteen-print.jpg)
 
@@ -55,4 +55,4 @@ Processing, with the HYPE framework. `HDrawablePool` to hold the shapes, `HColor
 
 This is the same idea as the AI systems I build now, years earlier and in a different medium. A person supplies the taste and the raw material, a system supplies the scale and the variation, and the result is only good if the boundary between the two was drawn on purpose.
 
-Random inside a pool of my own hand-drawn assets is different from random. That's the whole point.
+I controlled the source drawings, palette, and placement rules. The code produced variations within those choices.

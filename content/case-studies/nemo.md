@@ -27,7 +27,7 @@ A personal brand for John Nemo, built with a system I'm developing and steered b
 
 ![NEMO wordmark in mismatched type with a hand-drawn O on a textured cream field.](/case-studies/nemo/nemo-logo.jpg)
 
-The NEMO logo is the place to start, because it makes the whole argument in one mark. Five letters, none of them behaving the same way. The N and M are a variable sans-serif that can shift width and weight. The E is a condensed slab serif. The O is never just a typed character. It's an object every time. Hand-drawn, cut from paper, a magnetic letter off the fridge, a coffee stain, a Zubaz-pattern cutout. It shifts with every client, which is the point.
+The NEMO logo is the place to start, because it makes the whole argument in one mark. Four letters, each handled differently. The N and M are a variable sans-serif that can shift width and weight. The E is a condensed slab serif. The O is never just a typed character. It's an object every time. Hand-drawn, cut from paper, a magnetic letter off the fridge, a coffee stain, a Zubaz-pattern cutout. It shifts with every client, which is the point.
 
 Nemo's whole pitch is that he breaks formulaic branding to help people find their real voice. A logo for that can't be one tidy lockup. The inconsistency is the system. The mark works because it refuses to settle, the same way he does.
 
@@ -69,7 +69,7 @@ The system can pick fonts that match the words. It can't feel that Bebas and Int
 
 ![Hand-painted color swatches with hex values on a torn newsprint background.](/case-studies/nemo/nemo-color.jpg)
 
-The system named the palette correctly. Blue for trust, red for conversion. Black for ink. The specific colors it picked were the problem. Its blue was `#004DFF`, a loud digital blue. Its red was `#FF004D`, a near-neon. Named right, chosen wrong. Put those two next to each other and they vibrate. Both sit high and saturated, close in value, and the eye can't rest where they meet.
+The system proposed blue, red, and black. I kept that direction and changed the specific colors. The specific colors it picked were the problem. Its blue was `#004DFF`, a loud digital blue. Its red was `#FF004D`, a near-neon. Named right, chosen wrong. Put those two next to each other and they vibrate. Both sit high and saturated, close in value, and the eye can't rest where they meet.
 
 I pulled both toward ink. The blue became `#2176AE`, a printed, faded blue that reads like it came off a press instead of a screen. The red became `#E63946` and got a new name. "Conversion Red" is funnel language. "Punch Red" is what the color does on the page. The rename is small, but it moves the palette out of marketing vocabulary and into editorial vocabulary, which is where the brand lives.
 

@@ -174,6 +174,26 @@ pixels. Focused Chromium fallback tests also passed in landscape and at 320px,
 including retry after encoding failure and Escape. Desktop/phone screenshots
 were inspected. Actual Safari remains deferred.
 
+## Approved copy integration (2026-11-04)
+
+The approved thesis, method/limits paragraph and threshold label were applied to
+the latest source rather than replacing the lab with the older review worktree.
+Source: [genSound PR 5](https://github.com/joshcoledesign/genSound/pull/5), revision
+`165d5649c9c6e74f02c452aa516e840d9fcd6b76`. The portfolio snapshot was regenerated
+from that merged revision, retaining its source hashes. The source file's LF line
+endings are carried into the generated snapshot.
+
+Only three text replacements changed in the source. Normalized inline scripts,
+the analyzer, and all approved analysis datasets remain unchanged. The wrapper's
+method explanation uses the same approved wording. Current-browser checks showed
+the source link, both PNG sizes, and both layout export controls still present;
+the full-screen Hilbert viewer reported a successful 2000px PNG save and retained
+its viewer state. Main/viewer size synchronization also passed. Download-event
+capture did not return a file, so the earlier export pixel tests above were not
+claimed as rerun for this copy-only release. Desktop and 390px viewport checks
+passed without horizontal overflow; actual Safari and physical phones remain
+outside this verification.
+
 ## Initial release boundary (2026-11-03)
 
 Josh explicitly authorized production publication on 2026-11-03 with Safari

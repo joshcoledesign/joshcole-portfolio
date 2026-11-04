@@ -18,6 +18,8 @@ Dungeon's static snapshot uses `/experiments/dry-run-dungeon/runtime/` for its c
 
 The renderer supplies route-specific metadata, canonical URLs, CSP and same-origin runtime assets. Production retains Vercel Analytics. Open-source font/runtime notices are linked in the homepage footer. Trial type controls and review-host integrations are removed.
 
+Vercel appends its own toolbar loader to Dungeon's static Turbopack bootstrap. The production addition requires the visitor's explicit toolbar cookie. Deployment integrity checks require the complete original file byte for byte and recognize only the exact observed Vercel suffix; any other modification fails. All other assets require an exact hash match.
+
 ## Validation
 
 Run `pnpm lint`, `pnpm exec tsc --noEmit`, and `pnpm build`. Run `node scripts/verify-portfolio.mjs` for copy/source integrity. Pass a server origin as the final argument to verify all 18 routes, metadata/CSP, 202 deployed asset hashes, legacy surfaces, sitemap and unknown-route handling.

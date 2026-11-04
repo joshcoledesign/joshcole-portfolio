@@ -9,7 +9,7 @@
  function returnToCases(remember=true){closeCaseDialogs();showPage('home');landOn(q('#rh-work'),q('[data-open-case]'));metadata('home');if(remember)history.pushState({portfolioView:'home'},'','/#case-studies');}
  function returnToHomepage(remember=true){closeCaseDialogs();showPage('home');landOn(q('.rh-header'),q('.rh-identity'));metadata('home');if(remember&&(location.pathname!=='/'||location.hash))history.pushState({portfolioView:'home'},'','/');}
  function enterExperiment(name,remember=true){if(!experimentNames.includes(name))return;closeCaseDialogs();showPage(name);landOn(q('.rd-header'),q('.rd-home'));metadata(name);if(remember){if(!experimentNames.some(n=>pathFor(n)===location.pathname))history.replaceState({portfolioView:'home'},'','/#experiments');history.pushState({portfolioView:name},'',pathFor(name));}}
- function returnToExperiments(remember=true){closeCaseDialogs();showPage('home');landOn(q('.rh-lab'),q('.gs-home-feature'));metadata('home');if(remember)history.pushState({portfolioView:'home'},'','/#experiments');}
+ function returnToExperiments(remember=true){closeCaseDialogs();showPage('home');landOn(q('#rh-experiments'),q('.rh-dungeon-link'));metadata('home');if(remember)history.pushState({portfolioView:'home'},'','/#experiments');}
  const normalClick=event=>event.button===0&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&!event.altKey;
  for(const link of root.querySelectorAll('[data-logo-home]'))link.addEventListener('click',event=>{if(!normalClick(event))return;event.preventDefault();returnToHomepage();});
  for(const link of root.querySelectorAll('[data-open-case]'))link.addEventListener('click',event=>{if(!normalClick(event))return;event.preventDefault();enterCase(link.dataset.openCase);});

@@ -1795,8 +1795,8 @@ html>body{padding:0}
 #culture-case-studies .rh-hero-meta,#culture-case-studies .rh-hero-copy{flex-shrink:0;}
 #culture-case-studies .rh-quick-culture{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 24px;align-items:center;padding-top:26px;margin-top:auto;}
 #culture-case-studies .rh-quick-description{min-width:0;}
-#culture-case-studies .rh-quick-structure{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:8px 0 0;color:var(--rh-paper);font:12px/1.5 var(--rh-face),Arial,sans-serif;}
-#culture-case-studies .rh-quick-structure select{box-sizing:border-box;min-width:140px;max-width:100%;min-height:44px;padding:8px 12px;background:var(--rh-surface);color:var(--rh-paper);border:1px solid var(--rh-rule);font:16px/1.4 var(--rh-face),Arial,sans-serif;}
+#culture-case-studies .rh-quick-structure{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:8px 0 0;color:var(--rh-paper);font:500 16px/1.4 var(--rh-face),Arial,sans-serif;}
+#culture-case-studies .rh-quick-structure select{box-sizing:border-box;min-width:140px;max-width:100%;min-height:44px;padding:8px 12px;background:var(--rh-surface);color:var(--rh-paper);border:1px solid var(--rh-rule);font:500 16px/1.4 var(--rh-face),Arial,sans-serif;}
 #culture-case-studies .rh-quick-culture .rh-live-badge{position:static;display:block;background:transparent;padding:0;color:var(--rh-ink);font:11px/1.5 'Courier New',monospace;}
 #culture-case-studies .rh-quick-description>a{display:inline-block;padding:8px 0;color:var(--rh-link);font:12px/1.5 var(--rh-face),Arial,sans-serif;}
 #culture-case-studies .rh-quick-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
@@ -1806,8 +1806,8 @@ html>body{padding:0}
 #culture-case-studies .rh-site>.rh-work{padding-top:30px;border-top:1px solid var(--rh-rule);}
 #culture-case-studies .rd-culture .rh-specimen{margin-top:0;}
 #culture-case-studies .rh-culture-choices{display:grid;gap:16px;margin-top:24px;}
-#culture-case-studies .rh-culture-choices label{display:grid;gap:7px;font:12px/1.5 var(--rh-face),Arial,sans-serif;color:var(--rh-paper);}
-#culture-case-studies .rh-culture-choices select{min-width:0;width:100%;min-height:44px;background:var(--rh-surface);color:var(--rh-paper);border:1px solid var(--rh-rule);padding:8px;font:16px/1.4 var(--rh-face),Arial,sans-serif;}
+#culture-case-studies .rh-culture-choices label{display:grid;gap:7px;font:500 16px/1.4 var(--rh-face),Arial,sans-serif;color:var(--rh-paper);}
+#culture-case-studies .rh-culture-choices select{min-width:0;width:100%;min-height:44px;background:var(--rh-surface);color:var(--rh-paper);border:1px solid var(--rh-rule);padding:8px;font:500 16px/1.4 var(--rh-face),Arial,sans-serif;}
 #culture-case-studies .rh-culture-choices input{width:100%;min-width:0;margin:0;accent-color:var(--rh-ink);}
 @media(max-width:600px){#culture-case-studies .rh-quick-culture{grid-template-columns:1fr;gap:8px;padding-top:26px;}#culture-case-studies .rh-quick-hint{grid-column:auto;}#culture-case-studies .rh-quick-description>a{min-height:44px;}}
 @media(max-width:380px){#culture-case-studies .rh-quick-actions{gap:8px;}#culture-case-studies .rh-quick-actions button{padding:9px 10px;}}

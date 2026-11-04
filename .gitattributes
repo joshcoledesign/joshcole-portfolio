@@ -1,0 +1,5 @@
+# Preserve reviewed snapshots and asset hashes across Windows and Vercel/Linux.
+/public/portfolio/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+/public/portfolio/licenses/** -whitespace
+/public/experiments/dry-run-dungeon/runtime/** -text -whitespace
+/src/portfolio/** -text whitespace=trailing-space,space-before-tab,cr-at-eol

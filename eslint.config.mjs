@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "public/portfolio/**",
+    "public/experiments/dry-run-dungeon/runtime/**",
+    "src/portfolio/runtime/**",
+    "src/portfolio/navigation.js",
   ]),
 ]);
 

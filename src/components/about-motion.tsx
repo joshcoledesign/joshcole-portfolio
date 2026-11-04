@@ -10,6 +10,7 @@ export function AboutMotion(){
     const portrait=root.querySelector<HTMLElement>('[data-about-portrait]');
     const frame=root.querySelector<HTMLElement>('[data-about-portrait-frame]');
     const introductions=root.querySelectorAll<HTMLElement>('[data-about-reveal]');
+    const chapters=[...introductions].map(element=>({element,section:element.closest('section')}));
     const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
     const seen=new WeakSet<Element>(),animations=new Set<Animation>();
     let observer:IntersectionObserver|undefined,scrollFrame=0;
@@ -17,16 +18,31 @@ export function AboutMotion(){
     function resetPortrait(){
       portrait?.style.removeProperty('transform');
       portrait?.style.removeProperty('will-change');
+      for(const {element}of chapters){
+        element.style.removeProperty('transform');
+        element.style.removeProperty('will-change');
+      }
     }
     function updateScroll(){
       scrollFrame=0;
-      if(reduced.matches||!portrait||!frame)return;
+      if(reduced.matches)return;
+      const height=window.innerHeight,mobile=window.innerWidth<768;
+      // Chapter movement follows its stationary section, including on direct anchor visits.
+      for(const {element,section}of chapters){
+        if(!section)continue;
+        const rect=section.getBoundingClientRect();
+        if(rect.bottom<0||rect.top>height){element.style.removeProperty('will-change');continue;}
+        const progress=Math.max(-1,Math.min(1,(height/2-rect.top-rect.height/2)/(height/2+rect.height/2)));
+        element.style.setProperty('transform',`translate3d(0,${(-progress*(mobile?16:24)).toFixed(2)}px,0)`);
+        element.style.setProperty('will-change','transform');
+      }
+      if(!portrait||!frame)return;
       // Measure the stationary frame so the image's transform never feeds back into its position.
-      const rect=frame.getBoundingClientRect(),height=window.innerHeight;
+      const rect=frame.getBoundingClientRect();
       if(rect.bottom<0||rect.top>height){portrait.style.removeProperty('will-change');return;}
       const progress=Math.max(-1,Math.min(1,(height/2-rect.top-rect.height/2)/(height/2+rect.height/2)));
-      const distance=window.innerWidth<768?7:12;
-      portrait.style.setProperty('transform',`translate3d(0,${(-progress*distance).toFixed(2)}px,0) scale(1.045)`);
+      const distance=mobile?14:24;
+      portrait.style.setProperty('transform',`translate3d(0,${(-progress*distance).toFixed(2)}px,0) scale(1.08)`);
       portrait.style.setProperty('will-change','transform');
     }
     function schedule(){
@@ -46,9 +62,9 @@ export function AboutMotion(){
             seen.add(entry.target);observer?.unobserve(entry.target);
             if(typeof entry.target.animate!=='function')continue;
             const animation=entry.target.animate([
-              {translate:'0 12px',opacity:.82},
+              {translate:'0 26px',opacity:.8},
               {translate:'0 0',opacity:1},
-            ],{duration:650,easing:'cubic-bezier(.2,.75,.2,1)'});
+            ],{duration:850,easing:'cubic-bezier(.2,.75,.2,1)'});
             animations.add(animation);
             animation.finished.then(()=>animations.delete(animation),()=>animations.delete(animation));
           }

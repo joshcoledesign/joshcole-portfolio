@@ -561,6 +561,21 @@ function mountStoryMotion(root) {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const seen = new WeakSet(), animations = new Set();
     let observer, scrollFrame = 0;
+    const document = root.ownerDocument;
+    const headers = [...document?.querySelectorAll('[data-site-header]') ?? []];
+    let headerHeight = -1;
+    function syncHeader() {
+        const header = headers.find(element => element.getClientRects().length);
+        const height = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
+        if (height !== headerHeight) {
+            headerHeight = height;
+            document?.documentElement.style.setProperty('--site-header-height', `${height}px`);
+        }
+    }
+    const headerObserver = headers.length && 'ResizeObserver' in window ? new ResizeObserver(syncHeader) : undefined;
+    for (const header of headers)
+        headerObserver?.observe(header);
+    syncHeader();
     function resetPortrait() {
         portrait?.style.removeProperty('transform');
         portrait?.style.removeProperty('will-change');
@@ -606,6 +621,7 @@ function mountStoryMotion(root) {
         if (!scrollFrame && !reduced.matches)
             scrollFrame = requestAnimationFrame(updateScroll);
     }
+    function refresh() { syncHeader(); schedule(); }
     function syncPreference() {
         observer?.disconnect();
         cancelAnimationFrame(scrollFrame);
@@ -640,20 +656,22 @@ function mountStoryMotion(root) {
         schedule();
     }
     window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule, { passive: true });
+    window.addEventListener('resize', refresh, { passive: true });
     reduced.addEventListener('change', syncPreference);
-    root.addEventListener('portfolio:view-change', schedule);
+    root.addEventListener('portfolio:view-change', refresh);
     root.addEventListener('toggle', schedule, true);
     syncPreference();
     return () => {
         observer?.disconnect();
+        headerObserver?.disconnect();
         cancelAnimationFrame(scrollFrame);
-        root.removeEventListener('portfolio:view-change', schedule);
+        document?.documentElement.style.removeProperty('--site-header-height');
+        root.removeEventListener('portfolio:view-change', refresh);
         root.removeEventListener('toggle', schedule, true);
         for (const animation of animations)
             animation.cancel();
         window.removeEventListener('scroll', schedule);
-        window.removeEventListener('resize', schedule);
+        window.removeEventListener('resize', refresh);
         reduced.removeEventListener('change', syncPreference);
         resetPortrait();
     };

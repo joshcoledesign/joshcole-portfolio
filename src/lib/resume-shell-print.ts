@@ -15,7 +15,7 @@ export const RESUME_SHELL = `
 body{margin:0;background:var(--surface);color:var(--ink);font:400 17px/1.65 Geist,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:4px}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
-.toolbar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 5%;border-bottom:1px solid var(--rule)}
+.toolbar{position:sticky;top:0;z-index:40;background:var(--surface);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 5%;border-bottom:1px solid var(--rule)}
 .resume-home{display:block;flex:none;width:112px;height:62px}
 .resume-home span{display:block;width:100%;height:100%;background:var(--accent);mask:url('/portfolio/open-projects/signature.svg') center/contain no-repeat}
 .resume-actions{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap}
@@ -29,11 +29,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .resume-rule{height:1px;background:var(--accent);margin:32px 0 22px}
 .contact{display:flex;flex-wrap:wrap;gap:6px 0;margin:0;color:var(--muted);font:12px/1.7 monospace}
 .contact-group{display:inline-flex;align-items:baseline;flex-wrap:wrap}.contact-item{overflow-wrap:anywhere}.contact .sep{padding:0 14px;color:var(--rule)}
-.section{margin-top:48px;border-top:1px solid var(--rule);padding-top:22px}
+.section{margin-top:48px;border-top:1px solid var(--rule);padding-top:28px;scroll-margin-top:calc(var(--site-header-height,112px) + 24px)}
 [data-story-section]{position:relative}
 [data-story-rule]{position:absolute;inset-inline:0;top:0;height:1px;background:var(--accent);transform-origin:left;pointer-events:none}
 @media screen and (min-width:901px){.section{display:grid;grid-template-columns:240px minmax(0,1fr);column-gap:6%}.section>h2{grid-column:1;grid-row:1/span 30;align-self:start}.section>:not(h2):not([data-story-rule]){grid-column:2}.section p{max-width:78ch}}
-@media screen and (min-width:901px) and (prefers-reduced-motion:no-preference){.section>h2{position:sticky;top:96px}}
+@media screen and (min-width:901px) and (prefers-reduced-motion:no-preference){.section>h2{position:sticky;top:calc(var(--site-header-height,112px) + 24px)}}
 .section>h2{margin:0 0 22px;font:400 12px/1.5 monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
 .section p{margin:0 0 16px}.summary p{font-size:19px;line-height:1.65}
 .skill b{font-weight:500;color:var(--ink)}.skill{color:var(--muted)}
@@ -44,6 +44,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .role-group-roles{margin-top:24px;padding-left:24px;border-left:1px solid var(--rule)}
 .earlier .role{margin-top:18px}.earlier .role-title{font-size:18px}
 @media(max-width:640px){.toolbar{gap:14px;flex-wrap:wrap}.resume-actions{width:100%;justify-content:flex-start;gap:10px}.toolbar button,.toolbar .download{padding:10px 12px;font-size:13px}.sheet{margin-top:40px}.contact{display:grid;gap:7px}.contact .sep{display:none}.role-head{display:block}.role-date{display:block;margin-top:8px}.role-group-roles{padding-left:16px}.section{margin-top:36px}.role-title{font-size:21px}.summary p{font-size:18px}}
+@media(max-width:480px){:root{--site-header-height:180px}}
 @media print{
 [data-story-rule]{display:none}
 @page{size:letter portrait;margin:.40in .50in .38in}
@@ -61,7 +62,7 @@ html,body{background:#fff;color:var(--ink)}body{font-size:10pt;line-height:1.10;
 }
 </style>
 <script type="text/plain" id="plaintext">%%PLAINTEXT%%</script>
-<div class="toolbar">
+<div class="toolbar" data-site-header>
   <a href="/" class="resume-home" aria-label="Josh Cole — home"><span aria-hidden="true"></span></a>
   <div class="resume-actions" role="group" aria-label="Résumé options"><button type="button" id="btn-copy">Copy plain text</button><a class="download" href="%%PDF_HREF%%" download="josh-cole-resume.pdf">Download PDF ↗</a><span id="status" class="status" role="status" aria-live="polite"></span></div>
 </div>

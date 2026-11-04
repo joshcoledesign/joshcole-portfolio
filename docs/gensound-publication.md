@@ -96,11 +96,28 @@ Network observation during local analysis showed only a GET for `analyzer.js`;
 the audio was not sent. The existing Vercel Analytics script returns an expected
 404 on a local production server; it is recorded separately from lab failures.
 
-Safari remains **untested**: this Windows machine has neither Safari nor an
-installed WebKit runtime. Viewport tests do not replace physical-phone tests.
-Other upload codecs and long tracks were not tested here.
+Safari remains **untested**. Additional Windows Playwright WebKit checks covered
+the UI and standalone worker; its missing Web Audio constructors prevented
+end-to-end local-file analysis. Viewport tests do not replace physical-phone
+tests. Other upload codecs and long tracks were not tested here.
 
-## Release boundary
+## Palette growth fix (2026-11-04)
+
+Adding a fourth palette color from the original three-group preset now switches
+the hue control and legend to Note name. The existing twelve-note mapping makes
+all palette positions available; a track may still lack particular note classes.
+Previously affected saved palettes migrate once. Explicit group choices made
+after the fix persist, and other hue sources retain their selection.
+
+The canonical fix is [genSound PR 1](https://github.com/joshcoledesign/genSound/pull/1),
+source revision `c312c3ff198186c894ace8b421fe9aa191d38dae`. This snapshot was
+refreshed by the preparation script. Source regression tests in
+`tests/palette-browser.mjs` cover actual rendered palette sizes 3–12 in both
+layouts, cap/removal, blend, preset reset, alternate hue sources, persistence and
+old-settings migration. Chromium, Firefox and Playwright WebKit passed at desktop
+and phone widths. No analyzer, example data or unrelated portfolio work changed.
+
+## Initial release boundary (2026-11-03)
 
 Josh explicitly authorized production publication on 2026-11-03 with Safari
 still untested. Safari remains an open verification item. The release is prepared

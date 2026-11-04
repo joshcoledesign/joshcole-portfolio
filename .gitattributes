@@ -5,3 +5,6 @@
 /src/portfolio/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 /public/case-studies/hype-js/totem/** -text -whitespace
 /src/data/*.json -text whitespace=trailing-space,space-before-tab,cr-at-eol
+/src/worldstage/source/** -text -whitespace
+/src/worldstage/director/** -text -whitespace
+/public/experiments/worldstage/studio/** -text -whitespace

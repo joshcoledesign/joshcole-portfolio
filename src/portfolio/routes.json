@@ -102,27 +102,6 @@
     "description": "A living, microscopy-inspired generative system. Explore colonies, branching and labyrinth structures."
   },
   {
-    "view": "field",
-    "type": "experiment",
-    "path": "/experiments/field-conditions",
-    "title": "Field conditions — Josh Cole",
-    "description": "An open experiment in forces and flow."
-  },
-  {
-    "view": "type",
-    "type": "experiment",
-    "path": "/experiments/type-in-motion",
-    "title": "Type, in motion — Josh Cole",
-    "description": "An open experiment in typographic proportion and rhythm."
-  },
-  {
-    "view": "grid",
-    "type": "experiment",
-    "path": "/experiments/grid-pressure",
-    "title": "Grid pressure — Josh Cole",
-    "description": "An open experiment in order and interference."
-  },
-  {
     "view": "dungeon",
     "type": "experiment",
     "path": "/experiments/dry-run-dungeon",

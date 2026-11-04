@@ -1,0 +1,4 @@
+import type {MotionState} from '../scripts/director-performance.mts';
+export const MAIN_THRUSTERS:Array<{id:string;pivot:number[];lip:number[];polygon:number[][]}>;
+export function nozzleGimbal(state:MotionState):number;
+export function nozzleLip(pivot:{x:number;y:number},lip:{x:number;y:number},angle:number):{x:number;y:number};

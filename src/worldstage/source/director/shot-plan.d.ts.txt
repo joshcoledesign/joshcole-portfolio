@@ -1,0 +1,18 @@
+import type {MotionState,Performance} from '../scripts/director-performance.mts';
+export type Framing='wide'|'medium'|'close';
+export type CameraPoint={x:number;y:number;zoom:number};
+export type Camera={from:CameraPoint;to:CameraPoint;ease:'linear'|'smooth'|'ease-in'|'ease-out'};
+export type Shot={id?:'arrival'|'landing'|'aftermath';name:string;start:number;end:number;framing:Framing;move:boolean;view?:'wide'|'shoreline';camera?:Camera};
+export type ShotPlan={schema:'worldstage-shot-plan-1'|'worldstage-shot-plan-2'|'worldstage-shot-plan-3';fps:24;shots:Shot[]};
+export type Crop={shot:number;x:number;y:number;w:number;h:number;zoom:number};
+export const FRAMINGS:Record<Framing,{label:string;zoom:number}>;
+export function defaultPlan(performance:Pick<Performance,'states'|'video_contact_seconds'|'departure'|'flightResult'>):ShotPlan;
+export function validatePlan(input:unknown,frames:number):ShotPlan;
+export function cameraAt(plan:ShotPlan,states:MotionState[],frame:number):Crop;
+export function upgradePlan(plan:unknown,frames:number):ShotPlan;
+export function constrainPoint(point:CameraPoint):CameraPoint;
+export function cameraEndpoints(plan:ShotPlan,states:MotionState[],index:number):Camera;
+export function editFrames(plan:ShotPlan):number;
+export function editAt(plan:ShotPlan,frame:number):{shot:number;sourceFrame:number;outputFrame:number;offset:number};
+export function sourceToEdit(plan:ShotPlan,shot:number,frame:number):number;
+export function trimBounds(plan:ShotPlan,index:number,frames:number):{startMin:number;startMax:number;endMin:number;endMax:number};

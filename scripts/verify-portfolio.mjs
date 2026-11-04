@@ -39,6 +39,22 @@ assert.ok(!/[CH]:[\\/](?:Users|projects)/i.test(html+read('public/portfolio/'+bu
 assert.equal(new Set(routes.map(r=>r.path)).size,18);
 
 const base=process.argv[2];
+const platformAdditions=[];
+function verifyDeployedAsset(bytes,asset){
+  if(sha(bytes)===asset.sha256)return;
+  // Vercel appends its own toolbar to this static Next.js bootstrap. Require
+  // every original byte plus one exact known platform suffix; reject all else.
+  if(asset.path.endsWith('/turbopack-3-ry682tkyiqk.js')){
+    const original=read('public'+asset.path);
+    const suffix=bytes.subarray(original.length).toString().replace(/"dpl_[a-zA-Z0-9]+"/g,'"__DEPLOYMENT__"');
+    const preview='\n'+String.raw`;(function(){if(typeof document==="undefined")return;var s=document.createElement('script');s.src='https://vercel.live/_next-live/feedback/feedback.js';s.setAttribute("data-deployment-id","__DEPLOYMENT__");((document.head||document.documentElement).appendChild(s))})();`;
+    const production='\n'+String.raw`;(function(){try{if(typeof document==="undefined"||!/(?:^|;\s)__vercel_toolbar=1(?:;|$)/.test(document.cookie))return;}catch(e){return;}var s=document.createElement('script');s.src='https://vercel.live/_next-live/feedback/feedback.js';s.setAttribute("data-explicit-opt-in","true");s.setAttribute("data-cookie-opt-in","true");s.setAttribute("data-deployment-id","__DEPLOYMENT__");((document.head||document.documentElement).appendChild(s))})();`;
+    if(bytes.subarray(0,original.length).equals(original)&&(suffix===preview||suffix===production)){
+      platformAdditions.push({path:asset.path,addition:suffix===production?'Vercel cookie opt-in toolbar':'Vercel preview toolbar'});return;
+    }
+  }
+  assert.equal(sha(bytes),asset.sha256,asset.path+' deployment differs');
+}
 if(base){
   const get=async pathname=>{const response=await fetch(new URL(pathname,base),{signal:AbortSignal.timeout(20000)});assert.equal(response.status,200,pathname+' status');return response;};
   for(const route of routes){
@@ -47,7 +63,7 @@ if(base){
     assert.ok(page.includes('rel="canonical" href="https://joshcolecreative.com'+route.path+'"'),route.path+' canonical');
     assert.ok(response.headers.get('content-security-policy')?.includes("object-src 'none'"),route.path+' CSP');
   }
-  for(let i=0;i<assets.length;i+=8)await Promise.all(assets.slice(i,i+8).map(async asset=>assert.equal(sha(Buffer.from(await (await get(asset.path)).arrayBuffer())),asset.sha256,asset.path+' deployment differs')));
+  for(let i=0;i<assets.length;i+=8)await Promise.all(assets.slice(i,i+8).map(async asset=>verifyDeployedAsset(Buffer.from(await (await get(asset.path)).arrayBuffer()),asset)));
   for(const name of [build.scripts,build.styles])assert.equal(sha(Buffer.from(await (await get('/portfolio/'+name)).arrayBuffer())),sha(read('public/portfolio/'+name)));
   for(const pathname of ['/archive','/work/photography','/about','/resume','/resume/download','/experiments/gensound/index.html','/portfolio/licenses/index.html','/sitemap.xml'])await get(pathname);
   const sitemap=await (await get('/sitemap.xml')).text();
@@ -55,4 +71,4 @@ if(base){
   assert.ok(!sitemap.includes('totem'),'Unrelated draft published');
   assert.equal((await fetch(new URL('/portfolio/not-a-view',base))).status,404);
 }
-console.log(JSON.stringify({result:'passed',routes:routes.length,authoredBlocks:blocks,verifiedAssetHashes:assets.length,base:base??'source only'}));
+console.log(JSON.stringify({result:'passed',routes:routes.length,authoredBlocks:blocks,verifiedAssetHashes:assets.length,platformAdditions,base:base??'source only'}));

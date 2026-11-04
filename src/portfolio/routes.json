@@ -135,5 +135,29 @@
     "path": "/experiments/gensound",
     "title": "genSound — Josh Cole",
     "description": "Turn sound into generative art. Compare rings and Hilbert layouts and analyze your own audio in the browser."
+  },
+  {
+    "view": "hype",
+    "path": "/experiments/hype",
+    "title": "Hype — Josh Cole",
+    "description": "Hand-drawn illustration, generative composition and motion. Explore the original cast and change the live studies.",
+    "type": "experiment",
+    "native": true
+  },
+  {
+    "view": "worldstage",
+    "path": "/experiments/worldstage",
+    "title": "Worldstage — Josh Cole",
+    "description": "A procedural filmmaking experiment: direct a performance, preserve a take and film it through independent camera coverage.",
+    "type": "experiment",
+    "native": true
+  },
+  {
+    "view": "premise",
+    "path": "/experiments/premise",
+    "title": "Premise — Josh Cole",
+    "description": "A sentence becomes a world package: scene, subjects, laws, actions and opening frames. Explore selected worlds from the authoring experiment.",
+    "type": "experiment",
+    "native": true
   }
 ]

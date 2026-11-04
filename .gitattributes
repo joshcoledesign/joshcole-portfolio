@@ -3,3 +3,5 @@
 /public/portfolio/licenses/** -whitespace
 /public/experiments/dry-run-dungeon/runtime/** -text -whitespace
 /src/portfolio/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+/public/case-studies/hype-js/totem/** -text -whitespace
+/src/data/*.json -text whitespace=trailing-space,space-before-tab,cr-at-eol

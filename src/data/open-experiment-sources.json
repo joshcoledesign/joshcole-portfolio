@@ -1,0 +1,464 @@
+{
+  "assets": [
+    {
+      "path": "/case-studies/hype-js/totem/cast/character.svg",
+      "sha256": "e73884d76ff1563637ac5640f3536f5ca06e2e6b2b00a9bc68d8f224c8ab83ae",
+      "source": "external-hype-experiments/Totem/Artwork/step 1/build/data/totemCat.svg",
+      "sourceSha256": "e73884d76ff1563637ac5640f3536f5ca06e2e6b2b00a9bc68d8f224c8ab83ae",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/cast/crest.svg",
+      "sha256": "b5c64f91c672a7ea639577f8523d8042f28802c8361168626304f16d89f91c92",
+      "source": "external-hype-experiments/Totem/Artwork/step 11/build/data/totemStrokesDude.svg",
+      "sourceSha256": "b5c64f91c672a7ea639577f8523d8042f28802c8361168626304f16d89f91c92",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/cast/ornaments.svg",
+      "sha256": "5bab911d59e4ef5af6dbdd7a1d1d15bed8b9d78896dbb79f05364af70bd27216",
+      "source": "external-hype-experiments/Totem/Artwork/step 11/build/data/totemStrokes.svg",
+      "sourceSha256": "5bab911d59e4ef5af6dbdd7a1d1d15bed8b9d78896dbb79f05364af70bd27216",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/01.svg",
+      "sha256": "72b0a165dd99c29fcba8d0079a4b8363814c9b7a764462142959018f09ead473",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-01.svg",
+      "sourceSha256": "72b0a165dd99c29fcba8d0079a4b8363814c9b7a764462142959018f09ead473",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/02.svg",
+      "sha256": "42d6b99230d02c667f1f280e5263d4cbe74d1bb1da7ce14b946865f8e1563263",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-02.svg",
+      "sourceSha256": "42d6b99230d02c667f1f280e5263d4cbe74d1bb1da7ce14b946865f8e1563263",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/03.svg",
+      "sha256": "eb1051e830d648c3f802bea32308fdb0ee4e38a85a587ba6c5ab382e366345e9",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-03.svg",
+      "sourceSha256": "eb1051e830d648c3f802bea32308fdb0ee4e38a85a587ba6c5ab382e366345e9",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/04.svg",
+      "sha256": "d529be7314cb668668a08af8f39cda42caaeec456ff6736ef95ca4429a9bf59f",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-04.svg",
+      "sourceSha256": "d529be7314cb668668a08af8f39cda42caaeec456ff6736ef95ca4429a9bf59f",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/05.svg",
+      "sha256": "0d6321bed0c0ec350514c0a29909941644fe130f2f07193ae4b8be6224322fc5",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-05.svg",
+      "sourceSha256": "0d6321bed0c0ec350514c0a29909941644fe130f2f07193ae4b8be6224322fc5",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/06.svg",
+      "sha256": "5d79515cb92250d40b5aa2e0e3c4e3a99d37a1a8a491551762a22a5860beb56a",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-06.svg",
+      "sourceSha256": "5d79515cb92250d40b5aa2e0e3c4e3a99d37a1a8a491551762a22a5860beb56a",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/07.svg",
+      "sha256": "b91117d0a39fd136c68d55620bd942b08de38b2729fcf8d841ab6c9498d2c1ad",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-07.svg",
+      "sourceSha256": "b91117d0a39fd136c68d55620bd942b08de38b2729fcf8d841ab6c9498d2c1ad",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/08.svg",
+      "sha256": "8b574bdb9ab74e59cf185800c70436b28ba720eb2dd3764f223fb40ed8754e91",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-08.svg",
+      "sourceSha256": "8b574bdb9ab74e59cf185800c70436b28ba720eb2dd3764f223fb40ed8754e91",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/09.svg",
+      "sha256": "d29a2009fef8954b4a649993ab3c91189659c23e992cc203dedcfb35c2ba3b04",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-09.svg",
+      "sourceSha256": "d29a2009fef8954b4a649993ab3c91189659c23e992cc203dedcfb35c2ba3b04",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/10.svg",
+      "sha256": "baa8f8b0c4182996903bd3c758d2abe0fa127061999d16fa17c7602277546122",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-10.svg",
+      "sourceSha256": "baa8f8b0c4182996903bd3c758d2abe0fa127061999d16fa17c7602277546122",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/11.svg",
+      "sha256": "b62c3487dc4cf4223354647b9890ae4ef8cbc5b77268332889d08a1950e2cfd6",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-11.svg",
+      "sourceSha256": "b62c3487dc4cf4223354647b9890ae4ef8cbc5b77268332889d08a1950e2cfd6",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/12.svg",
+      "sha256": "7d46193213f0daa7b4fe5a6e39dedb73165cef8cc04dce2841eae69044727daf",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-12.svg",
+      "sourceSha256": "7d46193213f0daa7b4fe5a6e39dedb73165cef8cc04dce2841eae69044727daf",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/field/13.svg",
+      "sha256": "7f2ab0fa998d5c5891158fafd00e3d7c066f7c94ca83be4f4b641dc8ee5bfcb5",
+      "source": "external-hype-experiments/Totem/Artwork/step 15/build/data/totemStrokes1-13.svg",
+      "sourceSha256": "7f2ab0fa998d5c5891158fafd00e3d7c066f7c94ca83be4f4b641dc8ee5bfcb5",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/oscillating/01.svg",
+      "sha256": "bf7b06af39fbddf83051a2350eb5ac82a644adc707013aba438379eeafd38046",
+      "source": "external-hype-experiments/Totem/Oscillating/Step 1/build/data/totemStrokes1.svg",
+      "sourceSha256": "bf7b06af39fbddf83051a2350eb5ac82a644adc707013aba438379eeafd38046",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/oscillating/02.svg",
+      "sha256": "037f74a5c9273794abaf47e4621ea75f6f206196a7b481661a85649911303255",
+      "source": "external-hype-experiments/Totem/Oscillating/Step 1/build/data/totemStrokes2.svg",
+      "sourceSha256": "037f74a5c9273794abaf47e4621ea75f6f206196a7b481661a85649911303255",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/case-studies/hype-js/totem/oscillating/03.svg",
+      "sha256": "556a9c9c511f74dbae74d50aacec4b36e57b9c963e0b0459b064d1840b5d53a6",
+      "source": "external-hype-experiments/Totem/Oscillating/Step 1/build/data/totemStrokes3.svg",
+      "sourceSha256": "556a9c9c511f74dbae74d50aacec4b36e57b9c963e0b0459b064d1840b5d53a6",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/portfolio/open-projects/hype-preview.webp",
+      "sha256": "b07908c3b18335cdd3bda1847917f2839be645e345f3460b421492cbb8ce8081",
+      "source": "external-hype-experiments/Totem/Artwork/step 1/build/data/totemCat.svg",
+      "sourceSha256": "e73884d76ff1563637ac5640f3536f5ca06e2e6b2b00a9bc68d8f224c8ab83ae",
+      "transformation": "Whole source fitted to thumbnail canvas; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/worldstage/edit.mp4",
+      "sha256": "de16f6c788d4a27475309b9476c986277fbb9434bfab4149716bd89eefcfe897",
+      "source": "external-worldstage/artifacts/director-v3/sequences/5f002a45-d9b9-4e7e-a000-96656e0ce67a/sequence.mp4",
+      "sourceSha256": "de16f6c788d4a27475309b9476c986277fbb9434bfab4149716bd89eefcfe897",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/portfolio/open-projects/worldstage/wide.mp4",
+      "sha256": "6f35b94aba99bb71f944e022db36b7f066389cc6d1bec6184179e294df61047e",
+      "source": "external-worldstage/artifacts/director-v2/renders/7026ee1a-c37f-473f-a5b7-34831b925b86/film/illustrated-landing.mp4",
+      "sourceSha256": "6f35b94aba99bb71f944e022db36b7f066389cc6d1bec6184179e294df61047e",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/portfolio/open-projects/worldstage/shoreline.mp4",
+      "sha256": "995157ff8ecacddf4ef5c1516580e0df3dfbb2b75388427e8cf88d2931d8b397",
+      "source": "external-worldstage/artifacts/director-v2/renders/7f051952-33c2-416b-82c5-545a8c7b6a7e/film/illustrated-landing.mp4",
+      "sourceSha256": "995157ff8ecacddf4ef5c1516580e0df3dfbb2b75388427e8cf88d2931d8b397",
+      "transformation": "unchanged"
+    },
+    {
+      "path": "/portfolio/open-projects/worldstage/wide.webp",
+      "sha256": "7652c1c67ac2264dbe896d747a35af4acd2ab95dd78aeb1b0240a86b3cfbfbb0",
+      "source": "external-worldstage/artifacts/director-v2/renders/7026ee1a-c37f-473f-a5b7-34831b925b86/film/frame-396.png",
+      "sourceSha256": "f70f04988a29fd45b7c7534e736fc7afae28682d52dc3007248ee6d272f4de34",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/worldstage/shoreline.webp",
+      "sha256": "eba46f5b952a5a901cf0eee7952ce295ccfe4bb84416f2853a780a4ed64d1e4f",
+      "source": "external-worldstage/artifacts/director-v2/renders/7f051952-33c2-416b-82c5-545a8c7b6a7e/film/frame-396.png",
+      "sourceSha256": "d7cdc0dc5b04f2c741047e7beefb878890a76cc25008ff94de95a85e38af523c",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/worldstage-preview.webp",
+      "sha256": "94c71c6989d923a421f94b744051e4439526805022d4025062c703ba48d29f5d",
+      "source": "external-worldstage/artifacts/director-v2/renders/7026ee1a-c37f-473f-a5b7-34831b925b86/film/frame-396.png",
+      "sourceSha256": "f70f04988a29fd45b7c7534e736fc7afae28682d52dc3007248ee6d272f4de34",
+      "transformation": "Whole source fitted to thumbnail canvas; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/lighthouse-keeper-isometric-0.webp",
+      "sha256": "59aadb9635f6f161f888cbafbfbce978a28d9b037f11a962a6f21e5eaaa40a3a",
+      "source": "external-premise/worlds/lighthouse-keeper-isometric/frames/first-frame.png",
+      "sourceSha256": "c8a7a73329f472d87c468b650eac5aedb5008722b70a36bc63bdb0da38b91bdb",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/lighthouse-keeper-isometric-1.webp",
+      "sha256": "a66d1bf090e5350773aaf7b1ebe3026f9b2f173dbad8867c64f302ec6b0d0e62",
+      "source": "external-premise/worlds/lighthouse-keeper-isometric/frames/opening-01.png",
+      "sourceSha256": "7661caf75445fdb8e8f7a7233abda38cba923bd254c213b355c7529a6b3e3e36",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/lighthouse-keeper-isometric-2.webp",
+      "sha256": "5c48544b69e9c93b4c29a1f3e535a93e9239d018e9c93dc83c3d735b486cdea2",
+      "source": "external-premise/worlds/lighthouse-keeper-isometric/frames/opening-02.png",
+      "sourceSha256": "b476bc45195d69361c036c7da824b90e8e9c07b14c8939339288fef024a5497e",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/lighthouse-keeper-isometric-3.webp",
+      "sha256": "3ed00d9a36f2f75deea16905afe6836bfa148e1f2e63da344899671308ce78b6",
+      "source": "external-premise/worlds/lighthouse-keeper-isometric/frames/opening-03.png",
+      "sourceSha256": "ebc126609a3be4dadd9c7f47a2663574f32da4c235e9eed1707bf823e405f8a0",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/lighthouse-keeper-0.webp",
+      "sha256": "c1ae882642ec68fad0108bc3d187a0964c5c0da6eae65165ee26ae8b46a13a07",
+      "source": "external-premise/worlds/lighthouse-keeper/frames/first-frame.png",
+      "sourceSha256": "444f66963820d04dcdc8095af53592e603dd316361c08359d5b581afecc87cb6",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/lighthouse-keeper-1.webp",
+      "sha256": "6c4eb43ac2f42aedae9ce1464286ca344c27545a6da3134af3acc2db535d5133",
+      "source": "external-premise/worlds/lighthouse-keeper/frames/opening-01.png",
+      "sourceSha256": "7437bcd923f6294a05e657faf54af571d03651bfee9bb8a72c7a6068ec26ebbb",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/lighthouse-keeper-2.webp",
+      "sha256": "63b82d0702d8fd796e92f4a468455485e7e53ef0af9f2bedca0e18a068778679",
+      "source": "external-premise/worlds/lighthouse-keeper/frames/opening-02.png",
+      "sourceSha256": "ef9d3e9927d0bddee4bc17c398b409613e31b0dc46628d9ee5f2ed67d6805c92",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/lighthouse-keeper-3.webp",
+      "sha256": "cf9a1c46efc14a0edf178f4ccfc3c338ad5c963a17b23f5453e04bf1da27bea5",
+      "source": "external-premise/worlds/lighthouse-keeper/frames/opening-03.png",
+      "sourceSha256": "eb086cc1e3fcc03cc5201c3d70b38dd3b2d68a46cfd4f5ccb48e47529c586382",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/flooded-library-0.webp",
+      "sha256": "d2e3725dd3b347fc821b58b8b6ee2d92cfd0e4f148fe82d261f0823e1ba98307",
+      "source": "external-premise/worlds/flooded-library/frames/first-frame.png",
+      "sourceSha256": "42b2a0aa71248e79e336d0fdc1aba863b6e548f0ad25fde20e6da99c1e7e5804",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/flooded-library-1.webp",
+      "sha256": "1eaebe806f5ce62dff100ae398a404cff48b4478f2e35b0949665b46d5fa918a",
+      "source": "external-premise/worlds/flooded-library/frames/opening-01.png",
+      "sourceSha256": "0f887d4366d2b130bf69a32626e9a80debff499655023dd90615861f0bc31cd1",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/flooded-library-2.webp",
+      "sha256": "8da48e88fb32ff7f7227533c9e6e1f991775831ac06e0b557bc4fd7d880e4dfd",
+      "source": "external-premise/worlds/flooded-library/frames/opening-02.png",
+      "sourceSha256": "a896ea9391f50a074eba512d9626c74547d342ca44a07be5511d06ab77f13211",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/flooded-library-3.webp",
+      "sha256": "f5a692c55e75ed83deb3f554d5bfcd83811c91cb0cc3e76ff4e2314600d70c55",
+      "source": "external-premise/worlds/flooded-library/frames/opening-03.png",
+      "sourceSha256": "5bb4bb8165d3d7a3334ad0d0b738c1567996bbbac97b4f10e8826e9b568b79b9",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/mars-greenhouse-0.webp",
+      "sha256": "3b844f94879456b2f664790261c000efc65ed267d17a758ce23ee3af9d6aa703",
+      "source": "external-premise/worlds/mars-greenhouse/frames/first-frame.png",
+      "sourceSha256": "e806aa66fc5b0d1e4dbe076cbd590851330548d69987d01d9ff3fbabd3734401",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/mars-greenhouse-1.webp",
+      "sha256": "e8d560fc59b6874573351918f24388b11702db81b22cfceff72295c19ec00337",
+      "source": "external-premise/worlds/mars-greenhouse/frames/opening-01.png",
+      "sourceSha256": "abc32cacaf677162087a3844441ffb4aeee439b9001756dac7892648cb16eefd",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/mars-greenhouse-2.webp",
+      "sha256": "05dca0902a2ec28ca83db2c793668217ee68419aa7c1aac70134b9d83a684287",
+      "source": "external-premise/worlds/mars-greenhouse/frames/opening-02.png",
+      "sourceSha256": "e44201e3033566d0c62861a67f234dc35f051d3fbabf737eef9b2f1add50bbd6",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/mars-greenhouse-3.webp",
+      "sha256": "d82cf93d90813f06d585d2c0495b45e643cb24a566ca207d2b6bd85950a15af3",
+      "source": "external-premise/worlds/mars-greenhouse/frames/opening-03.png",
+      "sourceSha256": "19d00cca2494afeba7c459a635e7c24397da501cbb884925ed4184686d73a25b",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/bus-shelter-0.webp",
+      "sha256": "9a609f20ee72847fed1f17ce1c62260410755285807d34cd269c1a9836453ab7",
+      "source": "external-premise/worlds/bus-shelter/frames/first-frame.png",
+      "sourceSha256": "ba62c2f668cc95a73b61a26b69bc2d709f987493d72290dfdbf14907977c80bc",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/bus-shelter-1.webp",
+      "sha256": "cc80aaca157d8a27b2486bf3ecc507f93e8a4e9cce602c76c09777cdba629d34",
+      "source": "external-premise/worlds/bus-shelter/frames/opening-01.png",
+      "sourceSha256": "220fef2b87ff61f7f60709e66a1a3eec5f6066c3056f3bb77cf7453df83d4120",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/bus-shelter-2.webp",
+      "sha256": "7a7c4ee1148a4df945a1a63942b822f3f5ae40e0f8d8cece27959da70118dd1d",
+      "source": "external-premise/worlds/bus-shelter/frames/opening-02.png",
+      "sourceSha256": "009f31034614abf515f549edae5f928b2576b92163c015bdac01bae5191bc591",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/bus-shelter-3.webp",
+      "sha256": "884e61330879c994d3d45ee598871682641b9d55f329cfb889922537ac7c5201",
+      "source": "external-premise/worlds/bus-shelter/frames/opening-03.png",
+      "sourceSha256": "5d9cdc3d0a7d79380acb414d784eec6aff8f8327bce29abb0496c4594b7eea6c",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/salt-flat-0.webp",
+      "sha256": "b64a45eb1b1fbb1aa14a73588173c24c7497ce3b8eb733356bb954e7c4e8719a",
+      "source": "external-premise/worlds/salt-flat/frames/first-frame.png",
+      "sourceSha256": "99c587a3b09e8e4fab7ddde27d32be4d1537f1b5e6fa9ebb0d885c91f886e91f",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/salt-flat-1.webp",
+      "sha256": "266ec59c09dc1d0cb1e27d0339c0af289685cd25dd92e94ea481c705bb035bcb",
+      "source": "external-premise/worlds/salt-flat/frames/opening-01.png",
+      "sourceSha256": "a60be4d9d3cf323497e7c9fd314ba324dde781aa358e576a2b11fb396175ed91",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/salt-flat-2.webp",
+      "sha256": "68f38d2b6c371d5c7a1483c0ec87c95e656967cb490392e74504791a479f2a34",
+      "source": "external-premise/worlds/salt-flat/frames/opening-02.png",
+      "sourceSha256": "a8d2c9d237fd51aeb73903c52808a5fc02f944dd21620454e7ce3a2fcb984c11",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/salt-flat-3.webp",
+      "sha256": "84898baf1a0b0167cd71fc94bfeb20a68f114ecb57a70f16bcf592bc2d855504",
+      "source": "external-premise/worlds/salt-flat/frames/opening-03.png",
+      "sourceSha256": "71c7b1490e83ee937eb253c77e34cf486e5d6c4beb6c17a990071012cc0e796c",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/monastery-gate-0.webp",
+      "sha256": "4dc398e00c2ad5ea54c4515856579074ace6ef59435bd447adcc425467281b26",
+      "source": "external-premise/worlds/monastery-gate/frames/first-frame.png",
+      "sourceSha256": "deb50e47306481b37ea4fa1131e587e1d65485752934de0cde64153980316b01",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/monastery-gate-1.webp",
+      "sha256": "8d872eb83d2ca41deba1b5eae15f97e1e3ca23755eb253ed25d174a717effb65",
+      "source": "external-premise/worlds/monastery-gate/frames/opening-01.png",
+      "sourceSha256": "c826340058cf2cfc0e85553ca7d9896d69e6034d72fd06c924eb96cda69b57d8",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/monastery-gate-2.webp",
+      "sha256": "9c4b14088758003fb6ba568adf1230211f63368b6ef8eeb08e74718f5d80e81b",
+      "source": "external-premise/worlds/monastery-gate/frames/opening-02.png",
+      "sourceSha256": "af292e6e93c3f680dd72ce286fece63d316769a33c22bb98ad9242bbf276025a",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/monastery-gate-3.webp",
+      "sha256": "b74370a566813dbb47c5d63f0f05e1c172602e53e782c69b9c41ee226cb6939d",
+      "source": "external-premise/worlds/monastery-gate/frames/opening-03.png",
+      "sourceSha256": "a9e1534617935f02f3554daf34c006a1ffd38cd8dd07af4629e2bfaa8212ce21",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/rally-stage-0.webp",
+      "sha256": "9375d2790a1bcc0280e4ac5077cda86928a4326151c8ad7303250cc2aeaeda75",
+      "source": "external-premise/worlds/rally-stage/frames/first-frame.png",
+      "sourceSha256": "2cd0ed67d8a243714de5fe20f11c777b1adbaa453ad3caf82b7cac199348c769",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/rally-stage-1.webp",
+      "sha256": "1238e9e2d3824e527ec44d8bd2b4c4e4779b87bfa6dfb4cf54c6edec7fc4e7ab",
+      "source": "external-premise/worlds/rally-stage/frames/opening-01.png",
+      "sourceSha256": "78d17c2097535752edcd37a17814067ef3f47adfaa6cef4d564b2def92390a51",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/rally-stage-2.webp",
+      "sha256": "261d1c2e9c8141679985b77a08c9d0ac0b6d126f8687655347f93704bc991dff",
+      "source": "external-premise/worlds/rally-stage/frames/opening-02.png",
+      "sourceSha256": "14fa9ec742ca04a7becaa831ca9c735e05c79d4d2722de4787d8e39177d1c50d",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/rally-stage-3.webp",
+      "sha256": "37acbcefb7e55734221348a2127d2e47a426b58b7a1074bcbb4168f427e1da73",
+      "source": "external-premise/worlds/rally-stage/frames/opening-03.png",
+      "sourceSha256": "568093908b4230d8fdf3c7960d3682ea4eb4862a23142f83b75e1e12da28576c",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/welsh-hillside-0.webp",
+      "sha256": "7ee4398520564f017e69fdaaba2cb8b5c2eefe5b1e9f361496e8a6127135b72e",
+      "source": "external-premise/worlds/welsh-hillside/frames/first-frame.png",
+      "sourceSha256": "d8f6ec1f4895f657d907795c3c24d8235660b4d1ca3da71418d12a37f61cc71a",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/welsh-hillside-1.webp",
+      "sha256": "f75070f5adf609453291b32ddd595f802c1dfe8fb73402927ae76062b3427790",
+      "source": "external-premise/worlds/welsh-hillside/frames/opening-01.png",
+      "sourceSha256": "758917a990abcff5077951f01d3fa4277053276e58872bce62bf4917a5c79bad",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/welsh-hillside-2.webp",
+      "sha256": "64d0b5ee6f19621d3d16e441d41b95ceece495efbe24cc0eb6d7f6ec07674be5",
+      "source": "external-premise/worlds/welsh-hillside/frames/opening-02.png",
+      "sourceSha256": "850fc3f1a8a5be488929119c434f1bf5cfbca4a5b507830147eb5190c9412b32",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise/welsh-hillside-3.webp",
+      "sha256": "069f7218b19e347872d39c99580787ef1b3f02aea0423c26d2277acfa4e2ede4",
+      "source": "external-premise/worlds/welsh-hillside/frames/opening-03.png",
+      "sourceSha256": "4386c226c475f8545ad30787f05fcf1dca704a5e01d45f23067062cfa5fe41e2",
+      "transformation": "Whole frame resized at most 1280px wide; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/premise-preview.webp",
+      "sha256": "9e64699b3eb6f906408262e0f6c868f2e528636fdc612fc9660f8913456a9ffd",
+      "source": "external-premise/worlds/lighthouse-keeper-isometric/frames/first-frame.png",
+      "sourceSha256": "c8a7a73329f472d87c468b650eac5aedb5008722b70a36bc63bdb0da38b91bdb",
+      "transformation": "Whole source fitted to thumbnail canvas; WebP"
+    },
+    {
+      "path": "/portfolio/open-projects/signature.svg",
+      "sha256": "9d18aedec267bfc790f773fcfa3eac46c6b76b2a24e324c653bd0c4884723f5f",
+      "source": "approved signature trace from existing portfolio document",
+      "sourceSha256": "9d18aedec267bfc790f773fcfa3eac46c6b76b2a24e324c653bd0c4884723f5f",
+      "transformation": "unchanged vector trace"
+    }
+  ],
+  "worldstage": {
+    "sourcePerformance": "ac98bac3-5686-4b4f-b843-5d77e1dda4d9",
+    "motionHash": "fa83a1a06e4aa46e3d887c6a77c0ca49834372d10c3663bb24992d92c45cd297",
+    "frames": 464,
+    "duration": 19.333333333333332
+  },
+  "premise": {
+    "selection": "Nine source worlds with status approved; Skull Works and API comparison excluded"
+  },
+  "hype": {
+    "selection": "exhibition.json; original SVGs and existing browser adaptations"
+  }
+}

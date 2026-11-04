@@ -1,0 +1,445 @@
+[
+  {
+    "id": "lighthouse-keeper-isometric",
+    "title": "The Last Light",
+    "premise": "Isometric pixel art, 16-bit. A lighthouse keeper on a storm-battered North Atlantic island, 1950s, at dusk.",
+    "medium": "isometric 16-bit pixel art",
+    "status": "approved",
+    "frames": [
+      {
+        "src": "/portfolio/open-projects/premise/lighthouse-keeper-isometric-0.webp",
+        "time": 0,
+        "label": "First frame"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/lighthouse-keeper-isometric-1.webp",
+        "time": 1,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/lighthouse-keeper-isometric-2.webp",
+        "time": 7,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/lighthouse-keeper-isometric-3.webp",
+        "time": 14.5,
+        "label": "Opening preview"
+      }
+    ],
+    "subjects": [
+      "The keeper",
+      "The paraffin lamp"
+    ],
+    "laws": [
+      "The keeper stays supported by flagged paths, landing steps or internal stair treads and never floats or crosses open water.",
+      "The third-person isometric camera keeps one fixed viewing angle, scale and compass orientation throughout the opening and tightly frames The keeper within the station so the cottage, connecting path, tower court and tower fill the frame, allowing the island edge and sea to crop while the uniformly closer view makes the keeper about 28 pixels cap to boot at native 320x180 without separately enlarging her or distorting architecture.",
+      "The keeper can walk on connected stone and stairs but cannot jump barriers, teleport or pass through the shut red door."
+    ],
+    "actions": [
+      "walk north",
+      "walk west",
+      "walk south",
+      "walk east",
+      "plant boots",
+      "check key",
+      "open tower",
+      "ring fog bell"
+    ]
+  },
+  {
+    "id": "lighthouse-keeper",
+    "title": "The Keeper",
+    "premise": "Third person. A lighthouse keeper on a storm-battered North Atlantic island, 1950s, grainy color film.",
+    "medium": "grainy 1950s period color reversal film",
+    "status": "approved",
+    "frames": [
+      {
+        "src": "/portfolio/open-projects/premise/lighthouse-keeper-0.webp",
+        "time": 0,
+        "label": "First frame"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/lighthouse-keeper-1.webp",
+        "time": 1,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/lighthouse-keeper-2.webp",
+        "time": 7,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/lighthouse-keeper-3.webp",
+        "time": 14.5,
+        "label": "Opening preview"
+      }
+    ],
+    "subjects": [
+      "The keeper",
+      "The lighthouse lamp"
+    ],
+    "laws": [
+      "The keeper remains supported by the causeway, steps or stair treads under normal gravity and never floats above them.",
+      "The third-person camera follows two metres behind the keeper with its lens about 2.1 metres above the ground, slightly above her head, maintaining the same close rear viewpoint through the opening without crossing walls and allowing the tall tower to crop beyond the frame.",
+      "The keeper moves by walking and cannot jump railings, fly, teleport or pass through the closed tower door."
+    ],
+    "actions": [
+      "walk forward",
+      "step left",
+      "walk backward",
+      "step right",
+      "brace",
+      "unlock door",
+      "light lamp",
+      "ring bell"
+    ]
+  },
+  {
+    "id": "flooded-library",
+    "title": "Photoreal Flooded Library",
+    "premise": "First person. A flooded Victorian library at night by lantern light, photoreal.",
+    "medium": "photoreal",
+    "status": "approved",
+    "frames": [
+      {
+        "src": "/portfolio/open-projects/premise/flooded-library-0.webp",
+        "time": 0,
+        "label": "First frame"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/flooded-library-1.webp",
+        "time": 1,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/flooded-library-2.webp",
+        "time": 7,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/flooded-library-3.webp",
+        "time": 14.5,
+        "label": "Opening preview"
+      }
+    ],
+    "subjects": [
+      "Brass Oil Lantern",
+      "Walnut Bookcases",
+      "Oak Reading Tables",
+      "Bentwood Chairs",
+      "Card-Index Cabinet"
+    ],
+    "laws": [
+      "The first-person camera stays at the viewpoint anchored to Brass Oil Lantern and never shows an external third-person view.",
+      "reading-room: tall civic hall about twice as long as it is wide, with a ceiling about 7 m high, a plaster cornice and an iron-ribbed skylight; double entry doors at both short ends are about 2.1 m high with glazed transoms above, so an upright adult passes easily; walnut bookcases about 3 m tall with carved cornices stand against the long walls, with bases wet but the lowest visible book row largely above water; oak reading tables about 0.76 m high stand with their tops clear of the water, at the accepted initial waterline, approximately 0.3 m deep as an uncertain reference; floor, water line, tidemark and gallery are all measured from the submerged tile floor as 0 m; iron-gallery: oak plank gallery floor 3.6 m above the submerged tile floor, which is about 3.3 m above the accepted water surface; cast-iron brackets and slender columns carry the gallery, and its underside is about 3.35 m above the floor, high enough to wade beneath; lattice balustrade about 1.1 m high, with a second tier of book stacks rising behind it toward the dark ceiling; about 2 m deep, enough for one person to walk beside the stacks; gallery-stair: 20 risers of 0.18 m each, rising 3.6 m from the submerged floor to the gallery landing; treads about 0.28 m deep, so the run is about 5.3 m plus a small top landing; the lowest tread region is at the accepted waterline and higher risers are dry; oak treads on cast-iron stringers, with an iron handrail about 1 m above the treads.",
+      "The brass lantern remains the only strong local light: its amber glow fades into deep shadow along the aisle, while weak cold skylight fill may outline and dimly resolve the ceiling, far wall and gallery without competing with the lantern."
+    ],
+    "actions": [
+      "wade forward",
+      "wade back",
+      "wade left",
+      "wade right",
+      "raise lantern",
+      "lower lantern",
+      "climb riser",
+      "walk gallery"
+    ]
+  },
+  {
+    "id": "mars-greenhouse",
+    "title": "flat-shaded low-poly Mars",
+    "premise": "Fixed camera. A lone astronaut tends a greenhouse dome on Mars, flat-shaded low-poly.",
+    "medium": "flat-shaded low-poly",
+    "status": "approved",
+    "frames": [
+      {
+        "src": "/portfolio/open-projects/premise/mars-greenhouse-0.webp",
+        "time": 0,
+        "label": "First frame"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/mars-greenhouse-1.webp",
+        "time": 1,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/mars-greenhouse-2.webp",
+        "time": 7,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/mars-greenhouse-3.webp",
+        "time": 14.5,
+        "label": "Opening preview"
+      }
+    ],
+    "subjects": [
+      "The Astronaut",
+      "Greenhouse Dome",
+      "Growing Beds",
+      "Airlock Hatch"
+    ],
+    "laws": [
+      "The fixed isometric camera keeps one angle and common scene scale, frames The Astronaut within the custom tightly at native 320x180, and never rotates, zooms or separately enlarges a subject.",
+      "greenhouse-dome: a shallow faceted dome whose height is under half its base diameter; pale translucent triangular panels held by thin grey steel ribs on a ring of sandbagged regolith; the suited astronaut stands about one third of the dome's height at the aisle; the dome interior is open from aisle to back wall so the beds are visible; raised beds are waist-high to the astronaut and the aisle is wide enough for one person; airlock-vestibule: a boxy grey room attached flush to the dome's front face; the outer hatch is taller than the upright suited astronaut with clear headroom; a low threshold plate sits level with the yard and the inner door; a small round window and a status lamp sit beside the outer hatch; habitat-module: a low rounded white module with a short door on its end face; it is smaller than the dome, so it reads as a distant secondary building; the door admits an upright suited person and meets a level step; a small solar panel stands flat on top; water-tank: a white upright cylinder about as tall as the airlock door; a hose runs from its base toward the airlock; it stands on a flat regolith pad with short steel legs.",
+      "The player is at least 24 pixels cap to boot, targeting 28 pixels at native 320x180, achieved through common scene framing with foreshortened architecture and usable doors, never separate player enlargement."
+    ],
+    "actions": [
+      "walk north",
+      "walk west",
+      "walk south",
+      "walk east",
+      "tend plants",
+      "open airlock hatch",
+      "close airlock hatch",
+      "water bed"
+    ]
+  },
+  {
+    "id": "bus-shelter",
+    "title": "Glasgow Bus Shelter",
+    "premise": "Third person. Two strangers share a bus shelter during a thunderstorm in 1980s Glasgow, 16mm documentary.",
+    "medium": "16mm documentary film",
+    "status": "approved",
+    "frames": [
+      {
+        "src": "/portfolio/open-projects/premise/bus-shelter-0.webp",
+        "time": 0,
+        "label": "First frame"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/bus-shelter-1.webp",
+        "time": 1,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/bus-shelter-2.webp",
+        "time": 7,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/bus-shelter-3.webp",
+        "time": 14.5,
+        "label": "Opening preview"
+      }
+    ],
+    "subjects": [
+      "Older Man",
+      "Younger Woman",
+      "Strathclyde Double-Decker"
+    ],
+    "laws": [
+      "The camera follows the older man from the accepted close rear approach, initially roughly 3 metres behind at about 1.7 metres height. As he reaches or sits on the bench the camera holds outside the open approach-end entrance and keeps him in frame, rather than preserving a rear offset through shelter glass or the back wall.",
+      "The older man stays in frame with the open approach-end entrance visible behind or beside him; the camera remains on unobstructed pavement and never passes through shelter panels, roof or back wall, holding at the entrance when the man sits.",
+      "bus-shelter: Roof, back wall and two side panels enclose three sides; the approach-end facing the camera along the pavement is fully open; The open front is level with the pavement, with no step or door, and is tall enough for an upright adult to walk in; A timber-slat bench about 1.8 m long and 0.45 m deep recedes behind the approach-end entrance and seats two or three people; A timetable case and route information are mounted at eye level on the side panel; The roof overhangs the front only slightly, so slanting rain still reaches the threshold and the bench front edge; Painted steel uprights and wired glass show wear, with streaks of grime and some flaking paint; Both figures are ordinary adult scale; the nearer foreground man appears larger than the more distant woman through normal perspective. Upright adults fit beneath the shelter opening.; bus-stop-pole: A slim round steel pole rises from a concrete base at the kerb edge, beside the shelter; The flag sign sits at the top, above the shelter roof line, and carries a service number and the Strathclyde PTE logo; The pole stands about 0.4 m from the shelter's side, so it does not block the open front."
+    ],
+    "actions": [
+      "man walk into shelter",
+      "man sit on bench",
+      "man read timetable",
+      "man shake rain from cap",
+      "man speak weather",
+      "man speak bus",
+      "woman step under roof",
+      "woman sit on bench"
+    ]
+  },
+  {
+    "id": "salt-flat",
+    "title": "Watercolor Salt Rider",
+    "premise": "Third person. Riding a giant beetle across a salt flat at noon, watercolor.",
+    "medium": "watercolor",
+    "status": "approved",
+    "frames": [
+      {
+        "src": "/portfolio/open-projects/premise/salt-flat-0.webp",
+        "time": 0,
+        "label": "First frame"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/salt-flat-1.webp",
+        "time": 1,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/salt-flat-2.webp",
+        "time": 7,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/salt-flat-3.webp",
+        "time": 14.5,
+        "label": "Opening preview"
+      }
+    ],
+    "subjects": [
+      "Salt Rider",
+      "Teal Beetle",
+      "Salt Crust"
+    ],
+    "laws": [
+      "The follow camera stays 9 metres behind Salt Rider and 4 metres above ground, preserving this viewing geometry throughout the opening even if architecture crops.",
+      "The beetle's legs always bear its weight on the salt, with alternating feet lifting as it walks and the rider seated and supported on its back.",
+      "The beetle is larger than a horse, rideable by one seated adult, at the proportions of the human-accepted first frame. It reads as a large animal capable of carrying the rider; it is not required to be several times a standing adult’s height."
+    ],
+    "actions": [
+      "beetle stride forward",
+      "beetle stride back",
+      "beetle turn left",
+      "beetle turn right",
+      "beetle wing case flutter",
+      "rider mount",
+      "rider urge mount",
+      "rider rein in"
+    ]
+  },
+  {
+    "id": "monastery-gate",
+    "title": "The Dawn Gate",
+    "premise": "Third person. A lone swordswoman defends a mountain monastery gate at dawn, hand-painted anime.",
+    "medium": "hand-painted anime",
+    "status": "approved",
+    "frames": [
+      {
+        "src": "/portfolio/open-projects/premise/monastery-gate-0.webp",
+        "time": 0,
+        "label": "First frame"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/monastery-gate-1.webp",
+        "time": 1,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/monastery-gate-2.webp",
+        "time": 7,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/monastery-gate-3.webp",
+        "time": 14.5,
+        "label": "Opening preview"
+      }
+    ],
+    "subjects": [
+      "Swordswoman",
+      "Raiders",
+      "Elderly monk",
+      "Barred doors"
+    ],
+    "laws": [
+      "The follow camera stays 6 metres behind Swordswoman and 2.4 metres above ground, preserving this viewing geometry throughout the opening even if architecture crops.",
+      "monastery-gate: The doors are about 2.6 m tall, so an adult can pass upright with room above. The swordswoman's head reaches about two-thirds of the way up the door leaves.; The tiled ridge stands about three times the swordswoman's height, with the eaves roughly twice her height.; Two faded vermilion pillars frame the double doors, which are closed with a heavy timber bar from inside.; The gate stands on a granite sill roughly knee-high, one low step above the landing, and a cloth banner hangs from the eave on one side.; enclosure-wall: The wall top sits about half a metre above the swordswoman's head and clearly below the gate eaves and ridge.; The wall has a granite base course and a tiled cap, and it meets the gate flank at the pillar.; A narrow ledge about 0.8 m wide runs along its foot between the wall and the rock face.; approach-stairs: Twenty worn granite steps, each rising about 0.17 m with a run of about 0.33 m, follow the slope of the rock face.; The flight is wide enough for two people to climb abreast, and it ends at a flat landing roughly 4 m deep in the accepted follow-camera perspective.; The stairs approach the landing at an angle to the gate face, so the gate sits to one side as the swordswoman looks down the flight..",
+      "The director view has no player avatar and defers to the follow camera in laws.camera; subjects and architecture keep one coherent common scale at native 320x180, with no separately enlarged element. Player sprite minimums apply only when a player avatar exists."
+    ],
+    "actions": [
+      "swordswoman advance",
+      "swordswoman step back",
+      "swordswoman sidestep left",
+      "swordswoman sidestep right",
+      "swordswoman draw",
+      "swordswoman strike",
+      "swordswoman parry",
+      "swordswoman warn"
+    ]
+  },
+  {
+    "id": "rally-stage",
+    "title": "In-car camera footage",
+    "premise": "First person. Driving a 1970s rally car through a Finnish forest stage in sleet, in-car camera.",
+    "medium": "in-car camera footage",
+    "status": "approved",
+    "frames": [
+      {
+        "src": "/portfolio/open-projects/premise/rally-stage-0.webp",
+        "time": 0,
+        "label": "First frame"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/rally-stage-1.webp",
+        "time": 1,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/rally-stage-2.webp",
+        "time": 7,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/rally-stage-3.webp",
+        "time": 14.5,
+        "label": "Opening preview"
+      }
+    ],
+    "subjects": [
+      "Unnamed driver",
+      "Co-driver",
+      "Rally saloon number 14"
+    ],
+    "laws": [
+      "The first-person camera stays at the viewpoint anchored to Unnamed driver and never shows an external third-person view.",
+      "The road is 5 to 7 metres wide and the car about 1.6 metres wide, so a visible margin of gravel and snowbank always remains beside the bonnet.",
+      "The car stays on the road with all four wheels in contact with the gravel and never jumps airborne over the crest."
+    ],
+    "actions": [
+      "driver accelerate",
+      "driver brake",
+      "driver steer left",
+      "driver steer right",
+      "driver handbrake turn",
+      "driver shift gear",
+      "driver switch wipers",
+      "codriver call crest"
+    ]
+  },
+  {
+    "id": "welsh-hillside",
+    "title": "Hillside Collie Work",
+    "premise": "Third person. A border collie works sheep on a Welsh hillside in bright afternoon, nature documentary.",
+    "medium": "live-action documentary footage",
+    "status": "approved",
+    "frames": [
+      {
+        "src": "/portfolio/open-projects/premise/welsh-hillside-0.webp",
+        "time": 0,
+        "label": "First frame"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/welsh-hillside-1.webp",
+        "time": 1,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/welsh-hillside-2.webp",
+        "time": 7,
+        "label": "Opening preview"
+      },
+      {
+        "src": "/portfolio/open-projects/premise/welsh-hillside-3.webp",
+        "time": 14.5,
+        "label": "Opening preview"
+      }
+    ],
+    "subjects": [
+      "Moss, the border collie",
+      "Welsh Mountain ewes",
+      "The shepherd"
+    ],
+    "laws": [
+      "The subject-following camera starts roughly 5 metres behind Moss, the border collie, at the accepted elevated rear viewing height of about 2.5 metres. The scripted opening uses the default rear view; during interactive play the permitted mouse orbit may move up to 30 degrees either side and returns behind when released, without crossing ground or the wall.",
+      "drystone-wall: Built of mixed grey slate and granite stones laid dry with no mortar, with a broad base about 0.7 m thick tapering to about 0.45 m at the top.; Large flat through-stones project slightly from both faces at mid height, and upright coping stones form a ragged crest.; The 1.2 m height reaches an adult's waist to lower chest and stands roughly two and a half times a collie's shoulder height.; Lichen and moss stain the stones, and the wall runs diagonally across the slope, stepping with the ground.; hill-gate: A five-bar weathered timber gate about 3.2 m wide and 1.2 m tall, hung from a thick timber post with galvanized strap hinges.; A diagonal brace runs from the lower hinge side to the top latch end.; The opening is wide enough for a person and a flock of ewes to pass together.; The latch post is a squared stone-and-timber post matching the wall height..",
+      "At the first frame the timber gate is held open back against the wall, the collie stands on the downhill wall-track about 5 m from the gate facing the open gate, the about thirty ewes graze in a loose scatter about 16 m above the gate, the shepherd stands on the shepherd-knoll, and the clock reads about 3:30 pm with a steady light breeze."
+    ],
+    "actions": [
+      "collie walk forward",
+      "collie flank left",
+      "collie flank right",
+      "collie back off",
+      "collie outrun",
+      "collie stare",
+      "collie drop flat",
+      "flock graze"
+    ]
+  }
+]

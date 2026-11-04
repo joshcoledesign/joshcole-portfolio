@@ -7,7 +7,7 @@ const escape = (value: string) => value.replaceAll('&','&amp;').replaceAll('"','
 /** The approved WebGL/DOM composition is delivered directly, without an iframe or hydration race. */
 export function renderPortfolio(view: string): string | null {
   const route = routes.find((item) => item.view === view);
-  if (!route) return null;
+  if (!route || route.native) return null;
   let html = documentTemplate
     .replaceAll('__PAGE_TITLE__', escape(route.title))
     .replaceAll('__PAGE_DESCRIPTION__', escape(route.description))

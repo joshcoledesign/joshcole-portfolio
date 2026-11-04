@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     return {
       beforeFiles: [
         { source: "/", has: [{type:"query",key:"tag"}], destination: "/archive" },
-        ...portfolioRoutes.map((route) => ({
+        ...portfolioRoutes.filter((route) => !route.native).map((route) => ({
           source: route.path,
           destination: `/portfolio/${route.view}`,
           ...(route.path === "/" ? {missing:[{type:"query" as const,key:"tag"}]} : {}),
@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      { source: "/experiments/totem", destination: "/experiments/hype", permanent: true },
       {
         source: "/volumes/creative-immersive/nemo-brand",
         destination: "/",

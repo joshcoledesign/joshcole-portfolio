@@ -2575,6 +2575,10 @@ html,body{background:#0b0d0c!important;margin:0!important;}#culture-case-studies
 #culture-case-studies .rh-review-controls{display:none!important;}
 
 /* A distinct chapter separates open experiments from the case-study index. */
+#culture-case-studies .rh-secondary-experiments{margin:32px 0 0;padding-top:20px;border-top:1px solid var(--rh-rule);font-size:13px;color:var(--rh-muted);}
+#culture-case-studies .rh-secondary-experiments summary{width:fit-content;cursor:pointer;padding:10px 0;}
+#culture-case-studies .rh-secondary-experiments>div{display:flex;gap:10px 30px;flex-wrap:wrap;padding:16px 0;}
+#culture-case-studies .rh-secondary-experiments a{padding:8px 0;color:var(--rh-link);}
 #culture-case-studies .rh-open-experiments{margin-top:88px;border-top:1px solid var(--rh-ink);background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 540px);}
 #culture-case-studies .rh-experiments-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;padding:64px 36px 44px;}
 #culture-case-studies .rh-experiments-intro h2{margin:0;min-width:0;font-size:clamp(64px,8.8vw,128px);font-weight:500;line-height:.96;letter-spacing:-.055em;}

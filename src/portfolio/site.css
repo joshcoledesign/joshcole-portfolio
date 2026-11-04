@@ -1612,7 +1612,7 @@ html>body{padding:0}
 
 
 
-#culture-case-studies{--rh-surface:#0b0d0c;--rh-paper:#efece3;--rh-muted:#a9ada5;--rh-ink:#ff3b86;--rh-link:#ff6da5;--rh-rule:#373d36;--rh-face:'Portfolio Grotesk';--rh-glyph-scale:1;font-family:var(--rh-face),Arial,sans-serif;box-sizing:border-box;color:var(--rh-paper);}
+#culture-case-studies{--rh-surface:#0b0d0c;--rh-paper:#efece3;--rh-muted:#a9ada5;--rh-ink:#42e2ed;--rh-link:#42e2ed;--rh-rule:#373d36;--rh-face:'Portfolio Grotesk';--rh-glyph-scale:1;font-family:var(--rh-face),Arial,sans-serif;box-sizing:border-box;color:var(--rh-paper);}
 #culture-case-studies *{box-sizing:border-box;}#culture-case-studies [hidden]{display:none!important;}
 #culture-case-studies .rh-review-controls{display:flex;align-items:end;gap:16px;flex-wrap:wrap;padding:12px 18px 18px;background:#232621;color:#eceee6;font:11px/1.5 Arial,sans-serif;}
 #culture-case-studies .rh-review-controls>span{margin-right:auto;align-self:center;}

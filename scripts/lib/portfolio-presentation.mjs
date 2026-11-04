@@ -8,6 +8,14 @@ export function decoratePortfolioDocument(html){
   });
   html=html.replace(/<header\b([^>]*class="(?:rh-header|rd-header|sx-header|eb-header|xc-header)"[^>]*)>/g,'<header$1 data-site-header>');
   html=html.replace(/<h2\b/g,'<h2 data-story-intro');
+  html=html.replace(/<(?:a|button)\b[^>]*>/g,tag=>{
+    const project=/data-open-experiment="(culture|dungeon|gensound)"/.exec(tag)?.[1]
+      ??(/href="\/experiments\/hype"/.test(tag)?'hype':/href="\/experiments\/worldstage"/.test(tag)?'worldstage':undefined)
+      ??(/data-dg-(?:start|observe)\b/.test(tag)?'dungeon':/href="#gs-lab"|href="\/experiments\/gensound\/index.html"/.test(tag)?'gensound':undefined);
+    if(!project)return tag;
+    const action=project==='worldstage'?'studio':/data-open-experiment="(?:dungeon|gensound)"|href="\/experiments\/hype"/.test(tag)?'experiment':'lab';
+    return tag.replace(/>$/,` data-lab-entry="${project}" data-lab-action="${action}">`);
+  });
   // Case colophons were nested in main. Keep their full-width chrome outside the capped story.
   html=html.replace(/(<footer\b[^>]*class="(?:sx-footer[^"\n]*|eb-footer|xc-footer)"[\s\S]*?<\/footer>)\s*<\/main>/g,'</main>$1');
   return html;

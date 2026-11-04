@@ -48,6 +48,7 @@ export function TotemGallery({ experiments }: { experiments: Experiment[] }) {
           {experiments.map((experiment, position) => (
             <li key={experiment.id} className="w-44 shrink-0 lg:w-auto">
               <a href={"#" + experiment.id} aria-current={active.id === experiment.id ? "true" : undefined}
+                data-lab-entry={experiment.kind==='illustration'?undefined:'hype'}
                 className={["flex h-full items-center gap-3 border p-2 focus-visible:outline-2 focus-visible:outline-brand-cyan", active.id === experiment.id ? "border-foreground/60 bg-foreground/5" : "border-transparent hover:border-foreground/20"].join(" ")}>
                 <Image unoptimized src={experiment.thumbnail} width={48} height={48} alt="" className="h-12 w-12 shrink-0 bg-[#f3f0ec] object-contain p-1" />
                 <span>
@@ -68,8 +69,8 @@ export function TotemGallery({ experiments }: { experiments: Experiment[] }) {
             <p className="mt-3 text-sm leading-6 text-muted">{active.description}</p>
           </div>
           <div className="flex shrink-0 gap-4 pt-1">
-            <a href={"#" + previous.id} aria-label={"Previous: " + previous.title} className={linkStyle}>← Prev</a>
-            <a href={"#" + next.id} aria-label={"Next: " + next.title} className={linkStyle}>Next →</a>
+            <a data-lab-entry={previous.kind==='illustration'?undefined:'hype'} href={"#" + previous.id} aria-label={"Previous: " + previous.title} className={linkStyle}>← Prev</a>
+            <a data-lab-entry={next.kind==='illustration'?undefined:'hype'} href={"#" + next.id} aria-label={"Next: " + next.title} className={linkStyle}>Next →</a>
           </div>
         </div>
         {active.kind === "illustration" ? (

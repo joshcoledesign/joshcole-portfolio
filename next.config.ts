@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import portfolioRoutes from "./src/portfolio/routes.json";
+import shareImage from "./src/data/site-share-image.json";
 
 const nextConfig: NextConfig = {
   devIndicators: false,
@@ -19,6 +20,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      { source: "/opengraph-image.png", destination: shareImage.path, permanent: false },
       ...["field-conditions", "type-in-motion", "grid-pressure"].map((name) => ({
         source: `/experiments/${name}`, destination: "/experiments/culture", permanent: true,
       })),

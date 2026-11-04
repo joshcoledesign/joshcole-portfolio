@@ -156,6 +156,24 @@ mapping, valid PNG chunks, current settings, credits, filenames, visible public
 repository link, loading guards and error recovery. Actual Safari remains
 deferred; Windows WebKit visitor-audio decoding limitations still apply.
 
+## Full-screen export toolbar (2026-11-04)
+
+The full-screen viewer now has its own PNG size selector and Download PNG button
+for the active Rings or Hilbert layout. Main-page and viewer size choices stay
+synchronized. Saving retains the viewer/native fullscreen and displays success,
+recording-credit and retry messages within the viewer. One shared export path
+preserves the existing 500/2000px PNG dimensions, metadata and exact pixels.
+
+The toolbar wraps, while a contained canvas fills the remaining viewport without
+cropping. Source: [genSound PR 4](https://github.com/joshcoledesign/genSound/pull/4),
+revision `f760a7e9c6f59e857650a0cbcff76c5a457e0d99`.
+Source testing passed 88 exports across Chromium, Firefox and Playwright WebKit
+at desktop/phone widths, including both sizes and layouts in native fullscreen,
+retained view state, size synchronization, keyboard export and exact preview/PNG
+pixels. Focused Chromium fallback tests also passed in landscape and at 320px,
+including retry after encoding failure and Escape. Desktop/phone screenshots
+were inspected. Actual Safari remains deferred.
+
 ## Initial release boundary (2026-11-03)
 
 Josh explicitly authorized production publication on 2026-11-03 with Safari

@@ -17,3 +17,6 @@
 .lab-specimen[data-project=dungeon] .lab-specimen-fragment{display:grid;grid-template-columns:repeat(2,12px);grid-template-rows:repeat(2,12px);gap:4px;padding:5px;}.lab-specimen[data-project=dungeon] i{border:1px solid currentColor;background:color-mix(in srgb,currentColor 15%,transparent);}.lab-specimen[data-project=dungeon] i:nth-child(2),.lab-specimen[data-project=dungeon] i:nth-child(3){color:#aaa0ff;transform:translate(2px,-2px);}
 @media(prefers-reduced-motion:reduce){.lab-specimen.is-following{transition:none;}}
 @media(hover:none) and (pointer:coarse){.lab-specimen{display:none;}}
+/* The homepage floor also covers its cursor-following lab invitations. */
+body:has(#culture-case-studies[data-page=home]) :is(.lab-specimen,.lab-specimen-action,.lab-specimen-meta){font-size:13px;}
+body:has(#culture-case-studies[data-page=home]) :is(.lab-specimen-action,.lab-specimen-meta){white-space:normal;overflow-wrap:anywhere;}

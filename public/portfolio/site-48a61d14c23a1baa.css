@@ -2596,6 +2596,36 @@ html,body{background:#0b0d0c!important;margin:0!important;}#culture-case-studies
  #culture-case-studies .rh-experiments-arrow{font-size:36px;padding-top:5px;}
 }
 
+/* Homepage supporting text has a 13px floor at every breakpoint. */
+#culture-case-studies .rh-site :is(
+ nav,
+ .portfolio-ink,
+ .portfolio-ink select,
+ .rh-eyebrow,
+ .rh-hero-fps,
+ .rh-hero-links,
+ .rh-quick-culture .rh-live-badge,
+ .rh-quick-description>a,
+ .rh-quick-actions button,
+ .rh-quick-hint,
+ .rh-section-label,
+ .rh-number,
+ .rh-category,
+ .rh-dungeon-link,
+ .rh-dungeon-visual figcaption,
+ .rh-full-capture,
+ .rh-method-row,
+ .gs-home-feature figcaption,
+ .rh-experiment-strip a>span:last-child,
+ .rh-experiment-note,
+ .rh-footer-note,
+ .portfolio-site-links a,
+ .portfolio-site-links button
+){font-size:13px;}
+@media(max-width:560px){
+ #culture-case-studies .rh-site .rh-work-name small{font-size:13px;}
+}
+
 /* The same content cap and chapter choreography across both portfolio renderers. */
 .portfolio-page-content{width:100%;max-width:1680px;margin-inline:auto;padding-inline:min(5vw,84px);box-sizing:border-box;}
 #culture-case-studies .rh-site>section,
@@ -2656,3 +2686,6 @@ html,body{background:#0b0d0c!important;margin:0!important;}#culture-case-studies
 .lab-specimen[data-project=dungeon] .lab-specimen-fragment{display:grid;grid-template-columns:repeat(2,12px);grid-template-rows:repeat(2,12px);gap:4px;padding:5px;}.lab-specimen[data-project=dungeon] i{border:1px solid currentColor;background:color-mix(in srgb,currentColor 15%,transparent);}.lab-specimen[data-project=dungeon] i:nth-child(2),.lab-specimen[data-project=dungeon] i:nth-child(3){color:#aaa0ff;transform:translate(2px,-2px);}
 @media(prefers-reduced-motion:reduce){.lab-specimen.is-following{transition:none;}}
 @media(hover:none) and (pointer:coarse){.lab-specimen{display:none;}}
+/* The homepage floor also covers its cursor-following lab invitations. */
+body:has(#culture-case-studies[data-page=home]) :is(.lab-specimen,.lab-specimen-action,.lab-specimen-meta){font-size:13px;}
+body:has(#culture-case-studies[data-page=home]) :is(.lab-specimen-action,.lab-specimen-meta){white-space:normal;overflow-wrap:anywhere;}

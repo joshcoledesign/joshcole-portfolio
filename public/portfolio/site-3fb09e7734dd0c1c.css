@@ -2689,6 +2689,30 @@ html,body{background:#0b0d0c!important;margin:0!important;}#culture-case-studies
 #culture-case-studies .xc-inspector{width:100%;max-width:none;height:100dvh;}
 #culture-case-studies .xc-inspector-pan>img{width:calc(min(100%,1680px) * var(--image-zoom,1));margin-inline:auto;}
 
+/* A section boundary has one owner: its growing rule, not a second border. */
+#culture-case-studies section:has(>[data-story-rule]),
+[data-story-root] section:has(>[data-story-rule]),
+[data-about-motion] section:has(>[data-about-rule]){border-top-width:0;}
+#culture-case-studies .xc-chapter,
+#culture-case-studies :is(.xc-vrc-explorer,.xc-brand-proof,.ac-hotel-details,.ac-rfp-walkthrough,.ns-and-surfaces,.ns-willow-process,.ns-em-type,.ns-credit){border-bottom-width:0;}
+#culture-case-studies .xc-story{padding-top:0;}
+#culture-case-studies section:has(+section>[data-story-rule]),
+[data-story-root] section:has(+section>[data-story-rule]){border-bottom-width:0;}
+#culture-case-studies .rh-work-list>.rh-case-link:last-child{border-bottom-width:0;}
+#culture-case-studies .ac-rfp-split{border-top-width:0;border-bottom-width:0;}
+#culture-case-studies :is(.xc-brand-choices,.ac-gallery-choices)+.cw-sequence>.cw-sequence-nav{border-top-width:0;}
+#culture-case-studies .ns-em-specimen{border-top-width:0;border-bottom-width:0;}
+#culture-case-studies .rd-culture .rh-specimen{border-bottom-width:0;}
+[data-about-motion] .about-project-links{border-bottom-width:0;}
+
+/* Rules at a color change follow the painted band to the browser edges. */
+#culture-case-studies [data-band-color]>[data-story-rule],
+#culture-case-studies [data-band-color]+section>[data-story-rule],
+#culture-case-studies [data-band-color]+.xc-story>:first-child>[data-story-rule],
+#culture-case-studies .xc-story[data-band-color]>:first-child>[data-story-rule]{left:calc(50% - 50vw);right:auto;width:100vw;}
+#culture-case-studies [data-band-color]+.ns-credit{position:relative;border-top-width:0;}
+#culture-case-studies [data-band-color]+.ns-credit::before{content:'';position:absolute;top:0;left:calc(50% - 50vw);width:100vw;height:1px;background:var(--xc-line);pointer-events:none;}
+
 .lab-specimen{--specimen-ink:#42e2ed;position:fixed;left:0;top:0;z-index:80;display:flex;align-items:center;gap:12px;width:max-content;max-width:calc(100vw - 24px);padding:11px 15px 11px 11px;border-left:1px solid var(--specimen-ink);background:linear-gradient(100deg,#090d0bf5,#090d0bda);color:#efece3;backdrop-filter:blur(12px);box-shadow:0 12px 32px #0003;pointer-events:none;user-select:none;font:11px/1.4 'Courier New',monospace;box-sizing:border-box;}
 .lab-specimen[hidden]{display:none;}
 .lab-specimen.is-following{transition:transform 140ms cubic-bezier(.18,.8,.25,1);}

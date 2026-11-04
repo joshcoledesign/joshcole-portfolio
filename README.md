@@ -53,11 +53,14 @@ Available inline components are registered in `INLINE_COMPONENTS` in `src/compon
 
 ## Metadata assets
 
-Next.js App Router serves the site's file-based metadata from `src/app/`:
+Next.js App Router serves `src/app/icon.png` as the browser and site icon.
 
-- `icon.png` - browser and site icon
-- `opengraph-image.png` - 1200x630 social-sharing image
-- `opengraph-image.alt.txt` - social image description
+The 1200 × 630 social-sharing image lives in `public/share/`. Its versioned path,
+dimensions, type and alt text are declared in `src/data/site-share-image.json`
+and shared by native pages, portfolio HTML and the résumé. The old
+`/opengraph-image.png` address redirects to the current image. Verify with
+`node scripts/verify-share-preview.mjs` (optionally followed by a local or live
+site URL).
 
 ## Deployment
 

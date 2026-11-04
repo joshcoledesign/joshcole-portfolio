@@ -134,11 +134,11 @@
       "transformation": "unchanged"
     },
     {
-      "path": "/portfolio/open-projects/hype-preview.webp",
-      "sha256": "b07908c3b18335cdd3bda1847917f2839be645e345f3460b421492cbb8ce8081",
-      "source": "external-hype-experiments/Totem/Artwork/step 1/build/data/totemCat.svg",
-      "sourceSha256": "e73884d76ff1563637ac5640f3536f5ca06e2e6b2b00a9bc68d8f224c8ab83ae",
-      "transformation": "Whole source fitted to thumbnail canvas; WebP"
+      "path": "/portfolio/open-projects/hype-field-preview.webp",
+      "sha256": "29f7b5c130a47853cd97f5424e31ea841cd6fbf5453b2923b2742777e74cbf36",
+      "source": "Hype browser export / The Field / seed 1313 / palette 0 / density 750 / scale 1",
+      "sourceSha256": "6fe9181a81eb10ba2c388412c416357ff2be53bce895161e483c12508b718f3f",
+      "transformation": "Center crop of actual 1200×1200 browser canvas export, resized to 640×360 WebP"
     },
     {
       "path": "/portfolio/open-projects/worldstage/edit.mp4",

@@ -4,7 +4,7 @@ import {OpenExperimentFrame} from '@/components/open-experiment-frame';
 import {TotemGallery} from '@/components/totem-gallery';
 import gallery from '@/data/totem-gallery.json';
 
-export const metadata:Metadata={title:'Hype — Josh Cole',description:'Hand-drawn illustration, generative composition and motion. Explore the original cast and change the live studies.',alternates:{canonical:'/experiments/hype'},openGraph:{images:['/portfolio/open-projects/hype-preview.webp']}};
+export const metadata:Metadata={title:'Hype — Josh Cole',description:'Hand-drawn illustration, generative composition and motion. Explore the original cast and change the live studies.',alternates:{canonical:'/experiments/hype'},openGraph:{images:['/portfolio/open-projects/hype-field-preview.webp']}};
 
 export default function HypePage(){
   return <OpenExperimentFrame accent="#ff639f">

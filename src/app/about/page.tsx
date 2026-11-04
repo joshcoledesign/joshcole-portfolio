@@ -1,169 +1,23 @@
-// ─── About ────────────────────────────────────────────────────
-// Real bio. Visual system identical to case study pages.
+/* eslint-disable @next/next/no-html-link-for-pages -- These destinations require full document navigation. */
+import type {Metadata} from 'next';
+import Image from 'next/image';
+import {PortfolioPageFrame} from '@/components/portfolio-page-frame';
+import story from '@/data/about-story.json';
 
-import Link from "next/link";
-import Image from "next/image";
-import { PromptLine } from "@/components/prompt-line";
-import { CommitLog } from "@/components/commit-log";
+export const metadata:Metadata={title:'About — Josh Cole',description:'The work nobody sees. Josh Cole on craft, structure, creative technology and the people who shaped his practice.',alternates:{canonical:'/about'}};
+const label='font-mono text-xs leading-6 tracking-[.12em] text-[#42e2ed]';
+const body='text-[17px] leading-[1.8] text-[#b9beb5] sm:text-lg';
+const chapter='grid gap-10 border-t border-[#373d36] py-14 md:grid-cols-[.8fr_1.2fr] md:gap-20 md:py-24';
 
-const MONO = "var(--font-jetbrains-mono), monospace";
-const SYNE = "var(--font-syne), sans-serif";
-const INTER = "var(--font-inter), system-ui, sans-serif";
-
-const P: React.CSSProperties = {
-  fontFamily: INTER,
-  fontSize: 18,
-  lineHeight: 1.7,
-  color: "#acacb1",
-  margin: "0 0 28px",
-};
-
-export const metadata = {
-  title: "About | Josh Cole",
-};
-
-export default function AboutPage() {
-  return (
-    <div style={{ minHeight: "100vh", paddingBottom: 56 }}>
-      <PromptLine href="/" />
-      <main
-        className="page-container"
-        style={{
-          maxWidth: 960,
-          margin: "0 auto",
-          padding: "64px 48px 0",
-        }}
-      >
-        {/* ── Back link ── */}
-        <Link
-          href="/"
-          className="case-back-link"
-          aria-label="Back to Home"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 6,
-            fontFamily: MONO,
-            fontSize: 12,
-            color: "#26c5ff",
-            textDecoration: "none",
-            letterSpacing: "0.04em",
-            marginBottom: 40,
-          }}
-        >
-          <span aria-hidden="true">&lt;</span>
-          <span>cd / # home</span>
-        </Link>
-
-        {/* Eyebrow */}
-        <div
-          style={{
-            fontFamily: MONO,
-            fontSize: 12,
-            color: "#8a8a90",
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            marginBottom: 7,
-          }}
-        >
-          JOSH COLE
-        </div>
-
-        {/* Title */}
-        <h1
-          className="page-title"
-          style={{
-            fontFamily: SYNE,
-            fontWeight: 600,
-            lineHeight: 1.07,
-            color: "#e8e8ea",
-            margin: "0 0 20px",
-          }}
-        >
-          About
-        </h1>
-
-        {/* Divider */}
-        <div
-          aria-hidden="true"
-          style={{
-            height: 0,
-            borderTop: "0.5px solid rgba(255,255,255,0.1)",
-            marginBottom: 28,
-          }}
-        />
-
-        {/* Bio */}
-        <div>
-          <figure className="about-portrait">
-            <Image
-              src="/about/josh-kelly.png"
-              alt="ASCII-style portrait of Josh and Kelly Cole"
-              width={720}
-              height={955}
-              sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1023px) 38vw, 440px"
-            />
-            <figcaption>Josh &amp; Kelly Cole</figcaption>
-          </figure>
-          <p style={P}>
-            I&apos;m Josh Cole, a creative technologist. I&apos;ve spent my career as a designer, creative director, and design director, and I still think that way first. What I design and build now is AI systems and the interfaces around them, for brands, agencies, and product teams that want the technology to work for the person on the other side of it.
-          </p>
-
-          <p style={P}>
-            The way I work is something I learned from my dad. He was a sculptor. Clay, cast in bronze, finished by hand. He took a job at a foundry so he&apos;d understand every step of how a piece came to be, from armature to patina. One of his, a war chief about three feet tall, he built from the inside out. The armature, then the skeleton, then the organs from anatomy books, then the muscles, then the skin. Nobody was meant to see the organs. But the skin sat right because the structure under it was real. He even carved a flintlock rifle to scale, with a hammer you could pull back and a trigger you could pull.
-          </p>
-
-          <p style={P}>
-            This is where I learned the importance of the work nobody sees. A surface without real structure under it can look right, but
-            doesn&apos;t hold up.
-          </p>
-
-          <p style={P}>
-            My mom was a legal secretary, and after school I&apos;d go to her office and sit with her until the day was done. She told me, and I watched her do it every afternoon, that what you do when no one&apos;s looking is the part that counts. She did the work right whether or not anyone checked. At home she made pottery and painted ceramics, and she brought the same care to that. Between the two of them, honesty was the whole point of our house, and it stuck harder than anything else they gave me.
-          </p>
-
-          <p style={P}>
-            I went to school to sculpt monsters for film. Then I saw my first 3D animation and switched to animation and code. Compaq hired me before I&apos;d finished my degree and gave me the time to finish it. From there the work kept changing shape. Brand and creative direction, UX and design leadership, VR and generative art. The tools kept changing. What I was after hasn&apos;t. Know how it works all the way down. Build the structure nobody sees. Make the thing that isn&apos;t there yet.
-          </p>
-
-          <p style={P}>
-            Right now the tool is AI. That means Novensia, a brand operating system I&apos;m building where one model checks another&apos;s work, and an agent I built at UST that does the first pass on six-figure RFPs so the team can decide. Both are in the case studies.
-          </p>
-
-          <p style={P}>
-            The reason I keep building is simpler than a mission. When the work is right, the person on the other side feels what I felt making it. My parents lived with that kind of care, and I want to carry it into everything I make.
-          </p>
-
-          <p style={P}>
-            I run Josh Cole Creative and I&apos;m open to the next project or role.{" "}
-            <Link href="/#work-title" className="case-prose-link">View my case studies</Link> or{" "}
-            <a href="/resume/download" className="case-prose-link">download my résumé</a>.
-          </p>
-        </div>
-
-        {/* ── Recent commits ── */}
-        <div
-          aria-hidden="true"
-          style={{
-            height: 0,
-            borderTop: "0.5px solid rgba(255,255,255,0.1)",
-            margin: "28px 0",
-          }}
-        />
-        <div
-          style={{
-            fontFamily: MONO,
-            fontSize: 12,
-            color: "#8a8a90",
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            marginBottom: 7,
-          }}
-        >
-          RECENT COMMITS
-        </div>
-        <CommitLog />
-      </main>
-    </div>
-  );
+export default function AboutPage(){
+  return <PortfolioPageFrame><main className="mx-auto max-w-[1680px] px-[5%]">
+    <section className="grid gap-12 py-12 lg:grid-cols-[1.2fr_.8fr] lg:gap-20 lg:py-20" aria-labelledby="about-title">
+      <div><p className={label}>ABOUT / JOSH COLE</p><h1 id="about-title" className="mt-10 text-[clamp(56px,8.2vw,126px)] leading-[.94] tracking-[-.065em]">The work<br /><span className="text-[#42e2ed]">nobody sees.</span></h1><div className="mt-10 max-w-2xl border-l-2 border-[#42e2ed] pl-6 sm:mt-14"><p className={body} data-about-story="0">{story[0]}</p></div><a href="#where-it-started" className="mt-7 inline-flex min-h-11 items-center !text-[#42e2ed]">From the inside out ↓</a></div>
+      <figure className="m-0 self-end lg:pb-2"><div className="overflow-hidden bg-[#0b0d0c]"><Image src="/about/josh-kelly.png" alt="ASCII portrait of Josh and Kelly Cole" width={720} height={955} sizes="(max-width: 1023px) 90vw, 38vw" priority className="mx-auto h-auto max-h-[640px] w-full object-contain grayscale" /></div><figcaption className="mt-5 flex justify-between gap-4 border-t border-[#373d36] pt-4 font-mono text-[11px] leading-5 text-[#a9ada5]"><span>JOSH &amp; KELLY COLE</span><span>THE PEOPLE / THE PRACTICE</span></figcaption></figure>
+    </section>
+    <section id="where-it-started" className={chapter} aria-labelledby="structure-title"><div><p className={label}>01 / WHERE IT STARTED</p><h2 id="structure-title" className="mt-6 text-[clamp(40px,4.6vw,68px)] leading-[1.03] tracking-[-.045em]">Structure under<br />the surface.</h2></div><div className="space-y-9"><p className={body} data-about-story="1">{story[1]}</p><p data-about-story="2" className="border-l-2 border-[#42e2ed] pl-6 text-[clamp(25px,2.6vw,38px)] leading-[1.3] tracking-[-.025em]">{story[2]}</p></div></section>
+    <section className={chapter} aria-labelledby="care-title"><div><p className={label}>02 / WHAT STAYS WITH ME</p><h2 id="care-title" className="mt-6 text-[clamp(40px,4.6vw,68px)] leading-[1.03] tracking-[-.045em]">Care in<br />the making.</h2></div><div className="space-y-9"><p className={body} data-about-story="3">{story[3]}</p><p className={body} data-about-story="4">{story[4]}</p></div></section>
+    <section className={chapter} aria-labelledby="building-title"><div><p className={label}>03 / THE WORK NOW</p><h2 id="building-title" className="mt-6 text-[clamp(40px,4.6vw,68px)] leading-[1.03] tracking-[-.045em]">Systems, with<br /><span className="text-[#42e2ed]">a human hand.</span></h2></div><div><p className={body} data-about-story="5">{story[5]}</p><div className="mt-9 grid border-y border-[#373d36]"><a href="/work/novensia" className="flex min-h-16 items-center justify-between gap-6 border-b border-[#373d36] py-5 !text-[#efece3] hover:!text-[#42e2ed]"><span>Novensia / Brand Voice Engine</span><span aria-hidden="true" className="text-[#42e2ed]">↗</span></a><a href="/work/ust-rfp-agent" className="flex min-h-16 items-center justify-between gap-6 py-5 !text-[#efece3] hover:!text-[#42e2ed]"><span>UST / RFP Triage Agent</span><span aria-hidden="true" className="text-[#42e2ed]">↗</span></a></div></div></section>
+    <section className="border-t border-[#42e2ed] py-14 md:py-24" aria-label="The practice"><p className={label}>THE REASON I KEEP BUILDING</p><p data-about-story="6" className="mt-9 max-w-6xl text-[clamp(30px,4.1vw,62px)] leading-[1.17] tracking-[-.04em]">{story[6]}</p><p data-about-story="7" className={`${body} mt-10 max-w-2xl`}>I run Josh Cole Creative and I&apos;m open to the next project or role. <a href="/#case-studies" className="!text-[#42e2ed] underline decoration-[#42e2ed]/40 underline-offset-4">View my case studies</a> or <a href="/resume/download" className="!text-[#42e2ed] underline decoration-[#42e2ed]/40 underline-offset-4">download my résumé</a>.</p></section>
+  </main></PortfolioPageFrame>;
 }

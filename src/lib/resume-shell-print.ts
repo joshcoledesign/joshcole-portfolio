@@ -1,255 +1,67 @@
-import { RESUME_SHELL as RESUME_SCREEN_SHELL } from "./resume-shell";
-const SITE_SCREEN_CSS = `
-<style media="screen">
-  html,
-  body {
-    min-height: 100%;
-    background-color: #101117;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
-    background-size: 32px 32px;
-  }
-
-  body { font-size: 10pt; }
-  .name { font-size: 20pt; }
-  .discipline,
-  .contact,
-  .section > h2,
-  .role-date,
-  .role-summary { font-size: 10pt; }
-  .role-title { font-size: 11pt; }
-  .earlier .role-title { font-size: 10pt; }
-
-  .contact {
-    display: flex;
-    flex-wrap: wrap;
-    white-space: normal;
-  }
-
-  .contact-group { white-space: nowrap; }
-  .contact .sep { padding: 0 8px; }
-
-  @media (min-width: 821px) {
-    .toolbar,
-    .sheet {
-      width: 8.5in;
-    }
-
-    .sheet {
-      padding: 36px 0.58in;
-    }
-
-    .contact { font-size: 10pt; }
-  }
-
-  .toolbar {
-    gap: 16px;
-    margin-bottom: -4px;
-  }
-
-  @media (max-width: 820px) {
-    .toolbar {
-      margin-bottom: 12px;
-    }
-
-    .toolbar button,
-    .toolbar a {
-      display: inline-flex;
-      min-height: 44px;
-      align-items: center;
-    }
-
-    .contact { gap: 4px 10px; }
-
-    .contact-group { white-space: normal; }
-    .contact .contact-item { overflow-wrap: anywhere; }
-
-    .contact .sep {
-      display: none;
-    }
-  }
-
-  .toolbar button,
-  .toolbar a {
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: #26c5ff;
-    font-family: var(--mono);
-    font-size: 8.5pt;
-    letter-spacing: 0.04em;
-    line-height: 1.2;
-    text-decoration: none;
-  }
-
-  .toolbar button:hover,
-  .toolbar a:hover {
-    color: #e8e8ea;
-  }
-
-  .toolbar a:focus-visible { outline: 2px solid #26C5FF; outline-offset: 2px; }
-
-  .role-group {
-    margin-bottom: 9px;
-  }
-
-  .role-group-roles {
-    margin: 6px 0 0 12px;
-    padding-left: 12px;
-    border-left: 1px solid var(--rule);
-  }
-
-  .role-group-roles .role {
-    margin-bottom: 9px;
-  }
-
-  .role-group-roles .role:last-child {
-    margin-bottom: 0;
-  }
-</style>`;
-
-// Keep the approved 10pt body / 11pt role type scale while fitting the
-// current site resume onto two US-letter pages. Screen rules stay separate.
-const APPROVED_PRINT_CSS = `
-<style media="print">
-  @page { size: letter portrait; margin: 0.40in 0.50in 0.38in; }
-  html { background: #fff; }
-  body {
-    font-size: 10pt;
-    line-height: 1.10;
-    font-kerning: normal;
-    font-synthesis: none;
-    orphans: 2;
-    widows: 2;
-    text-rendering: geometricPrecision;
-  }
-  .sheet { width: auto; margin: 0; padding: 0; box-shadow: none; }
-  .name {
-    margin: 0 0 4.5pt;
-    font-size: 20pt;
-    letter-spacing: -0.125pt;
-    line-height: 1;
-  }
-  .discipline {
-    margin: 0;
-    font-size: 10pt;
-    letter-spacing: 0.8pt;
-    line-height: 1.35;
-  }
-  .grad-rule { height: 1.875pt; margin: 8.25pt 0 6.75pt; }
-  .contact {
-    margin: 0 0 5pt;
-    font-size: 10pt;
-    letter-spacing: 0;
-    line-height: 1.35;
-    display: flex;
-    flex-wrap: wrap;
-    white-space: normal;
-  }
-  .contact-group { white-space: nowrap; }
-  .contact .sep { padding: 0 6pt; }
-  .section { break-inside: auto; margin-top: 0; }
-  .role-group-summary { break-inside: avoid; }
-  .section > h2 {
-    margin: 6pt 0 2.5pt;
-    padding: 0 0 1.5pt;
-    border-bottom-width: 0.5pt;
-    break-after: avoid;
-    page-break-after: avoid;
-    font-size: 10pt;
-    letter-spacing: 0.25pt;
-    line-height: 1.35;
-  }
-  .summary p { margin: 0 0 3pt; }
-  .skill { margin: 0 0 1pt; line-height: 1.10; }
-  .role { margin: 3.5pt 0 0; }
-  .role-head { gap: 12pt; }
-  .role-title { margin: 0 0 1pt; font-size: 11pt; line-height: 1.2; }
-  .role-date { font-size: 10pt; }
-  .role-summary {
-    margin: 0;
-    font-size: 10pt;
-    line-height: 1.2;
-  }
-  .role li {
-    padding-left: 10pt;
-    margin: 0;
-    line-height: 1.10;
-  }
-  .role li::before {
-    top: 0.53em;
-    width: 2.25pt;
-    height: 2.25pt;
-  }
-  .role-group { display: contents; }
-  .role-group-roles {
-    display: contents;
-  }
-  .role-group-roles .role {
-    margin: 3.5pt 0 0 9pt;
-    padding-left: 9pt;
-    border-left: 0.5pt solid var(--rule);
-  }
-  .role { break-inside: avoid; }
-  /* At true 10pt the UST roles cannot share page one, so page two opens on
-     them rather than splitting a role across the break. */
-  .role-group-roles .role:first-child { break-before: page; }
-  .earlier .role { margin: 1.5pt 0 0; }
-  .earlier .role-title { font-size: 10pt; }
-  a { color: inherit; text-decoration: none; }
-</style>`;
-
-// The PDF link points at the approved ColeOS export copied into /public, so the
-// site offers the same reviewed file instead of a browser print.
-const PDF_BUTTON_JS = `  // Opens the print dialog so the PDF comes from the browser's own renderer —
-  // full type quality, real text layer. Client-side PDF libraries rasterize
-  // the page and produce a file no applicant tracking system can read.
-  // ON THE LIVE SITE: replace this with a link to a PDF built at deploy time.
-  document.getElementById('btn-pdf').addEventListener('click', function () {
-    window.print();
-  });
-`;
-
-const TXT_BUTTON_JS = `  document.getElementById('btn-txt').addEventListener('click', function () {
-    var url = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'josh-cole-resume.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
-    flash('Downloaded');
-  });
-
-`;
-
-/** Replace exactly one occurrence, failing the build if the shell has drifted. */
-function replaceOnce(source: string, search: string, replacement: string): string {
-  const index = source.indexOf(search);
-  if (index < 0 || source.indexOf(search, index + search.length) >= 0) {
-    throw new Error(`Resume shell transform expected one match for: ${search.slice(0, 60)}`);
-  }
-  return source.slice(0, index) + replacement + source.slice(index + search.length);
+// Culture presentation of the approved résumé content. Screen and paper share Geist.
+export const RESUME_SHELL = `
+<meta charset="utf-8">
+<title>Josh Cole — Creative Technologist · AI</title>
+<meta name="author" content="Josh Cole">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b0d0c">
+<style>
+@font-face{font-family:Geist;src:url('/portfolio/media/ccce59465ae5c61930ad.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Geist;src:url('/portfolio/media/a8eefb873ba9c9020665.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap}
+:root{color-scheme:dark;--surface:#0b0d0c;--ink:#efece3;--muted:#a9ada5;--accent:#42e2ed;--rule:#373d36;background:var(--surface)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface);color:var(--ink);font:400 17px/1.65 Geist,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:4px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 5%;border-bottom:1px solid var(--rule)}
+.resume-home{display:block;flex:none;width:112px;height:62px}
+.resume-home span{display:block;width:100%;height:100%;background:var(--accent);mask:url('/portfolio/open-projects/signature.svg') center/contain no-repeat}
+.resume-actions{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap}
+.toolbar button,.toolbar .download{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid var(--rule);background:transparent;color:var(--ink);font:400 14px/1.3 Geist,Arial,sans-serif;cursor:pointer;text-decoration:none}
+.toolbar button:hover,.toolbar .download:hover{border-color:var(--accent);color:var(--accent)}
+.toolbar .download{color:var(--accent);border-color:var(--accent)}
+.status{min-height:20px;min-width:3em;color:var(--muted);font:12px/1.5 monospace}
+.sheet{max-width:1180px;margin:64px auto 100px;padding:0 5%}
+.name{margin:0;font-size:clamp(52px,7.8vw,96px);font-weight:500;line-height:1;letter-spacing:-.065em}
+.discipline{margin:22px 0 0;font-size:clamp(19px,2.6vw,28px);line-height:1.3;letter-spacing:-.02em}
+.resume-rule{height:1px;background:var(--accent);margin:32px 0 22px}
+.contact{display:flex;flex-wrap:wrap;gap:6px 0;margin:0;color:var(--muted);font:12px/1.7 monospace}
+.contact-group{display:inline-flex;align-items:baseline;flex-wrap:wrap}.contact-item{overflow-wrap:anywhere}.contact .sep{padding:0 14px;color:var(--rule)}
+.section{margin-top:48px;border-top:1px solid var(--rule);padding-top:22px}
+.section>h2{margin:0 0 22px;font:400 12px/1.5 monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.section p{margin:0 0 16px}.summary p{font-size:19px;line-height:1.65}
+.skill b{font-weight:500;color:var(--ink)}.skill{color:var(--muted)}
+.role{margin:28px 0 0}.role-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px}.role-title{margin:0;font-size:22px;line-height:1.3;font-weight:500;letter-spacing:-.025em}
+.role-title .qual{font-size:16px;font-weight:400;color:var(--muted)}.role-title .org{font-weight:400}.role-date{flex:none;font:12px/1.5 monospace;color:var(--muted)}
+.role .role-summary,.role-group>.role-summary{margin:12px 0 14px;color:var(--muted);font-size:16px;line-height:1.65}
+.role ul{margin:14px 0 0;padding-left:22px}.role li{padding-left:3px;margin:7px 0}.role li::marker{color:var(--accent)}
+.role-group-roles{margin-top:24px;padding-left:24px;border-left:1px solid var(--rule)}
+.earlier .role{margin-top:18px}.earlier .role-title{font-size:18px}
+@media(max-width:640px){.toolbar{gap:14px;flex-wrap:wrap}.resume-actions{width:100%;justify-content:flex-start;gap:10px}.toolbar button,.toolbar .download{padding:10px 12px;font-size:13px}.sheet{margin-top:40px}.contact{display:grid;gap:7px}.contact .sep{display:none}.role-head{display:block}.role-date{display:block;margin-top:8px}.role-group-roles{padding-left:16px}.section{margin-top:36px}.role-title{font-size:21px}.summary p{font-size:18px}}
+@media print{
+@page{size:letter portrait;margin:.40in .50in .38in}
+:root{color-scheme:light;--surface:#fff;--ink:#141916;--muted:#515b54;--accent:#166874;--rule:#bbc3bd;background:#fff}
+html,body{background:#fff;color:var(--ink)}body{font-size:10pt;line-height:1.10;font-kerning:normal;font-synthesis:none;orphans:2;widows:2}
+.toolbar{display:none}.sheet{width:auto;max-width:none;margin:0;padding:0}.name{margin:0 0 4.5pt;font-size:24pt;letter-spacing:-.7pt;line-height:1}
+.discipline{margin:0;font-size:10pt;line-height:1.35;letter-spacing:.1pt}.resume-rule{height:1pt;margin:8pt 0 6pt;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.contact{margin:0 0 5pt;font:9pt/1.35 Geist,Arial,sans-serif;display:flex;flex-wrap:wrap;gap:0}.contact-group{white-space:nowrap}.contact .sep{display:inline;padding:0 6pt}
+.section{break-inside:auto;border:0;padding:0;margin:0}.section>h2{margin:6pt 0 2.5pt;padding:0 0 1.5pt;border-bottom:.5pt solid var(--rule);font:500 10pt/1.35 Geist,Arial,sans-serif;letter-spacing:.3pt;break-after:avoid;page-break-after:avoid}
+.section p,.summary p{margin:0 0 3pt;font-size:10pt;line-height:1.10}.section .skill{margin:0 0 1pt;line-height:1.10}
+.role{margin:3.5pt 0 0;break-inside:avoid}.role-head{display:flex;gap:12pt}.role-title{font-size:11pt;line-height:1.2;letter-spacing:-.1pt}.role-title .qual{font-size:10pt}.role-date{display:inline;margin:0;font:10pt/1.2 Geist,Arial,sans-serif}
+.role .role-summary,.role-group>.role-summary{margin:0;font-size:10pt;line-height:1.2}.role ul{margin:0;padding-left:10pt}.role li{padding:0;margin:0;line-height:1.10}.role li::marker{color:var(--ink)}
+.role-group,.role-group-roles{display:contents}.role-group-roles .role{margin:3.5pt 0 0 9pt;padding-left:9pt;border-left:.5pt solid var(--rule)}.role-group-roles .role:first-child{break-before:page}
+.earlier .role{margin:1.5pt 0 0}.earlier .role-title{font-size:10pt}a{color:inherit;text-decoration:none}
 }
-
-const SHELL_TRANSFORMS: [string, string][] = [
-  [">Copy plain text</button>", ">--copy-plain-text</button>"],
-  [
-    '<button type="button" id="btn-pdf">Save as PDF</button>',
-    '<a id="btn-pdf" href="%%PDF_HREF%%" download="josh-cole-resume.pdf">--save-as-pdf</a>',
-  ],
-  ['\n  <button type="button" id="btn-txt">Download .txt</button>', ""],
-  ["'Copy failed — use Download .txt'", "'Copy failed'"],
-  [TXT_BUTTON_JS, ""],
-  [PDF_BUTTON_JS, ""],
-  ["</style>", `</style>\n${SITE_SCREEN_CSS}\n${APPROVED_PRINT_CSS}`],
-  ['<div class="sheet">', '<main class="sheet">'],
-  ["\n</div>\n\n<script>\n(function () {", "\n</main>\n\n<script>\n(function () {"],
-];
-
-export const RESUME_SHELL = SHELL_TRANSFORMS.reduce(
-  (shell, [search, replacement]) => replaceOnce(shell, search, replacement),
-  RESUME_SCREEN_SHELL
-);
+</style>
+<script type="text/plain" id="plaintext">%%PLAINTEXT%%</script>
+<div class="toolbar">
+  <a href="/" class="resume-home" aria-label="Josh Cole — home"><span aria-hidden="true"></span></a>
+  <div class="resume-actions" role="group" aria-label="Résumé options"><button type="button" id="btn-copy">Copy plain text</button><a class="download" href="%%PDF_HREF%%" download="josh-cole-resume.pdf">Download PDF ↗</a><span id="status" class="status" role="status" aria-live="polite"></span></div>
+</div>
+<main class="sheet">%%BODY%%</main>
+<script>
+(()=>{const text=document.getElementById('plaintext').textContent.replace(/^\\n/,''),status=document.getElementById('status');
+document.getElementById('btn-copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(text);status.textContent='Copied';}catch{const field=document.createElement('textarea');field.value=text;field.style.cssText='position:fixed;left:-9999px';document.body.append(field);field.select();status.textContent=document.execCommand('copy')?'Copied':'Copy unavailable';field.remove();}});
+})();
+</script>`;

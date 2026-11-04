@@ -109,7 +109,7 @@ export function renderResumeBody(data: ResumeData): string {
     `  <header>\n` +
     `    <h1 class="name">${esc(data.name)}</h1>\n` +
     `    <p class="discipline">${esc(data.discipline)}</p>\n` +
-    `    <div class="grad-rule"></div>\n` +
+    `    <div class="resume-rule"></div>\n` +
     `    <p class="contact">\n` +
     `      ${contactHtml(data.contact)}\n` +
     `    </p>\n` +
@@ -217,7 +217,7 @@ const PRODUCTION_SHELL = stripComments(RESUME_SHELL);
 
 /** Public path of the approved ColeOS PDF for this content version. */
 export function resumePdfPath(data: ResumeData): string {
-  return `/files/josh-cole-resume-${data.resumeVersion}.pdf`;
+  return `/files/josh-cole-resume-${data.resumeVersion}-culture.pdf`;
 }
 
 function headMetaHtml(): string {

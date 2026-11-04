@@ -7,7 +7,7 @@
 import { usePathname } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
 
-const BARE_ROUTES = ["/", "/archive", "/experiments/hype", "/experiments/worldstage", "/experiments/premise"];
+const BARE_ROUTES = ["/", "/about", "/archive", "/experiments/hype", "/experiments/worldstage", "/experiments/premise"];
 
 export function SiteChrome() {
   const pathname = usePathname();

@@ -1,15 +1,16 @@
 import type { MetadataRoute } from "next";
 import { getPublishedPieces } from "@/lib/work";
+import portfolioRoutes from "@/portfolio/routes.json";
 
 const SITE_URL = "https://joshcolecreative.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/about", "/resume", "/work/photography", "/experiments/gensound"];
+  const staticRoutes = ["/", "/archive", "/about", "/resume", "/work/photography", ...portfolioRoutes.map(route => route.path)];
   const workRoutes = getPublishedPieces().map((piece) => `/work/${piece.slug}`);
 
-  return [...staticRoutes, ...workRoutes].map((pathname) => ({
+  return [...new Set([...staticRoutes, ...workRoutes])].map((pathname) => ({
     url: `${SITE_URL}${pathname}`,
-    changeFrequency: pathname === "" ? "weekly" : "monthly",
-    priority: pathname === "" ? 1 : pathname.startsWith("/work/") ? 0.8 : 0.6,
+    changeFrequency: pathname === "/" ? "weekly" : "monthly",
+    priority: pathname === "/" ? 1 : pathname.startsWith("/work/") ? 0.8 : 0.6,
   }));
 }

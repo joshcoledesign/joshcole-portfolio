@@ -1,7 +1,22 @@
 import type { NextConfig } from "next";
+import portfolioRoutes from "./src/portfolio/routes.json";
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: "/", has: [{type:"query",key:"tag"}], destination: "/archive" },
+        ...portfolioRoutes.map((route) => ({
+          source: route.path,
+          destination: `/portfolio/${route.view}`,
+          ...(route.path === "/" ? {missing:[{type:"query" as const,key:"tag"}]} : {}),
+        })),
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   async redirects() {
     return [
       {

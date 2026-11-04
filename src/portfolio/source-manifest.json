@@ -1,0 +1,402 @@
+{
+  "approvedReviewSha256": "720829690ae26f571c65144ecc1e43c86912237df6a234686f3166252ccb4e58",
+  "embeddedAssets": [
+    {
+      "path": "/portfolio/media/d9bcc3cc461d211ee1e9.webp",
+      "sha256": "d9bcc3cc461d211ee1e9469668ca4196c1a31464db8cb98b38bf59fc749b0182",
+      "bytes": 23034,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/9565f81197c3a9064948.webp",
+      "sha256": "9565f81197c3a9064948644eada4ceb4b38e7a141ca05ad8ec038c53053e1d8b",
+      "bytes": 56932,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/552cafea09114d2583fa.svg",
+      "sha256": "552cafea09114d2583fa60fbbf03e3e8924914c7cb4bb6c490a70bcd42c50da6",
+      "bytes": 30804,
+      "mime": "image/svg+xml"
+    },
+    {
+      "path": "/portfolio/media/a910174bc180be30dcb0.webp",
+      "sha256": "a910174bc180be30dcb0688975af8ac3035f4c0501ffbb6cf92dca7092cef06f",
+      "bytes": 7038,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/8fc80550ac18f25af0c6.webp",
+      "sha256": "8fc80550ac18f25af0c67961b4a0c60d6d4c43f43023db5cc8a3f5d815cdb551",
+      "bytes": 47200,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/7bc6795334e36c633da9.webp",
+      "sha256": "7bc6795334e36c633da9892b64d9b7d96611535a8d7a256a860b65066c45133f",
+      "bytes": 75160,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/314b27bab4d0bc82fdc0.webp",
+      "sha256": "314b27bab4d0bc82fdc0d7ad7018a1cd6fb955a533a84e2aefb90298a8e22c5e",
+      "bytes": 40694,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/2e49e309c45bd6c13e7d.webp",
+      "sha256": "2e49e309c45bd6c13e7d03f34420fe73d7c0c92234f45cfeab3353f79a3cb289",
+      "bytes": 49226,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/f75b9a4592e2fc62e00e.webp",
+      "sha256": "f75b9a4592e2fc62e00ece4344ef54d7a2ec271911d9c66cfa8518346345b1aa",
+      "bytes": 42110,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/21f229083be54fe87c14.webp",
+      "sha256": "21f229083be54fe87c143d0019df0cb154f6071e3ec5174372d539f5c4c153fc",
+      "bytes": 41930,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/4cfcec7ea56659dc70a6.webp",
+      "sha256": "4cfcec7ea56659dc70a60c6c0142072e4195274e43d91ff3f1653c4b99a19588",
+      "bytes": 14118,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/0848497b72c8bc51d913.png",
+      "sha256": "0848497b72c8bc51d913c980e4ec92a940d0d484713eecd67f61dea050dcbbc1",
+      "bytes": 14429,
+      "mime": "image/png"
+    },
+    {
+      "path": "/portfolio/media/0af9d561a19cbb2262d6.webp",
+      "sha256": "0af9d561a19cbb2262d64005208f220ceb0a66c0031336fde93ae7607c6f74ef",
+      "bytes": 32908,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/44798b91f61f01b72f05.webp",
+      "sha256": "44798b91f61f01b72f05a8b5efd58e945e83c48cb2cf6fc1fb05494737d40dd0",
+      "bytes": 28752,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/de25f23d90939e11c969.webp",
+      "sha256": "de25f23d90939e11c969bba34a09840b1f7bf268be859091a41e61f7a32db8af",
+      "bytes": 182486,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/eea5e1c64a0d344bab21.webp",
+      "sha256": "eea5e1c64a0d344bab21b8d0d170031c9b0dd3b406825985aad13d9124565ffa",
+      "bytes": 60114,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/a5b4deeae555c3a0b88c.webp",
+      "sha256": "a5b4deeae555c3a0b88c88f9356392588affedabbc3608ab61f563e58f206c14",
+      "bytes": 67258,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/64f6a2dae2c0fe1f2d47.webp",
+      "sha256": "64f6a2dae2c0fe1f2d47a714a3b49d6fb3cb56a2fe7c724791f2c5f1a5452ebe",
+      "bytes": 26002,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/719855120e3dc7238e09.webp",
+      "sha256": "719855120e3dc7238e09b1d8a49d249058b6944d40199ce094f0d4661ad3325d",
+      "bytes": 41786,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/portfolio/media/5ee25707c426c7ed8820.svg",
+      "sha256": "5ee25707c426c7ed8820ad98d5475c7a60afbd6332008358a192120ac8bd8b6b",
+      "bytes": 7876,
+      "mime": "image/svg+xml"
+    },
+    {
+      "path": "/portfolio/media/c9a88acf470f7e0d43f6.svg",
+      "sha256": "c9a88acf470f7e0d43f6d4e170a24dd65350219176d388fb42aa2109af16f587",
+      "bytes": 3126,
+      "mime": "image/svg+xml"
+    },
+    {
+      "path": "/portfolio/media/ccce59465ae5c61930ad.ttf",
+      "sha256": "ccce59465ae5c61930ada5453834f60500fbd95084d85db63e0e65fad0125455",
+      "bytes": 72916,
+      "mime": "font/ttf"
+    },
+    {
+      "path": "/portfolio/media/a8eefb873ba9c9020665.ttf",
+      "sha256": "a8eefb873ba9c9020665f8a98302697ce1f3b79ab2deef6ee508c0ca6a82e876",
+      "bytes": 72996,
+      "mime": "font/ttf"
+    },
+    {
+      "path": "/portfolio/media/7022da390e9b401ea35b.ttf",
+      "sha256": "7022da390e9b401ea35b722f8ed2376948e70add10954bc798839b4bfe17ef3f",
+      "bytes": 71160,
+      "mime": "font/ttf"
+    },
+    {
+      "path": "/portfolio/media/5c1b7b77c2d6132460f0.ttf",
+      "sha256": "5c1b7b77c2d6132460f03b60c175adc80da1ebd0b418c785135b1aed27a28b30",
+      "bytes": 71212,
+      "mime": "font/ttf"
+    },
+    {
+      "path": "/portfolio/media/b8f5e0a8bdd6a12c722c.ttf",
+      "sha256": "b8f5e0a8bdd6a12c722ca5635d9da87e77ccbb2d0172112e34e00c4e55f2cd5a",
+      "bytes": 109472,
+      "mime": "font/ttf"
+    },
+    {
+      "path": "/portfolio/media/68c4493c7c6c9aaff48d.ttf",
+      "sha256": "68c4493c7c6c9aaff48defeeb6408e7ce705efc4c33363de4d9d6f5e07775064",
+      "bytes": 111588,
+      "mime": "font/ttf"
+    }
+  ],
+  "dungeonAssets": [
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/index.html",
+      "sha256": "333a3bfc0600e266d9ce09aab927b2671096bee746bda4a5cce5acbdf2c933bc",
+      "sourceSha256": "518560a0541cdd8356a71f6430aef1474d7d66985e58513d8dce9af3069450f9",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/04_1x7sj8o3fj.css",
+      "sha256": "5b600d0beda8b70597c8ed405829d2a08a77aac61e01e2fd814fdb20420d2984",
+      "sourceSha256": "5b600d0beda8b70597c8ed405829d2a08a77aac61e01e2fd814fdb20420d2984",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/0cz1d0mv5g_q7.js",
+      "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+      "sourceSha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/1muk1kjoh244i.js",
+      "sha256": "2d007e7fc91d0c8df7e54128dbf7175c8e286ac6e6739ac792dfef24a0be409e",
+      "sourceSha256": "516e1305c71a616b9734a07bc8bff0ea4920cd3babff8176fdb8ec6546cfa9cd",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/1njgnfwy5emmo.js",
+      "sha256": "6d6193e787da63101daa554485b17404a56e0abf47e1a3f41b102daa77030ac9",
+      "sourceSha256": "6d6193e787da63101daa554485b17404a56e0abf47e1a3f41b102daa77030ac9",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/1pb65tbyicxr8.js",
+      "sha256": "b49616747ab58b35c43377d9ce94aff37c077d068abbd37f4be06fffc09bcafb",
+      "sourceSha256": "b49616747ab58b35c43377d9ce94aff37c077d068abbd37f4be06fffc09bcafb",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/2huuag93qmh2e.js",
+      "sha256": "d9fc18bcd099c666dda4ed83bd15dae969c641d3fc797a03ebd1c5a1a1f60558",
+      "sourceSha256": "d9fc18bcd099c666dda4ed83bd15dae969c641d3fc797a03ebd1c5a1a1f60558",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/30uqm-2h0bzxp.js",
+      "sha256": "46e0ccda413c0e046ac664e87b666a235c12c328459757d3ed51d70ac26011e9",
+      "sourceSha256": "ef5983bb67ea9ab07939f5d2196f34c9cd33447ae4309ee4ae5cdde8807a0e8f",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/35bm0bt2ewol-.js",
+      "sha256": "2b37b9e92fae0ac874007b977152ff48cc0fcc1d371e502ee36b347fb3415bf2",
+      "sourceSha256": "a5147ddea7825e5e2a918353730c67e97cd1e5ebe25c4ef5e6178fb725065efd",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/36atvn3tq0htp.js",
+      "sha256": "96f650539e5c3b4d3d36cdd08165b7cfd7cdc0ef454ca70edf859f47c86197f5",
+      "sourceSha256": "e4946ae9e6579deb0c4effa4efd28b49942417f104e16044d75b58e80515a48c",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/3swnduq6_9j_q.js",
+      "sha256": "1e8a48edbd344fbe2495359a4c1404696a2473ed145f108fa4e2572a8e020e98",
+      "sourceSha256": "1e8a48edbd344fbe2495359a4c1404696a2473ed145f108fa4e2572a8e020e98",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/turbopack-0_h5-s0lfuxoe.js",
+      "sha256": "bd4df1748df7b50f40cd164f3ba382a60db9b3aab93dd29d29b7fb0dbcfe5f18",
+      "sourceSha256": "bd4df1748df7b50f40cd164f3ba382a60db9b3aab93dd29d29b7fb0dbcfe5f18",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/turbopack-3-ry682tkyiqk.js",
+      "sha256": "7ccedcab587849fb2ec6ac627491f7228b23fe0117150a3049d7d0024fad0360",
+      "sourceSha256": "8bbb58cbfd4633c1d828c6bc37bc32abc768a149c01b1dfc4f5131fd81274551",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/turbopack-worker-1hrsqshz0gfey.js",
+      "sha256": "cf3e52b25b4c37e2b5e8ddfe13b5cfda970faec44792881b195d518b691aa93d",
+      "sourceSha256": "cf3e52b25b4c37e2b5e8ddfe13b5cfda970faec44792881b195d518b691aa93d",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/0c795a286deabae8-s.p.3vm0tq4e-zz_5.woff2",
+      "sha256": "cfff412005eed2f0152d1c110c78ac564642b943e64322fbd687083177d6fa70",
+      "sourceSha256": "cfff412005eed2f0152d1c110c78ac564642b943e64322fbd687083177d6fa70",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/13bf9871fe164e7f-s.2f7nqdagzwx2-.woff2",
+      "sha256": "992eea2f70210457ddd1196de4df3240919ffe068ad188c79d985fba4565d3bf",
+      "sourceSha256": "992eea2f70210457ddd1196de4df3240919ffe068ad188c79d985fba4565d3bf",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/1bffadaabf893a1e-s.3-6t-g6q0vh0a.woff2",
+      "sha256": "a28eb6d3ccb534ae0c94ca999371df024aab60b08c3c8a5720ee9e32fa0faaa2",
+      "sourceSha256": "a28eb6d3ccb534ae0c94ca999371df024aab60b08c3c8a5720ee9e32fa0faaa2",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/2bbe8d2671613f1f-s.0k62hbripvv8p.woff2",
+      "sha256": "8db00ff46c67b22cda8bed865acf7077651cac8d2841d5b40980556b48961931",
+      "sourceSha256": "8db00ff46c67b22cda8bed865acf7077651cac8d2841d5b40980556b48961931",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/2c55a0e60120577a-s.0-dom-5bn10r2.woff2",
+      "sha256": "fccca918fea40089dacadc7045861314d1a6bc91f1f323cc1eeb22ebcdb321b5",
+      "sourceSha256": "fccca918fea40089dacadc7045861314d1a6bc91f1f323cc1eeb22ebcdb321b5",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/3fe682a82f50d426-s.0vfdmo25voy_0.woff2",
+      "sha256": "7db7affbce1fdee69c1ffc2641bbca289b049867f524c9d861fe35ab6670bf29",
+      "sourceSha256": "7db7affbce1fdee69c1ffc2641bbca289b049867f524c9d861fe35ab6670bf29",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/5476f68d60460930-s.2uwcyprjm3xu3.woff2",
+      "sha256": "46dd4cdca58c26ae87cc6927657bf83b2e8abfc39ffd0ab176e301a8d28d22bf",
+      "sourceSha256": "46dd4cdca58c26ae87cc6927657bf83b2e8abfc39ffd0ab176e301a8d28d22bf",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "sha256": "1e06740a02a443fb7f3eeda8fcaa685a0f6c620e3f01e6666e847295469ce3ad",
+      "sourceSha256": "1e06740a02a443fb7f3eeda8fcaa685a0f6c620e3f01e6666e847295469ce3ad",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/71b036adf157cdcf-s.0bp8oijd_gu96.woff2",
+      "sha256": "3edf363dbf9d5fa0cdc784ae2b431a8a4152f4055a8a8858028c0bd668808273",
+      "sourceSha256": "3edf363dbf9d5fa0cdc784ae2b431a8a4152f4055a8a8858028c0bd668808273",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "sha256": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4",
+      "sourceSha256": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/89b21bb081cb7469-s.1fby2rem9ngyr.woff2",
+      "sha256": "1390e86cc2823e759358918c01c4fcc1b6e4f01bca915bdbeb6d68eb5c244405",
+      "sourceSha256": "1390e86cc2823e759358918c01c4fcc1b6e4f01bca915bdbeb6d68eb5c244405",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/9c72aa0f40e4eef8-s.1y4-pdgsjb-pw.woff2",
+      "sha256": "aebf2ab4a4ce6810d73c1ac7be7cafb4e5ec4cee2d6db5fb3e09691747ec4bd6",
+      "sourceSha256": "aebf2ab4a4ce6810d73c1ac7be7cafb4e5ec4cee2d6db5fb3e09691747ec4bd6",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/ab624315db63c58d-s.3tv8ju5p7udbb.woff2",
+      "sha256": "bbe669d7448c351de7dc0a945a94aa6e0d9c0464ea2ccd85152cb3f53229306a",
+      "sourceSha256": "bbe669d7448c351de7dc0a945a94aa6e0d9c0464ea2ccd85152cb3f53229306a",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/ad66f9afd8947f86-s.3lvt2whj97whp.woff2",
+      "sha256": "a2e2c783ca6f9c20486e81e72a279203e86730bbf8f01ff6a5ee9dbd09e1c271",
+      "sourceSha256": "a2e2c783ca6f9c20486e81e72a279203e86730bbf8f01ff6a5ee9dbd09e1c271",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/cc545e633e20c56d-s.176arc174-8zp.woff2",
+      "sha256": "af7486955880be1c2b972e9c766acffb776768d669b6576ed9a0919ce72e7ca6",
+      "sourceSha256": "af7486955880be1c2b972e9c766acffb776768d669b6576ed9a0919ce72e7ca6",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/media/e94b8ab81811a983-s.07tvg3tgusgux.woff2",
+      "sha256": "79bc839264c4a3c9b988de4acbc0dcf0d9ca4b41e2df523940f81b78e3d6fdb3",
+      "sourceSha256": "79bc839264c4a3c9b988de4acbc0dcf0d9ca4b41e2df523940f81b78e3d6fdb3",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/ZxrWAJQilE05L8YJ5M5Nr/_buildManifest.js",
+      "sha256": "9476e0afd3f9da68a64e6ec58631191fd3eaca62c9f5a377e7517fe9a89e59ea",
+      "sourceSha256": "9476e0afd3f9da68a64e6ec58631191fd3eaca62c9f5a377e7517fe9a89e59ea",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/ZxrWAJQilE05L8YJ5M5Nr/_clientMiddlewareManifest.js",
+      "sha256": "5483e3295dc35dfe29ea932efc85341c916f10ff78ff5b0e965e003710893a4a",
+      "sourceSha256": "5483e3295dc35dfe29ea932efc85341c916f10ff78ff5b0e965e003710893a4a",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/ZxrWAJQilE05L8YJ5M5Nr/_ssgManifest.js",
+      "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+      "sourceSha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/weights/ref-2000-p3.bin",
+      "sha256": "7b45406ecdf59d740c1073ff39946cb4e724ebd943c7fe0dd3c3e8e55f0ffe5d",
+      "sourceSha256": "7b45406ecdf59d740c1073ff39946cb4e724ebd943c7fe0dd3c3e8e55f0ffe5d",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/tfjs/tfjs-backend-wasm-simd.wasm",
+      "sha256": "77ebb28a6d34f371dbbf2086b7f2de8994acd8ea5a3cf1fa24d2c26c840cac7b",
+      "sourceSha256": "77ebb28a6d34f371dbbf2086b7f2de8994acd8ea5a3cf1fa24d2c26c840cac7b",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/tfjs/tfjs-backend-wasm-threaded-simd.wasm",
+      "sha256": "c052228d4bef185c27bbe59a9e029570c78bbb9f08b3cb46b597851650373de2",
+      "sourceSha256": "c052228d4bef185c27bbe59a9e029570c78bbb9f08b3cb46b597851650373de2",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    },
+    {
+      "path": "/experiments/dry-run-dungeon/runtime/tfjs/tfjs-backend-wasm.wasm",
+      "sha256": "70a5d516060464e5269f01c74bac1772d6b8ab6cb612acf16b5cdaf61f78d892",
+      "sourceSha256": "70a5d516060464e5269f01c74bac1772d6b8ab6cb612acf16b5cdaf61f78d892",
+      "transformation": "URL namespace only for text assets; binary files unchanged"
+    }
+  ],
+  "sourceAppCommit": "e686812c76850baba85858f7c3fdf1d3d1a84afc",
+  "typography": "Owner approved Geist for launch; all trial study fonts excluded.",
+  "openExperimentClassification": [
+    "Dry Run Dungeon",
+    "Worldstage",
+    "Premise"
+  ],
+  "notYetPresented": [
+    "Worldstage",
+    "Premise"
+  ]
+}

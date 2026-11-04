@@ -24,3 +24,17 @@ AA resize and contrast requirements still apply.
 Josh also requested phone access to the LinkedIn screenshot. The existing,
 unaltered hero JPEG is published at `/share/josh-cole-hero-linkedin.jpg`, so it can
 be opened directly and saved on a phone without access to local Windows files.
+
+## 16px body-copy follow-up
+
+Josh approved seeing the recommended hierarchy: 13px supporting text with 16px
+body copy. Homepage hero copy, eleven project descriptions, Dungeon introduction
+and method paragraphs, and the GenSound introduction now use 16px at every
+breakpoint. Captions, metadata and controls retain the preceding floor; display
+headings are unchanged. The scope remains the homepage.
+
+Chromium measured all 16 body-copy elements at 16px at 1440, 768, 390 and 320px
+with no horizontal overflow. Production build/TypeScript and source/presentation
+integrity passed. Desktop and 390px case-list captures are available at
+`/share/homepage-body-16px-desktop.jpg` and `/share/homepage-body-16px-mobile.jpg`.
+These previews show actual page content and can be viewed from a phone.

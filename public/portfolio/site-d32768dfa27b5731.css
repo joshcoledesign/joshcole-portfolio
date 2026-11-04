@@ -2622,9 +2622,15 @@ html,body{background:#0b0d0c!important;margin:0!important;}#culture-case-studies
  .portfolio-site-links a,
  .portfolio-site-links button
 ){font-size:13px;}
-@media(max-width:560px){
- #culture-case-studies .rh-site .rh-work-name small{font-size:13px;}
-}
+/* Reading copy stays at 16px on phones as well as desktop. */
+#culture-case-studies .rh-site :is(
+ .rh-hero-copy>p,
+ .rh-work-name small,
+ .rh-work-list details>p,
+ .rh-dungeon-copy>p,
+ .rh-dungeon-method p,
+ .gs-home-feature p
+){font-size:16px;}
 
 /* The same content cap and chapter choreography across both portfolio renderers. */
 .portfolio-page-content{width:100%;max-width:1680px;margin-inline:auto;padding-inline:min(5vw,84px);box-sizing:border-box;}

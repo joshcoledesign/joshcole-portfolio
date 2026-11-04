@@ -194,6 +194,42 @@ claimed as rerun for this copy-only release. Desktop and 390px viewport checks
 passed without horizontal overflow; actual Safari and physical phones remain
 outside this verification.
 
+## Full-screen layout toggle (2026-11-04)
+
+The full-screen toolbar now has a Rings/Hilbert segmented toggle. Switching
+updates the preview, title, pressed state and active download without closing or
+re-entering fullscreen. The selected PNG size stays unchanged. One viewer-layout
+function serves the main open buttons and the toggle; analysis and export
+encoding are unchanged, as is the approved explanatory copy.
+
+Source: [genSound PR 6](https://github.com/joshcoledesign/genSound/pull/6), revision
+`a98937d0148482c310a52b474c8b26c97655f5a6`. Source testing passed 98 actual exports
+across Chromium, Firefox and Playwright WebKit at desktop/phone widths, including
+both switching directions, keyboard activation, retained native fullscreen and
+PNG size, exact active preview/export pixels, and sharp 500/2000px outputs.
+Landscape and 320px fallback cases also switched layouts before downloading.
+The phone toolbar screenshot was inspected. Actual Safari remains deferred.
+
+## Full-screen palette controls (2026-11-04)
+
+The viewer includes the live Palette fieldset: edit, add/remove colors, spread
+around the wheel and switch Hard steps/Blend. Edits redraw both layouts and the
+active preview, persist and appear in PNG exports. The same fieldset moves back
+to the rail on close, Escape or native fullscreen exit, keeping a single control
+set and state. It sits beside the art on wide screens and in a bounded scroll
+area below on phones, with always-visible remove buttons in the viewer.
+
+Source: [genSound PR 7](https://github.com/joshcoledesign/genSound/pull/7), revision
+`f59d7c91eb6873cee2c5a4c99bfa2daea883c88c`. Source palette regression passed all
+six Chromium/Firefox/Playwright WebKit desktop/phone cases, including both
+previews, edits, wheel, blend, 12-color cap, one-color minimum, keyboard,
+main/viewer synchronization and reload persistence. Source PNG regression passed
+98 real exports, including changed palettes, exact native/4× pixels, settings
+metadata, native fullscreen and landscape/320px fallback. Desktop and phone
+screenshots were inspected. Lint, TypeScript/build, authored-copy and asset-hash
+checks passed. Approved explanatory copy, worker, data and licenses are unchanged;
+no dependencies were added. Actual Safari remains deferred.
+
 ## Initial release boundary (2026-11-03)
 
 Josh explicitly authorized production publication on 2026-11-03 with Safari

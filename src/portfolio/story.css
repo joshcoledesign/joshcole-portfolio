@@ -38,3 +38,22 @@
 @media(prefers-reduced-motion:reduce){
   #culture-case-studies .xc-chapter>h2{position:static;}
 }
+/* Paint the section color beyond its capped content, without changing layout. */
+#culture-case-studies [data-band-color]{border-image:linear-gradient(var(--band-color),var(--band-color)) fill 0 / 0 / 0 100vw;}
+#culture-case-studies .ac-rfp-split{border-image:linear-gradient(90deg,var(--split-first) 50%,var(--split-last) 50%) fill 0 / 0 / 0 100vw;}
+@media(max-width:800px){
+ #culture-case-studies .ac-rfp-split{border-image:none;grid-template-columns:minmax(0,1fr);}
+ #culture-case-studies .ac-rfp-split>div:first-child{border-right:0;border-image:linear-gradient(var(--split-first),var(--split-first)) fill 0 / 0 / 0 100vw;}
+ #culture-case-studies .ac-rfp-split>div:last-child{border-image:linear-gradient(var(--split-last),var(--split-last)) fill 0 / 0 / 0 100vw;}
+}
+/* Only the first, non-animated boundary fades across the living experiment. */
+#culture-case-studies .rh-site>.rh-work{border-top:0;position:relative;}
+#culture-case-studies .rh-site>.rh-work::before{content:'';position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,var(--rh-rule) 0%,var(--rh-rule) 35%,transparent 100%);pointer-events:none;}
+#culture-case-studies .rh-site .rh-quick-culture .rh-live-badge{display:flex;align-items:baseline;gap:10px;font:500 clamp(26px,2.5vw,34px)/1.15 var(--rh-face),Arial,sans-serif;letter-spacing:-.04em;color:var(--rh-paper);margin:0 0 16px;}
+#culture-case-studies .rh-site .rh-live-badge>span{font:13px/1.5 'Courier New',monospace;letter-spacing:0;color:var(--rh-ink);}
+.cw-viewer-image{width:calc(min(100%,1680px) * var(--image-zoom,1));margin-inline:auto;}
+.cw-viewer-options{justify-content:center;font-size:13px;}
+.cw-viewer-options label{margin-left:0;font-size:13px;}
+.cw-viewer-options input{min-height:44px;}
+#culture-case-studies .xc-inspector{width:100%;max-width:none;height:100dvh;}
+#culture-case-studies .xc-inspector-pan>img{width:calc(min(100%,1680px) * var(--image-zoom,1));margin-inline:auto;}

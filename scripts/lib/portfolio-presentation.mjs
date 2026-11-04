@@ -1,5 +1,7 @@
 // Presentation hooks only: source copy, images and project-specific interactions stay intact.
 export function decoratePortfolioDocument(html){
+  const bands=new Set(['sx-challenge','sx-interaction','sx-condition','sx-tags','sx-scope','sx-map-sequence','eb-screen-study','eb-chapter-1','eb-chapter-4','xc-brand-proof','ac-hotel-anchor','ac-nemo-hero','ac-nemo-lab','xc-story','ac-nemo-crosslink','ac-rfp-split','ac-rfp-walkthrough','ns-and-hero','ns-evidence','ns-ouya-hero','ns-ouya-acts','ns-willow-hero','ns-em-lab','ns-em-crosslink']);
+  html=html.replace(/<(?:section|article|aside|div|nav)\b[^>]*\bclass="([^"]+)"[^>]*>/g,(tag,classes)=>classes.split(/\s+/).some(name=>bands.has(name))?tag.replace(/>$/,' data-full-bleed>'):tag);
   const ruled=new Set(['rh-work','rh-open-experiments','rh-dungeon','rh-lab','rh-specimen','sx-pad','sx-principles','eb-chapter','xc-chapter','ns-evidence','xc-pad','dg-method','dg-observations','dg-reading','dg-findings','gs-method']);
   html=html.replace(/<section\b([^>]*\bclass="([^"]+)"[^>]*)>/g,(tag,attributes,classes)=>{
     if(!classes.split(/\s+/).some(name=>ruled.has(name)))return tag;

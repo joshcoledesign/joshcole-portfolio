@@ -12,7 +12,7 @@ const chapterHeading='md:sticky md:top-24 md:self-start motion-reduce:!static';
 const chapter='relative grid gap-10 border-t border-[#373d36] py-14 md:grid-cols-[.8fr_1.2fr] md:gap-20 md:py-24';
 
 export default function AboutPage(){
-  return <PortfolioPageFrame><main data-about-motion className="mx-auto max-w-[1680px] px-[5%]">
+  return <PortfolioPageFrame><main data-about-motion className="portfolio-page-content">
     <section className="grid gap-12 py-12 lg:grid-cols-[1.2fr_.8fr] lg:gap-20 lg:py-20" aria-labelledby="about-title">
       <div><p className={label}>ABOUT / JOSH COLE</p><h1 id="about-title" className="mt-10 text-[clamp(56px,8.2vw,126px)] leading-[.94] tracking-[-.065em]">The work<br /><span className="text-[#42e2ed]">nobody sees.</span></h1><div className="mt-10 max-w-2xl border-l-2 border-[#42e2ed] pl-6 sm:mt-14"><p className={body} data-about-story="0">{story[0]}</p></div><a href="#where-it-started" className="mt-7 inline-flex min-h-11 items-center !text-[#42e2ed]">From the inside out ↓</a></div>
       <figure className="m-0 self-end lg:pb-2"><div data-about-portrait-frame className="overflow-hidden bg-[#0b0d0c]"><Image data-about-portrait src="/about/josh-kelly.png" alt="ASCII portrait of Josh and Kelly Cole" width={720} height={955} sizes="(max-width: 1023px) 90vw, 38vw" priority className="mx-auto h-auto max-h-[640px] w-full object-contain grayscale" /></div><figcaption className="mt-5 flex justify-between gap-4 border-t border-[#373d36] pt-4 font-mono text-[11px] leading-5 text-[#a9ada5]"><span>JOSH &amp; KELLY COLE</span><span>THE PEOPLE / THE PRACTICE</span></figcaption></figure>

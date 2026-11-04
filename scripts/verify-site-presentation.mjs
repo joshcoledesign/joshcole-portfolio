@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {decoratePortfolioDocument} from './lib/portfolio-presentation.mjs';
+
+const read=file=>fs.readFileSync(file,'utf8');
+const source=read('src/portfolio/document.html');
+const decorated=decoratePortfolioDocument(source);
+const compiled=JSON.parse(read('src/portfolio/compiled-document.json'));
+assert.equal((decorated.match(/<\/main><footer class="(?:sx-footer|eb-footer|xc-footer)/g)||[]).length,11,'Every case colophon must sit outside capped main');
+assert.equal((compiled.match(/data-story-section/g)||[]).length,78,'Preserve coverage of story sections');
+assert.ok(!decorated.includes('<header data-story-section'),'Navigation must not receive story effects');
+for(const file of ['src/app/about/page.tsx',...['hype','worldstage','premise'].map(name=>`src/app/(open-experiments)/experiments/${name}/page.tsx`)])assert.ok(read(file).includes('className="portfolio-page-content"'),file+' shared width');
+const css=read('src/portfolio/story.css');
+assert.ok(css.includes('max-width:1680px')&&css.includes('margin-inline:auto'));
+assert.ok(css.includes('grid-area:auto!important'),'Decorative lines must not inherit case grid-column rules');
+assert.ok(css.includes('(prefers-reduced-motion:no-preference)')&&css.includes('(prefers-reduced-motion:reduce)'));
+const manifest=JSON.parse(read('src/portfolio/story-manifest.json'));
+const script=read('public'+manifest.script);
+assert.ok(script.includes('mountStoryMotion')&&script.includes('data-story-rule')&&script.includes('portfolio:view-change'),'Résumé and standalone views use the shared motion runtime');
+assert.ok(!script.includes('qaErrorStack'),'Temporary browser diagnosis must not ship');
+assert.ok(read('src/lib/resume-shell-print.ts').includes('max-width:1680px'));
+console.log(JSON.stringify({result:'passed',ruledSections:78,fullWidthCaseFooters:11,sharedWidth:1680,sharedMotion:true}));

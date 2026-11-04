@@ -246,7 +246,9 @@ export function renderResumeDocument(data: ResumeData): string {
   )
     .replace("%%PDF_HREF%%", "/resume/download")
     .replace("%%PLAINTEXT%%", () => renderResumePlainText(data))
-    .replace("%%BODY%%", () => renderResumeBody(data));
+    .replace("%%BODY%%", () => renderResumeBody(data)
+      .replace(/<section class="([^"]+)">/g,'<section class="$1" data-story-section><span data-story-rule aria-hidden="true"></span>')
+      .replace(/<h2\b/g,'<h2 data-story-intro'));
 
   // The shell is a fragment: everything before the plaintext block belongs in
   // <head>. Wrapping it gives a standards-mode document with a language.

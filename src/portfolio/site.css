@@ -2595,3 +2595,33 @@ html,body{background:#0b0d0c!important;margin:0!important;}#culture-case-studies
  #culture-case-studies .rh-experiments-intro h2 span{display:block;}
  #culture-case-studies .rh-experiments-arrow{font-size:36px;padding-top:5px;}
 }
+
+/* Homepage supporting text has a 13px floor at every breakpoint. */
+#culture-case-studies .rh-site :is(
+ nav,
+ .portfolio-ink,
+ .portfolio-ink select,
+ .rh-eyebrow,
+ .rh-hero-fps,
+ .rh-hero-links,
+ .rh-quick-culture .rh-live-badge,
+ .rh-quick-description>a,
+ .rh-quick-actions button,
+ .rh-quick-hint,
+ .rh-section-label,
+ .rh-number,
+ .rh-category,
+ .rh-dungeon-link,
+ .rh-dungeon-visual figcaption,
+ .rh-full-capture,
+ .rh-method-row,
+ .gs-home-feature figcaption,
+ .rh-experiment-strip a>span:last-child,
+ .rh-experiment-note,
+ .rh-footer-note,
+ .portfolio-site-links a,
+ .portfolio-site-links button
+){font-size:13px;}
+@media(max-width:560px){
+ #culture-case-studies .rh-site .rh-work-name small{font-size:13px;}
+}

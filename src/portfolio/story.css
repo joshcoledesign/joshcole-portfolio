@@ -12,13 +12,26 @@
 [data-story-root]{--story-accent:var(--experiment-accent,#42e2ed);}
 [data-story-section]{position:relative;}
 [data-story-rule]{position:absolute;inset-inline:0;top:0;height:1px;background:var(--story-accent,#42e2ed);transform-origin:left;pointer-events:none;grid-area:auto!important;}
+[data-site-header]{position:sticky;top:0;z-index:40;background:#0b0d0c;}
+#culture-case-studies :is(.rh-header,.rd-header){position:sticky;top:0;z-index:40;background:var(--rh-surface,#0b0d0c);}
+#gprs-below-the-surface .sx-header{position:sticky;top:0;z-index:40;background:var(--sx-black);}
+#einstein-case-study .eb-header{position:sticky;top:0;z-index:40;background:var(--eb-bg);}
+#culture-case-studies .xc-header{position:sticky;top:0;z-index:40;background:var(--xc-bg);}
+#culture-case-studies[data-page=gensound] .rd-header{background:#121316;}
+#culture-case-studies[data-page=dungeon] .rd-header{background:#101117;}
+[data-story-section],#culture-case-studies [id],[data-story-root] [id],[data-about-motion] [id]{scroll-margin-top:calc(var(--site-header-height,112px) + 24px);}
+/* Reserve room for wrapped navigation before the first client measurement. */
+@media(max-width:480px){:root{--site-header-height:180px;}}
+@media(max-width:360px){:root{--site-header-height:224px;}}
+#culture-case-studies .rh-lab{padding-top:28px;}
+[data-about-motion] .md\:sticky{top:calc(var(--site-header-height,112px) + 24px);}
 @media(min-width:801px) and (prefers-reduced-motion:no-preference){
   /* Spanning prose rows keeps a heading pinned until the next full-width image. */
-  #culture-case-studies .xc-chapter>h2{grid-row:2 / span 30;top:96px;}
+  #culture-case-studies .xc-chapter>h2{grid-row:2 / span 30;top:calc(var(--site-header-height,112px) + 24px);}
   #culture-case-studies :is(.dg-method-heading,.dg-reading>div:first-of-type,.gs-method-intro),
-  #gprs-below-the-surface :is(.sx-condition-title,.sx-brief>div:first-child){position:sticky;top:96px;align-self:start;}
+  #gprs-below-the-surface :is(.sx-condition-title,.sx-brief>div:first-child){position:sticky;top:calc(var(--site-header-height,112px) + 24px);align-self:start;}
   #einstein-case-study .eb-chapter:not(:has(.eb-morning)):has(>h2){display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);column-gap:8%;}
-  #einstein-case-study .eb-chapter:not(:has(.eb-morning))>h2{grid-column:1;grid-row:1 / span 30;position:sticky;top:96px;align-self:start;}
+  #einstein-case-study .eb-chapter:not(:has(.eb-morning))>h2{grid-column:1;grid-row:1 / span 30;position:sticky;top:calc(var(--site-header-height,112px) + 24px);align-self:start;}
   #einstein-case-study .eb-chapter:not(:has(.eb-morning))>:not(h2):not(figure):not([data-story-rule]){grid-column:2;}
   #einstein-case-study .eb-chapter>figure{grid-column:1/-1;}
 }

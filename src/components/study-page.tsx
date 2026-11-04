@@ -12,6 +12,7 @@ import { PromptLine } from "@/components/prompt-line";
 import type { StudyDocument } from "@/lib/study-documents";
 import type { Piece } from "@/lib/work";
 import styles from "./study-page.module.css";
+import { ImageZoom } from "./image-zoom";
 
 type ActiveImage = {
   src: string;
@@ -234,7 +235,7 @@ export function StudyPage({
       const dialog = dialogRef.current;
       if (!dialog) return;
       const focusable = Array.from(
-        dialog.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'),
+        dialog.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'),
       ).filter((element) => element.getClientRects().length > 0);
       if (!focusable.length) return;
       const first = focusable[0];
@@ -361,12 +362,7 @@ export function StudyPage({
           >
             ✕
           </button>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={activeImage.src}
-            alt={activeImage.alt}
-            onClick={(event) => event.stopPropagation()}
-          />
+          <ImageZoom key={activeImage.src} src={activeImage.src} alt={activeImage.alt} />
           {activeImage.caption && (
             <p onClick={(event) => event.stopPropagation()}>{activeImage.caption}</p>
           )}

@@ -11,6 +11,7 @@ import type { Piece } from "@/lib/work";
 import { layout } from "@/lib/treemap";
 import { youtubeId } from "@/lib/youtube";
 import styles from "./series-surface.module.css";
+import { ImageZoom } from "./image-zoom";
 
 const CANVAS_W = 1000;
 const DESKTOP_H = 625;
@@ -26,10 +27,8 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
   const closeRef = useRef<HTMLButtonElement>(null);
   const activeRef = useRef<number | null>(null);
   const [mapWidth, setMapWidth] = useState(CANVAS_W);
-  const [fitFrame, setFitFrame] = useState<number | null>(null);
   const videoId = piece.video ? youtubeId(piece.video) : null;
   const hasPhotography = piece.tags.includes("Photography");
-  const fitMediaByDefault = hasPhotography || piece.tags.includes("Portrait") || Boolean(videoId);
   const mediaType = videoId ? (hasPhotography ? "SERIES · VIDEO + PHOTOGRAPHY" : "SERIES · VIDEO") : "SERIES";
   const frameNoun = videoId && hasPhotography ? "photograph" : "frame";
 
@@ -47,7 +46,6 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
   const activeIndex = frameParam ? Number.parseInt(frameParam, 10) - 1 : -1;
   const active = activeIndex >= 0 && activeIndex < piece.images.length ? activeIndex : null;
   const dialogOpen = active !== null;
-  const fitImage = fitMediaByDefault || (active !== null && fitFrame === active);
   const hasStoryPanel = active !== null && Boolean(piece.images[active].story);
 
   useEffect(() => {
@@ -56,7 +54,6 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
 
   const setFrame = useCallback(
     (index: number | null) => {
-      setFitFrame(null);
       const next = new URLSearchParams(searchParams.toString());
       if (index === null) next.delete("frame");
       else next.set("frame", String(index + 1).padStart(2, "0"));
@@ -85,6 +82,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
         setFrameRef.current(null);
         return;
       }
+      if (event.target instanceof Element && event.target.closest('input, [aria-label="Scrollable image"]') && ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
       if (event.key === "ArrowLeft") {
         const next = (current - 1 + piece.images.length) % piece.images.length;
         activeRef.current = next;
@@ -99,7 +97,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
       const dialog = dialogRef.current;
       if (!dialog) return;
       const focusable = Array.from(
-        dialog.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'),
+        dialog.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'),
       ).filter((element) => element.getClientRects().length > 0);
       if (!focusable.length) return;
       const first = focusable[0];
@@ -231,19 +229,6 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
           <button ref={closeRef} className={styles.close} type="button" aria-label={`Close ${frameNoun}`} onClick={() => setFrame(null)}>
             ✕
           </button>
-          {!fitMediaByDefault && (
-            <button
-              className={styles.viewToggle}
-              type="button"
-              aria-label={fitImage ? "Show image at readable width" : "Fit whole image in view"}
-              onClick={(event) => {
-                event.stopPropagation();
-                setFitFrame(fitImage ? null : active);
-              }}
-            >
-              {fitImage ? "[ view details ]" : "[ fit whole image ]"}
-            </button>
-          )}
           {piece.images.length > 1 && (
             <>
               <button
@@ -270,18 +255,7 @@ export function SeriesSurface({ piece, backHref }: { piece: Piece; backHref: str
               </button>
             </>
           )}
-          <div
-            key={active}
-            className={`${styles.imageViewport} ${fitImage ? styles.fitView : ""}`}
-            onClick={(event) => event.stopPropagation()}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className={styles.dialogImage}
-              src={piece.images[active].src}
-              alt={piece.images[active].alt}
-            />
-          </div>
+          <ImageZoom key={active} src={piece.images[active].src} alt={piece.images[active].alt} />
           {hasStoryPanel && (
             <div className={styles.story} onClick={(event) => event.stopPropagation()}>
               <div className={styles.storyIndex}>

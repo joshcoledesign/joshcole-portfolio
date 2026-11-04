@@ -17,9 +17,9 @@
  function animate(image){if(reduced.matches)return;for(const a of image.getAnimations())a.cancel();image.decode().catch(()=>{}).then(()=>{if(!reduced.matches)image.animate([{opacity:.45,translate:'0 18px',scale:'.985'},{opacity:1,translate:'0 0',scale:'1'}],{duration:620,easing:'cubic-bezier(.2,.75,.2,1)'});});}
  for(const section of root.querySelectorAll('.xc-case')){
   const dialog=section.querySelector('.xc-inspector'),inspected=dialog.querySelector('[data-xc-inspector-image]'),zoom=dialog.querySelector('[data-xc-zoom]');
-  function inspect(src,caption){inspected.src=src;inspected.alt=caption;dialog.querySelector('[data-xc-inspector-caption]').textContent=caption;zoom.value='100';inspected.style.width='100%';dialog.querySelector('[data-xc-zoom-label]').textContent='100%';dialog.showModal();dialog.querySelector('.xc-inspector-pan').scrollTo(0,0);}
+  function inspect(src,caption){inspected.src=src;inspected.alt=caption;dialog.querySelector('[data-xc-inspector-caption]').textContent=caption;zoom.value='100';inspected.style.setProperty('--image-zoom','1');dialog.querySelector('[data-xc-zoom-label]').textContent='100%';dialog.showModal();dialog.querySelector('.xc-inspector-pan').scrollTo(0,0);}
   dialog.querySelector('[data-xc-inspector-close]').addEventListener('click',()=>dialog.close());
-  zoom.addEventListener('input',()=>{inspected.style.width=zoom.value+'%';dialog.querySelector('[data-xc-zoom-label]').textContent=zoom.value+'%';});
+  zoom.addEventListener('input',()=>{inspected.style.setProperty('--image-zoom',String(Number(zoom.value)/100));dialog.querySelector('[data-xc-zoom-label]').textContent=zoom.value+'%';});
   for(const button of section.querySelectorAll('[data-xc-inspect]'))button.addEventListener('click',()=>inspect(button.dataset.xcInspect,button.dataset.xcCaption));
   const productJson=section.querySelector('[data-xc-products]'),brandJson=section.querySelector('[data-xc-brands]');
   for(const [kind,json]of [['product',productJson],['brand',brandJson]]){if(!json)continue;const data=JSON.parse(json.textContent),image=section.querySelector('[data-xc-'+kind+'-image]'),caption=section.querySelector('[data-xc-'+kind+'-caption]'),buttons=[...section.querySelectorAll('[data-xc-'+kind+']')];let selected=Object.keys(data)[0];

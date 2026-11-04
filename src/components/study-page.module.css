@@ -414,6 +414,8 @@
   max-height: calc(100vh - 130px);
   object-fit: contain;
 }
+.lightbox{cursor:default;}
+.lightbox>div img{max-width:none;max-height:none;object-fit:initial;}
 
 .lightbox p {
   max-width: 960px;

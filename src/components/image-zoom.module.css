@@ -1,0 +1,10 @@
+.viewer{display:flex;flex-direction:column;min-width:0;min-height:0;width:100%;height:100%;overflow:hidden;}
+.controls{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;padding:10px 12px;flex:none;color:#efece3;font-size:13px;line-height:1.5;}
+.controls label{display:flex;align-items:center;gap:10px;}
+.controls output{min-width:4ch;}
+.controls input{width:clamp(90px,18vw,180px);accent-color:#42e2ed;min-height:44px;}
+.controls button{min-width:44px;min-height:44px;background:transparent;color:inherit;border:1px solid #555e59;cursor:pointer;font:inherit;}
+.controls button:disabled{opacity:.4;cursor:default;}
+.controls :focus-visible,.pan:focus-visible{outline:2px solid #42e2ed;outline-offset:-2px;}
+.pan{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;}
+.pan img{display:block;max-width:none;height:auto;margin:0 auto;}

@@ -4,7 +4,7 @@
 }
 
 .container {
-  width: min(100%, 1056px);
+  width: min(100%, 1680px);
   margin: 0 auto;
   padding: 52px 48px 0;
 }
@@ -279,6 +279,9 @@
   font-family: var(--font-jetbrains-mono), monospace;
   cursor: pointer;
 }
+
+.dialog{grid-template-columns:minmax(0,1376px) minmax(220px,280px);justify-content:center;}
+.imageOnlyDialog{grid-template-columns:minmax(0,1fr);}
 
 .close:hover,
 .nav:hover,

@@ -2398,8 +2398,6 @@ html,body{background:#0b0d0c!important;margin:0!important;}#culture-case-studies
 .cw-viewer-options input{accent-color:var(--cw-accent);width:130px;}
 .cw-viewer-pan{overflow:auto;overscroll-behavior:contain;min-height:0;flex:1;background:#17181c;scrollbar-color:#969ba4 #17181c;}
 .cw-viewer-image{display:block;max-width:none;width:100%;height:auto;margin:0;}
-.cw-viewer[data-fit=image] .cw-viewer-pan{display:grid;place-items:center;}
-.cw-viewer[data-fit=image] .cw-viewer-image{width:auto!important;height:auto;max-width:100%;max-height:100%;object-fit:contain;}
 @media(max-width:800px){
  #culture-case-studies .cw-tile{flex-basis:94%;}
  #culture-case-studies .cw-pages .cw-tile{flex-basis:94%;}
@@ -2604,7 +2602,6 @@ html,body{background:#0b0d0c!important;margin:0!important;}#culture-case-studies
  .rh-eyebrow,
  .rh-hero-fps,
  .rh-hero-links,
- .rh-quick-culture .rh-live-badge,
  .rh-quick-description>a,
  .rh-quick-actions button,
  .rh-quick-hint,

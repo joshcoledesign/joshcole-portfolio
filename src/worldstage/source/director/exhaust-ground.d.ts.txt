@@ -1,0 +1,1 @@
+export function exhaustGroundHit(mouth:{x:number;y:number;angle:number},groundAt:(x:number)=>number):{x:number;y:number;distance:number}|null;

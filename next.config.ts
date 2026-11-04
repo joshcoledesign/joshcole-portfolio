@@ -19,6 +19,9 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      ...["field-conditions", "type-in-motion", "grid-pressure"].map((name) => ({
+        source: `/experiments/${name}`, destination: "/experiments/culture", permanent: true,
+      })),
       { source: "/experiments/totem", destination: "/experiments/hype", permanent: true },
       {
         source: "/volumes/creative-immersive/nemo-brand",

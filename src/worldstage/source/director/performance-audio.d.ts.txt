@@ -1,0 +1,14 @@
+import type {Performance} from '../scripts/director-performance.mts';
+import type {ShotPlan} from './shot-plan.js';
+export type SoundMix={enabled:boolean;engines:number;engineDepth:number;wind:number;contact:number;master:number};
+export type Sound={sampleRate:number;frames:number;samples:number;contactSeconds:number;version:string;stems:Record<'engines'|'wind'|'contact',[Float32Array,Float32Array]>};
+export type EditedAudio={sampleRate:number;left:Float32Array;right:Float32Array;segments:Array<{shot:string;sourceStartSample:number;sourceEndSample:number;outputStartSample:number;outputEndSample:number;edgeFadeSamples:number;ambienceBlendSamples:number}>};
+export const SOUND_VERSION:string;
+export const SAMPLE_RATE:number;
+export const DEFAULT_MIX:SoundMix;
+export function validateMix(input?:unknown):SoundMix;
+export function synthesizePerformance(performance:Performance,engineDepth?:number):Sound;
+export function renderEditedAudio(sound:Sound,plan:ShotPlan,mix:SoundMix):EditedAudio;
+export function wavBytes(audio:EditedAudio):Uint8Array;
+
+export function editSoundStems(sound:Sound,plan:ShotPlan):{sampleRate:number;samples:number;stems:Sound["stems"];segments:EditedAudio["segments"]};

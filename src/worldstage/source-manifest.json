@@ -1,0 +1,186 @@
+{
+  "sourceRepository": "external-worldstage",
+  "sourceCommit": "27cf4379c2c253951ad65cab62b1826f940d6977",
+  "files": [
+    {
+      "source": "external-worldstage/director/coverage-projection.d.ts",
+      "path": "src/worldstage/source/director/coverage-projection.d.ts.txt",
+      "sha256": "659001b5cfd02c37db3a9d9527fa28042820d740aabb9857f1203ceee172f898"
+    },
+    {
+      "source": "external-worldstage/director/coverage-projection.js",
+      "path": "src/worldstage/source/director/coverage-projection.js",
+      "sha256": "84dbd0107b188d32c85dc308780fe276afa7f2d5e547e95fcd0cfba64e902c54"
+    },
+    {
+      "source": "external-worldstage/director/cue-track.js",
+      "path": "src/worldstage/source/director/cue-track.js",
+      "sha256": "1aece7beb0bb072278e561552e299d5aa304faf873fb24fcdd6658a85deb6961"
+    },
+    {
+      "source": "external-worldstage/director/edit-history.d.ts",
+      "path": "src/worldstage/source/director/edit-history.d.ts.txt",
+      "sha256": "a6a13085190ac05a525779471fa30651299527fff029353b4c43881afb1c5534"
+    },
+    {
+      "source": "external-worldstage/director/edit-history.js",
+      "path": "src/worldstage/source/director/edit-history.js",
+      "sha256": "cf5ccc9a141fe1e2b5c587e81a0a1e036d1cbcdef7b15a0755fe382690a5b850"
+    },
+    {
+      "source": "external-worldstage/director/exhaust-ground.d.ts",
+      "path": "src/worldstage/source/director/exhaust-ground.d.ts.txt",
+      "sha256": "68a7355c18438409c82f4cec4b4eecd263c3c5f742bc75342e1f3eff80e21c78"
+    },
+    {
+      "source": "external-worldstage/director/exhaust-ground.js",
+      "path": "src/worldstage/source/director/exhaust-ground.js",
+      "sha256": "f82b701465c5f6500e0468f8629988282e0f3afc1a03d3794cdf7d65fa93b03a"
+    },
+    {
+      "source": "external-worldstage/director/index.html",
+      "path": "src/worldstage/source/director/index.html",
+      "sha256": "25567b4b07ddfe507f65d60bdb0e37d04211bbceff7833fdb78177e57372955f"
+    },
+    {
+      "source": "external-worldstage/director/motion-preview.js",
+      "path": "src/worldstage/source/director/motion-preview.js",
+      "sha256": "9201f9c20b9cd236b66ac74bfdab46749d0f61ec03d95b434f4c457115fa2ef4"
+    },
+    {
+      "source": "external-worldstage/director/performance-audio.d.ts",
+      "path": "src/worldstage/source/director/performance-audio.d.ts.txt",
+      "sha256": "b05f6cc0580302035d2c613726ee49a1018541e525e4d20d17d7c4982b3661d6"
+    },
+    {
+      "source": "external-worldstage/director/performance-audio.js",
+      "path": "src/worldstage/source/director/performance-audio.js",
+      "sha256": "a19253584563b5e61ca2bc38653c594b32f4c89f92a51ec0e4dc825d22900086"
+    },
+    {
+      "source": "external-worldstage/director/reference-board.html",
+      "path": "src/worldstage/source/director/reference-board.html",
+      "sha256": "c3664a1924a8bd4f1766e417f6d5901247966344d7337edf95bf74e0cca3da44"
+    },
+    {
+      "source": "external-worldstage/director/shot-editor.js",
+      "path": "src/worldstage/source/director/shot-editor.js",
+      "sha256": "9d9110a326e65585a62ead366263a93913cf783d0c77ef6a9c7018bb060eb0e0"
+    },
+    {
+      "source": "external-worldstage/director/shot-plan.d.ts",
+      "path": "src/worldstage/source/director/shot-plan.d.ts.txt",
+      "sha256": "debb8f89df5f90b9e21b8e590255bf0140ce12f9675ed8bc1ba1d46f02915fb6"
+    },
+    {
+      "source": "external-worldstage/director/shot-plan.js",
+      "path": "src/worldstage/source/director/shot-plan.js",
+      "sha256": "19665d09c5c8a10014484172e51082ee231eb139f2e8a6616dc7042401edd00b"
+    },
+    {
+      "source": "external-worldstage/director/sound-preview.js",
+      "path": "src/worldstage/source/director/sound-preview.js",
+      "sha256": "a4c9715461b25393d6ec9ed07027bb950ada59b0865f018b778d8d0b225ade8f"
+    },
+    {
+      "source": "external-worldstage/director/studio.css",
+      "path": "src/worldstage/source/director/studio.css",
+      "sha256": "373849ee7e69e5f7a08b3a026db85d8062b78d855d83f4b351437f1db793f73d"
+    },
+    {
+      "source": "external-worldstage/director/studio.js",
+      "path": "src/worldstage/source/director/studio.js",
+      "sha256": "0ae41609754ceb3ca69624bf42b4712a86d45409dba61e26522cbfe089ffed8b"
+    },
+    {
+      "source": "external-worldstage/director/terrain-ground.d.ts",
+      "path": "src/worldstage/source/director/terrain-ground.d.ts.txt",
+      "sha256": "b315418e6f7cd51e658728a71d3aa1f664e444014d6efef0691df9e15898b3fb"
+    },
+    {
+      "source": "external-worldstage/director/terrain-ground.js",
+      "path": "src/worldstage/source/director/terrain-ground.js",
+      "sha256": "93a66d399c2e5e2911b333a187ed30f04de206913d32d00947689e359b2af5ab"
+    },
+    {
+      "source": "external-worldstage/director/thruster-rig.d.ts",
+      "path": "src/worldstage/source/director/thruster-rig.d.ts.txt",
+      "sha256": "8597bf4a9355200817af463747d0337d9980dc68cab88cb49a9713dfe65e3ca0"
+    },
+    {
+      "source": "external-worldstage/director/thruster-rig.js",
+      "path": "src/worldstage/source/director/thruster-rig.js",
+      "sha256": "a7ec49842b97bfa6d59e49e793bae9165467e5a3d3e82eaca41f33476ba674f5"
+    },
+    {
+      "source": "external-worldstage/scripts/director-render.mts",
+      "path": "src/worldstage/source/director-render.mts.txt",
+      "sha256": "3877304e32afa5e277365eada4268038e0d90973c4f554064dcf02abac1a7f4a"
+    },
+    {
+      "source": "external-worldstage/scripts/director-settings.mts",
+      "path": "src/worldstage/solver/director-settings.ts",
+      "transformation": "Import extensions adapted for the existing Next.js build",
+      "sourceSha256": "d8bd3af5c66df35f1c261d8606a7e8e690c4e1dc48b9824081588d12e0aaf083"
+    },
+    {
+      "source": "external-worldstage/scripts/director-performance.mts",
+      "path": "src/worldstage/solver/director-performance.ts",
+      "transformation": "Import extensions adapted for the existing Next.js build",
+      "sourceSha256": "bf8d0012531967eb8074b6e2361bb7a37c1011e5b50aa94df00b73bb95ba7373"
+    },
+    {
+      "source": "external-worldstage/scripts/terrain-performance.mts",
+      "path": "src/worldstage/solver/terrain-performance.ts",
+      "transformation": "Import extensions adapted for the existing Next.js build",
+      "sourceSha256": "465768ed72ed480b7b586b1308c05f533763ee9491f7f48af16472739086ea3e"
+    },
+    {
+      "source": "external-worldstage/scripts/departure-performance.mts",
+      "path": "src/worldstage/solver/departure-performance.ts",
+      "transformation": "Import extensions adapted for the existing Next.js build",
+      "sourceSha256": "9d04672ed032992225bf5e81c6478cfed5341484d7a16c679459005b776b1493"
+    },
+    {
+      "source": "external-worldstage/scripts/pilot-styles.mts",
+      "path": "src/worldstage/solver/pilot-styles.ts",
+      "transformation": "Import extensions adapted for the existing Next.js build",
+      "sourceSha256": "0d7e8c24fc2e64046a60b1c48290b247c5f67112a183d9d1cd908899819fbb43"
+    },
+    {
+      "source": "external-worldstage/director/terrain-ground.js",
+      "path": "src/worldstage/director/terrain-ground.js",
+      "sha256": "93a66d399c2e5e2911b333a187ed30f04de206913d32d00947689e359b2af5ab"
+    },
+    {
+      "source": "external-worldstage/director/terrain-ground.d.ts",
+      "path": "src/worldstage/director/terrain-ground.d.ts",
+      "sha256": "b315418e6f7cd51e658728a71d3aa1f664e444014d6efef0691df9e15898b3fb"
+    },
+    {
+      "source": "external-worldstage/artifacts/illustrated-landing-v3/a/assets/background-plate.png",
+      "path": "public/experiments/worldstage/studio/assets/background.png",
+      "sha256": "bfaa70d758701fe70615ea129337e384a9289bf16c900f7a824bd3deda85e926"
+    },
+    {
+      "source": "external-worldstage/artifacts/illustrated-landing-v3/a/assets/ship-layer.png",
+      "path": "public/experiments/worldstage/studio/assets/ship.png",
+      "sha256": "7dd62bfcb038ef72e125b2d3e778a91da9119d06b4ee95f88884d83cf4af930c"
+    },
+    {
+      "source": "external-worldstage/artifacts/illustrated-landing-v1/a/exhaust-layer.png",
+      "path": "public/experiments/worldstage/studio/assets/exhaust.png",
+      "sha256": "9198cebe2ab8864b5adfcdbf0f2ace59f3e451f587c82447d47641cdd6a78b1e"
+    },
+    {
+      "source": "external-worldstage/artifacts/director-v8/assets/shoreline-plate-v2.png",
+      "path": "public/experiments/worldstage/studio/assets/shoreline-background.png",
+      "sha256": "bf967b2042cebcf398bf7b3d1bf4f1ed7ed1bf3cfdd33c339b159b081c55f6a1"
+    },
+    {
+      "source": "external-worldstage/artifacts/director-v8/assets/ship-shoreline-v1.png",
+      "path": "public/experiments/worldstage/studio/assets/shoreline-ship.png",
+      "sha256": "968acc2c798b58a1945ef8254bf7ea4c89bac5f745d750ffc430d0fca38b9d32"
+    }
+  ]
+}

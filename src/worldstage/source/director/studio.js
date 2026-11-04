@@ -1,0 +1,127 @@
+import {drawMotion} from './motion-preview.js';
+import {mountCueTrack} from './cue-track.js';
+import './shot-editor.js';
+const $=selector=>document.querySelector(selector);
+const film=$('#film'),other=$('#compare-film'),timeline=$('#timeline'),frameImage=$('#frame-preview');
+const motionCanvas=document.createElement('canvas'),compareCanvas=document.createElement('canvas');
+motionCanvas.id='motion-canvas';motionCanvas.hidden=true;motionCanvas.setAttribute('aria-label','Saved motion preview');film.after(motionCanvas);other.after(compareCanvas);compareCanvas.hidden=true;
+let studio,takes=[],settings={},selectedId='benchmark',dirty=false,busy=false,comparing=false,pendingTime=0;
+let selectedPerformance,comparisonPerformance,motionMode=false,comparisonMotion=false,motionTime=0,playing=false,lastTick=0;
+const cache=new Map();
+let auditionTimer,auditionVersion=0,cueSeek=11.5,auditionUrl;
+const cueTrack=mountCueTrack($('#cue-director'),{getSettings:()=>settings,onSeek:t=>{cueSeek=t;pause();setTime(t);},onChange:(key,value)=>{settings[key]=value;if(["cueBrake","cueHover","cueLand","engineIgnition","engineShutdown"].includes(key))cueSeek=value;updateControls();markChanged();scheduleCueAudition();}});
+function scheduleCueAudition(){
+ clearTimeout(auditionTimer);const version=++auditionVersion;pause();cueTrack.status('Auditioning cues…');
+ auditionTimer=setTimeout(async()=>{try{
+  const p=await post('/api/audition',{settings});if(version!==auditionVersion)return;
+  selectedPerformance=p;motionMode=true;film.pause();film.hidden=true;motionCanvas.hidden=false;duration(p.duration_seconds);
+  $('#primary-tag').textContent='CUE AUDITION · UNSAVED';$('#download-film').hidden=true;$('#add-departure').disabled=true;metrics({metrics:p});
+  if(auditionUrl)URL.revokeObjectURL(auditionUrl);auditionUrl=URL.createObjectURL(new Blob([JSON.stringify(p,null,2)],{type:'application/json'}));
+  $('#download-take').href=auditionUrl;$('#download-take').download='worldstage-cue-audition.json';setTime(cueSeek);
+  cueTrack.status(p.flightResult?.status==='failed'?`Recorded attempt: ${p.flightResult.reason}. Simulation stops at ${(p.duration_seconds-1/24).toFixed(2)}s; Preview motion saves it for review.`:'Live audition ready · Preview motion saves a take. Actual contact follows engine and gear response.');message('Cue audition ready. Preview motion to save, or keep adjusting.');
+ }catch(error){if(version===auditionVersion){cueTrack.status(error.message);message(error.message,true);}}},180);
+}
+const presets={controlled:{landingTarget:660,roughness:.3,groundSlope:.75,wind:.35,descent:.8,seed:101},gustLanding:{landingTarget:820,roughness:.7,groundSlope:-1.5,wind:1.8,gustiness:1.8,correction:.8,seed:68},hardLanding:{landingTarget:870,roughness:1,groundSlope:2.5,wind:1.1,descent:1.25,engineLag:1.3,gear:1.2,correction:.85,seed:7},benchmark:{},soft:{carry:.9,braking:1.1,descent:.8,engineLag:.8,gear:1.15},weather:{wind:1.65,gustiness:1.5,correction:.85,dust:1.45,smoke:1.2,ambient:.8},urgent:{carry:1.1,braking:1.05,descent:1.2,engineLag:1.2,gear:1.15}};
+const settingHelp={
+pilotStyle:'Changes pilot decisions and engine response: Heavy transport brakes early with slower spool; Precision pilot holds a low hover before a soft descent; Emergency arrival brakes late and lands harder. Terrain, weather and the ship stay the same. Preview motion applies the choice. Standard keeps the previous coupled controller.',
+landingTarget:'Horizontal landing goal on the shore, in stage pixels. The controller steers toward it after the fixed arrival. Wind and engine authority can cause a miss; the recorded take preserves the actual result.',
+roughness:'Adds small cooled-rock ridges beneath the landing gear. Each support contacts its own ground height, changing contact order, compression and hull settling.',
+groundSlope:'Tilts the landing ground in degrees. Positive values fall toward screen right; the hull settles onto the slope through separate spring supports.',
+carry:'Sets the controller’s target forward momentum. Higher values carry the ship farther before stopping. Wind and braking also affect where it actually lands.',
+braking:'Sets the requested braking acceleration. Higher values ask the ship to stop sooner. New takes tilt their thrust to brake, so nozzle limits, available lift and engine delay affect the result.',
+descent:'Sets the target downward pace after approach. Higher values descend faster and may land harder; lower values give a longer, gentler take.',
+engineLag:'Engine spool response. Higher values make delivered thrust rise and fall more slowly, delaying braking, cushioning and shutdown. Gusts can move the ship farther before its engines respond.',
+gear:'Landing gear softness. Higher values allow more compression and settling under the ship’s weight; lower values feel firmer.',
+wind:'Scales the weather forces on the airborne ship. The same saved wind field sweeps smoke, dust, fog and water ripples. After contact, ground grip holds the ship.',
+gustiness:'How uneven the wind becomes. Higher values create stronger pulses, vertical disturbances and turning forces. The weather seed changes when and in which direction they arrive.',
+correction:'How strongly the landing controller corrects drift and descent. Higher values recover sooner; lower values allow more displacement. Corrections still have engine delay and a thrust limit.',
+thrust:'Available engine authority for corrections. Higher values give the controller more acceleration when it reaches its limit. It does not force the engines to run harder throughout the take.',
+seed:'Selects a repeatable weather pattern. The same seed and motion controls reproduce the same performance. Explore creates six seeds while holding the other controls fixed.',
+dust:'Visible landing dust and grit density in the full render. Changes visibility rather than simulated forces. The motion preview uses simplified effects.',
+smoke:'Visible exhaust smoke density in the full render. Engine power follows the saved motion; the motion preview shows simplified jets.',
+ambient:'Brightness of the cold environment and ship paint in the full render. Local lamps and engine light remain separate.'
+};
+const helpTip=document.createElement('div');helpTip.id='setting-tip';helpTip.className='setting-tip';helpTip.role='tooltip';helpTip.hidden=true;
+const helpTitle=document.createElement('strong'),helpText=document.createElement('p'),helpFoot=document.createElement('small');
+helpFoot.textContent='Changes begin after the fixed arrival. Preview motion to apply settings; render the saved performance when ready.';
+helpTip.append(helpTitle,helpText,helpFoot);document.body.append(helpTip);
+let helpAnchor=null,helpPinned=false,helpTimer;
+function positionHelp(){
+  if(!helpAnchor||helpTip.hidden)return;const rect=helpAnchor.getBoundingClientRect(),gap=10;
+  const left=Math.max(12,Math.min(window.innerWidth-helpTip.offsetWidth-12,rect.right-helpTip.offsetWidth));
+  let top=rect.bottom+gap;if(top+helpTip.offsetHeight>window.innerHeight-12)top=Math.max(12,rect.top-helpTip.offsetHeight-gap);
+  helpTip.style.left=left+'px';helpTip.style.top=top+'px';
+}
+function closeHelp(){clearTimeout(helpTimer);if(helpAnchor){helpAnchor.setAttribute('aria-expanded','false');helpAnchor.removeAttribute('aria-describedby');}helpTip.hidden=true;helpAnchor=null;helpPinned=false;}
+function showHelp(button,key,title,pinned=false){
+  clearTimeout(helpTimer);if(helpAnchor&&helpAnchor!==button)closeHelp();
+  helpAnchor=button;helpPinned=pinned;helpTitle.textContent=title;helpText.textContent=settingHelp[key];helpTip.hidden=false;
+  button.setAttribute('aria-expanded','true');button.setAttribute('aria-describedby',helpTip.id);positionHelp();
+}
+function leaveHelp(){if(!helpPinned)helpTimer=setTimeout(()=>{if(!helpTip.matches(':hover')&&document.activeElement!==helpAnchor)closeHelp();},180);}
+helpTip.addEventListener('pointerenter',()=>clearTimeout(helpTimer));helpTip.addEventListener('pointerleave',leaveHelp);
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!helpTip.hidden){event.preventDefault();closeHelp();}});
+document.addEventListener('pointerdown',event=>{if(!helpTip.hidden&&!helpTip.contains(event.target)&&!event.target.closest('.setting-help'))closeHelp();});
+window.addEventListener('resize',positionHelp);window.addEventListener('scroll',positionHelp,true);
+const formatTime=t=>`${String(Math.floor(t/60)).padStart(2,'0')}:${(t%60).toFixed(2).padStart(5,'0')}`;
+async function api(path,options){const res=await fetch(path,options);const data=await res.json();if(!res.ok)throw new Error(data.error||'The studio could not complete that request.');return data;}
+const post=(path,body)=>api(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+function message(text,error=false){$('#status-text').textContent=text;document.body.classList.toggle('error',error);}
+function handle(task){return (...args)=>Promise.resolve().then(()=>task(...args)).catch(error=>message(error.message,true));}
+async function performanceFor(id){if(!cache.has(id))cache.set(id,await api('/api/performance/'+id));return cache.get(id);}
+function hidePreview(){frameImage.hidden=true;$('#preview-note').hidden=true;}
+const currentTime=()=>motionMode?motionTime:(film.currentTime||0);
+function pause(){playing=false;film.pause();other.pause();$('#play').textContent='▶';$('#play').setAttribute('aria-label','Play take');}
+function paintMotion(){if(motionMode&&selectedPerformance)drawMotion(motionCanvas,selectedPerformance,motionTime);if(comparing&&comparisonMotion&&comparisonPerformance)drawMotion(compareCanvas,comparisonPerformance,currentTime());}
+function syncTime(){const t=currentTime();timeline.value=String(t);$('#time').textContent=formatTime(t);if(comparing&&!comparisonMotion&&other.readyState>=1&&Math.abs(other.currentTime-t)>.12)other.currentTime=Math.min(other.duration||t,t);paintMotion();}
+function setTime(t){pendingTime=Math.max(0,Math.min(Number(timeline.max)||17,t));motionTime=pendingTime;if(!motionMode&&film.readyState>=1)film.currentTime=pendingTime;syncTime();hidePreview();}
+function duration(seconds){timeline.max=String(seconds);$('.duration').textContent=formatTime(seconds).slice(0,5);$('#settled-jump').dataset.time=String(seconds-.5);$('#settled-jump').lastElementChild.textContent=(seconds-.5).toFixed(1);$('.arrival-zone').style.width=(4.5/seconds*100)+'%';}
+const settingValue=(key,value)=>key==='landingTarget'?Math.round(value)+' px':key==='groundSlope'?value.toFixed(2)+'°':key==='roughness'?Math.round(value*100)+'%':value.toFixed(2)+'×';
+function updateControls(){for(const [key,value]of Object.entries(settings)){const input=$('#setting-'+key);if(!input)continue;input.value=String(value);const output=$('#value-'+key);if(output)output.textContent=settingValue(key,value);}cueTrack.update(settings);$('#pilot-style-note').textContent=studio.pilotStyles?.find(s=>s.id===(settings.pilotStyle??0))?.description??'Choose how the pilot approaches the landing.';}
+function markChanged(){clearTimeout(auditionTimer);auditionVersion++;pause();dirty=true;$('#unsaved').hidden=false;hidePreview();message('Settings changed. Preview motion or explore variations to apply.');}
+function helpButton(key,label){const help=document.createElement('button');help.type='button';help.className='setting-help';help.textContent='?';help.setAttribute('aria-label','About '+label);help.setAttribute('aria-expanded','false');
+help.addEventListener('pointerenter',()=>{if(!helpPinned)showHelp(help,key,label);});help.addEventListener('pointerleave',leaveHelp);help.addEventListener('focus',()=>showHelp(help,key,label));help.addEventListener('blur',()=>{if(!helpPinned)closeHelp();});help.addEventListener('click',()=>{if(helpAnchor===help&&helpPinned)closeHelp();else showHelp(help,key,label,true);});return help;}
+function drawControls(){for(const [key,spec]of Object.entries(studio.spec)){
+if(spec.group==='cue'||spec.group==='engine')continue;
+if(key==='pilotStyle'){$('#pilot-style-label').after(helpButton(key,spec.label));continue;}
+if(key==='seed'){const label=$('.seed-row label');label.after(helpButton(key,spec.label));continue;}
+const row=document.createElement('div');row.className='slider';const heading=document.createElement('div');heading.className='slider-label';const caption=document.createElement('span');caption.className='setting-caption';const label=document.createElement('label');label.htmlFor='setting-'+key;label.textContent=spec.label;caption.append(label,helpButton(key,spec.label));heading.append(caption);
+const output=document.createElement('output');output.id='value-'+key;output.htmlFor='setting-'+key;heading.append(output);const input=document.createElement('input');input.id='setting-'+key;input.type='range';input.min=spec.min;input.max=spec.max;input.step=spec.step;input.setAttribute('aria-label',spec.label);input.addEventListener('input',()=>{settings[key]=Number(input.value);output.textContent=settingValue(key,settings[key]);$('#preset').value='';markChanged();});row.append(heading,input);$('#'+spec.group+'-controls').append(row);
+}updateControls();}
+function metrics(take){const m=take.metrics;if(!m)return;const contact=m.video_contact_seconds??m.contact_seconds+4.5,s=m.physicsSummary,failed=m.flightResult?.status==='failed';$('#metrics').replaceChildren();for(const [label,value]of [['CONTACT',contact<0?'—':contact.toFixed(2)+'s'],['DRIFT',(s.maximum_drift_pixels??0).toFixed(1)+'px'],['IMPACT',s.vertical_contact_speed_mps.toFixed(2)+'m/s'],[failed?'TARGET OFFSET':'TARGET MISS',Math.abs(s.landing_error_pixels??0).toFixed(1)+'px']]){const span=document.createElement('span'),b=document.createElement('b');span.textContent=label;b.textContent=value;span.append(b);$('#metrics').append(span);}$('#contact-jump').disabled=contact<0;$('#contact-jump').dataset.time=String(Math.max(0,contact));$('#contact-jump').lastElementChild.textContent=contact<0?'—':contact.toFixed(1);
+ let feedback=$('#flight-feedback');if(!feedback){feedback=document.createElement('p');feedback.id='flight-feedback';feedback.className='flight-feedback';$('#cue-director').append(feedback);}feedback.hidden=!m.flightResult;feedback.dataset.failed=String(failed);feedback.textContent=m.flightResult?(failed?`${m.flightResult.reason} · attempt recorded through ${(m.duration_seconds-1/24).toFixed(2)}s. The simulation stops at its test limit; this is not a settled landing.`:s.outcome+' · '+m.flightResult.reason):'';
+}
+function renderLibrary(){document.dispatchEvent(new CustomEvent('worldstage:takes',{detail:takes}));const list=$('#takes');list.replaceChildren();$('#take-count').textContent=String(takes.length).padStart(2,'0');
+for(const take of takes){const card=document.createElement('article');card.className='take-card'+(take.id===selectedId?' selected':'');const button=document.createElement('button');button.className='take-load';button.type='button';button.setAttribute('aria-label','Load '+take.name);button.disabled=busy;
+if(take.kind==='motion'){const canvas=document.createElement('canvas');canvas.setAttribute('aria-hidden','true');button.append(canvas);performanceFor(take.id).then(p=>{if(canvas.isConnected)drawMotion(canvas,p,p.video_contact_seconds);}).catch(()=>{});}else{const img=document.createElement('img');img.src=`/media/${take.id}/poster`;img.alt='';img.loading='lazy';button.append(img);}
+const caption=document.createElement('div'),name=document.createElement('strong'),note=document.createElement('small');name.textContent=take.name;note.textContent=take.id==='benchmark'?'APPROVED VISUAL BENCHMARK':`SEED ${take.settings.seed} · ${take.metrics?.physicsSummary.outcome??'PRESERVED FILM'}`;caption.append(name,note);button.append(caption);button.addEventListener('click',handle(()=>loadTake(take.id)));card.append(button);
+if(take.id!=='benchmark'){const keep=document.createElement('button');keep.className='keep quiet';keep.textContent=take.keeper?'★ Keeper':'☆ Keep';keep.setAttribute('aria-pressed',String(!!take.keeper));keep.setAttribute('aria-label','Keep '+take.name);keep.disabled=busy;keep.addEventListener('click',handle(async()=>{await post('/api/keep/'+take.id,{keeper:!take.keeper});takes=await api('/api/takes');renderLibrary();message(!take.keeper?'Keeper marked. Its motion is saved.':'Keeper mark removed; the take is still saved.');}));card.append(keep);}list.append(card);}
+const select=$('#compare-select'),old=select.value;select.replaceChildren();for(const take of takes){const option=document.createElement('option');option.value=take.id;option.textContent=take.name;select.append(option);}select.value=takes.some(t=>t.id===old)?old:'benchmark';}
+async function loadTake(id){if(auditionUrl){URL.revokeObjectURL(auditionUrl);auditionUrl=undefined;}$("#download-take").removeAttribute("download");clearTimeout(auditionTimer);auditionVersion++;cueTrack.status("Drag a cue to audition. Preview motion saves a new take.");const take=takes.find(t=>t.id===id);if(!take)return;const time=currentTime();pause();hidePreview();selectedId=id;dirty=false;settings={...studio.defaults,...take.settings};updateControls();$('#preset').value='';$('#view-name').textContent=take.name;$('#unsaved').hidden=true;
+selectedPerformance=await performanceFor(id);$('#add-departure').disabled=!!selectedPerformance.departure||!selectedPerformance.terrain||selectedPerformance.flightResult?.settled===false;$('#takeoff-jump').hidden=!selectedPerformance.departure;if(selectedPerformance.departure){$('#takeoff-jump').dataset.time=String(selectedPerformance.departure.liftoff_seconds);$('#takeoff-jump small').textContent=selectedPerformance.departure.liftoff_seconds.toFixed(1);}
+motionMode=take.kind==='motion';film.hidden=motionMode;motionCanvas.hidden=!motionMode;$('#primary-tag').textContent=motionMode?'MOTION PREVIEW · SIMPLIFIED EFFECTS':'RENDERED TAKE';duration(selectedPerformance.duration_seconds);motionTime=Math.min(time,selectedPerformance.duration_seconds);pendingTime=motionTime;
+if(!motionMode){film.src=`/media/${id}/film`;film.poster=`/media/${id}/poster`;film.addEventListener('loadedmetadata',()=>setTime(pendingTime),{once:true});}else{film.removeAttribute('src');film.querySelectorAll('source').forEach(source=>source.remove());film.load();}
+$('#download-film').hidden=motionMode;$('#download-film').href=`/media/${id}/film?download`;$('#download-take').href=`/media/${id}/performance?download`;$('#take-name').value='Wind study '+String(takes.length+1).padStart(2,'0');metrics(take);renderLibrary();if(comparing)await loadComparison();syncTime();message(motionMode?'Saved motion loaded. Play to audition; render for full atmosphere.':'Rendered take loaded.');}
+async function loadComparison(){const id=$('#compare-select').value,take=takes.find(t=>t.id===id);comparisonPerformance=await performanceFor(id);comparisonMotion=take.kind==='motion';other.hidden=comparisonMotion;compareCanvas.hidden=!comparisonMotion;if(!comparisonMotion){other.src=`/media/${id}/film`;other.poster=`/media/${id}/poster`;other.addEventListener('loadedmetadata',()=>{other.currentTime=Math.min(other.duration,currentTime());if(playing)other.play().catch(()=>{});},{once:true});}else{other.pause();other.removeAttribute('src');other.load();}syncTime();}
+function setBusy(value){busy=value;for(const input of document.querySelectorAll('.controls input,.controls select,.controls button:not(.setting-help),#cue-director input,#cue-director button,#compare-toggle,.take-load,.keep'))input.disabled=value;$('#progress-track').hidden=!value;if(!value){$('#progress-text').textContent='';cueTrack.update(settings);if(selectedPerformance)$("#add-departure").disabled=!!selectedPerformance.departure||!selectedPerformance.terrain||selectedPerformance.flightResult?.settled===false||dirty;}}
+async function captureMotion(force=false){if(!dirty&&(!force||selectedId!=='benchmark'))return selectedId;const take=await post('/api/motion',{settings,name:$('#take-name').value});takes=await api('/api/takes');await loadTake(take.id);return take.id;}
+async function previewMotion(){setBusy(true);try{await captureMotion(true);setTime(4.5);startPlaying();message('Motion ready. The full render adds turbulent exhaust, dust and reflections.');}finally{setBusy(false);}}
+async function explore(){pause();setBusy(true);const name=$('#take-name').value;try{const batch=await post('/api/explore',{settings,name,count:6});takes=await api('/api/takes');await loadTake(batch.takes[0].id);setTime(4.5);startPlaying();message('Six saved weather performances. Play each, mark a keeper, then render.');}finally{setBusy(false);}}
+function progress(job){$('#progress-bar').style.width=job.progress+'%';$('#progress-text').textContent=job.progress+'%';message(job.message);}
+async function render(kind){pause();setBusy(true);try{const frame=Math.round(currentTime()*24);const id=await captureMotion();let job=await post(kind==='preview'?'/api/preview':'/api/render',{performanceId:id,frame});progress(job);while(job.status==='queued'||job.status==='rendering'){await new Promise(r=>setTimeout(r,900));job=await api('/api/jobs/'+job.id);progress(job);}if(job.status==='failed')throw new Error(job.message);
+if(kind==='preview'){frameImage.src=`/media/${job.id}/preview`;frameImage.hidden=false;$('#preview-note').hidden=false;$('#preview-note').textContent=`RENDERED FRAME · ${formatTime(job.frame/24)} · SAVED MOTION`;message('Frame ready. Motion remains identical to your saved performance.');}else{takes=await api('/api/takes');await loadTake(job.id);message('Film saved from the selected motion. Ready to compare or export.');}}finally{setBusy(false);}}
+function startPlaying(){hidePreview();if(currentTime()>=Number(timeline.max)-.05)setTime(0);playing=true;lastTick=performance.now();if(!motionMode)film.play().catch(error=>{pause();message(error.message,true);});if(comparing&&!comparisonMotion)other.play().catch(()=>{});$('#play').textContent='Ⅱ';$('#play').setAttribute('aria-label','Pause take');}
+function tick(now){if(playing&&motionMode){motionTime=Math.min(Number(timeline.max),motionTime+(now-lastTick)/1000);syncTime();if(motionTime>=Number(timeline.max))pause();}else if(playing)syncTime();lastTick=now;requestAnimationFrame(tick);}requestAnimationFrame(tick);
+$('#play').addEventListener('click',()=>playing?pause():startPlaying());film.addEventListener('ended',()=>{if(!motionMode)pause();});film.addEventListener('loadedmetadata',()=>{if(!motionMode)duration(film.duration);});
+timeline.addEventListener('input',()=>{pause();setTime(Number(timeline.value));});$('#restart').addEventListener('click',()=>{pause();setTime(0);});document.querySelectorAll('.moments button').forEach(button=>button.addEventListener('click',()=>{pause();setTime(Number(button.dataset.time));}));
+$('#preset').addEventListener('change',()=>{settings={...studio.defaults,...presets[$('#preset').value]};updateControls();markChanged();});$('#reset').addEventListener('click',()=>{settings={...studio.defaults};updateControls();$('#preset').value='benchmark';markChanged();});
+$('#setting-pilotStyle').addEventListener('change',()=>{settings.pilotStyle=Number($('#setting-pilotStyle').value);$('#preset').value='';updateControls();markChanged();});
+$('#setting-seed').addEventListener('change',()=>{const value=Number($('#setting-seed').value);if(!Number.isInteger(value)||value<1||value>9999999){$('#setting-seed').value=String(settings.seed);message('Choose a whole seed from 1 to 9999999.',true);return;}settings.seed=value;markChanged();});$('#shuffle').addEventListener('click',()=>{settings.seed=1+crypto.getRandomValues(new Uint32Array(1))[0]%9999999;updateControls();markChanged();});
+$('#motion').addEventListener('click',handle(previewMotion));$('#explore').addEventListener('click',handle(explore));$('#preview').addEventListener('click',handle(()=>render('preview')));$('#record').addEventListener('click',handle(()=>render('film')));
+$('#compare-toggle').addEventListener('click',handle(async()=>{pause();hidePreview();comparing=!comparing;$('#comparison').hidden=!comparing;$('#viewers').classList.toggle('comparing',comparing);$('#compare-toggle').textContent=comparing?'Close comparison':'Compare takes';if(comparing)await loadComparison();}));$('#compare-select').addEventListener('change',handle(loadComparison));
+const narrow=matchMedia('(max-width:760px)'),controls=$('.controls');
+function positionControls(){if(narrow.matches)$('.screen-column').insertBefore(controls,$('.take-library'));else $('.workspace').append(controls);}
+narrow.addEventListener('change',positionControls);positionControls();
+try{[studio,takes]=await Promise.all([api('/api/studio'),api('/api/takes')]);settings={...studio.defaults};drawControls();renderLibrary();await loadTake('benchmark');}catch(error){message('The studio could not load: '+error.message,true);}
+
+$('#add-departure').addEventListener('click',handle(async()=>{pause();$('#add-departure').disabled=true;try{const job=await post('/api/departure',{sourceTakeId:selectedId,name:'Black Shore · Landing and departure'});takes=await api('/api/takes');renderLibrary();await loadTake(job.id);message('Takeoff recorded. Play the motion, then render this saved performance.');}finally{$('#add-departure').disabled=!!selectedPerformance?.departure||!selectedPerformance?.terrain||selectedPerformance?.flightResult?.settled===false||dirty;}}));

@@ -89,6 +89,8 @@
 
 /* ─── Base styles ────────────────────────────────────────────── */
 
+html { background-color: #0b0d0c; color-scheme: dark; }
+
 html,
 body {
   overflow-x: clip;

@@ -37,6 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      style={{backgroundColor:"#0b0d0c",colorScheme:"dark"}}
       className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <body className="min-h-screen bg-background text-foreground">

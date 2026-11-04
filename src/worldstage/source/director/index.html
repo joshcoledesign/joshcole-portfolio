@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111519"><title>Worldstage — Direct a landing</title><link rel="stylesheet" href="/studio.css"></head>
+<body>
+<header class="topbar"><a class="brand" href="/" aria-label="Worldstage studio"><span class="brand-mark">W</span> WORLDSTAGE <span class="edition">DIRECTOR STUDY 01</span></a><span class="local"><i></i> Local studio</span></header>
+<main>
+  <section class="scene-heading"><div><p class="eyebrow">BLACK SHORE / THREE MOONS</p><h1>Direct a landing.</h1><p class="intro">One world. Different performances. Keep the ones worth filming.</p></div><span class="locked">↗ Approach path locked <small>0–4.5s</small></span></section>
+  <nav class="stage-nav" aria-label="Studio stages"><a class="quiet" href="#viewers">01 · Performance</a><a class="quiet" href="#sequence-editor">02 · Camera & edit ↓</a><a class="quiet" href="/references" target="_blank" rel="noopener">03 · Motion references ↗</a></nav>
+  <div class="workspace">
+    <section class="screen-column" aria-label="Scene and saved takes">
+      <div class="viewer-toolbar"><div><span class="dot"></span><span id="view-name">Approved benchmark</span><span id="unsaved" hidden>Changed settings</span></div><button id="compare-toggle" class="quiet" type="button">Compare takes</button></div>
+      <div id="viewers" class="viewers"><div class="film-panel"><span class="film-tag" id="primary-tag">CURRENT TAKE</span><video id="film" preload="metadata" playsinline muted poster="/media/benchmark/poster" aria-label="Current landing take"><source src="/media/benchmark/film" type="video/mp4"></video><img id="frame-preview" hidden alt="Rendered preview of your directing settings"><div id="preview-note" hidden>FRAME PREVIEW · RECORD TO PLAY THIS PERFORMANCE</div></div><div id="comparison" class="film-panel" hidden><label class="compare-label" for="compare-select">COMPARE WITH <select id="compare-select"></select></label><video id="compare-film" preload="metadata" playsinline muted aria-label="Comparison landing take"></video></div></div>
+      <div class="transport"><button id="play" class="play" aria-label="Play take">▶</button><span id="time" class="time">00:00.00</span><input id="timeline" type="range" min="0" max="17" step="0.041666666666666664" value="0" aria-label="Timeline position"><span class="duration">00:17</span><button id="restart" class="quiet" aria-label="Return to start">↺</button></div>
+      <div class="timeline-notes"><span class="arrival-zone">FIXED ARRIVAL</span><span>DIRECTED PERFORMANCE</span></div>
+      <div class="moments" aria-label="Jump to a moment"><button data-time="2">Arrival <small>02.0</small></button><button data-time="7">Braking <small>07.0</small></button><button data-time="12.9" id="contact-jump">Touchdown <small>12.9</small></button><button data-time="16.5" id="settled-jump">Settled <small>16.5</small></button><button id="takeoff-jump" data-time="20" hidden>Takeoff <small>20.0</small></button></div>
+      <section id="cue-director" aria-label="Performance cue track"></section>
+      <div class="review-row"><div id="metrics" class="metrics"><span>CONTACT <b>12.92s</b></span><span>GEAR STROKE <b>0.26m</b></span><span>FLARE <b>4.1°</b></span></div><div class="exports"><a id="download-film" class="quiet" href="/media/benchmark/film?download" download>↓ Export MP4</a><a id="download-take" class="quiet" href="/media/benchmark/performance?download" download>Performance JSON</a></div></div>
+      <section class="take-library"><div class="section-title"><h2>Saved takes <span id="take-count">01</span></h2><span>Stored on this computer</span></div><div id="takes" class="takes"></div></section>
+    </section>
+    <aside class="controls" aria-label="Directing controls">
+      <div class="control-heading"><h2>The performance</h2><button id="reset" class="quiet">Reset</button></div>
+      <label class="field-label" for="preset">START FROM</label><select id="preset" class="preset"><option value="benchmark">Approved benchmark</option><option value="soft">Soft arrival</option><option value="weather">Heavy weather</option><option value="urgent">Urgent descent</option><option value="controlled">Controlled landing</option><option value="gustLanding">Gust-battered landing</option><option value="hardLanding">Hard landing</option><option value="" disabled>Custom direction</option></select>
+      <div class="slider-label"><span class="setting-caption"><label class="field-label" id="pilot-style-label" for="setting-pilotStyle">LANDING STYLE</label></span></div><select id="setting-pilotStyle" class="preset"><option value="0">Standard</option><option value="1">Heavy transport</option><option value="2">Precision pilot</option><option value="3">Emergency arrival</option></select><p id="pilot-style-note" class="control-hint"></p>
+      <details class="atmosphere" open><summary>Landing ground <span>03</span></summary><div id="ground-controls" class="sliders"></div><p class="control-hint">Move the target on the shore. Unevenness and slope change gear contact and settling.</p></details>
+      <div id="environment-controls" class="sliders"></div>
+      <div class="seed-row"><label for="setting-seed">Weather seed</label><input id="setting-seed" type="number" min="1" max="9999999" step="1" value="101"><button id="shuffle" class="quiet" aria-label="Choose another weather seed">↻</button></div>
+      <button id="explore" class="secondary explore">Explore 6 variations</button>
+      <details class="atmosphere"><summary>Landing controller <span>06</span></summary><div id="landing-controls" class="sliders"></div></details>
+      <details class="atmosphere"><summary>Atmosphere <span>03</span></summary><div id="atmosphere-controls" class="sliders"></div></details>
+      <p class="control-hint">Preview motion instantly. Keep a performance, then render its full atmosphere. The opening stays fixed.</p>
+      <label class="field-label" for="take-name">NAME YOUR TAKE</label><input id="take-name" class="take-name" value="Take 02" maxlength="60" autocomplete="off">
+      <button id="motion" class="primary explore">Preview motion</button>
+      <div class="render-buttons"><button id="preview" class="secondary">Render frame</button><button id="record" class="secondary">Render take <span>↗</span></button></div>
+      <button id="add-departure" class="secondary explore">Add takeoff to saved landing</button><p class="control-hint">Keeps this landing, then records ignition, hover and departure.</p>
+      <div id="render-status" class="render-status" role="status" aria-live="polite"><div class="status-line"><span id="status-text">Ready when you are.</span><span id="progress-text"></span></div><div id="progress-track" hidden><div id="progress-bar"></div></div></div>
+    </aside>
+  </div>
+  <section id="sequence-editor" class="sequence-editor" aria-label="Shot sequence editor">
+    <div class="section-title"><div><p class="eyebrow">CAMERA & EDIT / STUDY 02</p><h2>One performance. Three shots.</h2></div><span id="sequence-source-note">Saved motion stays locked</span></div>
+    <div class="sequence-workspace">
+      <div><div class="film-panel sequence-screen"><canvas id="sequence-canvas" width="1280" height="544" aria-label="Shot sequence preview"></canvas><video id="sequence-source" playsinline muted preload="auto" hidden></video><span id="sequence-shot-name" class="film-tag">ARRIVAL</span></div>
+        <div class="transport"><button id="sequence-play" class="play" aria-label="Play sequence">▶</button><span id="sequence-time" class="time">00:00.00</span><input id="sequence-timeline" type="range" min="0" max="17" step="0.041666666666666664" value="0" aria-label="Sequence timeline"><span id="sequence-duration" class="duration">00:17</span></div>
+        <div class="edit-readout"><span id="sequence-source-time">SOURCE 00:00.00</span><label><input id="sequence-loop" type="checkbox"> Loop selected shot</label></div>
+        <div class="sound-toolbar"><button id="sound-preview" class="secondary" aria-pressed="false">Enable sound</button><span>Performance-driven sound</span><label><input id="sound-export" type="checkbox" checked> Include in export</label></div>
+        <div class="timeline-tools"><div><button id="edit-undo" class="quiet" disabled title="Undo · Ctrl+Z">↶ Undo</button><button id="edit-redo" class="quiet" disabled title="Redo · Ctrl+Shift+Z">↷ Redo</button></div><span>Drag edges to trim · drag grips to reorder</span><div><button id="shot-earlier" class="quiet" title="Move selected shot earlier">← Earlier</button><button id="shot-later" class="quiet" title="Move selected shot later">Later →</button></div></div>
+        <div id="shot-strip" class="shot-strip" aria-label="Shot selection timeline"></div>
+      </div>
+      <div class="sequence-settings"><label class="field-label" for="sequence-take">SAVED RENDERED PERFORMANCE</label><select id="sequence-take" class="preset"></select>
+        <div class="composition-heading"><h3 id="selected-shot-name">01 · Arrival</h3><span id="shot-length"></span></div>
+        <label class="field-label" for="shot-view">CAMERA VIEW</label><select id="shot-view" class="preset"><option value="wide">Original wide view</option><option value="shoreline" disabled>Low shoreline view</option></select><button id="render-coverage" class="secondary explore">Render shoreline view</button><p id="coverage-status" class="control-hint">Same saved performance, another viewpoint.</p>
+        <div class="trim-control"><label for="shot-in">Source In <input id="shot-in" type="number" step="0.041666666666666664" aria-label="Shot source In in seconds"></label><input id="shot-in-range" type="range" step="1" aria-label="Trim shot In"></div>
+        <div class="trim-control"><label for="shot-out">Source Out <input id="shot-out" type="number" step="0.041666666666666664" aria-label="Shot source Out in seconds"></label><input id="shot-out-range" type="range" step="1" aria-label="Trim shot Out"></div>
+        <label class="field-label" for="shot-preset">FRAMING STARTING POINT</label><select id="shot-preset" class="preset"><option value="wide">Wide · world</option><option value="medium">Medium · ship</option><option value="close">Close · landing</option><option value="custom" disabled>Custom composition</option></select>
+        <div class="endpoint-tabs" role="group" aria-label="Camera endpoint"><button id="camera-from" class="secondary" aria-pressed="true">Start frame</button><button id="camera-to" class="secondary" aria-pressed="false">End frame</button></div>
+        <div class="composition-controls"><label for="camera-zoom">Zoom <output id="camera-zoom-value">1.00×</output></label><input id="camera-zoom" type="range" min="1" max="2" step="0.01">
+          <label for="camera-x">Horizontal position <output id="camera-x-value">50%</output></label><input id="camera-x" type="range" min="0" max="100" step="0.1">
+          <label for="camera-y">Vertical position <output id="camera-y-value">50%</output></label><input id="camera-y" type="range" min="0" max="100" step="0.1"></div>
+        <div class="camera-actions"><button id="camera-match" class="quiet">Match end to start</button><button id="camera-reset" class="quiet">Reset framing</button></div>
+        <label class="field-label" for="camera-ease">CAMERA EASING</label><select id="camera-ease" class="preset"><option value="smooth">Smooth in & out</option><option value="linear">Constant pace</option><option value="ease-in">Ease in</option><option value="ease-out">Ease out</option></select>
+        <p id="composition-hint" class="control-hint">Choose a start or end frame, then drag the image to compose it. Zoom in to make room for a pan. Source motion stays locked.</p>
+        <details class="sound-mix"><summary>Sound mix <small>PROCEDURAL STUDY</small></summary><div class="composition-controls">
+          <label for="mix-engines">Engines <output id="mix-engines-value">85%</output></label><input class="sound-level" id="mix-engines" type="range" min="0" max="1.5" step="0.05" title="Thrust-driven engine rumble, roar and shutdown tail.">
+          <label for="mix-engineDepth">Engine depth <output id="mix-engineDepth-value">65%</output></label><input class="sound-level" id="mix-engineDepth" type="range" min="0" max="1" step="0.05" aria-describedby="engine-depth-help" title="Higher values lower the engine body and add weight while preserving turbulent exhaust hiss and timing."><p id="engine-depth-help" class="control-hint">Original to deeper, heavier rumble. Exhaust hiss stays crisp.</p>
+          <label for="mix-wind">Wind <output id="mix-wind-value">60%</output></label><input class="sound-level" id="mix-wind" type="range" min="0" max="1.5" step="0.05" title="Wind noise responds to captured gust strength.">
+          <label for="mix-contact">Contact & gear <output id="mix-contact-value">100%</output></label><input class="sound-level" id="mix-contact" type="range" min="0" max="1.5" step="0.05" title="Impact, compression and settling follow recorded touchdown.">
+          <label for="mix-master">Master <output id="mix-master-value">70%</output></label><input class="sound-level" id="mix-master" type="range" min="0" max="1" step="0.05">
+        </div><p class="control-hint">Sound follows source time through trims and reordering. Enable sound to listen; export inclusion is separate.</p></details>
+        <label class="field-label" for="sequence-name">SEQUENCE NAME</label><input id="sequence-name" class="take-name" maxlength="60" value="Black Shore · Gust recovery">
+        <button id="sequence-export" class="primary explore">Export sequence</button><p id="sequence-status" class="control-hint" role="status" aria-live="polite">Choose a rendered performance.</p>
+        <div id="sequence-links" class="sequence-links" hidden><a id="sequence-mp4" class="quiet" download>↓ Sequence MP4</a><a id="sequence-json" class="quiet" download>Shot plan & source frames</a></div>
+      </div>
+    </div>
+    <div id="sequence-library" class="sequence-library" aria-label="Saved sequences"></div>
+  </section>
+  <footer><span>ILLUSTRATED PERFORMANCE STUDY</span><p>Saved takes preserve the controls and captured motion. Illustrated coverage replays the saved event.</p><span>WORLDSTAGE / 01</span></footer>
+</main><script src="/studio.js" type="module"></script>
+</body></html>

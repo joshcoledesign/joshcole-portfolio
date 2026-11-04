@@ -37,7 +37,7 @@ for(const asset of assets)assert.equal(sha(read('public'+asset.path)),asset.sha2
 for(const match of html.matchAll(/(?:src|href)="(\/portfolio\/[^"#?]+)"/g))assert.ok(fs.existsSync(path.join(root,'public',match[1])),'Missing image: '+match[1]);
 assert.ok(!/Unlicensed Trial|GTPlanarTrial|ABCWhyte|data:font\//i.test(html+read('public/portfolio/'+build.styles)+read('public/portfolio/'+build.scripts)),'Unlicensed study font in output');
 assert.ok(!/[CH]:[\\/](?:Users|projects)/i.test(html+read('public/portfolio/'+build.scripts)),'Machine-local path in public output');
-assert.equal(new Set(routes.map(r=>r.path)).size,21);
+assert.equal(new Set(routes.map(r=>r.path)).size,18);
 
 const base=process.argv[2];
 const platformAdditions=[];

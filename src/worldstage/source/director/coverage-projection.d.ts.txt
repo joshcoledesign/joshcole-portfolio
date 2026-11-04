@@ -1,0 +1,5 @@
+import type {MotionState} from '../scripts/director-performance.mts';
+export const COVERAGE_SCALE:number;
+export function projectCoverageState(state:MotionState,anchorX:number,view?:'wide'|'shoreline'):MotionState;
+
+export function coverageAnchor(states:MotionState[]):number;

@@ -1,4 +1,5 @@
 // Culture presentation of the approved résumé content. Screen and paper share Geist.
+import storyManifest from '@/portfolio/story-manifest.json';
 export const RESUME_SHELL = `
 <meta charset="utf-8">
 <title>Josh Cole — Creative Technologist · AI</title>
@@ -22,13 +23,17 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .toolbar button:hover,.toolbar .download:hover{border-color:var(--accent);color:var(--accent)}
 .toolbar .download{color:var(--accent);border-color:var(--accent)}
 .status{min-height:20px;min-width:3em;color:var(--muted);font:12px/1.5 monospace}
-.sheet{max-width:1180px;margin:64px auto 100px;padding:0 5%}
+.sheet{width:100%;max-width:1680px;margin:64px auto 100px;padding:0 min(5vw,84px)}
 .name{margin:0;font-size:clamp(52px,7.8vw,96px);font-weight:500;line-height:1;letter-spacing:-.065em}
 .discipline{margin:22px 0 0;font-size:clamp(19px,2.6vw,28px);line-height:1.3;letter-spacing:-.02em}
 .resume-rule{height:1px;background:var(--accent);margin:32px 0 22px}
 .contact{display:flex;flex-wrap:wrap;gap:6px 0;margin:0;color:var(--muted);font:12px/1.7 monospace}
 .contact-group{display:inline-flex;align-items:baseline;flex-wrap:wrap}.contact-item{overflow-wrap:anywhere}.contact .sep{padding:0 14px;color:var(--rule)}
 .section{margin-top:48px;border-top:1px solid var(--rule);padding-top:22px}
+[data-story-section]{position:relative}
+[data-story-rule]{position:absolute;inset-inline:0;top:0;height:1px;background:var(--accent);transform-origin:left;pointer-events:none}
+@media screen and (min-width:901px){.section{display:grid;grid-template-columns:240px minmax(0,1fr);column-gap:6%}.section>h2{grid-column:1;grid-row:1/span 30;align-self:start}.section>:not(h2):not([data-story-rule]){grid-column:2}.section p{max-width:78ch}}
+@media screen and (min-width:901px) and (prefers-reduced-motion:no-preference){.section>h2{position:sticky;top:96px}}
 .section>h2{margin:0 0 22px;font:400 12px/1.5 monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
 .section p{margin:0 0 16px}.summary p{font-size:19px;line-height:1.65}
 .skill b{font-weight:500;color:var(--ink)}.skill{color:var(--muted)}
@@ -40,6 +45,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .earlier .role{margin-top:18px}.earlier .role-title{font-size:18px}
 @media(max-width:640px){.toolbar{gap:14px;flex-wrap:wrap}.resume-actions{width:100%;justify-content:flex-start;gap:10px}.toolbar button,.toolbar .download{padding:10px 12px;font-size:13px}.sheet{margin-top:40px}.contact{display:grid;gap:7px}.contact .sep{display:none}.role-head{display:block}.role-date{display:block;margin-top:8px}.role-group-roles{padding-left:16px}.section{margin-top:36px}.role-title{font-size:21px}.summary p{font-size:18px}}
 @media print{
+[data-story-rule]{display:none}
 @page{size:letter portrait;margin:.40in .50in .38in}
 :root{color-scheme:light;--surface:#fff;--ink:#141916;--muted:#515b54;--accent:#166874;--rule:#bbc3bd;background:#fff}
 html,body{background:#fff;color:var(--ink)}body{font-size:10pt;line-height:1.10;font-kerning:normal;font-synthesis:none;orphans:2;widows:2}
@@ -59,7 +65,8 @@ html,body{background:#fff;color:var(--ink)}body{font-size:10pt;line-height:1.10;
   <a href="/" class="resume-home" aria-label="Josh Cole — home"><span aria-hidden="true"></span></a>
   <div class="resume-actions" role="group" aria-label="Résumé options"><button type="button" id="btn-copy">Copy plain text</button><a class="download" href="%%PDF_HREF%%" download="josh-cole-resume.pdf">Download PDF ↗</a><span id="status" class="status" role="status" aria-live="polite"></span></div>
 </div>
-<main class="sheet">%%BODY%%</main>
+<main class="sheet" data-story-root>%%BODY%%</main>
+<script defer src="${storyManifest.script}"></script>
 <script>
 (()=>{const text=document.getElementById('plaintext').textContent.replace(/^\\n/,''),status=document.getElementById('status');
 document.getElementById('btn-copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(text);status.textContent='Copied';}catch{const field=document.createElement('textarea');field.value=text;field.style.cssText='position:fixed;left:-9999px';document.body.append(field);field.select();status.textContent=document.execCommand('copy')?'Copied':'Copy unavailable';field.remove();}});

@@ -266,11 +266,11 @@ function showPage(name,persist=true){if(!["home","culture","field","type","grid"
  function closeCaseDialogs(){for(const dialog of root.querySelectorAll('dialog[open]'))dialog.close();for(const dialog of document.querySelectorAll('.cw-viewer[open]'))dialog.close();}
  let initialNavigation=true;
  function landOn(target,focus){if(!initialNavigation)focus?.focus({preventScroll:true});const scroll=()=>target.scrollIntoView({block:'start',behavior:'instant'});scroll();requestAnimationFrame(()=>requestAnimationFrame(scroll));}
- function enterCase(name,remember=true){const view=q(caseViews[name]);if(!view)return;closeCaseDialogs();view.dispatchEvent(new Event('portfolio:case-enter'));showPage(name);landOn(view,view.querySelector('[data-return-case]'));metadata(name);if(remember){if(!caseNames.some(n=>pathFor(n)===location.pathname))history.replaceState({portfolioView:'home'},'','/#case-studies');history.pushState({portfolioView:name},'',pathFor(name));}}
- function returnToCases(remember=true){closeCaseDialogs();showPage('home');landOn(q('#rh-work'),q('[data-open-case]'));metadata('home');if(remember)history.pushState({portfolioView:'home'},'','/#case-studies');}
- function returnToHomepage(remember=true){closeCaseDialogs();showPage('home');landOn(q('.rh-header'),q('.rh-identity'));metadata('home');if(remember&&(location.pathname!=='/'||location.hash))history.pushState({portfolioView:'home'},'','/');}
- function enterExperiment(name,remember=true){if(!experimentNames.includes(name))return;closeCaseDialogs();showPage(name);landOn(q('.rd-header'),q('.rd-home'));metadata(name);if(remember){if(!experimentNames.some(n=>pathFor(n)===location.pathname))history.replaceState({portfolioView:'home'},'','/#experiments');history.pushState({portfolioView:name},'',pathFor(name));}}
- function returnToExperiments(remember=true){closeCaseDialogs();showPage('home');landOn(q('#rh-experiments'),q('.rh-dungeon-link'));metadata('home');if(remember)history.pushState({portfolioView:'home'},'','/#experiments');}
+ function enterCase(name,remember=true){const view=q(caseViews[name]);if(!view)return;closeCaseDialogs();view.dispatchEvent(new Event('portfolio:case-enter'));showPage(name);root.dispatchEvent(new Event('portfolio:view-change'));landOn(view,view.querySelector('[data-return-case]'));metadata(name);if(remember){if(!caseNames.some(n=>pathFor(n)===location.pathname))history.replaceState({portfolioView:'home'},'','/#case-studies');history.pushState({portfolioView:name},'',pathFor(name));}}
+ function returnToCases(remember=true){closeCaseDialogs();showPage('home');root.dispatchEvent(new Event('portfolio:view-change'));landOn(q('#rh-work'),q('[data-open-case]'));metadata('home');if(remember)history.pushState({portfolioView:'home'},'','/#case-studies');}
+ function returnToHomepage(remember=true){closeCaseDialogs();showPage('home');root.dispatchEvent(new Event('portfolio:view-change'));landOn(q('.rh-header'),q('.rh-identity'));metadata('home');if(remember&&(location.pathname!=='/'||location.hash))history.pushState({portfolioView:'home'},'','/');}
+ function enterExperiment(name,remember=true){if(!experimentNames.includes(name))return;closeCaseDialogs();showPage(name);root.dispatchEvent(new Event('portfolio:view-change'));landOn(q('.rd-header'),q('.rd-home'));metadata(name);if(remember){if(!experimentNames.some(n=>pathFor(n)===location.pathname))history.replaceState({portfolioView:'home'},'','/#experiments');history.pushState({portfolioView:name},'',pathFor(name));}}
+ function returnToExperiments(remember=true){closeCaseDialogs();showPage('home');root.dispatchEvent(new Event('portfolio:view-change'));landOn(q('#rh-experiments'),q('.rh-dungeon-link'));metadata('home');if(remember)history.pushState({portfolioView:'home'},'','/#experiments');}
  const normalClick=event=>event.button===0&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&!event.altKey;
  for(const link of root.querySelectorAll('[data-logo-home]'))link.addEventListener('click',event=>{if(!normalClick(event))return;event.preventDefault();returnToHomepage();});
  for(const link of root.querySelectorAll('[data-open-case]'))link.addEventListener('click',event=>{if(!normalClick(event))return;event.preventDefault();enterCase(link.dataset.openCase);});
@@ -551,3 +551,111 @@ function showPage(name,persist=true){if(!["home","culture","field","type","grid"
 
 ;
 document.querySelector('[data-contact-reveal]').addEventListener('click',function(){const address=String.fromCharCode(99,111,108,101,116,104,105,114,116,101,101,110)+'@'+String.fromCharCode(112,109,46,109,101);const link=document.createElement('a');link.href='mailto:'+address;link.textContent=address;this.replaceWith(link);});
+;
+(()=>{/** Shared progressive enhancement for React pages and standalone portfolio documents. */
+function mountStoryMotion(root) {
+    const portrait = root.querySelector('[data-about-portrait]');
+    const frame = root.querySelector('[data-about-portrait-frame]');
+    const introductions = root.querySelectorAll('[data-about-reveal],[data-story-intro]');
+    const rules = [...root.querySelectorAll('[data-about-rule],[data-story-rule]')].map(element => ({ element, section: element.closest('[data-story-section],section') }));
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const seen = new WeakSet(), animations = new Set();
+    let observer, scrollFrame = 0;
+    function resetPortrait() {
+        portrait?.style.removeProperty('transform');
+        portrait?.style.removeProperty('will-change');
+        for (const { element } of rules) {
+            element.style.removeProperty('transform');
+            element.style.removeProperty('will-change');
+        }
+    }
+    function updateScroll() {
+        scrollFrame = 0;
+        if (reduced.matches)
+            return;
+        const height = window.innerHeight, mobile = window.innerWidth < 768;
+        // Draw the chapter divider from its stationary section, never a transformed element.
+        for (const { element, section } of rules) {
+            if (!section)
+                continue;
+            if (!section.getClientRects().length)
+                continue;
+            const rect = section.getBoundingClientRect();
+            if (rect.bottom < 0 || rect.top > height) {
+                element.style.removeProperty('will-change');
+                continue;
+            }
+            const progress = Math.max(0, Math.min(1, (height - rect.top) / (height * .75)));
+            element.style.setProperty('transform', `scaleX(${progress.toFixed(3)})`);
+            element.style.setProperty('will-change', 'transform');
+        }
+        if (!portrait || !frame)
+            return;
+        // Measure the stationary frame so the image's transform never feeds back into its position.
+        const rect = frame.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > height) {
+            portrait.style.removeProperty('will-change');
+            return;
+        }
+        const progress = Math.max(-1, Math.min(1, (height / 2 - rect.top - rect.height / 2) / (height / 2 + rect.height / 2)));
+        const distance = mobile ? 14 : 24;
+        portrait.style.setProperty('transform', `translate3d(0,${(-progress * distance).toFixed(2)}px,0) scale(1.08)`);
+        portrait.style.setProperty('will-change', 'transform');
+    }
+    function schedule() {
+        if (!scrollFrame && !reduced.matches)
+            scrollFrame = requestAnimationFrame(updateScroll);
+    }
+    function syncPreference() {
+        observer?.disconnect();
+        cancelAnimationFrame(scrollFrame);
+        scrollFrame = 0;
+        for (const animation of animations)
+            animation.cancel();
+        animations.clear();
+        resetPortrait();
+        if (reduced.matches)
+            return;
+        if ('IntersectionObserver' in window) {
+            observer = new IntersectionObserver(entries => {
+                for (const entry of entries) {
+                    if (!entry.isIntersecting || seen.has(entry.target) || reduced.matches)
+                        continue;
+                    seen.add(entry.target);
+                    observer?.unobserve(entry.target);
+                    if (typeof entry.target.animate !== 'function')
+                        continue;
+                    const animation = entry.target.animate([
+                        { translate: '0 44px', opacity: .45 },
+                        { translate: '0 0', opacity: 1 },
+                    ], { duration: 1000, easing: 'cubic-bezier(.22,1,.36,1)' });
+                    animations.add(animation);
+                    animation.finished.then(() => animations.delete(animation), () => animations.delete(animation));
+                }
+            }, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
+            for (const introduction of introductions)
+                if (!seen.has(introduction))
+                    observer.observe(introduction);
+        }
+        schedule();
+    }
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    reduced.addEventListener('change', syncPreference);
+    root.addEventListener('portfolio:view-change', schedule);
+    root.addEventListener('toggle', schedule, true);
+    syncPreference();
+    return () => {
+        observer?.disconnect();
+        cancelAnimationFrame(scrollFrame);
+        root.removeEventListener('portfolio:view-change', schedule);
+        root.removeEventListener('toggle', schedule, true);
+        for (const animation of animations)
+            animation.cancel();
+        window.removeEventListener('scroll', schedule);
+        window.removeEventListener('resize', schedule);
+        reduced.removeEventListener('change', syncPreference);
+        resetPortrait();
+    };
+}
+;const root=document.getElementById('culture-case-studies');if(root)mountStoryMotion(root);})();

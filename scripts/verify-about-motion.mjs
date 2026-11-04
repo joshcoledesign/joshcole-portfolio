@@ -3,14 +3,14 @@ import assert from 'node:assert/strict';
 import ts from 'typescript';
 
 // Exercise the actual enhancement with controlled observer/frame/preference events.
-const code=ts.transpileModule(fs.readFileSync('src/components/about-motion.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+const code=ts.transpileModule(fs.readFileSync('src/lib/story-motion.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 function mount(reducedInitially){
   const styles=new Map(),listeners=new Map(),frames=new Map(),animations=[];
   const rect={top:180,bottom:680,height:500};
   const portrait={style:{setProperty:(key,value)=>styles.set(key,value),removeProperty:key=>styles.delete(key)}};
   const chapterRect={top:200,bottom:1000,height:800},ruleStyles=new Map();
-  const introductions=Array.from({length:4},()=>({style:{setProperty:(key,value)=>ruleStyles.set(key,value),removeProperty:key=>ruleStyles.delete(key)},closest:()=>({getBoundingClientRect:()=>chapterRect}),animate(keyframes){const animation={keyframes,cancelled:false,finished:new Promise(()=>{}),cancel(){this.cancelled=true;}};animations.push(animation);return animation;}}));
-  const root={querySelector:selector=>selector==='[data-about-portrait]'?portrait:{getBoundingClientRect:()=>rect},querySelectorAll:()=>introductions};
+  const introductions=Array.from({length:4},()=>({style:{setProperty:(key,value)=>ruleStyles.set(key,value),removeProperty:key=>ruleStyles.delete(key)},closest:()=>({getClientRects:()=>[chapterRect],getBoundingClientRect:()=>chapterRect}),animate(keyframes){const animation={keyframes,cancelled:false,finished:new Promise(()=>{}),cancel(){this.cancelled=true;}};animations.push(animation);return animation;}}));
+  const root={querySelector:selector=>selector==='[data-about-portrait]'?portrait:{getBoundingClientRect:()=>rect},querySelectorAll:()=>introductions,addEventListener:(name,fn)=>listeners.set('root-'+name,fn),removeEventListener:name=>listeners.delete('root-'+name)};
   const media={matches:reducedInitially,listener:null,addEventListener(_type,fn){this.listener=fn;},removeEventListener(){this.listener=null;}};
   let observerCallback,nextFrame=0,cleanup;
   class Observer{
@@ -25,7 +25,7 @@ function mount(reducedInitially){
     ()=>({useEffect:fn=>{cleanup=fn();}}),exports,browser,{querySelector:()=>root},Observer,
     fn=>{frames.set(++nextFrame,fn);return nextFrame;},id=>frames.delete(id),
   );
-  exports.AboutMotion();
+  cleanup=exports.mountStoryMotion(root);
   return {styles,ruleStyles,chapterRect,listeners,frames,animations,media,introductions,rect,browser,cleanup,
     flush(){for(const [id,fn]of [...frames]){frames.delete(id);fn();}},
     enter(element){observerCallback([{target:element,isIntersecting:true}]);},
@@ -35,6 +35,7 @@ function mount(reducedInitially){
 const page=fs.readFileSync('src/app/about/page.tsx','utf8');assert.ok(page.includes('md:sticky md:top-24 md:self-start motion-reduce:!static'),'Chapter headings pin only on desktop with motion allowed');
 const normal=mount(false);
 normal.flush();const first=normal.styles.get('transform');assert.ok(first);
+normal.listeners.get('root-portfolio:view-change')();assert.equal(normal.frames.size,1,'Internal page changes must refresh visible rules without needing a scroll');normal.flush();
 normal.rect.top=-160;normal.rect.bottom=340;normal.listeners.get('scroll')();normal.flush();assert.notEqual(normal.styles.get('transform'),first);
 const chapterFirst=normal.ruleStyles.get('transform');normal.chapterRect.top=-100;normal.chapterRect.bottom=700;normal.listeners.get('scroll')();normal.flush();assert.notEqual(normal.ruleStyles.get('transform'),chapterFirst,'Dividers must draw in response to scroll');
 assert.equal(normal.frames.size,0,'Motion must not run an idle animation loop');

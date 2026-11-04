@@ -210,6 +210,26 @@ PNG size, exact active preview/export pixels, and sharp 500/2000px outputs.
 Landscape and 320px fallback cases also switched layouts before downloading.
 The phone toolbar screenshot was inspected. Actual Safari remains deferred.
 
+## Full-screen palette controls (2026-11-04)
+
+The viewer includes the live Palette fieldset: edit, add/remove colors, spread
+around the wheel and switch Hard steps/Blend. Edits redraw both layouts and the
+active preview, persist and appear in PNG exports. The same fieldset moves back
+to the rail on close, Escape or native fullscreen exit, keeping a single control
+set and state. It sits beside the art on wide screens and in a bounded scroll
+area below on phones, with always-visible remove buttons in the viewer.
+
+Source: [genSound PR 7](https://github.com/joshcoledesign/genSound/pull/7), revision
+`f59d7c91eb6873cee2c5a4c99bfa2daea883c88c`. Source palette regression passed all
+six Chromium/Firefox/Playwright WebKit desktop/phone cases, including both
+previews, edits, wheel, blend, 12-color cap, one-color minimum, keyboard,
+main/viewer synchronization and reload persistence. Source PNG regression passed
+98 real exports, including changed palettes, exact native/4× pixels, settings
+metadata, native fullscreen and landscape/320px fallback. Desktop and phone
+screenshots were inspected. Lint, TypeScript/build, authored-copy and asset-hash
+checks passed. Approved explanatory copy, worker, data and licenses are unchanged;
+no dependencies were added. Actual Safari remains deferred.
+
 ## Initial release boundary (2026-11-03)
 
 Josh explicitly authorized production publication on 2026-11-03 with Safari

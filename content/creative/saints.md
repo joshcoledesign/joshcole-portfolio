@@ -1,7 +1,7 @@
 ---
 title: SAINTS
-descriptor: portraiture in the icon position
-processLine: "> photoshop composite · 5–8 studio frames · single model, multiplied"
+descriptor: composite portraits made from multiple views of one subject
+processLine: "> studio photography and set building · subject and object compositing · digital painting · grading, light matching, retouching"
 credit: ""
 slug: saints
 thumbPosition: top
@@ -25,4 +25,4 @@ tags:
   - "Gallery"
 ---
 
-One subject in camera, multiple perspectives, and some advanced compositing.
+I photographed every subject in the studio. I built sets when needed, including the one with the large table. The finished images involved extensive compositing of subjects and objects, digital painting, color grading, light matching, and retouching in Photoshop.

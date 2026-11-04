@@ -47,7 +47,7 @@ I was on the concept team and designed the interface. The authorization flow, th
 
 We ran it at a bar across the street from the agency, outside of business hours, on our own faces. Only people who had explicitly opted in were ever matched. Then we built a working setup inside the agency and published a demo video.
 
-TechCrunch ran it under the headline "Creepy or Awesome?" CBS, Gizmodo, Computerworld, Adweek, and the Daily Mail followed. We read all of it, and we read the comments, because the comments were the point. The reaction split almost exactly down the middle. Half the room wanted it in every bar they went to, half the room felt watched.
+TechCrunch ran it under the headline "Creepy or Awesome?" CBS, Gizmodo, Computerworld, Adweek, and the Daily Mail followed. We read all of it, and we read the comments, because the comments were the point. The public reaction was mixed. Some comments welcomed it. Others focused on feeling watched.
 
 ![Press coverage of Facedeals, including TechCrunch article](/case-studies/facedeals/press.jpg)
 

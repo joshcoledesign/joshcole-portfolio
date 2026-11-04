@@ -195,7 +195,7 @@
   {
     "name": "novensia",
     "source": "content/case-studies/novensia-case-study.md",
-    "sourceSha256": "0ffc721b9cb2927344f37528069b21eb4ab177497a52dd16b81d3f7a54a6b96c",
+    "sourceSha256": "8315f45826d443d63209c2cfd90d8d20b96d60d3d32271a9b9753dd07529f85c",
     "blocks": [
       {
         "id": "novensia-source-1",
@@ -207,7 +207,7 @@
       },
       {
         "id": "novensia-source-3",
-        "text": "The system: a guided intake, a four-stage voice engine, and a synthesis layer to come."
+        "text": "The system: a guided intake, a reviewed Brand Foundation, and a four-stage voice and content engine."
       },
       {
         "id": "novensia-source-4",
@@ -223,7 +223,7 @@
       },
       {
         "id": "novensia-source-7",
-        "text": "Where it's going: synthesis, RAG, and the visual half as a built pipeline."
+        "text": "Where it's going: a smaller closed beta for Foundation and writing, with image creation coming soon."
       },
       {
         "id": "novensia-source-8",
@@ -235,7 +235,7 @@
       },
       {
         "id": "novensia-source-10",
-        "text": "I designed and built it, working through Claude Code. I run it by hand, on purpose. It stays manual until it has earned the trust to run on its own. Every run ends with me reading the output before anything is used."
+        "text": "I designed Novensia and built the early versions with Claude Code. I've since used Codex for substantial implementation work. People review the Foundation proposals and content. The visual identities shown here came from a separate process that I steered and art-directed by hand."
       },
       {
         "id": "novensia-source-11",
@@ -267,7 +267,7 @@
       },
       {
         "id": "novensia-source-18",
-        "text": "First, the foundation. A guided intake with seven chapters that walk you through who you are, what you believe, who you serve, how you want the brand to look and sound. Each chapter is a run of questions, and each question comes with a short note on how to think about it as you answer, so momentum holds and nothing overwhelms. Autosave on every keystroke. Chapters you can move between freely, because the work doesn't come out in order. It's a capture instrument by design. No AI synthesis at this stage, on purpose. You can't make sense of what you haven't said clearly first."
+        "text": "First, the foundation. A guided intake with seven chapters that walk you through who you are, what you believe, who you serve, how you want the brand to look and sound. Each chapter is a run of questions, and each question comes with a short note on how to think about it as you answer, so momentum holds and nothing overwhelms. Autosave on every keystroke. Chapters you can move between freely, because the work doesn't come out in order. It's a capture instrument by design. The captured material can then be synthesized into proposed Brand Foundation claims, gaps, and conflicts. A person reviews the proposals before publishing a Foundation version."
       },
       {
         "id": "novensia-source-19",
@@ -287,11 +287,11 @@
       },
       {
         "id": "novensia-source-23",
-        "text": "The voice profile captures techniques, not phrases. \"Trained on your voice\" usually means remixing sentences from your samples, which is why the result sounds like a karaoke version of you. Novensia learns how you make a point, not the words you used to make it last time."
+        "text": "The voice profile describes writing techniques found in the samples. The drafting stage uses that profile as guidance."
       },
       {
         "id": "novensia-source-24",
-        "text": "The third layer, synthesis, is next. It fuses the foundation with the tools, so when the engine writes it draws on your mission, your pillars, and the people you serve, not only your writing samples. The schema already reserves space for it."
+        "text": "The Foundation connects the work. The writing workflow uses a published Foundation version and a snapshot of the writing samples. Human review remains part of both the Foundation and content workflows."
       },
       {
         "id": "novensia-source-25",
@@ -303,7 +303,7 @@
       },
       {
         "id": "novensia-source-27",
-        "text": "The engine writes the words. The other half of the system turns a person, or a company, into a brand identity. The look. Same foundation, different job, and this is the half I steer by hand against the system's logic."
+        "text": "The engine writes the words. The visual identities shown here came from a separate process that I steered and art-directed by hand. Image creation is coming soon for the smaller closed beta, which focuses on Foundation and writing."
       },
       {
         "id": "novensia-source-28",
@@ -359,11 +359,11 @@
       },
       {
         "id": "novensia-source-41",
-        "text": "Four brands have gone through the system so far. Rory Miller, John Nemo, John Michael Morgan, and Sean Patton. The engine wrote the voice documents. The identity work was steered by hand against the system's logic. Same pipeline, four voices that don't sound alike, four brands that don't look alike. All four are personal brands because that's who came first. The system reads a company the same way."
+        "text": "The examples here are four personal brands. Rory Miller, John Nemo, John Michael Morgan, and Sean Patton. The engine wrote the voice documents. I steered and art-directed the visual identities by hand."
       },
       {
         "id": "novensia-source-42",
-        "text": "The clearest proof the system isn't a template is what it does with the same starting point. Sage sits in all four analyses. Nemo's Sage cracks a joke. Rory's is monastic. John Michael Morgan's is a rebel-philosopher. Sean's was forged in combat. The archetype is where the system starts. The person is what it's made of."
+        "text": "All four analyses included Sage. The visual directions still differed because I worked from each person's material and reviewed the proposals."
       },
       {
         "id": "novensia-source-43",
@@ -379,7 +379,7 @@
       },
       {
         "id": "novensia-source-46",
-        "text": "One full run, for Rory, produced the document set below. Core, Voice, Voice Library, Visual, a brand film treatment, and video scripts with alternates, plus the logo. Every piece was reviewed by a second model, then by me, before it went to him."
+        "text": "For Rory, the document set below includes Core, Voice, Voice Library, Visual, a brand film treatment, and video scripts with alternates, plus the logo."
       },
       {
         "id": "novensia-source-47",
@@ -391,7 +391,7 @@
       },
       {
         "id": "novensia-source-49",
-        "text": "John Michael Morgan. A personal-brand strategist whose whole pitch is \"brand out loud.\" The system returned Maverick × Sage, a rebel-philosopher. Bold truth meets timeless insight. I built a warm vintage-editorial identity. A serif headline face, gold, ochre, and ivory, the feel of book covers and protest posters, heavy print grain. Literary and warm where Sean is cold and Rory is bare. Wisdom that echoes."
+        "text": "John Michael Morgan. A personal-brand strategist whose whole pitch is \"brand out loud.\" The system returned Maverick × Sage, a rebel-philosopher. I built a warm vintage-editorial identity. A serif headline face, gold, ochre, and ivory, the feel of book covers and protest posters, heavy print grain. Literary and warm where Sean is cold and Rory is bare."
       },
       {
         "id": "novensia-source-50",
@@ -439,7 +439,7 @@
       },
       {
         "id": "novensia-source-61",
-        "text": "At the end, something quiet happens. You've written it down. Your mission, your pillars, who you serve, how you sound. The thing you've carried around half-articulated for years is outside your head, structured, readable. That's what the whole product is designed to deliver. The architecture serves that moment. So does the design. So does the AI, when it shows up."
+        "text": "By the end, the brand's mission, pillars, audience, and voice are written down in one place. Once reviewed and published as the brand's Foundation, that record informs all future generation for the brand."
       },
       {
         "id": "novensia-source-62",
@@ -451,7 +451,7 @@
       },
       {
         "id": "novensia-source-64",
-        "text": "One person at this stage is a scope decision, not a ceiling. Working solo has kept the product coherent. The interface design shapes the architecture. The words in the interface shape the design. And all of it is shaped by what it's like to sit down and write a mission statement for the first time, which is the moment the product exists to serve. When one person holds every layer, a change in one reaches the others the same day. The platform is already built for more than one workspace and more than one set of hands. The next stage adds them."
+        "text": "One person at this stage is a scope decision, not a ceiling. Working solo has kept the product coherent. The interface design shapes the architecture. The words in the interface shape the design. And all of it is shaped by what it's like to sit down and write a mission statement for the first time, which is the moment the product exists to serve. When one person holds every layer, a change in one reaches the others the same day. Verified signup, private workspaces, and saved-run recovery are implemented in the controlled alpha. I'm continuing to test source fidelity and review behavior before the next closed-beta milestone."
       },
       {
         "id": "novensia-source-65",
@@ -459,7 +459,7 @@
       },
       {
         "id": "novensia-source-66",
-        "text": "The synthesis layer, so generated content is grounded in mission and pillars, not only samples. The schema's built for it."
+        "text": "A smaller closed beta for Foundation and writing. The core workflows exist, while model-quality evidence, human review, and release acceptance remain work in progress."
       },
       {
         "id": "novensia-source-67",
@@ -561,7 +561,7 @@
   {
     "name": "nemo",
     "source": "content/case-studies/nemo.md",
-    "sourceSha256": "6533f221da31e5cf772f67b9ad864c06b74165d4870a4c2894e3d10d56b73cac",
+    "sourceSha256": "76846a4187d6545eb6f9524e1c11bc76e65ee1552b187517cad975ee897d57c2",
     "blocks": [
       {
         "id": "nemo-source-1",
@@ -573,7 +573,7 @@
       },
       {
         "id": "nemo-source-3",
-        "text": "The NEMO logo is the place to start, because it makes the whole argument in one mark. Five letters, none of them behaving the same way. The N and M are a variable sans-serif that can shift width and weight. The E is a condensed slab serif. The O is never just a typed character. It's an object every time. Hand-drawn, cut from paper, a magnetic letter off the fridge, a coffee stain, a Zubaz-pattern cutout. It shifts with every client, which is the point."
+        "text": "The NEMO logo is the place to start, because it makes the whole argument in one mark. Four letters, each handled differently. The N and M are a variable sans-serif that can shift width and weight. The E is a condensed slab serif. The O is never just a typed character. It's an object every time. Hand-drawn, cut from paper, a magnetic letter off the fridge, a coffee stain, a Zubaz-pattern cutout. It shifts with every client, which is the point."
       },
       {
         "id": "nemo-source-4",
@@ -657,7 +657,7 @@
       },
       {
         "id": "nemo-source-24",
-        "text": "The system named the palette correctly. Blue for trust, red for conversion. Black for ink. The specific colors it picked were the problem. Its blue was #004DFF, a loud digital blue. Its red was #FF004D, a near-neon. Named right, chosen wrong. Put those two next to each other and they vibrate. Both sit high and saturated, close in value, and the eye can't rest where they meet."
+        "text": "The system proposed blue, red, and black. I kept that direction and changed the specific colors. The specific colors it picked were the problem. Its blue was #004DFF, a loud digital blue. Its red was #FF004D, a near-neon. Named right, chosen wrong. Put those two next to each other and they vibrate. Both sit high and saturated, close in value, and the eye can't rest where they meet."
       },
       {
         "id": "nemo-source-25",
@@ -734,7 +734,7 @@
   {
     "name": "ust-rfp",
     "source": "content/case-studies/ust-rfp-agent-case-study.md",
-    "sourceSha256": "052c18ef129e7f8faabbb0908f1adeef66cf699a06d9762049c92d6c2590d147",
+    "sourceSha256": "bc9ba65f8d6e6bfb93e514e2f5ab73f6f692937978e9fbc238f4b3734822f4d3",
     "blocks": [
       {
         "id": "ust-rfp-source-1",
@@ -750,7 +750,7 @@
       },
       {
         "id": "ust-rfp-source-4",
-        "text": "I built a system that does the first pass."
+        "text": "I built a working pilot to handle the first pass."
       },
       {
         "id": "ust-rfp-source-5",
@@ -770,15 +770,15 @@
       },
       {
         "id": "ust-rfp-source-9",
-        "text": "Once the agent has the complete request, it scores it against every rule in the table. A couple of rules are hard stops. If one of them trips, the request is an instant no-go and nothing else needs checking. For everything else, the agent writes a per-request spreadsheet with each rule scored, stores it, and generates a summary document. A synopsis of the request, the results, a final score, and the flags behind it. Go, maybe, or no-go, with the reasons attached."
+        "text": "The agent checks each request against the team's rules. A couple are hard stops. If one applies, the request is marked no-go and recorded with the rejection reason. For the other requests, the agent creates a spreadsheet with the rule scores and a summary with a synopsis, final score, flags, and a go, maybe, or no-go recommendation."
       },
       {
         "id": "ust-rfp-source-10",
-        "text": "A no-go doesn't disappear. Every request gets scored and stored, including the ones a hard stop rejected, so the team can go back and audit what the agent turned away and why."
+        "text": "Every request is stored, including hard-stop rejections, so the team can review what was turned away and why."
       },
       {
         "id": "ust-rfp-source-11",
-        "text": "The summary lands in a Teams channel. The whole team scans it over coffee. A morning of senior-people judgment becomes a digest they can read in minutes, and the handful of requests actually worth pursuing get pulled out and scrubbed by humans before anyone commits real time."
+        "text": "The summaries are posted to a Teams channel each morning. The team can review them whenever they choose and decide which requests to pursue."
       },
       {
         "id": "ust-rfp-source-12",
@@ -790,7 +790,7 @@
       },
       {
         "id": "ust-rfp-source-14",
-        "text": "These are six-figure pursuit decisions. For a team to rely on an agent's read of an RFP, the agent has to be right in a way that holds up. Not in a demo, in production, every morning, on messy inputs. That takes real work. When I left UST the system was a working pilot, still in testing, still being tuned. That wasn't unfinished business. That was the business. You don't ship an AI system that influences where a team spends half a million dollars and call it done after the first good output. You calibrate it until the people using it would stake a decision on it."
+        "text": "These were recommendations about six-figure opportunities. When I left UST, the system was a working pilot, still in testing and being tuned."
       },
       {
         "id": "ust-rfp-source-15",
@@ -815,7 +815,7 @@
   {
     "name": "andculture",
     "source": "content/creative/andculture.md",
-    "sourceSha256": "75a5b89d22532d24e27bdf405411656a5d78203dc12c4693fa82a7720cf7e7fb",
+    "sourceSha256": "ca5130e7649c3c68e22014c84c6a24b564d3d1ab1a534920a03482c768a47483",
     "blocks": [
       {
         "id": "andculture-source-1",
@@ -835,7 +835,7 @@
       },
       {
         "id": "andculture-source-5",
-        "text": "Business went up after the rebrand, and Andculture got talked about in the startup community. Startups liked that the same team could make something by hand and build the software behind it."
+        "text": "After the rebrand, we saw more leads and more startup work."
       },
       {
         "id": "andculture-source-6",
@@ -998,11 +998,11 @@
   {
     "name": "emergence",
     "source": "content/case-studies/emergence-case-study.md",
-    "sourceSha256": "3d43c9927ab6d255c428ea1ccd13985fcd3759b66efeafcfcbcfacb985b1bc83",
+    "sourceSha256": "1945ec091e501e20958be2a75b123a812e8d076fe1df61532e371d6e363f5ebf",
     "blocks": [
       {
         "id": "emergence-source-1",
-        "text": "Emergence is the design system that assembles to create Novensia. It's named for what it's meant to do. Give one idea a visual form. Something new forming out of something larger."
+        "text": "Emergence is the design system I built for Novensia. It defines the colors, type, components, and interaction states used across the product."
       },
       {
         "id": "emergence-source-2",
@@ -1038,7 +1038,7 @@
       },
       {
         "id": "emergence-source-10",
-        "text": "The rule that decides between them. A label is a word a human wrote (\"Temperature\"). A value is data the machine produced (\"0.7\"). Label gets Geist. Value gets Mono. The reader knows what kind of thing they're looking at before they read a word of it."
+        "text": "The rule that decides between them. A label is a word a human wrote (\"Temperature\"). A value is data the machine produced (\"0.7\"). Label gets Geist. Value gets Mono. The type choices give interface labels, written content, and machine values different visual treatments."
       },
       {
         "id": "emergence-source-11",
@@ -1067,7 +1067,7 @@
   {
     "name": "gprs",
     "source": "content/case-studies/gprs-sitemap-case-study.md",
-    "sourceSha256": "4b83c836da9b232d5b50952c3dbf1d60e45315754fb3e96d11bd6054bd590a14",
+    "sourceSha256": "7c0ea1fab917fe19d6c993044a1865041fc624bd609be5b4ed40c9932ae19c11",
     "blocks": [
       {
         "id": "source-1",
@@ -1131,7 +1131,7 @@
       },
       {
         "id": "source-16",
-        "text": "The map is the surface. SiteMap's entire premise is that the map is the source of truth. The satellite view of the site, with utility lines and feature markers layered on top, is where the user lives. Panels slide in over the map rather than replacing it. Detail views keep the map's context. The reader never loses sight of where they are physically, because where they are physically is the whole point. Making the map the workspace was the design decision that everything else hung on."
+        "text": "The map is the surface. The satellite view of the site, with captured utility lines and feature markers layered over it, is the main workspace. Panels open over the map rather than replacing it, and detail views retain that map context."
       },
       {
         "id": "source-17",
@@ -1151,7 +1151,7 @@
       },
       {
         "id": "source-21",
-        "text": "Performance is part of the design. A site can have thousands of features on the map at once. The Settings panel exposes the controls that make that workable (render scale, feature icon size, hide-removed-lines, low-memory mode) and the defaults are calibrated so the map stays usable without the user ever having to open the panel. The settings exist for the power user. The defaults exist for everyone else."
+        "text": "Performance is part of the design. A site can have thousands of features on the map at once. The Settings panel includes controls for render scale, feature icon size, hidden removed lines, and low-memory mode. The defaults provide a starting point, and users can adjust those controls for the site and device they're working with."
       },
       {
         "id": "source-22",

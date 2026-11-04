@@ -13,7 +13,7 @@ export default function HypePage(){
         <p className="mb-5 font-mono text-xs tracking-[.14em] text-[#ff639f]">OPEN EXPERIMENT / ILLUSTRATION × CODE</p>
         <div className="grid items-end gap-8 lg:grid-cols-[1.1fr_1fr]">
           <h1 className="text-[clamp(90px,17vw,240px)] leading-[.82] tracking-[-.075em]">Hype<span className="text-[#ff639f]">.</span></h1>
-          <div className="max-w-xl"><h2 data-story-intro className="text-3xl leading-tight tracking-tight sm:text-5xl">The hand sets<br />the vocabulary.</h2><p className="mt-6 max-w-md text-base leading-7 text-[#b3b9b5]">I draw the shapes and choose the colors. Code finds the arrangements. Meet the original cast, then make a composition or set it in motion.</p></div>
+          <div className="max-w-xl"><h2 data-story-intro className="text-3xl leading-tight tracking-tight sm:text-5xl">The hand sets<br />the vocabulary.</h2><p className="mt-6 max-w-md text-base leading-7 text-[#b3b9b5]">These studies use my original illustrations. Change the seed, palette, scale, and motion controls to see how the same drawings produce different compositions.</p></div>
         </div>
       </header>
       <section aria-label="Hype live exhibition" className="py-10 md:py-16" data-story-section><span data-story-rule aria-hidden="true" />

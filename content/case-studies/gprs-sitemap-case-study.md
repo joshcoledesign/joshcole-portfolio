@@ -55,7 +55,7 @@ That pull in two directions ran through every decision. A from-scratch redesign 
 
 A few principles emerged from the redesign and held across the suite.
 
-**The map is the surface.** SiteMap's entire premise is that the map is the source of truth. The satellite view of the site, with utility lines and feature markers layered on top, is where the user lives. Panels slide in _over_ the map rather than replacing it. Detail views keep the map's context. The reader never loses sight of where they are physically, because where they are physically is the whole point. Making the map the workspace was the design decision that everything else hung on.
+**The map is the surface.** The satellite view of the site, with captured utility lines and feature markers layered over it, is the main workspace. Panels open over the map rather than replacing it, and detail views retain that map context.
 
 **Color carries condition.** Storm lines run down a vertical rail with their pipe condition color-coded (green for excellent, yellow for fair, red for immediate attention, and so on). The user scanning a sewer system isn't reading words. They're reading the rail. The condition language is consistent across utility types and across surfaces, so a field engineer on a phone and an estimator at a desk see the same colors meaning the same things.
 
@@ -65,7 +65,7 @@ A few principles emerged from the redesign and held across the suite.
 
 ![Plan Room file details with tags](/case-studies/gprs/plan-room-details.jpg)
 
-**Performance is part of the design.** A site can have thousands of features on the map at once. The Settings panel exposes the controls that make that workable (render scale, feature icon size, hide-removed-lines, low-memory mode) and the defaults are calibrated so the map stays usable without the user ever having to open the panel. The settings exist for the power user. The defaults exist for everyone else.
+**Performance is part of the design.** A site can have thousands of features on the map at once. The Settings panel includes controls for render scale, feature icon size, hidden removed lines, and low-memory mode. The defaults provide a starting point, and users can adjust those controls for the site and device they're working with.
 
 **Same language on every device, not the same product.** Desktop, tablet, and mobile share the same data model and the same language, but they don't try to be the same product. Desktop is where the heavy work happens (reviewing inspection videos, managing subscriptions, administering tags). Mobile is where the field happens (pulling up a line detail in the dirt, confirming a work order on site). Tablet sits between them, comfortable in both contexts. The design treats each surface as serious in its own right, not as a downsized version of the next one up.
 

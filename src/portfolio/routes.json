@@ -35,7 +35,7 @@
     "type": "case",
     "path": "/work/novensia",
     "title": "Novensia — Josh Cole",
-    "description": "An AI brand operating system. Foundation first, multi-model, built end to end by one set of hands. Four brands produced so far.",
+    "description": "An AI brand operating system. Foundation first, multi-model, built end to end by one set of hands. The case study also shows four brand identities developed through a separate process I steered by hand.",
     "source": "content/case-studies/novensia-case-study.md"
   },
   {
@@ -91,7 +91,7 @@
     "type": "case",
     "path": "/work/emergence",
     "title": "Emergence — Josh Cole",
-    "description": "The design system that runs Novensia. Something new forming out of something larger.",
+    "description": "Emergence is the design system I built for Novensia. It defines the colors, type, components, and interaction states used across the product.",
     "source": "content/case-studies/emergence-case-study.md"
   },
   {

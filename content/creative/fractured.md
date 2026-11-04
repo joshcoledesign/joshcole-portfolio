@@ -26,6 +26,8 @@ tags:
   - "Generative"
 ---
 
-We've gotten good at showing one frame. The good one, the version where everything's working, where the answer to "how are you" is "I'm good." The reel everyone keeps. Fractured is built out of everything that frame leaves out.
+I believe a person is more than a single photograph. Life is made up of good and bad moments. A photography session usually ends with one or two images chosen, but there are often beautiful frames left behind.
 
-Each piece stacks 40 to 80 frames of one person, a script randomizing the opacity and order so no single moment wins. The up and the down, blurred into one image you can almost resolve but never quite happens. Because that's what a person actually is, not the best frame, but all of them at once. The whole picture is harder to look at. It's also the true one, and there's something worth feeling in it.
+In Fractured, I bring those frames together. Each piece combines 40 to 80 photographs of one person. A Photoshop script randomizes the layer order and opacity, so expressions and moments overlap.
+
+For me, the combined image brings back more of the session. The whole moment, the person, and the emotion, rather than just the one frame we picked. It's both an experiment in generative art and a piece of art about what a single photograph leaves out.

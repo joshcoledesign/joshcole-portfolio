@@ -117,6 +117,28 @@ layouts, cap/removal, blend, preset reset, alternate hue sources, persistence an
 old-settings migration. Chromium, Firefox and Playwright WebKit passed at desktop
 and phone widths. No analyzer, example data or unrelated portfolio work changed.
 
+## PNG downloads (2026-11-04)
+
+Both layouts now have a **Download PNG** button. Files preserve the current native
+500 × 500 canvas pixels and use track/layout filenames. Track-loading guards and
+a synchronous redraw prevent stale exports. PNG iTXt metadata retains settings,
+Unicode track names and the approved example credits without drawing labels onto
+the artwork; Hitman exports also show a sharing-credit reminder on the page.
+
+The canonical source is [genSound PR 2](https://github.com/joshcoledesign/genSound/pull/2),
+revision `8608a60d0ddbca4991e856d4f63e99d48a6807bd`. Regression tests in
+`tests/download-browser.mjs` validated 52 actual downloads across Chromium,
+Firefox and Playwright WebKit at desktop and phone widths: PNG dimensions, native
+chunk CRC checks, decoded pixel equality, all examples/both layouts, settings and
+credits, loading guards, pending color changes, Unicode visitor-audio filenames,
+encoding failure recovery and no horizontal overflow. The palette regression
+passed again. Windows WebKit covers example exports; visitor-audio exports were
+verified in Chromium/Firefox because of WebKit's previously recorded Web Audio
+limitation. Actual Safari and physical phones remain deferred.
+
+The PNG text chunks follow the [W3C PNG iTXt specification](https://www.w3.org/TR/png-3/#11iTXt).
+No dependency, backend upload route, analyzer or example-data change was added.
+
 ## Initial release boundary (2026-11-03)
 
 Josh explicitly authorized production publication on 2026-11-03 with Safari

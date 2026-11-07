@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,{otherChunks:["static/chunks/1e0895o92hpg0.js","static/chunks/3e42zbttbf27h.js"],runtimeModuleIds:[14331]}]);

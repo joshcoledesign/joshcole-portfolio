@@ -167,8 +167,8 @@
   "dungeonAssets": [
     {
       "path": "/experiments/dry-run-dungeon/runtime/index.html",
-      "sha256": "dfe43e9bb6c45f69aa9b4048929dab1ace30f42469c48b67d6d581abdbdfd783",
-      "sourceSha256": "66e5ff57abb167f2f94a65c27f9c8533ab6372027c17332b720bf656b6bf177b",
+      "sha256": "2e21826703b97090f07d9eac264432651a4f0f2834a25ace8ca936e20f3da6c3",
+      "sourceSha256": "2877b198206cd0163713852ad5e0715323e0b7b914e8390f1332a4d755b106b7",
       "transformation": "URL namespace only for text assets; binary files unchanged"
     },
     {
@@ -250,19 +250,19 @@
       "transformation": "URL namespace only for text assets; binary files unchanged"
     },
     {
-      "path": "/experiments/dry-run-dungeon/runtime/_next/static/k8XeOsU8_Yfzf50LdWQRm/_buildManifest.js",
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/kLHNqCYqbhIy-lifal_6b/_buildManifest.js",
       "sha256": "9476e0afd3f9da68a64e6ec58631191fd3eaca62c9f5a377e7517fe9a89e59ea",
       "sourceSha256": "9476e0afd3f9da68a64e6ec58631191fd3eaca62c9f5a377e7517fe9a89e59ea",
       "transformation": "URL namespace only for text assets; binary files unchanged"
     },
     {
-      "path": "/experiments/dry-run-dungeon/runtime/_next/static/k8XeOsU8_Yfzf50LdWQRm/_clientMiddlewareManifest.js",
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/kLHNqCYqbhIy-lifal_6b/_clientMiddlewareManifest.js",
       "sha256": "5483e3295dc35dfe29ea932efc85341c916f10ff78ff5b0e965e003710893a4a",
       "sourceSha256": "5483e3295dc35dfe29ea932efc85341c916f10ff78ff5b0e965e003710893a4a",
       "transformation": "URL namespace only for text assets; binary files unchanged"
     },
     {
-      "path": "/experiments/dry-run-dungeon/runtime/_next/static/k8XeOsU8_Yfzf50LdWQRm/_ssgManifest.js",
+      "path": "/experiments/dry-run-dungeon/runtime/_next/static/kLHNqCYqbhIy-lifal_6b/_ssgManifest.js",
       "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
       "sourceSha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
       "transformation": "URL namespace only for text assets; binary files unchanged"
@@ -394,7 +394,7 @@
       "transformation": "URL namespace only for text assets; binary files unchanged"
     }
   ],
-  "sourceAppCommit": "0500358659cdab96c74eede7472bbb444fbc44d5",
+  "sourceAppCommit": "e8ab7ad7ae59a657c4c75f69ebdef479160ad6e4",
   "typography": "Owner approved Geist for launch; all trial study fonts excluded.",
   "openExperimentClassification": [
     "Dry Run Dungeon",

@@ -4,7 +4,7 @@ The Dry Run Dungeon page (`/experiments/dry-run-dungeon`) and the homepage featu
 
 ## What changed
 
-- **Live experiment.** `public/experiments/dry-run-dungeon/runtime/` is a new static snapshot of the game at commit `0500358` (`joshcoledesign/dry-run-dungeon`, branch `p5-perf-a11y`, PR #10): pixel art, the legend under the boards, curiosity with its on-screen reason, the 60-second demo, how-to-read, the dry-run SVG perf fix, and WCAG AA label contrast. It starts from the shipped P4 weights (`world-model-p4.bin`) in place of P3's `ref-2000-p3.bin`; the frame and the "Open on its own" link load `?weights=world-model-p4`.
+- **Live experiment.** `public/experiments/dry-run-dungeon/runtime/` is a new static snapshot of the game at `main` commit `e8ab7ad` (`joshcoledesign/dry-run-dungeon`, the merge of PR #10): pixel art, the legend under the boards, curiosity with its on-screen reason, the 60-second demo, how-to-read, the dry-run SVG perf fix, and WCAG AA label contrast. It starts from the shipped P4 weights (`world-model-p4.bin`) in place of P3's `ref-2000-p3.bin`; the frame and the "Open on its own" link load `?weights=world-model-p4`.
 - **Captures.** `dungeon-planning-capture.webp` (897 × 317, the page hero) and the homepage capture (1200 × 1480, now `/portfolio/media/d8349d4f8db7f5ef1bee.webp`) are new captures of the production build in headless Chrome during a planning beat. The old homepage capture showed the Next.js dev-mode badge; the new one does not.
 - **Host presentation.** The toggle labels in the embedded game get `gap:.6ch`, so "[x] agent drives" keeps its space inside the host's `inline-flex` rule.
 - **Benchmark copy (approved by Josh, 2026-11-07).** "What the recorded test showed" reported P3: planning 5/30 wins, 5 deaths, 110 mean steps. It now reports P4's 10-seed table on the shipped model, same protocol, from `docs/phase-4.md` in the game repository: planning 16/30 wins, 4 deaths, 88 mean steps; reactive 10/30, 27, 92 (unchanged). Wording:
@@ -16,7 +16,7 @@ The Dry Run Dungeon page (`/experiments/dry-run-dungeon`) and the homepage featu
 
 As before: the game's prerendered `index.html`, every file in `.next/static` except source maps and the worker's raw `.ts` (Turbopack emits it beside the compiled `turbopack-worker-*.js`; the page never requests it), the three TF.js `.wasm` files, and the weights. Text files only get a URL namespace rewrite (`/_next/`, `/tfjs/`, `/weights/` → `/experiments/dry-run-dungeon/runtime/…`); binary files are byte for byte. `src/portfolio/source-manifest.json` records 38 files with their source and published hashes, and `sourceAppCommit`. The bootstrap Vercel appends its toolbar to, `turbopack-3-ry682tkyiqk.js`, is byte-identical to the previous snapshot's, so `verify-portfolio.mjs` needs no change.
 
-When PR #10 merges, rebuild the snapshot from the merged `main` so `sourceAppCommit` names a commit on `main`.
+It was first taken from the PR branch (`0500358`) and retaken from `main` after Josh merged PR #10; only Next.js's per-build ID changed (in `index.html` and the three build-manifest paths).
 
 ## Verification
 

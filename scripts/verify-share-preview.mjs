@@ -23,7 +23,7 @@ if(base){
     const response=await fetch(new URL(path,base));assert.equal(response.status,200,path);
     const html=await response.text();
     for(const [attribute,key]of [['property','og:image'],['name','twitter:image']]){
-      assert.deepEqual(tags(html,attribute,key),['https://joshcolecreative.com'+image.path],`${path}: ${key}`);
+      assert.deepEqual(tags(html,attribute,key),['https://www.joshcolecreative.com'+image.path],`${path}: ${key}`);
     }
     for(const [key,value]of [['og:image:width',String(image.width)],['og:image:height',String(image.height)],['og:image:alt',image.alt]])assert.deepEqual(tags(html,'property',key),[value],path+': '+key);
   }

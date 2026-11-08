@@ -41,7 +41,7 @@ async function pixels(frame) {
         const frame = page.frameLocator('iframe');
         await frame.locator('#stats').filter({ hasText: '250,000 windows' }).waitFor();
         assert.match(await page.title(), /genSound/);
-        assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://joshcolecreative.com/experiments/gensound');
+        assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://www.joshcolecreative.com/experiments/gensound');
         assert.match(await page.locator('main > p').first().innerText(), /Kevin MacLeod/);
         const checks = [];
         for (const track of ['beethoven-symphony-8-finale', 'chopin-nocturne-op9-no2', 'macleod-hitman']) {

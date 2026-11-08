@@ -61,14 +61,14 @@ if(base){
   for(const route of routes){
     const response=await get(route.path),page=await response.text();
     assert.ok(page.includes('<title>'+route.title+'</title>'),route.path+' title');
-    assert.ok(page.includes('rel="canonical" href="https://joshcolecreative.com'+route.path+'"'),route.path+' canonical');
+    assert.ok(page.includes('rel="canonical" href="https://www.joshcolecreative.com'+route.path+'"'),route.path+' canonical');
     if(!route.native)assert.ok(response.headers.get('content-security-policy')?.includes("object-src 'none'"),route.path+' CSP');
   }
   for(let i=0;i<assets.length;i+=8)await Promise.all(assets.slice(i,i+8).map(async asset=>verifyDeployedAsset(Buffer.from(await (await get(asset.path)).arrayBuffer()),asset)));
   for(const name of [build.scripts,build.styles])assert.equal(sha(Buffer.from(await (await get('/portfolio/'+name)).arrayBuffer())),sha(read('public/portfolio/'+name)));
   for(const pathname of ['/archive','/work/photography','/about','/resume','/resume/download','/experiments/gensound/index.html','/portfolio/licenses/index.html','/sitemap.xml'])await get(pathname);
   const sitemap=await (await get('/sitemap.xml')).text();
-  for(const route of routes)assert.ok(sitemap.includes('https://joshcolecreative.com'+route.path+'</loc>'),'Route missing from sitemap: '+route.path);
+  for(const route of routes)assert.ok(sitemap.includes('https://www.joshcolecreative.com'+route.path+'</loc>'),'Route missing from sitemap: '+route.path);
   assert.ok(!sitemap.includes('/experiments/totem'),'Legacy alias in sitemap');
   assert.equal((await fetch(new URL('/portfolio/not-a-view',base))).status,404);
 }

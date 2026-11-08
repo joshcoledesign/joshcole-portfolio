@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/site-metadata';
 import documentTemplate from './compiled-document.json';
 import routes from './routes.json';
 
@@ -11,7 +12,7 @@ export function renderPortfolio(view: string): string | null {
   let html = documentTemplate
     .replaceAll('__PAGE_TITLE__', escape(route.title))
     .replaceAll('__PAGE_DESCRIPTION__', escape(route.description))
-    .replaceAll('__PAGE_URL__', `https://joshcolecreative.com${route.path}`);
+    .replaceAll('__PAGE_URL__', `${SITE_URL}${route.path}`);
   const setHidden = (tag: string, hidden: boolean) => {
     const visibleTag = tag.replace(/\s+hidden(?=[\s>])/g, '');
     return hidden ? visibleTag.replace(/>$/, ' hidden>') : visibleTag;

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import portfolioRoutes from "@/portfolio/routes.json";
 
-const SITE_URL = "https://joshcolecreative.com";
+import { SITE_URL } from "@/lib/site-metadata";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["/", "/about", "/resume", ...portfolioRoutes.map(route => route.path)];

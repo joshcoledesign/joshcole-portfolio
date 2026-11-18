@@ -3,6 +3,8 @@
  const persistent=value=>{
   if(value?.modelContent?.kind!=='culture-case-studies')return value;
   const modelContent={...value.modelContent};delete modelContent.structure;
+  // Reset older color preferences once so the refreshed palette opens in Cyan.
+  if(modelContent.paletteVersion!==2)delete modelContent.ink;
   return {...value,modelContent};
  };
  let snapshot={modelContent:null,privateContent:{}};

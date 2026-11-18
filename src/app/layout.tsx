@@ -55,6 +55,10 @@ export default function RootLayout({
       style={{backgroundColor:"#0b0d0c",colorScheme:"dark"}}
       className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://use.typekit.net/wno7axa.css" />
+      </head>
       <body className="min-h-screen bg-background text-foreground">
         {children}
         <SiteChrome />

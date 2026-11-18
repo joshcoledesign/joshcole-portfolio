@@ -1,4 +1,4 @@
-// Culture presentation of the approved résumé content. Screen and paper share Geist.
+// Culture presentation: Vinila Variable on screen; the approved Geist print layout.
 import storyManifest from '@/portfolio/story-manifest.json';
 export const RESUME_SHELL = `
 <meta charset="utf-8">
@@ -7,19 +7,21 @@ export const RESUME_SHELL = `
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0b0d0c">
+<link rel="preconnect" href="https://use.typekit.net" crossorigin>
+<link rel="stylesheet" href="https://use.typekit.net/wno7axa.css">
 <style>
 @font-face{font-family:Geist;src:url('/portfolio/media/ccce59465ae5c61930ad.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:Geist;src:url('/portfolio/media/a8eefb873ba9c9020665.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap}
 :root{color-scheme:dark;--surface:#0b0d0c;--ink:#efece3;--muted:#a9ada5;--accent:#42e2ed;--rule:#373d36;background:var(--surface)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--surface);color:var(--ink);font:400 17px/1.65 Geist,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--surface);color:var(--ink);font:400 17px/1.65 'vinila-variable',vinila,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:4px}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
 .toolbar{position:sticky;top:0;z-index:40;background:var(--surface);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 5%;border-bottom:1px solid var(--rule)}
 .resume-home{display:block;flex:none;width:112px;height:62px}
 .resume-home span{display:block;width:100%;height:100%;background:var(--accent);mask:url('/portfolio/open-projects/signature.svg') center/contain no-repeat}
 .resume-actions{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap}
-.toolbar button,.toolbar .download{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid var(--rule);background:transparent;color:var(--ink);font:400 14px/1.3 Geist,Arial,sans-serif;cursor:pointer;text-decoration:none}
+.toolbar button,.toolbar .download{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid var(--rule);background:transparent;color:var(--ink);font:400 14px/1.3 'vinila-variable',vinila,Arial,sans-serif;cursor:pointer;text-decoration:none}
 .toolbar button:hover,.toolbar .download:hover{border-color:var(--accent);color:var(--accent)}
 .toolbar .download{color:var(--accent);border-color:var(--accent)}
 .status{min-height:20px;min-width:3em;color:var(--muted);font:12px/1.5 monospace}
@@ -49,7 +51,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 [data-story-rule]{display:none}
 @page{size:letter portrait;margin:.40in .50in .38in}
 :root{color-scheme:light;--surface:#fff;--ink:#141916;--muted:#515b54;--accent:#166874;--rule:#bbc3bd;background:#fff}
-html,body{background:#fff;color:var(--ink)}body{font-size:10pt;line-height:1.10;font-kerning:normal;font-synthesis:none;orphans:2;widows:2}
+html,body{background:#fff;color:var(--ink)}body{font-family:Geist,Arial,sans-serif;font-size:10pt;line-height:1.10;font-kerning:normal;font-synthesis:none;orphans:2;widows:2}
 .toolbar{display:none}.sheet{width:auto;max-width:none;margin:0;padding:0}.name{margin:0 0 4.5pt;font-size:24pt;letter-spacing:-.7pt;line-height:1}
 .discipline{margin:0;font-size:10pt;line-height:1.35;letter-spacing:.1pt}.resume-rule{height:1pt;margin:8pt 0 6pt;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .contact{margin:0 0 5pt;font:9pt/1.35 Geist,Arial,sans-serif;display:flex;flex-wrap:wrap;gap:0}.contact-group{white-space:nowrap}.contact .sep{display:inline;padding:0 6pt}

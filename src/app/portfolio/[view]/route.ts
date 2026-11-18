@@ -9,6 +9,6 @@ export async function GET(_request: Request, context: { params: Promise<{view: s
     'Cache-Control':'public, max-age=0, must-revalidate',
     'X-Content-Type-Options':'nosniff',
     'Referrer-Policy':'strict-origin-when-cross-origin',
-    'Content-Security-Policy':"default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; frame-src 'self'; worker-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'",
+    'Content-Security-Policy':"default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://use.typekit.net https://p.typekit.net; img-src 'self' data: blob:; font-src 'self' https://use.typekit.net; frame-src 'self'; worker-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'",
   }});
 }

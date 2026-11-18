@@ -1,0 +1,18 @@
+{
+  "roles": {
+    "body": "Schibsted Grotesk",
+    "heading": "Vinila Variable",
+    "ui": "JetBrains Mono"
+  },
+  "preserve": [
+    "original-project-specimens",
+    "approved-resume-pdf-and-print"
+  ],
+  "assets": [
+    {
+      "path": "/portfolio/fonts/site-typography.css",
+      "bytes": 1463,
+      "sha256": "6a7328943405cbf3c27958d9128bf783c89091a9f1d914ae90beb29c5848729e"
+    }
+  ]
+}

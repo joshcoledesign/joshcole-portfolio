@@ -44,8 +44,8 @@
 /* ─── Tailwind v4 theme mapping ──────────────────────────────── */
 @theme inline {
   /* Fonts */
-  --font-sans:    var(--font-inter);
-  --font-display: var(--font-syne);
+  --font-sans:    var(--site-font-body);
+  --font-display: var(--site-font-heading);
   --font-mono:    var(--font-jetbrains-mono);
 
   /* Semantic color aliases usable as Tailwind utilities */
@@ -103,7 +103,7 @@ a {
 body {
   background-color: var(--bg-base);
   color: var(--text-body);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--site-font-body);
   /* 32px grid — rgba(255,255,255,0.028) */
   background-image:
     linear-gradient(var(--grid-line) 1px, transparent 1px),

@@ -1,0 +1,15 @@
+/* Shared presentation roles. Original project specimens retain their own faces. */
+@font-face{font-family:'Schibsted Grotesk';src:url('/portfolio/fonts/schibsted-grotesk-variable.ttf') format('truetype');font-style:normal;font-weight:400 900;font-display:swap;}
+:root{--site-font-body:'Schibsted Grotesk',Arial,sans-serif;--site-font-heading:'vinila-variable','vinila',Arial,sans-serif;--site-font-ui:'JetBrains Mono',monospace;}
+h1,h2,h3,h4,h5,h6{font-family:var(--site-font-heading);}
+#culture-case-studies .rh-footer>p{font-family:var(--site-font-heading);}
+#culture-case-studies :is(.xc-case,.rd-shell) :is(button,input,select,textarea),
+#culture-case-studies :is(#gprs-below-the-surface,#einstein-case-study) :is(button,input,select,textarea),
+[data-story-root] :is(button,input,select,textarea){font-family:var(--site-font-ui);}
+#culture-case-studies .ac-hotel-intro>p{font-family:var(--site-font-body);}
+#culture-case-studies .ac-rfp-flow-note{font-family:var(--site-font-body);}
+/* Standalone labs share the site's prose, display and control roles. */
+html[data-site-lab],html[data-site-lab] body{font-family:var(--site-font-body);}
+html[data-site-lab] :is(h1,h2,h3,h4):where(:not(.font-mono)):where(:not([class*="text-mono"])){font-family:var(--site-font-heading);}
+html[data-site-lab] :is(button,input,select,textarea,label,legend,summary){font-family:var(--site-font-ui);}
+html[data-site-lab="dungeon"] :is(h2,h3,h4){font-family:var(--site-font-ui);}

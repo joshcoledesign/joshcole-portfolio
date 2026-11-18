@@ -167,9 +167,11 @@
   "dungeonAssets": [
     {
       "path": "/experiments/dry-run-dungeon/runtime/index.html",
-      "sha256": "2e21826703b97090f07d9eac264432651a4f0f2834a25ace8ca936e20f3da6c3",
+      "sha256": "05974b637c4164f29d3f899f7c957a1c7cb750b64b0f32e3e64f5efa0026d11d",
       "sourceSha256": "2877b198206cd0163713852ad5e0715323e0b7b914e8390f1332a4d755b106b7",
-      "transformation": "URL namespace only for text assets; binary files unchanged"
+      "transformation": "URL namespace only for text assets; binary files unchanged; HTML-only shared body/heading/UI font links; original script tags preserved",
+      "preTypographySha256": "2e21826703b97090f07d9eac264432651a4f0f2834a25ace8ca936e20f3da6c3",
+      "bytes": 95127
     },
     {
       "path": "/experiments/dry-run-dungeon/runtime/_next/static/chunks/07nlus5zn5uiu.js",

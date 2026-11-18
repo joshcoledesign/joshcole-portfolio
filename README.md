@@ -65,3 +65,16 @@ site URL).
 ## Deployment
 
 Vercel deploys the site automatically when changes are merged to `main`. Production is available at [joshcolecreative.com](https://joshcolecreative.com); no manual CLI deployment is required for the normal release workflow.
+
+## Current website fonts
+
+The site's main sans-serif is Vinila Variable, delivered by Adobe Fonts web project
+`wno7axa` through its hosted stylesheet. The project supplies normal weights
+100–900; keep that weight axis controlled by `font-weight`.
+
+The embed is included in the native root layout, the generated portfolio document
+and the standalone web résumé, which have separate document shells. Portfolio
+responses allow only Adobe's stylesheet and font hosts alongside existing sources.
+No Adobe font files are copied into the repository. Monospaced metadata, client
+typography specimens and the approved downloadable/print résumé retain their
+existing fonts.

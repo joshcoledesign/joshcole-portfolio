@@ -2652,6 +2652,10 @@ html,body{background:#0b0d0c!important;margin:0!important;}#culture-case-studies
 }
 /* Paint the section color beyond its capped content, without changing layout. */
 #culture-case-studies [data-band-color]{border-image:linear-gradient(var(--band-color),var(--band-color)) fill 0 / 0 / 0 100vw;}
+/* Extend gradients and textures on their own layer; keep the original content geometry. */
+#culture-case-studies [data-band-image]{position:relative;isolation:isolate;background-image:none!important;}
+#culture-case-studies [data-band-image]::before{content:'';position:absolute;inset-block:0;left:calc((100% - var(--band-viewport-width,100vw))/2);width:var(--band-viewport-width,100vw);background-image:var(--band-image);background-size:var(--band-size);background-position:var(--band-position);background-repeat:var(--band-repeat);z-index:-1;pointer-events:none;}
+#culture-case-studies .dg-hero[data-band-image]{overflow:visible;}
 #culture-case-studies .ac-rfp-split{border-image:linear-gradient(90deg,var(--split-first) 50%,var(--split-last) 50%) fill 0 / 0 / 0 100vw;}
 @media(max-width:800px){
  #culture-case-studies .ac-rfp-split{border-image:none;grid-template-columns:minmax(0,1fr);}
@@ -2663,7 +2667,7 @@ html,body{background:#0b0d0c!important;margin:0!important;}#culture-case-studies
 #culture-case-studies .rh-site>.rh-work::before{content:'';position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,var(--rh-rule) 0%,var(--rh-rule) 35%,transparent 100%);pointer-events:none;}
 /* Homepage chapter dividers span the browser; their content keeps the shared cap. */
 #culture-case-studies .rh-site [data-story-rule],
-#culture-case-studies .rh-site>.rh-work::before{left:calc(50% - 50vw);right:auto;width:100vw;}
+#culture-case-studies .rh-site>.rh-work::before{left:calc((100% - var(--band-viewport-width,100vw))/2);right:auto;width:var(--band-viewport-width,100vw);}
 #culture-case-studies .rh-site .rh-quick-culture .rh-live-badge{display:flex;align-items:baseline;gap:10px;font:500 clamp(26px,2.5vw,34px)/1.15 var(--rh-face),Arial,sans-serif;letter-spacing:-.04em;color:var(--rh-paper);margin:0 0 16px;}
 #culture-case-studies .rh-site .rh-live-badge>span{font:13px/1.5 var(--font-mono);letter-spacing:0;color:var(--rh-ink);}
 .cw-viewer-image{width:calc(min(100%,1680px) * var(--image-zoom,1));margin-inline:auto;}
@@ -2691,11 +2695,13 @@ html,body{background:#0b0d0c!important;margin:0!important;}#culture-case-studies
 
 /* Rules at a color change follow the painted band to the browser edges. */
 #culture-case-studies [data-band-color]>[data-story-rule],
+#culture-case-studies [data-band-image]>[data-story-rule],
 #culture-case-studies [data-band-color]+section>[data-story-rule],
+#culture-case-studies [data-band-image]+section>[data-story-rule],
 #culture-case-studies [data-band-color]+.xc-story>:first-child>[data-story-rule],
-#culture-case-studies .xc-story[data-band-color]>:first-child>[data-story-rule]{left:calc(50% - 50vw);right:auto;width:100vw;}
+#culture-case-studies .xc-story[data-band-color]>:first-child>[data-story-rule]{left:calc((100% - var(--band-viewport-width,100vw))/2);right:auto;width:var(--band-viewport-width,100vw);}
 #culture-case-studies [data-band-color]+.ns-credit{position:relative;border-top-width:0;}
-#culture-case-studies [data-band-color]+.ns-credit::before{content:'';position:absolute;top:0;left:calc(50% - 50vw);width:100vw;height:1px;background:var(--xc-line);pointer-events:none;}
+#culture-case-studies [data-band-color]+.ns-credit::before{content:'';position:absolute;top:0;left:calc((100% - var(--band-viewport-width,100vw))/2);width:var(--band-viewport-width,100vw);height:1px;background:var(--xc-line);pointer-events:none;}
 
 .lab-specimen{--specimen-ink:#42e2ed;position:fixed;left:0;top:0;z-index:80;display:flex;align-items:center;gap:12px;width:max-content;max-width:calc(100vw - 24px);padding:11px 15px 11px 11px;border-left:1px solid var(--specimen-ink);background:linear-gradient(100deg,#090d0bf5,#090d0bda);color:#efece3;backdrop-filter:blur(12px);box-shadow:0 12px 32px #0003;pointer-events:none;user-select:none;font:11px/1.4 var(--font-mono);box-sizing:border-box;}
 .lab-specimen[hidden]{display:none;}

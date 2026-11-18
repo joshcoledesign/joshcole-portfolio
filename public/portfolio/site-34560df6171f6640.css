@@ -2761,7 +2761,6 @@ body:has(#culture-case-studies[data-page=home]) :is(.lab-specimen-action,.lab-sp
 #culture-case-studies .rh-site .rh-structure-select select{appearance:none;-webkit-appearance:none;width:123px;min-width:123px;min-height:32px;height:32px;color:var(--rh-ink);font:400 13px/19.5px var(--font-mono);}
 #culture-case-studies .rh-culture-settings>a{display:inline-flex;align-items:center;min-height:46px;color:var(--rh-link);font:600 13px/26px var(--font-mono);}
 #culture-case-studies .rh-site .rh-quick-hint,.rh-screen-reader-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important;}
-#culture-case-studies[data-planting=true] .rh-site .rh-quick-hint{width:auto!important;height:auto!important;clip-path:none!important;white-space:normal!important;overflow:visible!important;top:108px;left:0;margin:0!important;color:var(--rh-ink);}
 #culture-case-studies .rh-site .rh-culture,#culture-case-studies .rh-site .rh-culture-fallback{mask-image:linear-gradient(90deg,transparent,#000 42%),linear-gradient(180deg,transparent,#000 8%,#000 85%,transparent);mask-composite:intersect;}
 #culture-case-studies .rh-site .rh-work{padding:30px 36px 0;}
 #culture-case-studies .rh-site .rh-work .rh-section-label{padding-bottom:8px;font:500 13px/19.5px var(--font-mono);}
@@ -2797,7 +2796,6 @@ body:has(#culture-case-studies[data-page=home]) :is(.lab-specimen-action,.lab-sp
  #culture-case-studies .rh-site .rh-quick-culture .rh-live-badge{font-size:clamp(20px,5vw,28px);line-height:32px;}
  #culture-case-studies .rh-site .portfolio-color-select select,#culture-case-studies .rh-site .rh-structure-select select{min-height:44px;height:44px;}
  #culture-case-studies .rh-culture-settings{gap:12px 24px;}
- #culture-case-studies[data-planting=true] .rh-site .rh-quick-hint{top:26px;}
  #culture-case-studies .rh-site .rh-work{padding:30px 18px 0;}
  #culture-case-studies .rh-site .rh-work-list .rh-case-link{grid-template-columns:20px minmax(0,1fr);gap:10px 12px;}
  #culture-case-studies .rh-site .rh-work-name{font-size:28px;line-height:30px;}

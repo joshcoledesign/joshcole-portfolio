@@ -2737,11 +2737,11 @@ body:has(#culture-case-studies[data-page=home]) :is(.lab-specimen-action,.lab-sp
 #culture-case-studies .rh-site .rh-hero-meta .rh-eyebrow{font:400 13px/19.5px var(--font-mono);letter-spacing:0;}
 #culture-case-studies .rh-site .rh-hero-fps{font:400 13px/19.5px var(--font-mono);}
 #culture-case-studies .rh-home-main{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:32px;margin-top:32px;pointer-events:none;}
-#culture-case-studies .rh-site .rh-hero-copy{width:500px;max-width:calc(100% - 162px);}
-#culture-case-studies .rh-site .rh-hero-copy h1{margin:0;font:700 50px/52px var(--rh-face),Arial,sans-serif;letter-spacing:0;}
+#culture-case-studies .rh-site .rh-hero-copy{width:640px;max-width:calc(100% - 162px);}
+#culture-case-studies .rh-site .rh-hero-copy h1{margin:0;font:700 64px/64px var(--rh-face),Arial,sans-serif;letter-spacing:0;}
 #culture-case-studies .rh-site .rh-hero-copy h1>span{display:block;}
 #culture-case-studies .rh-site .rh-hero-copy h1 em{font:inherit;color:var(--rh-ink);}
-#culture-case-studies .rh-hero-deck{margin-top:29px;color:var(--rh-paper);font:500 14px/24.8px var(--rh-body-face);}
+#culture-case-studies .rh-hero-deck{max-width:500px;margin-top:29px;color:var(--rh-paper);font:500 14px/24.8px var(--rh-body-face);}
 #culture-case-studies .rh-site .rh-hero-deck p{font-family:inherit;}
 #culture-case-studies .rh-hero-deck p+p{margin-top:16px;}
 #culture-case-studies .rh-site .rh-hero-links{margin-top:28px;gap:27px;align-items:center;flex-wrap:wrap;font:600 13px/26px var(--font-mono);}
@@ -2775,6 +2775,7 @@ body:has(#culture-case-studies[data-page=home]) :is(.lab-specimen-action,.lab-sp
 #culture-case-studies .rh-site .rh-experiments-intro h2 span{color:inherit;display:inline;}
 #culture-case-studies .rh-site .rh-experiments-arrow{font:700 32px/32px var(--font-mono);padding:0 0 8px;color:var(--rh-ink);}
 @media(max-width:1000px){#culture-case-studies .rh-header-controls{gap:40px;}}
+@media(min-width:701px) and (max-width:899px){#culture-case-studies .rh-site .rh-hero-copy h1{font-size:clamp(40px,calc(10vw - 22px),64px);line-height:1;}}
 @media(max-width:700px){
  #culture-case-studies .rh-site .rh-header{display:grid;grid-template-columns:minmax(0,1fr) auto;padding:20px 18px;gap:12px 18px;}
  #culture-case-studies .rh-header-controls{display:contents;}
@@ -2785,7 +2786,7 @@ body:has(#culture-case-studies[data-page=home]) :is(.lab-specimen-action,.lab-sp
  #culture-case-studies .rh-site .rh-hero{padding:32px 18px 24px;min-height:0;}
  #culture-case-studies .rh-home-main{flex-direction:column;gap:24px;margin-top:24px;}
  #culture-case-studies .rh-site .rh-hero-copy{width:100%;max-width:500px;}
- #culture-case-studies .rh-site .rh-hero-copy h1{font-size:clamp(30px,9.2vw,50px);line-height:1.04;}
+ #culture-case-studies .rh-site .rh-hero-copy h1{font-size:clamp(30px,9.2vw,50px);line-height:1;}
  #culture-case-studies .rh-site .rh-hero-deck{font-size:16px;}
  #culture-case-studies .rh-site .rh-hero-links{row-gap:0;}
  #culture-case-studies .rh-hero-link-separator{display:none;}
@@ -2803,6 +2804,7 @@ body:has(#culture-case-studies[data-page=home]) :is(.lab-specimen-action,.lab-sp
  #culture-case-studies .rh-site .rh-experiments-intro h2{font-size:clamp(32px,8.4vw,56px);line-height:1.05;}
  #culture-case-studies .rh-site .rh-experiments-arrow{font-size:26px;line-height:28px;padding:0;}
 }
+@media(max-width:360px){#culture-case-studies .rh-site .rh-hero-copy h1{font-size:clamp(26px,8.4vw,30px);}}
 @media(hover:none) and (pointer:coarse){#culture-case-studies .rh-site .rh-quick-actions button,#culture-case-studies .rh-site .portfolio-color-select select{min-height:44px;height:auto;}}
 
 /* Shared presentation roles. Original project specimens retain their own faces. */

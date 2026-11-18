@@ -33,7 +33,8 @@ const genSound=json('public/experiments/gensound/snapshot.json').files.map(file=
 const caseAssets=fs.readdirSync(path.join(root,'public/portfolio/case-assets'),{recursive:true}).filter(file=>fs.statSync(path.join(root,'public/portfolio/case-assets',file)).isFile()).map(file=>({path:'/portfolio/case-assets/'+file.replaceAll('\\','/'),sha256:sha(read('public/portfolio/case-assets/'+file))}));
 const openProjects=json('src/data/open-experiment-sources.json').assets;
 const monoFonts=json('src/data/site-mono-fonts.json').files;
-const assets=[...source.embeddedAssets,...source.dungeonAssets,...genSound,...caseAssets,...openProjects,...monoFonts];
+const homepageAssets=json('src/data/homepage-design.json').assets;
+const assets=[...source.embeddedAssets,...source.dungeonAssets,...genSound,...caseAssets,...openProjects,...monoFonts,...homepageAssets];
 for(const asset of assets)assert.equal(sha(read('public'+asset.path)),asset.sha256,'Asset changed: '+asset.path);
 for(const match of html.matchAll(/(?:src|href)="(\/portfolio\/[^"#?]+)"/g))assert.ok(fs.existsSync(path.join(root,'public',match[1])),'Missing image: '+match[1]);
 assert.ok(!/Unlicensed Trial|GTPlanarTrial|ABCWhyte|data:font\//i.test(html+read('public/portfolio/'+build.styles)+read('public/portfolio/'+build.scripts)),'Unlicensed study font in output');

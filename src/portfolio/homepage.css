@@ -1,5 +1,7 @@
 /* Josh's Figma homepage revision, frame 138:567. Scope stays inside Home. */
 @font-face{font-family:'Schibsted Grotesk';src:url('/portfolio/fonts/schibsted-grotesk-variable.ttf') format('truetype');font-style:normal;font-weight:400 900;font-display:swap;}
+#culture-case-studies .rh-site{--rh-body-face:'Schibsted Grotesk',Arial,sans-serif;}
+#culture-case-studies .rh-site :is(.rh-hero-deck p,.rh-dungeon-copy>p,.rh-dungeon-method p,.rh-dungeon-method summary,.gs-home-feature p,.rh-experiment-note){font-family:var(--rh-body-face);}
 /* Keep native chooser focus on the dark canvas, including Culture's detail controls. */
 #culture-case-studies :is(.rh-site,.rd-shell) select{color-scheme:dark;accent-color:var(--rh-ink);}
 #culture-case-studies :is(.rh-site,.rd-shell) select:focus{border-color:var(--rh-ink);outline:none;}
@@ -20,7 +22,7 @@
 #culture-case-studies .rh-site .rh-hero-copy h1{margin:0;font:700 50px/52px var(--rh-face),Arial,sans-serif;letter-spacing:0;}
 #culture-case-studies .rh-site .rh-hero-copy h1>span{display:block;}
 #culture-case-studies .rh-site .rh-hero-copy h1 em{font:inherit;color:var(--rh-ink);}
-#culture-case-studies .rh-hero-deck{margin-top:29px;color:var(--rh-paper);font:500 14px/24.8px 'Schibsted Grotesk',Arial,sans-serif;}
+#culture-case-studies .rh-hero-deck{margin-top:29px;color:var(--rh-paper);font:500 14px/24.8px var(--rh-body-face);}
 #culture-case-studies .rh-site .rh-hero-deck p{font-family:inherit;}
 #culture-case-studies .rh-hero-deck p+p{margin-top:16px;}
 #culture-case-studies .rh-site .rh-hero-links{margin-top:28px;gap:27px;align-items:center;flex-wrap:wrap;font:600 13px/26px var(--font-mono);}
@@ -45,7 +47,7 @@
 #culture-case-studies .rh-site .rh-work .rh-section-label h2{letter-spacing:0;}
 #culture-case-studies .rh-site .rh-work-list .rh-case-link{grid-template-columns:32px minmax(0,1fr) auto;gap:16px;padding:25px 0;}
 #culture-case-studies .rh-site .rh-work-name{font:700 32px/32px var(--rh-face),Arial,sans-serif;letter-spacing:-1px;}
-#culture-case-studies .rh-site .rh-work-name small{margin-top:2px;font:400 16px/25px 'Schibsted Grotesk',Arial,sans-serif;letter-spacing:0;}
+#culture-case-studies .rh-site .rh-work-name small{margin-top:2px;font:400 16px/25px var(--rh-body-face);letter-spacing:0;}
 #culture-case-studies .rh-site .rh-category{font:400 13px/19.5px var(--font-mono);gap:8px;color:var(--rh-paper);}
 #culture-case-studies .rh-work-arrow{width:12px;color:var(--rh-ink);text-align:center;}
 #culture-case-studies .rh-site .rh-open-experiments{margin-top:100px;}

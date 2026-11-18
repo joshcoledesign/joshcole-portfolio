@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Syne, Inter, JetBrains_Mono } from "next/font/google";
+import { Syne, Inter } from "next/font/google";
 import "./globals.css";
+import "../../public/portfolio/fonts/jetbrains-mono.css";
 import "../portfolio/story.css";
 import "../portfolio/lab-cursor.css";
 import { SiteChrome } from "@/components/site-chrome";
@@ -17,12 +18,6 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
@@ -53,7 +48,7 @@ export default function RootLayout({
     <html
       lang="en"
       style={{backgroundColor:"#0b0d0c",colorScheme:"dark"}}
-      className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
+      className={`${syne.variable} ${inter.variable} antialiased`}
     >
       <head>
         <link rel="preconnect" href="https://use.typekit.net" crossOrigin="anonymous" />

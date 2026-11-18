@@ -50,7 +50,7 @@
 #culture-case-studies .rh-site>.rh-work{border-top:0;position:relative;}
 #culture-case-studies .rh-site>.rh-work::before{content:'';position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,var(--rh-rule) 0%,var(--rh-rule) 35%,transparent 100%);pointer-events:none;}
 #culture-case-studies .rh-site .rh-quick-culture .rh-live-badge{display:flex;align-items:baseline;gap:10px;font:500 clamp(26px,2.5vw,34px)/1.15 var(--rh-face),Arial,sans-serif;letter-spacing:-.04em;color:var(--rh-paper);margin:0 0 16px;}
-#culture-case-studies .rh-site .rh-live-badge>span{font:13px/1.5 'Courier New',monospace;letter-spacing:0;color:var(--rh-ink);}
+#culture-case-studies .rh-site .rh-live-badge>span{font:13px/1.5 var(--font-mono);letter-spacing:0;color:var(--rh-ink);}
 .cw-viewer-image{width:calc(min(100%,1680px) * var(--image-zoom,1));margin-inline:auto;}
 .cw-viewer-options{justify-content:center;font-size:13px;}
 .cw-viewer-options label{margin-left:0;font-size:13px;}

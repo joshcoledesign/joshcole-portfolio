@@ -1,0 +1,20 @@
+/* JetBrains Mono v2.304 — SIL Open Font License; see /portfolio/licenses/jetbrains-mono-ofl.txt. */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/portfolio/fonts/jetbrains-mono-variable.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/portfolio/fonts/jetbrains-mono-italic-variable.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 100 800;
+  font-display: swap;
+}
+:root {
+  --font-jetbrains-mono: 'JetBrains Mono';
+  --font-mono: 'JetBrains Mono', monospace;
+}
+:where(code, kbd, samp, pre) { font-family: var(--font-mono); }

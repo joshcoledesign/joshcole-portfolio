@@ -7,6 +7,7 @@ export const RESUME_SHELL = `
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0b0d0c">
+<link rel="stylesheet" href="/portfolio/fonts/jetbrains-mono.css">
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link rel="stylesheet" href="https://use.typekit.net/wno7axa.css">
 <style>
@@ -24,23 +25,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .toolbar button,.toolbar .download{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid var(--rule);background:transparent;color:var(--ink);font:400 14px/1.3 'vinila-variable',vinila,Arial,sans-serif;cursor:pointer;text-decoration:none}
 .toolbar button:hover,.toolbar .download:hover{border-color:var(--accent);color:var(--accent)}
 .toolbar .download{color:var(--accent);border-color:var(--accent)}
-.status{min-height:20px;min-width:3em;color:var(--muted);font:12px/1.5 monospace}
+.status{min-height:20px;min-width:3em;color:var(--muted);font:12px/1.5 var(--font-mono)}
 .sheet{width:100%;max-width:1680px;margin:64px auto 100px;padding:0 min(5vw,84px)}
 .name{margin:0;font-size:clamp(52px,7.8vw,96px);font-weight:500;line-height:1;letter-spacing:-.065em}
 .discipline{margin:22px 0 0;font-size:clamp(19px,2.6vw,28px);line-height:1.3;letter-spacing:-.02em}
 .resume-rule{height:1px;background:var(--accent);margin:32px 0 22px}
-.contact{display:flex;flex-wrap:wrap;gap:6px 0;margin:0;color:var(--muted);font:12px/1.7 monospace}
+.contact{display:flex;flex-wrap:wrap;gap:6px 0;margin:0;color:var(--muted);font:12px/1.7 var(--font-mono)}
 .contact-group{display:inline-flex;align-items:baseline;flex-wrap:wrap}.contact-item{overflow-wrap:anywhere}.contact .sep{padding:0 14px;color:var(--rule)}
 .section{margin-top:48px;padding-top:28px;scroll-margin-top:calc(var(--site-header-height,112px) + 24px)}
 [data-story-section]{position:relative}
 [data-story-rule]{position:absolute;inset-inline:0;top:0;height:1px;background:var(--accent);transform-origin:left;pointer-events:none}
 @media screen and (min-width:901px){.section{display:grid;grid-template-columns:240px minmax(0,1fr);column-gap:6%}.section>h2{grid-column:1;grid-row:1/span 30;align-self:start}.section>:not(h2):not([data-story-rule]){grid-column:2}.section p{max-width:78ch}}
 @media screen and (min-width:901px) and (prefers-reduced-motion:no-preference){.section>h2{position:sticky;top:calc(var(--site-header-height,112px) + 24px)}}
-.section>h2{margin:0 0 22px;font:400 12px/1.5 monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.section>h2{margin:0 0 22px;font:400 12px/1.5 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
 .section p{margin:0 0 16px}.summary p{font-size:19px;line-height:1.65}
 .skill b{font-weight:500;color:var(--ink)}.skill{color:var(--muted)}
 .role{margin:28px 0 0}.role-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px}.role-title{margin:0;font-size:22px;line-height:1.3;font-weight:500;letter-spacing:-.025em}
-.role-title .qual{font-size:16px;font-weight:400;color:var(--muted)}.role-title .org{font-weight:400}.role-date{flex:none;font:12px/1.5 monospace;color:var(--muted)}
+.role-title .qual{font-size:16px;font-weight:400;color:var(--muted)}.role-title .org{font-weight:400}.role-date{flex:none;font:12px/1.5 var(--font-mono);color:var(--muted)}
 .role .role-summary,.role-group>.role-summary{margin:12px 0 14px;color:var(--muted);font-size:16px;line-height:1.65}
 .role ul{margin:14px 0 0;padding-left:22px}.role li{padding-left:3px;margin:7px 0}.role li::marker{color:var(--accent)}
 .role-group-roles{margin-top:24px;padding-left:24px;border-left:1px solid var(--rule)}

@@ -1,16 +1,16 @@
 {
   "sourceRepository": "https://github.com/joshcoledesign/genSound",
   "sourceRevision": "f59d7c91eb6873cee2c5a4c99bfa2daea883c88c",
-  "preparedAt": "2026-11-04T16:23:44.186Z",
+  "preparedAt": "2026-11-18T01:50:13.750Z",
   "derived": true,
-  "adaptation": "index.html receives doctype, English language and mobile viewport metadata; all other copied bytes are unchanged.",
+  "adaptation": "index.html receives doctype, English language, mobile viewport metadata and the site's self-hosted JetBrains Mono stylesheet/data-font mapping; the unused DM Mono request is removed. All analysis, export, interaction code and other copied files are unchanged.",
   "files": [
     {
       "sourcePath": "playground/index.html",
       "publicPath": "index.html",
       "sourceSha256": "60ede30345c7e3ee9016ce55f78c67a9165923431b4a5fb5058cfd5ea4e6aaa3",
-      "sha256": "6d6ac746d7be4de4c29d202ffb23e9a5aef64e66bec0843d33c7ce31784cf511",
-      "bytes": 46465
+      "sha256": "3aa0ef63a2b05b34dd731ea78a6b95e6ededb6f29186463183e9cfe79253df7b",
+      "bytes": 46470
     },
     {
       "sourcePath": "playground/analyzer.js",

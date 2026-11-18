@@ -2723,7 +2723,8 @@ body:has(#culture-case-studies[data-page=home]) :is(.lab-specimen-action,.lab-sp
 /* Keep native chooser focus on the dark canvas, including Culture's detail controls. */
 #culture-case-studies :is(.rh-site,.rd-shell) select{color-scheme:dark;accent-color:var(--rh-ink);}
 #culture-case-studies :is(.rh-site,.rd-shell) select:focus{border-color:var(--rh-ink);outline:none;}
-#culture-case-studies :is(.rh-site,.rd-shell) select:focus-visible{outline:2px solid var(--rh-ink);outline-offset:3px;}
+/* Overlay the border for one continuous focus edge, without an outer second line. */
+#culture-case-studies :is(.rh-site,.rd-shell) select:focus-visible{outline:2px solid var(--rh-ink);outline-offset:-2px;}
 #culture-case-studies .rh-site .rh-header{padding:25px 36px;gap:24px;}
 #culture-case-studies .rh-header-controls{display:flex;align-items:center;gap:132px;}
 #culture-case-studies .rh-site .rh-header nav{font:400 13px/26px var(--font-mono);gap:25px;}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "fileKey": "CF1QuVQCitxZHIzbe8swzF",
+    "nodeId": "138:567",
+    "date": "2026-11-18"
+  },
+  "scope": [
+    "home-header",
+    "home-hero",
+    "culture-controls",
+    "case-study-rows",
+    "experiments-heading"
+  ],
+  "preserve": [
+    "all-eleven-case-studies",
+    "live-culture-engine",
+    "random-initial-structure",
+    "color-preference",
+    "1680px-content-cap",
+    "13px-supporting-text-floor"
+  ],
+  "font": {
+    "family": "Schibsted Grotesk",
+    "sourceRepository": "https://github.com/schibsted/schibsted-grotesk",
+    "sourceRevision": "d485f61f105e1b3935f4d21dfb4d371359798603"
+  },
+  "assets": [
+    {
+      "path": "/portfolio/fonts/schibsted-grotesk-variable.ttf",
+      "sha256": "6ceeadf6be8e1fd7687011c7fa38ed0edd1abe967a0b73d97caec183552e823d",
+      "bytes": 176068
+    },
+    {
+      "path": "/portfolio/licenses/schibsted-grotesk-ofl.txt",
+      "sha256": "3b4f3063b6ac7c1e403e2c4a5e8ef3a58190ff83ed7b15af66511858699139ce",
+      "bytes": 4406
+    }
+  ]
+}

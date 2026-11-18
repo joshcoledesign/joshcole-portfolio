@@ -32,8 +32,11 @@ const files = await Promise.all(entries.map(async ([sourcePath, publicPath]) => 
   let bytes = original;
   if (publicPath === "index.html") {
     // The upstream page is an HTML fragment. Supply document and phone viewport
-    // metadata without changing its styles, copy, analysis or interaction code.
-    bytes = Buffer.from('<!doctype html>\n<html lang="en">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n' + original.toString("utf8") + '\n</html>\n');
+    // metadata and the site's mono font, retaining copy, analysis and handlers.
+    const html = original.toString("utf8")
+      .replace('family=DM+Mono:wght@400;500&family=', 'family=')
+      .replace(/--font-data:[^;]+;/, '--font-data: "JetBrains Mono", monospace;');
+    bytes = Buffer.from('<!doctype html>\n<html lang="en">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<link rel="stylesheet" href="/portfolio/fonts/jetbrains-mono.css">\n' + html + '\n</html>\n');
   }
   if (publicPath.startsWith("data/") && publicPath !== "data/manifest.json") {
     const data = JSON.parse(original);
@@ -49,7 +52,7 @@ const provenance = {
   sourceRevision: revision,
   preparedAt: new Date().toISOString(),
   derived: true,
-  adaptation: "index.html receives doctype, English language and mobile viewport metadata; all other copied bytes are unchanged.",
+  adaptation: "index.html receives doctype, English language, mobile viewport metadata and the site's self-hosted JetBrains Mono stylesheet/data-font mapping; the unused DM Mono request is removed. All analysis, export, interaction code and other copied files are unchanged.",
   files: files.map(({ sourcePath, publicPath, original, bytes }) => ({
     sourcePath, publicPath, sourceSha256: sha256(original), sha256: sha256(bytes), bytes: bytes.length,
   })),

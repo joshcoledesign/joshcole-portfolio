@@ -1,0 +1,28 @@
+{
+  "family": "JetBrains Mono",
+  "version": "2.304",
+  "sourceRepository": "https://github.com/JetBrains/JetBrainsMono",
+  "sourceRef": "v2.304",
+  "weightRange": [
+    100,
+    800
+  ],
+  "license": "/portfolio/licenses/jetbrains-mono-ofl.txt",
+  "files": [
+    {
+      "path": "/portfolio/fonts/jetbrains-mono-variable.ttf",
+      "bytes": 303144,
+      "sha256": "662a196d58f1183bf2d77428b6d5283fe3f45161ab021bea4036bc98e5cac016"
+    },
+    {
+      "path": "/portfolio/fonts/jetbrains-mono-italic-variable.ttf",
+      "bytes": 308888,
+      "sha256": "f115aaa12113718c02ce72864fe6823b87241bc23d3e44cf1220155f861063f2"
+    },
+    {
+      "path": "/portfolio/fonts/jetbrains-mono.css",
+      "bytes": 661,
+      "sha256": "be54b3d0fabb4de5f88983ce369974d30208ff5f6d311cf1b53ffb4f9c3b233d"
+    }
+  ]
+}

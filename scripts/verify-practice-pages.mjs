@@ -22,7 +22,8 @@ if(base){
   // Next serializes the site's unrelated 404 boundary into RSC script data.
   const visibleAbout=about.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,'');
   assert.ok(!/prompt-seg|git log --oneline|RECENT COMMITS/.test(visibleAbout));
-  assert.ok(!/Syne|JetBrains|fonts\.googleapis|linear-gradient|grad-rule|--save-as-pdf/.test(resume));
+  assert.ok(!/Syne|fonts\.googleapis|linear-gradient|grad-rule|--save-as-pdf/.test(resume));
+  assert.ok(resume.includes('/portfolio/fonts/jetbrains-mono.css'),'Web résumé loads the shared mono font');
   const plain=resume.match(/<script type="text\/plain" id="plaintext">([\s\S]*?)<\/script>/)?.[1];assert.ok(plain);assert.equal(sha(plain.replaceAll('\r\n','\n').trim()),checks.resumePlainTextSha256);
   assert.ok(!sitemap.includes('/archive<')&&!sitemap.includes('/work/photography<'));
   const routes=JSON.parse(fs.readFileSync('src/portfolio/routes.json'));const allowed=new Set(routes.map(route=>route.path).concat(['/about','/resume']));for(const match of sitemap.matchAll(/<loc>(.*?)<\/loc>/g))assert.ok(allowed.has(new URL(match[1]).pathname),'Legacy sitemap entry '+match[1]);

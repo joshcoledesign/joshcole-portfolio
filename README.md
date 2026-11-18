@@ -75,6 +75,11 @@ The site's main sans-serif is Vinila Variable, delivered by Adobe Fonts web proj
 The embed is included in the native root layout, the generated portfolio document
 and the standalone web résumé, which have separate document shells. Portfolio
 responses allow only Adobe's stylesheet and font hosts alongside existing sources.
-No Adobe font files are copied into the repository. Monospaced metadata, client
-typography specimens and the approved downloadable/print résumé retain their
-existing fonts.
+No Adobe font files are copied into the repository.
+
+Monospaced site text uses self-hosted JetBrains Mono v2.304 (normal and italic,
+weights 100–800), including the standalone lab interfaces. The shared stylesheet
+is `public/portfolio/fonts/jetbrains-mono.css`; font provenance and hashes are in
+`src/data/site-mono-fonts.json`, with the SIL Open Font License in the notices.
+The labelled Geist Mono specimen inside Emergence remains original project
+evidence. The approved downloadable/print résumé retains its existing type.

@@ -1,4 +1,4 @@
-// Culture presentation: Vinila Variable on screen; the approved Geist print layout.
+// Screen roles: Schibsted body, Vinila headings, JetBrains Mono UI; approved Geist print layout.
 import storyManifest from '@/portfolio/story-manifest.json';
 export const RESUME_SHELL = `
 <meta charset="utf-8">
@@ -8,6 +8,7 @@ export const RESUME_SHELL = `
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0b0d0c">
 <link rel="stylesheet" href="/portfolio/fonts/jetbrains-mono.css">
+<link rel="stylesheet" href="/portfolio/fonts/site-typography.css">
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link rel="stylesheet" href="https://use.typekit.net/wno7axa.css">
 <style>
@@ -15,19 +16,19 @@ export const RESUME_SHELL = `
 @font-face{font-family:Geist;src:url('/portfolio/media/a8eefb873ba9c9020665.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap}
 :root{color-scheme:dark;--surface:#0b0d0c;--ink:#efece3;--muted:#a9ada5;--accent:#42e2ed;--rule:#373d36;background:var(--surface)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--surface);color:var(--ink);font:400 17px/1.65 'vinila-variable',vinila,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--surface);color:var(--ink);font:400 17px/1.65 var(--site-font-body);-webkit-font-smoothing:antialiased}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:4px}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
 .toolbar{position:sticky;top:0;z-index:40;background:var(--surface);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 5%;border-bottom:1px solid var(--rule)}
 .resume-home{display:block;flex:none;width:112px;height:62px}
 .resume-home span{display:block;width:100%;height:100%;background:var(--accent);mask:url('/portfolio/open-projects/signature.svg') center/contain no-repeat}
 .resume-actions{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap}
-.toolbar button,.toolbar .download{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid var(--rule);background:transparent;color:var(--ink);font:400 14px/1.3 'vinila-variable',vinila,Arial,sans-serif;cursor:pointer;text-decoration:none}
+.toolbar button,.toolbar .download{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid var(--rule);background:transparent;color:var(--ink);font:400 14px/1.3 var(--site-font-ui);cursor:pointer;text-decoration:none}
 .toolbar button:hover,.toolbar .download:hover{border-color:var(--accent);color:var(--accent)}
 .toolbar .download{color:var(--accent);border-color:var(--accent)}
 .status{min-height:20px;min-width:3em;color:var(--muted);font:12px/1.5 var(--font-mono)}
 .sheet{width:100%;max-width:1680px;margin:64px auto 100px;padding:0 min(5vw,84px)}
-.name{margin:0;font-size:clamp(52px,7.8vw,96px);font-weight:500;line-height:1;letter-spacing:-.065em}
+.name{font-family:var(--site-font-heading);margin:0;font-size:clamp(52px,7.8vw,96px);font-weight:500;line-height:1;letter-spacing:-.065em}
 .discipline{margin:22px 0 0;font-size:clamp(19px,2.6vw,28px);line-height:1.3;letter-spacing:-.02em}
 .resume-rule{height:1px;background:var(--accent);margin:32px 0 22px}
 .contact{display:flex;flex-wrap:wrap;gap:6px 0;margin:0;color:var(--muted);font:12px/1.7 var(--font-mono)}
@@ -40,7 +41,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .section>h2{margin:0 0 22px;font:400 12px/1.5 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
 .section p{margin:0 0 16px}.summary p{font-size:19px;line-height:1.65}
 .skill b{font-weight:500;color:var(--ink)}.skill{color:var(--muted)}
-.role{margin:28px 0 0}.role-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px}.role-title{margin:0;font-size:22px;line-height:1.3;font-weight:500;letter-spacing:-.025em}
+.role{margin:28px 0 0}.role-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px}.role-title{font-family:var(--site-font-heading);margin:0;font-size:22px;line-height:1.3;font-weight:500;letter-spacing:-.025em}
 .role-title .qual{font-size:16px;font-weight:400;color:var(--muted)}.role-title .org{font-weight:400}.role-date{flex:none;font:12px/1.5 var(--font-mono);color:var(--muted)}
 .role .role-summary,.role-group>.role-summary{margin:12px 0 14px;color:var(--muted);font-size:16px;line-height:1.65}
 .role ul{margin:14px 0 0;padding-left:22px}.role li{padding-left:3px;margin:7px 0}.role li::marker{color:var(--accent)}
@@ -51,7 +52,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 @media print{
 [data-story-rule]{display:none}
 @page{size:letter portrait;margin:.40in .50in .38in}
-:root{color-scheme:light;--surface:#fff;--ink:#141916;--muted:#515b54;--accent:#166874;--rule:#bbc3bd;background:#fff}
+:root{--site-font-heading:Geist,Arial,sans-serif;color-scheme:light;--surface:#fff;--ink:#141916;--muted:#515b54;--accent:#166874;--rule:#bbc3bd;background:#fff}
 html,body{background:#fff;color:var(--ink)}body{font-family:Geist,Arial,sans-serif;font-size:10pt;line-height:1.10;font-kerning:normal;font-synthesis:none;orphans:2;widows:2}
 .toolbar{display:none}.sheet{width:auto;max-width:none;margin:0;padding:0}.name{margin:0 0 4.5pt;font-size:24pt;letter-spacing:-.7pt;line-height:1}
 .discipline{margin:0;font-size:10pt;line-height:1.35;letter-spacing:.1pt}.resume-rule{height:1pt;margin:8pt 0 6pt;print-color-adjust:exact;-webkit-print-color-adjust:exact}

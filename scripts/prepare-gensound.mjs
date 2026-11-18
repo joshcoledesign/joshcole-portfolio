@@ -32,11 +32,11 @@ const files = await Promise.all(entries.map(async ([sourcePath, publicPath]) => 
   let bytes = original;
   if (publicPath === "index.html") {
     // The upstream page is an HTML fragment. Supply document and phone viewport
-    // metadata and the site's mono font, retaining copy, analysis and handlers.
+    // metadata and shared font roles, retaining copy, analysis and handlers.
     const html = original.toString("utf8")
-      .replace('family=DM+Mono:wght@400;500&family=', 'family=')
+      .replace(/^<link[^\n]+(?:fonts\.googleapis\.com|fonts\.gstatic\.com)[^\n]*>\r?\n/gm, '')
       .replace(/--font-data:[^;]+;/, '--font-data: "JetBrains Mono", monospace;');
-    bytes = Buffer.from('<!doctype html>\n<html lang="en">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<link rel="stylesheet" href="/portfolio/fonts/jetbrains-mono.css">\n' + html + '\n</html>\n');
+    bytes = Buffer.from('<!doctype html>\n<html lang="en" data-site-lab="gensound">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<link rel="stylesheet" href="/portfolio/fonts/jetbrains-mono.css">\n<link rel="stylesheet" href="/portfolio/fonts/site-typography.css">\n<link rel="stylesheet" href="https://use.typekit.net/wno7axa.css">\n' + html + '\n</html>\n');
   }
   if (publicPath.startsWith("data/") && publicPath !== "data/manifest.json") {
     const data = JSON.parse(original);
@@ -52,7 +52,7 @@ const provenance = {
   sourceRevision: revision,
   preparedAt: new Date().toISOString(),
   derived: true,
-  adaptation: "index.html receives doctype, English language, mobile viewport metadata and the site's self-hosted JetBrains Mono stylesheet/data-font mapping; the unused DM Mono request is removed. All analysis, export, interaction code and other copied files are unchanged.",
+  adaptation: "index.html receives document/phone metadata, the site's self-hosted Schibsted Grotesk body and JetBrains Mono UI roles, and Adobe-hosted Vinila headings. Google font requests are removed. All analysis, export, interaction code and other copied files are unchanged.",
   files: files.map(({ sourcePath, publicPath, original, bytes }) => ({
     sourcePath, publicPath, sourceSha256: sha256(original), sha256: sha256(bytes), bytes: bytes.length,
   })),

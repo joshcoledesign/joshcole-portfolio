@@ -34,7 +34,7 @@ const caseAssets=fs.readdirSync(path.join(root,'public/portfolio/case-assets'),{
 const openProjects=json('src/data/open-experiment-sources.json').assets;
 const monoFonts=json('src/data/site-mono-fonts.json').files;
 const homepageAssets=json('src/data/homepage-design.json').assets;
-const assets=[...source.embeddedAssets,...source.dungeonAssets,...genSound,...caseAssets,...openProjects,...monoFonts,...homepageAssets];
+const assets=[...source.embeddedAssets,...source.dungeonAssets,...genSound,...caseAssets,...openProjects,...monoFonts,...homepageAssets,...json('src/data/site-typography.json').assets];
 for(const asset of assets)assert.equal(sha(read('public'+asset.path)),asset.sha256,'Asset changed: '+asset.path);
 for(const match of html.matchAll(/(?:src|href)="(\/portfolio\/[^"#?]+)"/g))assert.ok(fs.existsSync(path.join(root,'public',match[1])),'Missing image: '+match[1]);
 assert.ok(!/Unlicensed Trial|GTPlanarTrial|ABCWhyte|data:font\//i.test(html+read('public/portfolio/'+build.styles)+read('public/portfolio/'+build.scripts)),'Unlicensed study font in output');

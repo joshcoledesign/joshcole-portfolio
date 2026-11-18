@@ -4,6 +4,7 @@ import "./globals.css";
 import "../../public/portfolio/fonts/jetbrains-mono.css";
 import "../portfolio/story.css";
 import "../portfolio/lab-cursor.css";
+import "../../public/portfolio/fonts/site-typography.css";
 import { SiteChrome } from "@/components/site-chrome";
 import { Analytics } from "@vercel/analytics/next";
 import { SITE_DESCRIPTION, SITE_OG_IMAGE, SITE_URL } from "@/lib/site-metadata";

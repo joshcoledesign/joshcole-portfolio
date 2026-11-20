@@ -21,6 +21,7 @@ const shell = [
 ];
 
 const sections = [
+  ["logo", "Logo"],
   ["color", "Color"],
   ["type", "Typography"],
   ["shape", "Controls"],
@@ -65,6 +66,32 @@ export default function DesignSystemPage() {
           {sections.map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}
         </nav>
       </header>
+
+      <section id="logo" className={styles.section} aria-labelledby="logo-title">
+        <h2 id="logo-title">Logo</h2>
+        <figure className={styles.logoSpecimen}>
+          <div className={styles.logoStage}>
+            <div
+              className={styles.logoMark}
+              role="img"
+              aria-label="Josh Cole handwritten signature logo"
+            />
+          </div>
+          <figcaption>
+            <p>
+              The handwritten signature from the portfolio header, shown in the default Cyan
+              accent on the dark site canvas.
+            </p>
+            <a
+              className={styles.logoDownload}
+              href="/portfolio/open-projects/signature.svg"
+              download="josh-cole-signature.svg"
+            >
+              Download SVG
+            </a>
+          </figcaption>
+        </figure>
+      </section>
 
       <section id="color" className={styles.section} aria-labelledby="color-title">
         <h2 id="color-title">Color</h2>

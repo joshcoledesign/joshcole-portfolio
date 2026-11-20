@@ -70,6 +70,27 @@
 .section h2 { font: 700 clamp(28px, 5vw, 40px)/1.1 var(--site-font-heading); margin: 0 0 20px; }
 .section h3 { font: 700 20px/1.2 var(--site-font-heading); margin: 24px 0 12px; }
 .section > p { max-width: 66ch; margin: 16px 0 0; }
+.logoSpecimen { width: min(100%, 460px); margin: 0; }
+.logoStage {
+  display: grid;
+  place-items: center;
+  min-height: 172px;
+  padding: 24px;
+  border: 1px solid var(--ds-rule);
+}
+.logoMark {
+  width: clamp(142px, 28vw, 222px);
+  max-width: 100%;
+  aspect-ratio: 685 / 378;
+  background-color: var(--ds-accent);
+  mask: url("/portfolio/open-projects/signature.svg") center / contain no-repeat;
+}
+.logoSpecimen figcaption { margin-top: 12px; color: var(--ds-muted); }
+.logoDownload { margin-top: 12px; }
+@media (forced-colors: active) {
+  .logoMark { background-color: CanvasText; forced-color-adjust: none; }
+}
+
 .swatches {
   list-style: none;
   margin: 0;

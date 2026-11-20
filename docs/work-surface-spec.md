@@ -1,5 +1,7 @@
 # Work Surface — design spec
 
+> **Historical specification.** Some design rules and route descriptions below are superseded. See the [current website design reference](../JOSH_COLE_DESIGN_SKILL.md).
+
 *joshcolecreative.com · August 2026. The reference implementation is `work-surface-reference.html`. Where this document and the prototype disagree, the prototype wins on numbers and this document wins on intent.*
 
 ---

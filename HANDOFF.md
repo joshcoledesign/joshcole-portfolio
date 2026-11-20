@@ -1,5 +1,7 @@
 # HANDOFF — joshcole-portfolio
 
+> **Historical handoff.** Some design rules and route descriptions below are superseded. See the [current website design reference](JOSH_COLE_DESIGN_SKILL.md).
+
 Point a new conversation here to resume without losing context.
 Design token source of truth: `JOSH_COLE_DESIGN_SKILL.md` (repo root).
 Build spec source of truth: this file + the design skill doc.

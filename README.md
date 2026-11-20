@@ -68,9 +68,14 @@ Vercel deploys the site automatically when changes are merged to `main`. Product
 
 ## Current website fonts
 
-The site's main sans-serif is Vinila Variable, delivered by Adobe Fonts web project
-`wno7axa` through its hosted stylesheet. The project supplies normal weights
-100–900; keep that weight axis controlled by `font-weight`.
+The site uses Vinila Variable for display and headings, Schibsted Grotesk for
+reading copy, and JetBrains Mono for UI. The roles and ordinary controls are
+implemented in `public/portfolio/fonts/site-typography.css`. See the
+[website design reference](JOSH_COLE_DESIGN_SKILL.md) for scope and exceptions.
+
+Vinila is delivered by Adobe Fonts web project `wno7axa` through its hosted
+stylesheet. The project supplies normal weights 100-900; keep that weight axis
+controlled by `font-weight`. Schibsted Grotesk is self-hosted.
 
 The embed is included in the native root layout, the generated portfolio document
 and the standalone web résumé, which have separate document shells. Portfolio
@@ -81,5 +86,5 @@ Monospaced site text uses self-hosted JetBrains Mono v2.304 (normal and italic,
 weights 100–800), including the standalone lab interfaces. The shared stylesheet
 is `public/portfolio/fonts/jetbrains-mono.css`; font provenance and hashes are in
 `src/data/site-mono-fonts.json`, with the SIL Open Font License in the notices.
-The labelled Geist Mono specimen inside Emergence remains original project
-evidence. The approved downloadable/print résumé retains its existing type.
+The labelled original type specimens inside Emergence remain project evidence.
+The approved downloadable/print résumé retains its existing type.
